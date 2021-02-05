@@ -143,10 +143,12 @@ static void leftLoop4int(sint32 array[4], sint32 step)
     sint32 i;
     sint32 index;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         temp[i] = array[i];
+    }
 
     index = step % 4 == 0 ? 0 : step % 4;
+
     for (i = 0; i < 4; i++) {
         array[i] = temp[index];
         index++;
@@ -168,10 +170,11 @@ static sint32 mergeArrayToInt(sint32 array[4])
 /**
  */
 static const sint32 Rcon[10] = { 0x01000000, 0x02000000,
-    0x04000000, 0x08000000,
-    0x10000000, 0x20000000,
-    0x40000000, 0x80000000,
-    0x1b000000, 0x36000000 };
+                                 0x04000000, 0x08000000,
+                                 0x10000000, 0x20000000,
+                                 0x40000000, 0x80000000,
+                                 0x1b000000, 0x36000000
+                               };
 /**
  */
 static sint32 T(sint32 num, sint32 round)
@@ -183,8 +186,9 @@ static sint32 T(sint32 num, sint32 round)
     splitIntToArray(num, numArray);
     leftLoop4int(numArray, 1);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         numArray[i] = getNumFromSBox(numArray[i]);
+    }
 
     result = mergeArrayToInt(numArray);
     return result ^ Rcon[round];
@@ -199,8 +203,9 @@ static void extendKey(sint8 *key)
     sint32 i;
     sint32 j;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         w[i] = getWordFromStr(key + i * 4);
+    }
 
     for (i = 4, j = 0; i < 44; i++) {
         if (i % 4 == 0) {
@@ -237,8 +242,9 @@ static void subBytes(sint32 array[4][4])
     sint32 i, j;
 
     for (i = 0; i < 4; i++)
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < 4; j++) {
             array[i][j] = getNumFromSBox(array[i][j]);
+        }
 }
 
 /**
@@ -337,24 +343,31 @@ static sint32 GFMul(sint32 n, sint32 s)
         case 1:
             result = s;
             break;
+
         case 2:
             result = GFMul2(s);
             break;
+
         case 3:
             result = GFMul3(s);
             break;
+
         case 0x9:
             result = GFMul9(s);
             break;
+
         case 0xB:
             result = GFMul11(s);
             break;
+
         case 0xD:
             result = GFMul13(s);
             break;
+
         case 0xE:
             result = GFMul14(s);
             break;
+
         default:
             break;
     }
@@ -370,13 +383,14 @@ static void mixColumns(sint32 array[4][4])
     sint32 i, j;
 
     for (i = 0; i < 4; i++)
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < 4; j++) {
             tempArray[i][j] = array[i][j];
+        }
 
     for (i = 0; i < 4; i++)
         for (j = 0; j < 4; j++) {
             array[i][j] = GFMul(colM[i][0], tempArray[0][j]) ^ GFMul(colM[i][1], tempArray[1][j])
-                    ^ GFMul(colM[i][2], tempArray[2][j]) ^ GFMul(colM[i][3], tempArray[3][j]);
+                          ^ GFMul(colM[i][2], tempArray[2][j]) ^ GFMul(colM[i][3], tempArray[3][j]);
         }
 }
 /**
@@ -386,26 +400,29 @@ static void convertArrayToStr(sint32 array[4][4], sint8 *str)
     sint32 i, j;
 
     for (i = 0; i < 4; i++)
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < 4; j++) {
             *str++ = (sint8) array[j][i];
+        }
 }
 /**
  */
 static sint32 checkKeyLen(sint32 len)
 {
-    if (len == 16)
+    if (len == 16) {
         return 1;
-    else
+    } else {
         return 0;
+    }
 }
 
 /**
  */
-void aes(sint8 *p, sint32 plen, sint8 *key, sint8 * cipher)
+void aes(sint8 *p, sint32 plen, sint8 *key, sint8 *cipher)
 {
     sint32 pArray[4][4];
     sint32 i, k;
     sint32 keylen = 16;
+
     if (plen == 0 || plen % 16 != 0) {
         return;
     }
@@ -453,9 +470,11 @@ static sint32 getNumFromS1Box(sint32 index)
 static void deSubBytes(sint32 array[4][4])
 {
     sint32 i, j;
+
     for (i = 0; i < 4; i++)
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < 4; j++) {
             array[i][j] = getNumFromS1Box(array[i][j]);
+        }
 }
 /**
  */
@@ -465,11 +484,13 @@ static void rightLoop4int(sint32 array[4], sint32 step)
     sint32 i;
     sint32 index;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         temp[i] = array[i];
+    }
 
     index = step % 4 == 0 ? 0 : step % 4;
     index = 3 - index;
+
     for (i = 3; i >= 0; i--) {
         array[i] = temp[index];
         index--;
@@ -517,13 +538,14 @@ static void deMixColumns(sint32 array[4][4])
     sint32 i, j;
 
     for (i = 0; i < 4; i++)
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < 4; j++) {
             tempArray[i][j] = array[i][j];
+        }
 
     for (i = 0; i < 4; i++)
         for (j = 0; j < 4; j++) {
             array[i][j] = GFMul(deColM[i][0], tempArray[0][j]) ^ GFMul(deColM[i][1], tempArray[1][j])
-                    ^ GFMul(deColM[i][2], tempArray[2][j]) ^ GFMul(deColM[i][3], tempArray[3][j]);
+                          ^ GFMul(deColM[i][2], tempArray[2][j]) ^ GFMul(deColM[i][3], tempArray[3][j]);
         }
 }
 /**
@@ -533,8 +555,9 @@ static void addRoundTowArray(sint32 aArray[4][4], sint32 bArray[4][4])
     sint32 i, j;
 
     for (i = 0; i < 4; i++)
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < 4; j++) {
             aArray[i][j] = aArray[i][j] ^ bArray[i][j];
+        }
 }
 /**
  */
@@ -560,7 +583,7 @@ static void getArrayFrom4W(sint32 i, sint32 array[4][4])
 
 /**
  */
-void deAes(sint8 *c, sint32 clen, sint8 *key, sint8 * pPlainText)
+void deAes(sint8 *c, sint32 clen, sint8 *key, sint8 *pPlainText)
 {
 
     sint32 keylen = 16;

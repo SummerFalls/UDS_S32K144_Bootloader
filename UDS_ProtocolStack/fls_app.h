@@ -24,30 +24,27 @@
 /*invalid UDS services ID*/
 #define INVALID_UDS_SERVICES_ID (0xFFu)
 
-typedef enum
-{
+typedef enum {
     FLASH_IDLE,           /*flash idle*/
     FLASH_ERASING,        /*erase flash */
     FLASH_PROGRAMMING,    /*program flash*/
     FLASH_CHECKING,       /*check flash*/
     FLASH_WAITTING       /*waitting transmitted message successful*/
-}tFlshJobModle;
+} tFlshJobModle;
 
-typedef enum
-{
+typedef enum {
     FLASH_OPERATE_ERRO,  /*flash operate erro*/
     FLASH_OPERATE_RIGHT  /*flash operate right*/
-}tFlashErroCode;
+} tFlashErroCode;
 
 /** flashloader download step */
-typedef enum
-{
+typedef enum {
     FL_REQUEST_STEP,      /*flash request step*/
     FL_TRANSFER_STEP,     /*flash transfer data step*/
     FL_EXIT_TRANSFER_STEP,/*exit transfter data step*/
     FL_CHECKSUM_STEP      /*check sum step*/
 
-}tFlDownloadStepType;
+} tFlDownloadStepType;
 
 
 
@@ -66,8 +63,8 @@ extern void Flash_OperateMainFunction(void);
 
 /*Flash program region. Called by uds servive 0x36u*/
 extern uint8 Flash_ProgramRegion(const uint32 i_addr,
-                                             const uint8 *i_pDataBuf,
-                                             const uint32 i_dataLen);
+                                 const uint8 *i_pDataBuf,
+                                 const uint32 i_dataLen);
 
 /*Is read application inforemation from flash valid?*/
 extern uint8 Flash_IsReadAppInfoFromFlashValid(void);
@@ -95,9 +92,9 @@ extern void Flash_SaveDownloadDataInfo(const uint32 i_dataStartAddr, const uint3
 
 /*set opeate flash active job*/
 extern void Flash_SetOperateFlashActiveJob(const tFlshJobModle i_activeJob,
-                                    const tpfResponse i_pfActiveFinshedCallBack,
-                                    const uint8 i_requestUDSSerID,
-                                    const tpfReuestMoreTime i_pfRequestMoreTimeCallback);
+                                           const tpfResponse i_pfActiveFinshedCallBack,
+                                           const uint8 i_requestUDSSerID,
+                                           const tpfReuestMoreTime i_pfRequestMoreTimeCallback);
 
 
 /*Get flash active job*/

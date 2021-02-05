@@ -87,8 +87,8 @@ void TP_SystemTickCtl(void)
 
 /*read a frame from TP Rx FIFO. If no data can read return FALSE, else return TRUE*/
 boolean TP_ReadAFrameDataFromTP(uint32 *o_pRxMsgID,
-                                      uint32 *o_pxRxDataLen,
-                                      uint8 *o_pDataBuf)
+                                uint32 *o_pxRxDataLen,
+                                uint8 *o_pDataBuf)
 {
     tErroCode eStatus;
     tLen xReadDataLen = 0u;
@@ -101,31 +101,31 @@ boolean TP_ReadAFrameDataFromTP(uint32 *o_pRxMsgID,
 
     /*can read data from buf*/
     GetCanReadLen(RX_TP_QUEUE_ID, &xReadDataLen, &eStatus);
-    if(ERRO_NONE != eStatus || (xReadDataLen < sizeof(tUDSAndTPExchangeMsgInfo)))
-    {
+
+    if (ERRO_NONE != eStatus || (xReadDataLen < sizeof(tUDSAndTPExchangeMsgInfo))) {
         return FALSE;
     }
 
     /*read receive ID and data len*/
     ReadDataFromFifo(RX_TP_QUEUE_ID,
-                    sizeof(exchangeMsgInfo),
-                    (uint8 *)&exchangeMsgInfo,
-                    &xReadDataLen,
-                    &eStatus);
-    if(ERRO_NONE != eStatus || sizeof(exchangeMsgInfo) != xReadDataLen)
-    {
+                     sizeof(exchangeMsgInfo),
+                     (uint8 *)&exchangeMsgInfo,
+                     &xReadDataLen,
+                     &eStatus);
+
+    if (ERRO_NONE != eStatus || sizeof(exchangeMsgInfo) != xReadDataLen) {
         TPDebugPrintf("Read data len erro!\n");
         return FALSE;
     }
 
     /*read data from fifo*/
     ReadDataFromFifo(RX_TP_QUEUE_ID,
-                    exchangeMsgInfo.dataLen,
-                    o_pDataBuf,
-                    &xReadDataLen,
-                    &eStatus);
-    if(ERRO_NONE != eStatus || (exchangeMsgInfo.dataLen != xReadDataLen))
-    {
+                     exchangeMsgInfo.dataLen,
+                     o_pDataBuf,
+                     &xReadDataLen,
+                     &eStatus);
+
+    if (ERRO_NONE != eStatus || (exchangeMsgInfo.dataLen != xReadDataLen)) {
         TPDebugPrintf("Read data erro!\n");
         return FALSE;
     }
@@ -138,9 +138,9 @@ boolean TP_ReadAFrameDataFromTP(uint32 *o_pRxMsgID,
 
 /*write a frame data  to tp TX FIFO*/
 boolean TP_WriteAFrameDataInTP(const uint32 i_TxMsgID,
-                                     const tpfUDSTxMsgCallBack i_pfUDSTxMsgCallBack,
-                                     const uint32 i_xTxDataLen,
-                                     const uint8 *i_pDataBuf)
+                               const tpfUDSTxMsgCallBack i_pfUDSTxMsgCallBack,
+                               const uint32 i_xTxDataLen,
+                               const uint8 *i_pDataBuf)
 {
     tErroCode eStatus;
     tLen xCanWriteLen = 0u;
@@ -156,34 +156,32 @@ boolean TP_WriteAFrameDataInTP(const uint32 i_TxMsgID,
     ASSERT(NULL_PTR == i_pDataBuf);
 
     /*check transmit ID*/
-    if(i_TxMsgID != TP_GetConfigTxMsgID())
-    {
+    if (i_TxMsgID != TP_GetConfigTxMsgID()) {
         return FALSE;
     }
 
-    if(0u == xWritDataLen)
-    {
+    if (0u == xWritDataLen) {
         return FALSE;
     }
 
     /*check can wirte data len*/
     GetCanWriteLen(TX_TP_QUEUE_ID, &xCanWriteLen, &eStatus);
-    if(ERRO_NONE != eStatus || xCanWriteLen < totalWriteDataLen)
-    {
+
+    if (ERRO_NONE != eStatus || xCanWriteLen < totalWriteDataLen) {
         return FALSE;
     }
 
     /*write uds transmitt ID*/
     WriteDataInFifo(TX_TP_QUEUE_ID, (uint8 *)&exchangeMsgInfo, sizeof(tUDSAndTPExchangeMsgInfo), &eStatus);
-    if(ERRO_NONE != eStatus)
-    {
+
+    if (ERRO_NONE != eStatus) {
         return FALSE;
     }
 
     /*write data in fifo*/
     WriteDataInFifo(TX_TP_QUEUE_ID, (uint8 *)i_pDataBuf, xWritDataLen, &eStatus);
-    if(ERRO_NONE != eStatus)
-    {
+
+    if (ERRO_NONE != eStatus) {
         return FALSE;
     }
 

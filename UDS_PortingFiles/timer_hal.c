@@ -50,14 +50,14 @@ void TIMER_HAL_1msPeriod(void)
 
     /* Just for check time overflow or not? */
     cntTmp = gs_1msCnt + 1u;
-    if(0u != cntTmp)
-    {
+
+    if (0u != cntTmp) {
         gs_1msCnt++;
     }
 
     cntTmp = gs_100msCnt + 1u;
-    if(0u != cntTmp)
-    {
+
+    if (0u != cntTmp) {
         gs_100msCnt++;
     }
 }
@@ -73,8 +73,7 @@ boolean  TIMER_HAL_Is1msTickTimeout(void)
 {
     boolean result = FALSE;
 
-    if(gs_1msCnt)
-    {
+    if (gs_1msCnt) {
         result = TRUE;
 
         gs_1msCnt--;
@@ -95,8 +94,7 @@ boolean TIMER_HAL_Is100msTickTimeout(void)
 {
     boolean result = FALSE;
 
-    if(gs_100msCnt >= 100u)
-    {
+    if (gs_100msCnt >= 100u) {
         result = TRUE;
 
         gs_100msCnt -= 100u;

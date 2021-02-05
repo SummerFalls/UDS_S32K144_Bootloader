@@ -38,8 +38,7 @@
 void BOOTLOADER_MAIN_Init(void (*pfBSP_Init)(void), void (*pfAbortTxMsg)(void))
 {
     /*Is power on ?*/
-    if(TRUE == Boot_IsPowerOnTriggerReset())
-    {
+    if (TRUE == Boot_IsPowerOnTriggerReset()) {
         Boot_PowerONClearAllFlag();
     }
 
@@ -47,16 +46,14 @@ void BOOTLOADER_MAIN_Init(void (*pfBSP_Init)(void), void (*pfAbortTxMsg)(void))
     Boot_JumpToAppOrNot();
 
     /*User Init: clock CAN Lin etc..*/
-    if(NULL_PTR != pfBSP_Init)
-    {
+    if (NULL_PTR != pfBSP_Init) {
         /*do BSP init*/
         (*pfBSP_Init)();
     }
 
     BOOTLOADER_DEBUG_Init();
 
-    if(TRUE != CRC_HAL_Init())
-    {
+    if (TRUE != CRC_HAL_Init()) {
         APPDebugPrintf("CRC_HAL_Init failed!\n");
     }
 
@@ -68,8 +65,7 @@ void BOOTLOADER_MAIN_Init(void (*pfBSP_Init)(void), void (*pfAbortTxMsg)(void))
 
     TP_Init();
 
-    if(TRUE != FLASH_HAL_APPAddrCheck())
-    {
+    if (TRUE != FLASH_HAL_APPAddrCheck()) {
         APPDebugPrintf("\n FLASH_HAL_APPAddrCheck check error!\n");
     }
 
@@ -95,8 +91,7 @@ void BOOTLOADER_MAIN_Demo(void)
     static uint16 timerCnt1Ms = 0u;
 #endif
 
-    if(TRUE == TIMER_HAL_Is1msTickTimeout())
-    {
+    if (TRUE == TIMER_HAL_Is1msTickTimeout()) {
         TP_SystemTickCtl();
 
         UDS_SystemTickCtl();
@@ -105,18 +100,18 @@ void BOOTLOADER_MAIN_Demo(void)
 #ifdef EN_DEBUG_IO
         /*tigger LED*/
         timerCnt1Ms++;
-        if(250u == timerCnt1Ms)
-        {
+
+        if (250u == timerCnt1Ms) {
             timerCnt1Ms = 0u;
 
             ToggleDebugIO();
         }
+
 #endif
     }
 
     /*fed watchdog every 100ms*/
-    if(TRUE == TIMER_HAL_Is100msTickTimeout())
-    {
+    if (TRUE == TIMER_HAL_Is100msTickTimeout()) {
         WATCHDOG_HAL_Fed();
     }
 

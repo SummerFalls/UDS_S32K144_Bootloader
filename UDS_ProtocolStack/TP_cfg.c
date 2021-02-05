@@ -103,8 +103,7 @@ void TP_RegisterTransmittedAFrmaeMsgCallBack(const tpfUDSTxMsgCallBack i_pfTxMsg
 /*do transmited a frame message call back*/
 void TP_DoTransmittedAFrameMsgCallBack(const uint8 i_result)
 {
-    if(NULL_PTR != gs_pfUDSTxMsgCallBack)
-    {
+    if (NULL_PTR != gs_pfUDSTxMsgCallBack) {
         (gs_pfUDSTxMsgCallBack)(i_result);
         gs_pfUDSTxMsgCallBack = NULL_PTR;
     }
@@ -130,7 +129,7 @@ boolean TP_DriverWriteDataInTP(const uint32 i_RxID, const uint32 i_RxDataLen, co
 }
 
 /*Driver read data from TP for Tx message to BUS*/
-boolean TP_DriverReadDataFromTP(const uint32 i_readDataLen, uint8 * o_pReadDatabuf, uint32 *o_pTxMsgID, uint32 *o_pTxMsgLength)
+boolean TP_DriverReadDataFromTP(const uint32 i_readDataLen, uint8 *o_pReadDatabuf, uint32 *o_pTxMsgID, uint32 *o_pTxMsgLength)
 {
     boolean result = FALSE;
     tTPTxMsgHeader TPTxMsgHeader;
@@ -150,8 +149,7 @@ boolean TP_DriverReadDataFromTP(const uint32 i_readDataLen, uint8 * o_pReadDatab
     result = CANTP_DriverReadDataFromCANTP(i_readDataLen, o_pReadDatabuf, &TPTxMsgHeader);
 #endif
 
-    if(TRUE == result)
-    {
+    if (TRUE == result) {
         *o_pTxMsgID = TPTxMsgHeader.TxMsgID;
         *o_pTxMsgLength = TPTxMsgHeader.TxMsgLength;
     }

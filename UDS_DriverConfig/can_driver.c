@@ -37,8 +37,7 @@ static void CAN_Filiter_RXIndividual(void)
     /* Set the ID mask type is individual */
     FLEXCAN_DRV_SetRxMaskType(0u, FLEXCAN_RX_MASK_INDIVIDUAL);
 
-    for(i = 0u; i < g_ucRxCANMsgIDNum; i++)
-    {
+    for (i = 0u; i < g_ucRxCANMsgIDNum; i++) {
         FLEXCAN_DRV_SetRxIndividualMask(0u, g_astRxMsgConfig[i].RxID_Type, g_astRxMsgConfig[i].usRxMailBox, g_astRxMsgConfig[i].usRxMask);
     }
 }
@@ -49,8 +48,7 @@ static void Config_Rx_Buffer(void)
     uint32_t i;
 
     /* Configure RX buffer with index RX_MAILBOX for Function ID and Physical ID*/
-    for(i = 0u; i < g_ucRxCANMsgIDNum; i++)
-    {
+    for (i = 0u; i < g_ucRxCANMsgIDNum; i++) {
 #ifdef IsUse_CAN_Pal_Driver
         /* According to Rx msg ID type to configure MB msg ID type */
         buff_RxTx_Cfg.idType = g_astRxMsgConfig[i].RxID_Type;
@@ -82,10 +80,8 @@ static uint8_t IsRxCANMsgId(uint32_t i_usRxMsgId)
 {
     uint8_t Index = 0u;
 
-    while(Index < g_ucRxCANMsgIDNum)
-    {
-        if(i_usRxMsgId  == g_astRxMsgConfig[Index].usRxID )
-        {
+    while (Index < g_ucRxCANMsgIDNum) {
+        if (i_usRxMsgId  == g_astRxMsgConfig[Index].usRxID ) {
             return TRUE;
         }
 
@@ -107,10 +103,8 @@ static void CheckCANTranmittedStatus(void)
     Can_Tx_Statu = FLEXCAN_DRV_GetTransferStatus(INST_CANCOM1, g_stTxMsgConfig.ucTxMailBox);
 #endif  //end of IsUse_CAN_Pal_Driver
 
-    if(STATUS_SUCCESS == Can_Tx_Statu)
-    {
-        if(NULL != g_stTxMsgConfig.pfCallBack)
-        {
+    if (STATUS_SUCCESS == Can_Tx_Statu) {
+        if (NULL != g_stTxMsgConfig.pfCallBack) {
             g_stTxMsgConfig.pfCallBack();
             g_stTxMsgConfig.pfCallBack = NULL;
         }
@@ -128,23 +122,21 @@ static void CAN_RxTx_Interrupt_Handle(uint32_t instance,
 
     DEV_ASSERT(driverState != NULL);
 
-    switch(eventType)
-    {
-    case CAN_EVENT_RX_COMPLETE:
-        RxCANMsgMainFun();
-        break;
+    switch (eventType) {
+        case CAN_EVENT_RX_COMPLETE:
+            RxCANMsgMainFun();
+            break;
 
-    case CAN_EVENT_TX_COMPLETE:
-        TxCANMsgMainFun();
-        break;
+        case CAN_EVENT_TX_COMPLETE:
+            TxCANMsgMainFun();
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     /* Enable MB interrupt*/
-    for(i = 0u; i < g_ucRxCANMsgIDNum; i++)
-    {
+    for (i = 0u; i < g_ucRxCANMsgIDNum; i++) {
         CAN_Receive(&can_pal1_instance,  g_astRxMsgConfig[i].usRxMailBox, &recvMsg);
     }
 }
@@ -157,32 +149,27 @@ static void CAN_RxTx_Interrupt_Handle(uint32_t instance,
 {
     DEV_ASSERT(driverState != NULL);
 
-    switch(eventType)
-    {
-    case FLEXCAN_EVENT_RX_COMPLETE:
-        RxCANMsgMainFun();
+    switch (eventType) {
+        case FLEXCAN_EVENT_RX_COMPLETE:
+            RxCANMsgMainFun();
 
-        /* Enable MB interrupt*/
-        if(RX_MAILBOX_FUN_ID == objIdx)
-        {
-            FLEXCAN_DRV_Receive(INST_CANCOM1, RX_MAILBOX_FUN_ID, &recvMsg);
-        }
-        else if(RX_MAILBOX_PHY_ID == objIdx)
-        {
-            FLEXCAN_DRV_Receive(INST_CANCOM1, RX_MAILBOX_PHY_ID, &recvMsg);
-        }
-        else
-        {
-            ;
-        }
-        break;
+            /* Enable MB interrupt*/
+            if (RX_MAILBOX_FUN_ID == objIdx) {
+                FLEXCAN_DRV_Receive(INST_CANCOM1, RX_MAILBOX_FUN_ID, &recvMsg);
+            } else if (RX_MAILBOX_PHY_ID == objIdx) {
+                FLEXCAN_DRV_Receive(INST_CANCOM1, RX_MAILBOX_PHY_ID, &recvMsg);
+            } else {
+                ;
+            }
 
-    case FLEXCAN_EVENT_TX_COMPLETE:
-        TxCANMsgMainFun();
-        break;
+            break;
 
-    default:
-        break;
+        case FLEXCAN_EVENT_TX_COMPLETE:
+            TxCANMsgMainFun();
+            break;
+
+        default:
+            break;
     }
 }
 #endif  //end of IsUse_CAN_Pal_Driver
@@ -216,8 +203,8 @@ void InitCAN(void)
     /* Start receiving data in RX_MAILBOX and Enable MBn of Rx buffer interrupt */
     {
         uint32_t i = 0u;
-        for(i = 0u; i < g_ucRxCANMsgIDNum; i++)
-        {
+
+        for (i = 0u; i < g_ucRxCANMsgIDNum; i++) {
 #ifdef IsUse_CAN_Pal_Driver
             CAN_Receive(&can_pal1_instance, g_astRxMsgConfig[i].usRxMailBox, &recvMsg);
 
@@ -257,40 +244,35 @@ void RxCANMsgMainFun(void)
     stRxCANMsg.ucRxDataLen = recvMsg.dataLen;
 #endif  //end of IsUse_CAN_Pal_Driver
 
-    if((0u != stRxCANMsg.ucRxDataLen) &&
-            (TRUE == IsRxCANMsgId(stRxCANMsg.usRxDataId)))
-    {
+    if ((0u != stRxCANMsg.ucRxDataLen) &&
+            (TRUE == IsRxCANMsgId(stRxCANMsg.usRxDataId))) {
 
         /*read can message*/
-        for(CANDataIndex = 0u; CANDataIndex < stRxCANMsg.ucRxDataLen; CANDataIndex++)
-        {
+        for (CANDataIndex = 0u; CANDataIndex < stRxCANMsg.ucRxDataLen; CANDataIndex++) {
             stRxCANMsg.aucDataBuf[CANDataIndex] = recvMsg.data[CANDataIndex];
         }
 
-        if(TRUE != TP_DriverWriteDataInTP(stRxCANMsg.usRxDataId, stRxCANMsg.ucRxDataLen, stRxCANMsg.aucDataBuf))
-        {
+        if (TRUE != TP_DriverWriteDataInTP(stRxCANMsg.usRxDataId, stRxCANMsg.ucRxDataLen, stRxCANMsg.aucDataBuf)) {
             /*here is TP driver write data in TP failed, TP will lost CAN message*/
-            while(1)
-            {
+            while (1) {
             }
         }
+
 #if 0
         /*write data in softer data FIFO*/
         GetCanWriteLen(RX_BUS_FIFO, &xCanWriteLen, &eStatus);
-        if((ERRO_NONE == eStatus) && (xCanWriteLen > acuCANMsgLen))
-        {
+
+        if ((ERRO_NONE == eStatus) && (xCanWriteLen > acuCANMsgLen)) {
             /*write data in software fifo*/
             WriteDataInFifo(RX_BUS_FIFO, (uint8_t *)&stRxCANMsg, acuCANMsgLen, &eStatus);
 
-            if(ERRO_NONE != eStatus)
-            {
-                while(1);
+            if (ERRO_NONE != eStatus) {
+                while (1);
             }
+        } else {
+            while (1);
         }
-        else
-        {
-            while(1);
-        }
+
 #endif
     }
 }
@@ -339,8 +321,7 @@ uint8_t TransmiteCANMsg(const uint32_t i_usCANMsgID,
 
     DEV_ASSERT(i_pucDataBuf != NULL);
 
-    if(i_usCANMsgID != g_stTxMsgConfig.usTxID)
-    {
+    if (i_usCANMsgID != g_stTxMsgConfig.usTxID) {
         return FALSE;
     }
 
@@ -348,8 +329,7 @@ uint8_t TransmiteCANMsg(const uint32_t i_usCANMsgID,
     message.id = i_usCANMsgID;
     message.length = i_ucDataLen;
 
-    for(i = 0u; i < i_ucDataLen; i++)
-    {
+    for (i = 0u; i < i_ucDataLen; i++) {
         message.data[i] = i_pucDataBuf[i];
     }
 
@@ -358,8 +338,7 @@ uint8_t TransmiteCANMsg(const uint32_t i_usCANMsgID,
 #else
     DEV_ASSERT(i_pucDataBuf != NULL);
 
-    if(i_usCANMsgID != g_stTxMsgConfig.usTxID)
-    {
+    if (i_usCANMsgID != g_stTxMsgConfig.usTxID) {
         return FALSE;
     }
 
@@ -369,12 +348,9 @@ uint8_t TransmiteCANMsg(const uint32_t i_usCANMsgID,
 
 #endif  //end of IsUse_CAN_Pal_Driver
 
-    if(STATUS_SUCCESS == CANTxStatus)
-    {
+    if (STATUS_SUCCESS == CANTxStatus) {
         ret = TRUE;
-    }
-    else
-    {
+    } else {
         ret = FALSE;
     }
 

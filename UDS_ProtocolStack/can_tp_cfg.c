@@ -20,14 +20,14 @@ static tpfNetTxCallBack gs_pfTxMsgSuccessfulCallBack = NULL_PTR;
 
 
 static uint8 CANTP_TxMsg(const tUdsId i_xTxId,
-                              const uint16 i_DataLen,
-                              const uint8* i_pDataBuf,
-                              const tpfNetTxCallBack i_pfNetTxCallBack,
-                              const uint32 txBlockingMaxtime);
+                         const uint16 i_DataLen,
+                         const uint8 *i_pDataBuf,
+                         const tpfNetTxCallBack i_pfNetTxCallBack,
+                         const uint32 txBlockingMaxtime);
 
-static uint8 CANTP_RxMsg(tUdsId * o_pxRxId,
-                               uint8 * o_pRxDataLen,
-                               uint8 *o_pRxBuf);
+static uint8 CANTP_RxMsg(tUdsId *o_pxRxId,
+                         uint8 *o_pRxDataLen,
+                         uint8 *o_pRxBuf);
 
 static void CANTP_AbortTxMsg(void);
 
@@ -36,8 +36,7 @@ static boolean CANTP_ClearTXBUSFIFO(void);
 
 /*uds netwrok layer cfg info */
 #if 0
-const tUdsCANNetLayerCfg g_stCANUdsNetLayerCfgInfo =
-{
+const tUdsCANNetLayerCfg g_stCANUdsNetLayerCfgInfo = {
     1u,       /*called can tp period*/
     RX_FUN_ID,   /*can tp rx function ID*/
     RX_PHY_ID,   /*can tp rx phy ID*/
@@ -56,8 +55,7 @@ const tUdsCANNetLayerCfg g_stCANUdsNetLayerCfgInfo =
     CANTP_AbortTxMsg,
 };
 #else
-const tUdsCANNetLayerCfg g_stCANUdsNetLayerCfgInfo =
-{
+const tUdsCANNetLayerCfg g_stCANUdsNetLayerCfgInfo = {
     1u,       /*called can tp period*/
     RX_FUN_ID,   /*can tp rx function ID*/
     RX_PHY_ID,   /*can tp rx phy ID*/
@@ -79,10 +77,10 @@ const tUdsCANNetLayerCfg g_stCANUdsNetLayerCfgInfo =
 
 /*can tp tx message: there not use CAN driver TxFIFO, directly invoked CAN send function*/
 static uint8 CANTP_TxMsg(const tUdsId i_xTxId,
-                              const uint16 i_DataLen,
-                              const uint8* i_pDataBuf,
-                              const tpfNetTxCallBack i_pfNetTxCallBack,
-                              const uint32 txBlockingMaxtime)
+                         const uint16 i_DataLen,
+                         const uint8 *i_pDataBuf,
+                         const tpfNetTxCallBack i_pfNetTxCallBack,
+                         const uint32 txBlockingMaxtime)
 {
     tLen xCanWriteDataLen = 0u;
     tErroCode eStatus;
@@ -92,42 +90,42 @@ static uint8 CANTP_TxMsg(const tUdsId i_xTxId,
 
     ASSERT(NULL_PTR == i_pDataBuf);
 
-    if(i_DataLen > 8u)
-    {
+    if (i_DataLen > 8u) {
         return FALSE;
     }
 
     GetCanWriteLen(TX_BUS_FIFO, &xCanWriteDataLen, &eStatus);
-    if((ERRO_NONE == eStatus) && (msgInfoLen <= xCanWriteDataLen))
-    {
+
+    if ((ERRO_NONE == eStatus) && (msgInfoLen <= xCanWriteDataLen)) {
         TxMsgInfo.TxMsgID = i_xTxId;
         TxMsgInfo.TxMsgLength = sizeof(aMsgBuf);
         TxMsgInfo.TxMsgCallBack = (uint32)i_pfNetTxCallBack;
 
         fsl_memcpy(&aMsgBuf[0u], i_pDataBuf, i_DataLen);
 
-        WriteDataInFifo(TX_BUS_FIFO, (uint8 *)&TxMsgInfo, sizeof(tTPTxMsgHeader),&eStatus);
-        if(ERRO_NONE != eStatus)
-        {
+        WriteDataInFifo(TX_BUS_FIFO, (uint8 *)&TxMsgInfo, sizeof(tTPTxMsgHeader), &eStatus);
+
+        if (ERRO_NONE != eStatus) {
             ClearFIFO(TX_BUS_FIFO, &eStatus);
 
             return FALSE;
         }
 
-        WriteDataInFifo(TX_BUS_FIFO, (uint8 *)aMsgBuf,8,&eStatus);
-        if(ERRO_NONE != eStatus)
-        {
+        WriteDataInFifo(TX_BUS_FIFO, (uint8 *)aMsgBuf, 8, &eStatus);
+
+        if (ERRO_NONE != eStatus) {
             ClearFIFO(TX_BUS_FIFO, &eStatus);
             return FALSE;
         }
     }
+
     return TRUE;
     //ret = TransmiteCANMsg(i_xTxId, i_DataLen, i_pDataBuf, i_pfNetTxCallBack, txBlockingMaxtime);
 }
 
 /*can tp rx message: read rx msg from CAN driver RxFIFO*/
-static uint8 CANTP_RxMsg(tUdsId * o_pxRxId,
-                         uint8 * o_pRxDataLen,
+static uint8 CANTP_RxMsg(tUdsId *o_pxRxId,
+                         uint8 *o_pRxDataLen,
                          uint8 *o_pRxBuf)
 {
     tLen xCanRxDataLen = 0u;
@@ -142,43 +140,37 @@ static uint8 CANTP_RxMsg(tUdsId * o_pxRxId,
     ASSERT(NULL_PTR == o_pRxDataLen);
 
     GetCanReadLen(RX_BUS_FIFO, &xCanRxDataLen, &eStatus);
-    if((ERRO_NONE == eStatus) && (headerLen <= xCanRxDataLen))
-    {
+
+    if ((ERRO_NONE == eStatus) && (headerLen <= xCanRxDataLen)) {
         ReadDataFromFifo(RX_BUS_FIFO,
                          headerLen,
-                        (uint8 *)&stRxCanMsg,
-                        &xReadDataLen,
-                        &eStatus);
+                         (uint8 *)&stRxCanMsg,
+                         &xReadDataLen,
+                         &eStatus);
 
-        if((ERRO_NONE == eStatus) && (headerLen <= xCanRxDataLen))
-        {
+        if ((ERRO_NONE == eStatus) && (headerLen <= xCanRxDataLen)) {
             ReadDataFromFifo(RX_BUS_FIFO,
                              stRxCanMsg.rxDataLen,
-                            (uint8 *)&stRxCanMsg.aucDataBuf,
-                            &xCanRxDataLen,
-                            &eStatus);
+                             (uint8 *)&stRxCanMsg.aucDataBuf,
+                             &xCanRxDataLen,
+                             &eStatus);
 
-            if(TRUE != CANTP_IsReceivedMsgIDValid(stRxCanMsg.rxDataId))
-            {
+            if (TRUE != CANTP_IsReceivedMsgIDValid(stRxCanMsg.rxDataId)) {
                 return FALSE;
             }
 
             *o_pxRxId = stRxCanMsg.rxDataId;
             *o_pRxDataLen = stRxCanMsg.rxDataLen;
 
-            for(ucIndex = 0u; ucIndex < stRxCanMsg.rxDataLen; ucIndex++)
-            {
+            for (ucIndex = 0u; ucIndex < stRxCanMsg.rxDataLen; ucIndex++) {
                 o_pRxBuf[ucIndex] = stRxCanMsg.aucDataBuf[ucIndex];
             }
 
             return TRUE;
-         }
+        }
 
-    }
-    else
-    {
-        if((0u != xCanRxDataLen) || (ERRO_NONE != eStatus))
-        {
+    } else {
+        if ((0u != xCanRxDataLen) || (ERRO_NONE != eStatus)) {
             TPDebugPrintf("\n %s write message in FIFO failed! status = %d, FIFO avaliable Length=%d\n", __func__, eStatus, xCanRxDataLen);
         }
     }
@@ -203,9 +195,8 @@ boolean CANTP_IsReceivedMsgIDValid(const uint32 i_receiveMsgID)
 {
     boolean result = FALSE;
 
-    if((i_receiveMsgID == CANTP_GetConfigRxMsgFUNID())
- || (i_receiveMsgID == CANTP_GetConfigRxMsgPHYID()))
-    {
+    if ((i_receiveMsgID == CANTP_GetConfigRxMsgFUNID())
+            || (i_receiveMsgID == CANTP_GetConfigRxMsgPHYID())) {
         result = TRUE;
     }
 
@@ -237,15 +228,13 @@ static void CANTP_AbortTxMsg(void)
 {
     TPDebugPrintf("CANTP_AbortTxMsg\n");
 
-    if(NULL_PTR != gs_pfCANTPAbortTxMsg)
-    {
+    if (NULL_PTR != gs_pfCANTPAbortTxMsg) {
         (gs_pfCANTPAbortTxMsg)();
 
         gs_pfTxMsgSuccessfulCallBack = NULL_PTR;
     }
 
-    if(TRUE != CANTP_ClearTXBUSFIFO())
-    {
+    if (TRUE != CANTP_ClearTXBUSFIFO()) {
         TPDebugPrintf("CANTP_AbortTxMsg: Clear TX BUS FIFO failed!\n");
     }
 
@@ -269,26 +258,25 @@ boolean CANTP_DriverWriteDataInCANTP(const uint32 i_RxID, const uint32 i_dataLen
 
     ASSERT(NULL_PTR == i_pDataBuf);
 
-    if(i_dataLen > 8u)
-    {
+    if (i_dataLen > 8u) {
         return FALSE;
     }
 
     GetCanWriteLen(RX_BUS_FIFO, &xCanWriteDataLen, &eStatus);
-    if((ERRO_NONE == eStatus) && ((i_dataLen + headerLen) <= xCanWriteDataLen))
-    {
+
+    if ((ERRO_NONE == eStatus) && ((i_dataLen + headerLen) <= xCanWriteDataLen)) {
         stRxCanMsg.rxDataId = i_RxID;
         stRxCanMsg.rxDataLen = i_dataLen;
 
         WriteDataInFifo(RX_BUS_FIFO, (uint8 *)&stRxCanMsg, headerLen, &eStatus);
-        if(ERRO_NONE != eStatus)
-        {
+
+        if (ERRO_NONE != eStatus) {
             return FALSE;
         }
 
         WriteDataInFifo(RX_BUS_FIFO, (uint8 *)i_pDataBuf, stRxCanMsg.rxDataLen, &eStatus);
-        if(ERRO_NONE != eStatus)
-        {
+
+        if (ERRO_NONE != eStatus) {
             return FALSE;
         }
     }
@@ -310,38 +298,37 @@ boolean CANTP_DriverReadDataFromCANTP(const uint32 i_readDataLen, uint8 *o_pRead
     ASSERT(0u == i_readDataLen);
 
     GetCanReadLen(TX_BUS_FIFO, &xCanRxDataLen, &eStatus);
-    if((ERRO_NONE == eStatus) && (xCanRxDataLen > msgInfoLen))
-    {
-            /*read header an*/
+
+    if ((ERRO_NONE == eStatus) && (xCanRxDataLen > msgInfoLen)) {
+        /*read header an*/
+        ReadDataFromFifo(TX_BUS_FIFO,
+                         sizeof(tTPTxMsgHeader),
+                         (uint8 *)&TxMsgInfo,
+                         &xCanRxDataLen,
+                         &eStatus);
+
+        if ((ERRO_NONE == eStatus) && (xCanRxDataLen == sizeof(tTPTxMsgHeader))) {
+            result = TRUE;
+        }
+
+        if (TRUE == result) {
+
             ReadDataFromFifo(TX_BUS_FIFO,
-                             sizeof(tTPTxMsgHeader),
-                            (uint8 *)&TxMsgInfo,
-                            &xCanRxDataLen,
-                            &eStatus);
-            if((ERRO_NONE == eStatus) && (xCanRxDataLen == sizeof(tTPTxMsgHeader)))
-            {
+                             i_readDataLen,
+                             o_pReadDataBuf,
+                             &xCanRxDataLen,
+                             &eStatus);
+
+            if ((ERRO_NONE == eStatus) && (xCanRxDataLen == i_readDataLen) && (i_readDataLen >= TxMsgInfo.TxMsgLength)) {
                 result = TRUE;
+
+                *o_pstTxMsgHeader = TxMsgInfo;
+
+
+                /*storage callback, if user want to TX message callback please call TP_DoTxMsgSuccesfulCallback or self call callback*/
+                gs_pfTxMsgSuccessfulCallBack = (tpfNetTxCallBack)TxMsgInfo.TxMsgCallBack;
             }
-
-            if(TRUE == result)
-            {
-
-                ReadDataFromFifo(TX_BUS_FIFO,
-                                 i_readDataLen,
-                                o_pReadDataBuf,
-                                &xCanRxDataLen,
-                                &eStatus);
-                if((ERRO_NONE == eStatus) && (xCanRxDataLen == i_readDataLen) && (i_readDataLen >= TxMsgInfo.TxMsgLength))
-                {
-                    result = TRUE;
-
-                    *o_pstTxMsgHeader = TxMsgInfo;
-
-
-                    /*storage callback, if user want to TX message callback please call TP_DoTxMsgSuccesfulCallback or self call callback*/
-                    gs_pfTxMsgSuccessfulCallBack = (tpfNetTxCallBack)TxMsgInfo.TxMsgCallBack;
-                }
-            }
+        }
 
     }
 
@@ -352,8 +339,7 @@ boolean CANTP_DriverReadDataFromCANTP(const uint32 i_readDataLen, uint8 *o_pRead
 /*do tx message successful callback*/
 void CANTP_DoTxMsgSuccessfulCallBack(void)
 {
-    if(NULL_PTR != gs_pfTxMsgSuccessfulCallBack)
-    {
+    if (NULL_PTR != gs_pfTxMsgSuccessfulCallBack) {
         (gs_pfTxMsgSuccessfulCallBack)();
 
         gs_pfTxMsgSuccessfulCallBack = NULL_PTR;
@@ -367,8 +353,8 @@ static boolean CANTP_ClearTXBUSFIFO(void)
     tErroCode eStatus = ERRO_NONE;
 
     ClearFIFO(TX_BUS_FIFO, &eStatus);
-    if(ERRO_NONE == eStatus)
-    {
+
+    if (ERRO_NONE == eStatus) {
         result = TRUE;
     }
 

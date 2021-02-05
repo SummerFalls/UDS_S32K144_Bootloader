@@ -11,15 +11,13 @@
 
 #include "multi_cyc_fifo.h"
 
-typedef enum
-{
+typedef enum {
     FIFO_EMPTY,           /*fifo empty*/
     FIFO_USING,           /*fifo using*/
     FIFO_FULL            /*fifo full */
-}tFifoStatus;
+} tFifoStatus;
 
-typedef struct
-{
+typedef struct {
     tId xOwnerId;                  /*owner fifo id*/
     tLen xFifoLen;                 /*fifo len*/
     tLen xReadAddr;                /*read fifo addr*/
@@ -27,7 +25,7 @@ typedef struct
     tFifoStatus eFifoStatus;       /*fifo status*/
     unsigned char *pStartFifoAddr; /*start fifo addr*/
     void *pvNextFifoList;          /*next fifo list*/
-}tFifoInfo;
+} tFifoInfo;
 
 /*********************Marco define***************************/
 #define STRUCT_LEN (20u) /*every fifo struct used space*/
@@ -45,62 +43,62 @@ static tLen gs_xCleanFifoLen = TOTAL_BYTES;                  /*can used fifo len
 ** Modify Paramerer :   m_pxCounter need modify counter  Read/Write counter
 ***********************************************************/
 #define AddCounter(i_xFifoLen, m_pxCounter)\
-do{\
-    (*(m_pxCounter))++;\
-    if(*(m_pxCounter) >= (i_xFifoLen))\
-    {\
-        *(m_pxCounter) -= (i_xFifoLen);\
-    }\
-}while(0)
+    do{\
+        (*(m_pxCounter))++;\
+        if(*(m_pxCounter) >= (i_xFifoLen))\
+        {\
+            *(m_pxCounter) -= (i_xFifoLen);\
+        }\
+    }while(0)
 
 /*add write counter used in write fifo*/
 #define AddWriteCounter(m_pstNode)\
-do{\
-    AddCounter(m_pstNode->xFifoLen, &(m_pstNode->xWriteAddr));\
-}while(0)
+    do{\
+        AddCounter(m_pstNode->xFifoLen, &(m_pstNode->xWriteAddr));\
+    }while(0)
 
 /*Check and change current  write FIFO status*/
 #define CheckAndChangeWriteFIFOStatus(m_pstNode) \
-do{\
-    DisableAllInterrupts();\
-    if((m_pstNode)->xWriteAddr == (m_pstNode)->xReadAddr)\
-    {\
-        (m_pstNode)->eFifoStatus = FIFO_FULL;\
-    }\
-    else\
-    {\
-        (m_pstNode)->eFifoStatus = FIFO_USING;\
-    }\
-    EnableAllInterrupts();\
-}while(0u)
+    do{\
+        DisableAllInterrupts();\
+        if((m_pstNode)->xWriteAddr == (m_pstNode)->xReadAddr)\
+        {\
+            (m_pstNode)->eFifoStatus = FIFO_FULL;\
+        }\
+        else\
+        {\
+            (m_pstNode)->eFifoStatus = FIFO_USING;\
+        }\
+        EnableAllInterrupts();\
+    }while(0u)
 
 /*add read counter used in read fifo*/
 #define AddReadCounter(m_pstNode)\
-do{\
-    AddCounter(m_pstNode->xFifoLen, &(m_pstNode->xReadAddr));\
-}while(0)
+    do{\
+        AddCounter(m_pstNode->xFifoLen, &(m_pstNode->xReadAddr));\
+    }while(0)
 
 /*Check and change current read FIFO status*/
 #define CheckAndChangeReadFIFOStatus(m_pstNode) \
-do{\
-    DisableAllInterrupts();\
-    if((m_pstNode)->xWriteAddr == (m_pstNode)->xReadAddr)\
-    {\
-        (m_pstNode)->eFifoStatus = FIFO_EMPTY;\
-    }\
-    else\
-    {\
-        (m_pstNode)->eFifoStatus = FIFO_USING;\
-    }\
-    EnableAllInterrupts();\
-}while(0u)
+    do{\
+        DisableAllInterrupts();\
+        if((m_pstNode)->xWriteAddr == (m_pstNode)->xReadAddr)\
+        {\
+            (m_pstNode)->eFifoStatus = FIFO_EMPTY;\
+        }\
+        else\
+        {\
+            (m_pstNode)->eFifoStatus = FIFO_USING;\
+        }\
+        EnableAllInterrupts();\
+    }while(0u)
 
 
 /*get fifo list header*/
 #define GetListHeader(o_psListHeader)\
-do{\
-    (o_psListHeader) = gs_pstListHeader;\
-}while(0)
+    do{\
+        (o_psListHeader) = gs_pstListHeader;\
+    }while(0)
 
 /**********************************************************/
 
@@ -128,31 +126,30 @@ void ApplyFifo(tLen i_xApplyFifoLen, tLen i_xFifoId, tErroCode *o_peApplyStatus)
     uint32 CleanFIFOLenTmp = 0u;
 
 #ifdef SAFE_LEVEL_O3
-    if((tErroCode *)0u == o_peApplyStatus)
-    {
+
+    if ((tErroCode *)0u == o_peApplyStatus) {
         return;
     }
 
     /*confirm apply FIFO header start align as 4Bytes*/
     CleanFIFOLenTmp = (uint32)(&gs_ucFifo[TOTAL_BYTES - gs_xCleanFifoLen]) & 0x03u;
 
-    if((i_xApplyFifoLen + STRUCT_LEN + CleanFIFOLenTmp) > gs_xCleanFifoLen)
-    {
+    if ((i_xApplyFifoLen + STRUCT_LEN + CleanFIFOLenTmp) > gs_xCleanFifoLen) {
         *o_peApplyStatus = ERRO_OVER_MAX;
 
         return;
     }
+
 #endif
 
     FindFifo(i_xFifoId, &pstNode, o_peApplyStatus);
-    if(ERRO_NONE == *o_peApplyStatus) /*note if ERRO_NONE that means id have registered.*/
-    {
+
+    if (ERRO_NONE == *o_peApplyStatus) { /*note if ERRO_NONE that means id have registered.*/
         *o_peApplyStatus = ERRO_REGISTERED_SECOND;
         return;
     }
 
-    if(CleanFIFOLenTmp)
-    {
+    if (CleanFIFOLenTmp) {
         gs_xCleanFifoLen -= CleanFIFOLenTmp;
     }
 
@@ -166,7 +163,7 @@ void ApplyFifo(tLen i_xApplyFifoLen, tLen i_xFifoId, tErroCode *o_peApplyStatus)
     pstNode->eFifoStatus = FIFO_EMPTY;
 
     xNodeNeedSpace = (tLen)((unsigned char *)((tFifoInfo *)(&gs_ucFifo[TOTAL_BYTES - gs_xCleanFifoLen]) + 1u) -
-                       (unsigned char *)(&gs_ucFifo[TOTAL_BYTES - gs_xCleanFifoLen]));
+                            (unsigned char *)(&gs_ucFifo[TOTAL_BYTES - gs_xCleanFifoLen]));
 
     xNodeNeedSpace += i_xApplyFifoLen;
     gs_xCleanFifoLen -= xNodeNeedSpace;
@@ -188,49 +185,47 @@ void ApplyFifo(tLen i_xApplyFifoLen, tLen i_xFifoId, tErroCode *o_peApplyStatus)
 **  Created Date        :   2013-3-27
 **********************************************************/
 void WriteDataInFifo(tId i_xFifoId,
-                       unsigned char *i_pucWriteDataBuf,
-                       tLen i_xWriteDatalen,
-                       tErroCode *o_peWriteStatus)
+                     unsigned char *i_pucWriteDataBuf,
+                     tLen i_xWriteDatalen,
+                     tErroCode *o_peWriteStatus)
 {
     tFifoInfo *pstNode = (tFifoInfo *)0u;
     tLen xIndex = 0u;
     tLen xCanWriteTotal = 0u;
 
 #ifdef SAFE_LEVEL_O3
-    if((tErroCode *)0u == o_peWriteStatus)
-    {
+
+    if ((tErroCode *)0u == o_peWriteStatus) {
         return;
     }
 
-    if((unsigned char *)0u == i_pucWriteDataBuf)
-    {
+    if ((unsigned char *)0u == i_pucWriteDataBuf) {
         *o_peWriteStatus = ERRO_POINTER_NULL;
 
         return;
     }
+
 #endif
 
     GetCanWriteLen(i_xFifoId, &xCanWriteTotal, o_peWriteStatus);
-    if(ERRO_NONE != *o_peWriteStatus)
-    {
+
+    if (ERRO_NONE != *o_peWriteStatus) {
         return;
     }
 
-    if(i_xWriteDatalen > xCanWriteTotal)
-    {
+    if (i_xWriteDatalen > xCanWriteTotal) {
         *o_peWriteStatus = ERRO_OVER_MAX;
 
         return;
     }
 
     FindFifo(i_xFifoId, &pstNode, o_peWriteStatus);
-    if(ERRO_NONE != *o_peWriteStatus)
-    {
+
+    if (ERRO_NONE != *o_peWriteStatus) {
         return;
     }
 
-    for(xIndex = 0u; xIndex < i_xWriteDatalen; xIndex++)
-    {
+    for (xIndex = 0u; xIndex < i_xWriteDatalen; xIndex++) {
         (pstNode->pStartFifoAddr)[pstNode->xWriteAddr] = i_pucWriteDataBuf[xIndex];
         AddWriteCounter(pstNode);
     }
@@ -256,47 +251,46 @@ void WriteDataInFifo(tId i_xFifoId,
 **  Created Date        :   2013-3-27
 **********************************************************/
 void ReadDataFromFifo(tId i_xFifoId, tLen i_xNeedReadDataLen,
-                           unsigned char *o_pucReadDataBuf,
-                           tLen *o_pxReadLen,
-                           tErroCode *o_peReadStatus)
+                      unsigned char *o_pucReadDataBuf,
+                      tLen *o_pxReadLen,
+                      tErroCode *o_peReadStatus)
 {
     tFifoInfo *pstNode = (tFifoInfo *)0u;
     tLen xIndex = 0u;
     tLen xCanReadTotal = 0u;
 
 #ifdef SAFE_LEVEL_O3
-    if((tErroCode *)0u == o_peReadStatus)
-    {
+
+    if ((tErroCode *)0u == o_peReadStatus) {
         return;
     }
 
-    if((unsigned char *)0u == o_pucReadDataBuf ||
-        (tLen *)0u == o_pxReadLen ||
-        (tLen)0u == i_xNeedReadDataLen )
-    {
+    if ((unsigned char *)0u == o_pucReadDataBuf ||
+            (tLen *)0u == o_pxReadLen ||
+            (tLen)0u == i_xNeedReadDataLen ) {
         *o_peReadStatus = ERRO_POINTER_NULL;
 
         return;
     }
+
 #endif
 
     GetCanReadLen(i_xFifoId, &xCanReadTotal, o_peReadStatus);
-    if(ERRO_NONE != *o_peReadStatus)
-    {
+
+    if (ERRO_NONE != *o_peReadStatus) {
         return;
     }
 
     FindFifo(i_xFifoId, &pstNode, o_peReadStatus);
-    if(ERRO_NONE != *o_peReadStatus)
-    {
+
+    if (ERRO_NONE != *o_peReadStatus) {
         return;
     }
 
     xCanReadTotal = xCanReadTotal > i_xNeedReadDataLen ? i_xNeedReadDataLen : xCanReadTotal;
     *o_pxReadLen = xCanReadTotal;
 
-    for(xIndex = 0u; xIndex < xCanReadTotal; xIndex++)
-    {
+    for (xIndex = 0u; xIndex < xCanReadTotal; xIndex++) {
         o_pucReadDataBuf[xIndex] = (pstNode->pStartFifoAddr)[pstNode->xReadAddr] ;
         AddReadCounter(pstNode);
     }
@@ -324,37 +318,32 @@ void GetCanReadLen(tId i_xFifoId, tLen *o_pxCanReadLen, tErroCode *o_peGetStatus
     tFifoInfo *pstNode = (tFifoInfo *)0u;
 
 #ifdef SAFE_LEVEL_O3
-    if((tErroCode *)0u == o_peGetStatus)
-    {
+
+    if ((tErroCode *)0u == o_peGetStatus) {
         return;
     }
 
-    if((tLen *)0u == o_pxCanReadLen)
-    {
+    if ((tLen *)0u == o_pxCanReadLen) {
         *o_peGetStatus = ERRO_POINTER_NULL;
 
         return;
     }
+
 #endif
 
     FindFifo(i_xFifoId, &pstNode, o_peGetStatus);
-    if(ERRO_NONE != *o_peGetStatus)
-    {
+
+    if (ERRO_NONE != *o_peGetStatus) {
         return;
     }
 
-    if(FIFO_USING == pstNode->eFifoStatus)
-    {
+    if (FIFO_USING == pstNode->eFifoStatus) {
         *o_pxCanReadLen = (pstNode->xReadAddr > pstNode->xWriteAddr) ?
                           (pstNode->xFifoLen - pstNode->xReadAddr + pstNode->xWriteAddr) :
                           (pstNode->xWriteAddr - pstNode->xReadAddr);
-    }
-    else if(FIFO_FULL == pstNode->eFifoStatus)
-    {
+    } else if (FIFO_FULL == pstNode->eFifoStatus) {
         *o_pxCanReadLen = pstNode->xFifoLen;
-    }
-    else
-    {
+    } else {
         *o_pxCanReadLen = (tLen)0u;
     }
 
@@ -378,37 +367,32 @@ void GetCanWriteLen(tId i_xFifoId, tLen *o_pxCanWriteLen, tErroCode *o_peGetStat
     tFifoInfo *pstNode = (tFifoInfo *)0u;
 
 #ifdef SAFE_LEVEL_O3
-    if((tErroCode *)0u == o_peGetStatus)
-    {
+
+    if ((tErroCode *)0u == o_peGetStatus) {
         return;
     }
 
-    if((tLen *)0u == o_pxCanWriteLen)
-    {
+    if ((tLen *)0u == o_pxCanWriteLen) {
         *o_peGetStatus = ERRO_POINTER_NULL;
 
         return;
     }
+
 #endif
 
     FindFifo(i_xFifoId, &pstNode, o_peGetStatus);
-    if(ERRO_NONE != *o_peGetStatus)
-    {
+
+    if (ERRO_NONE != *o_peGetStatus) {
         return;
     }
 
-    if(FIFO_USING == pstNode->eFifoStatus)
-    {
+    if (FIFO_USING == pstNode->eFifoStatus) {
         *o_pxCanWriteLen = (pstNode->xReadAddr > pstNode->xWriteAddr) ?
                            (pstNode->xReadAddr - pstNode->xWriteAddr) :
                            (pstNode->xFifoLen + pstNode->xReadAddr - pstNode->xWriteAddr);
-    }
-    else if(FIFO_EMPTY == pstNode->eFifoStatus)
-    {
+    } else if (FIFO_EMPTY == pstNode->eFifoStatus) {
         *o_pxCanWriteLen = pstNode->xFifoLen;
-    }
-    else
-    {
+    } else {
         *o_pxCanWriteLen = (tLen)0u;
     }
 
@@ -431,21 +415,20 @@ static void AddInList(tFifoInfo *i_pstFifoNode, tFifoInfo **m_ppstHeader, tErroC
     tFifoInfo *pstTemp = (tFifoInfo *)0u;
 
 #ifdef SAFE_LEVEL_O3
-    if((tErroCode *)0u == o_peAddStatus)
-    {
+
+    if ((tErroCode *)0u == o_peAddStatus) {
         return;
     }
 
-    if((tFifoInfo **)0u == m_ppstHeader || (tFifoInfo *)0u == i_pstFifoNode)
-    {
+    if ((tFifoInfo **)0u == m_ppstHeader || (tFifoInfo *)0u == i_pstFifoNode) {
         *o_peAddStatus = ERRO_POINTER_NULL;
 
         return;
     }
+
 #endif
 
-    if((tFifoInfo *)0u == *m_ppstHeader)
-    {
+    if ((tFifoInfo *)0u == *m_ppstHeader) {
         *m_ppstHeader = i_pstFifoNode;
         *o_peAddStatus = ERRO_NONE;
 
@@ -454,10 +437,8 @@ static void AddInList(tFifoInfo *i_pstFifoNode, tFifoInfo **m_ppstHeader, tErroC
 
     pstTemp = *m_ppstHeader;
 
-    while((void *)0u != pstTemp->pvNextFifoList)
-    {
-        if(i_pstFifoNode == pstTemp)
-        {
+    while ((void *)0u != pstTemp->pvNextFifoList) {
+        if (i_pstFifoNode == pstTemp) {
             *o_peAddStatus = ERRO_REGISTERED_SECOND;
 
             return;
@@ -490,24 +471,23 @@ static void FindFifo(tId i_xFifoId, tFifoInfo **o_ppstNode, tErroCode *o_peFindS
     tFifoInfo *pstNode = (tFifoInfo *)0u;
 
 #ifdef SAFE_LEVEL_O3
-    if((tErroCode *)0u == o_peFindStatus)
-    {
+
+    if ((tErroCode *)0u == o_peFindStatus) {
         return;
     }
 
-    if((tFifoInfo **)0u == o_ppstNode)
-    {
+    if ((tFifoInfo **)0u == o_ppstNode) {
         *o_peFindStatus = ERRO_POINTER_NULL;
 
         return;
     }
+
 #endif
 
     GetListHeader(pstNode);
-    while((tFifoInfo *)0u != pstNode)
-    {
-        if(i_xFifoId == pstNode->xOwnerId)
-        {
+
+    while ((tFifoInfo *)0u != pstNode) {
+        if (i_xFifoId == pstNode->xOwnerId) {
             *o_peFindStatus = ERRO_NONE;
 
             *o_ppstNode = pstNode;
@@ -537,15 +517,16 @@ void ClearFIFO(tId i_xFifoId, tErroCode *o_peGetStatus)
     tFifoInfo *pstNode = (tFifoInfo *)0u;
 
 #ifdef SAFE_LEVEL_O3
-    if((tErroCode *)0u == o_peGetStatus)
-    {
+
+    if ((tErroCode *)0u == o_peGetStatus) {
         return;
     }
+
 #endif
 
     FindFifo(i_xFifoId, &pstNode, o_peGetStatus);
-    if(ERRO_NONE != *o_peGetStatus)
-    {
+
+    if (ERRO_NONE != *o_peGetStatus) {
         return;
     }
 

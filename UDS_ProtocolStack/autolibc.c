@@ -93,7 +93,7 @@
 #include "toolchain.h"
 
 #ifdef AUTOLIB_TESTING
-    #include "addresschecker.h"
+#include "addresschecker.h"
 #endif
 #include "autolibc.h"
 
@@ -139,9 +139,9 @@ static uint32_t u32RandVal = 0x12345678U;
                            LOCAL FUNCTION PROTOTYPES
 ==============================================================================*/
 static INLINE int32_t fsl_memcmp_aux( const void *pcoavMemA1,
-                               const void *pcoavMemB1,
-                               uint32_t u32Size1
-                             );
+                                      const void *pcoavMemB1,
+                                      uint32_t u32Size1
+                                    );
 /*==============================================================================
                                 LOCAL FUNCTIONS
 ==============================================================================*/
@@ -157,17 +157,16 @@ static INLINE int32_t fsl_memcmp_aux( const void *pcoavMemA1,
 *         of first not matching bytes otherwise.
 */
 static INLINE int32_t fsl_memcmp_aux( const void *pcoavMemA1,
-                               const void *pcoavMemB1,
-                               uint32_t u32Size1
-                             )
+                                      const void *pcoavMemB1,
+                                      uint32_t u32Size1
+                                    )
 {
     const uint8_t *pcoau8MemA1 = (const uint8_t *)pcoavMemA1;
     const uint8_t *pcoau8MemB1 = (const uint8_t *)pcoavMemB1;
     uint32_t u32Ctr1;
     int32_t s32Result1 = 0;
 
-    for ( u32Ctr1=0U; u32Ctr1 < u32Size1; u32Ctr1++ )
-    {
+    for ( u32Ctr1 = 0U; u32Ctr1 < u32Size1; u32Ctr1++ ) {
 #ifdef AUTOLIB_TESTING
         /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -177,12 +176,13 @@ static INLINE int32_t fsl_memcmp_aux( const void *pcoavMemA1,
                  );
 #endif
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-        s32Result1 =(int32_t)pcoau8MemA1[u32Ctr1]-(int32_t)pcoau8MemB1[u32Ctr1];
-        if ( s32Result1 != 0 )
-        {
+        s32Result1 = (int32_t)pcoau8MemA1[u32Ctr1] - (int32_t)pcoau8MemB1[u32Ctr1];
+
+        if ( s32Result1 != 0 ) {
             break;
         }
     }
+
     return s32Result1;
 }
 /*==============================================================================
@@ -228,10 +228,8 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
 #endif
 
     /* too short for optimizations, copy along 1B */
-    if ( u32Length2 < MEMCPY_OPT_LENGTH )
-    {
-        for (u32Ctr2 = 0U; u32Ctr2 < u32Length2; u32Ctr2++)
-        {
+    if ( u32Length2 < MEMCPY_OPT_LENGTH ) {
+        for (u32Ctr2 = 0U; u32Ctr2 < u32Length2; u32Ctr2++) {
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -243,21 +241,21 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
             pau8Dst2[u32Ctr2] = pcoau8Src2[u32Ctr2];
         }
-    }
-    else
-    { /* optimized copying */
+    } else {
+        /* optimized copying */
         u32Ctr2 = 0U;
         /* Compute offset between pointers. We are only interested in last 2 bits, so uint8_t is enough */
         /* warning - convertion to smaller type (lost of higher bytes) - required behaviour here */
         /** @violates @ref AutoLibc_REF_3 MISRA 2004 Afvisory Rule 11.3 */
         u8ShiftDif = (uint8_t)((uaddr_t)pavDest2 - (uaddr_t)pcoavSource2);
+
         /* Check whether offset between pointers is multiple of 4 (last 2 bits are zero) */
-        if ( 0U == (u8ShiftDif & 3U) )
-        { /* copy along 4B */
+        if ( 0U == (u8ShiftDif & 3U) ) {
+            /* copy along 4B */
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Afvisory Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            while ( 0U != (((uaddr_t)(&pau8Dst2[u32Ctr2])) & 3U) )
-            { /* copy first unaligned part of data */
+            while ( 0U != (((uaddr_t)(&pau8Dst2[u32Ctr2])) & 3U) ) {
+                /* copy first unaligned part of data */
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                 CA_Check2( &pau8Dst2[u32Ctr2], \
@@ -280,9 +278,9 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
             /* u32Length2 is >= MIN_OPT_LENGTH here, u32Ctr2 is at most 3 */
             u32Length2 -= u32Ctr2;
             u32IntCount2 = u32Length2 >> 2U; /* = u32Length2 / 4U */
+
             /* copy integer aligned part of data */
-            for ( u32Ctr2 = 0U; u32Ctr2 < u32IntCount2 ; u32Ctr2++ )
-            {
+            for ( u32Ctr2 = 0U; u32Ctr2 < u32IntCount2 ; u32Ctr2++ ) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -295,6 +293,7 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                 pau32Dst2[u32Ctr2] = pcoau32Src2[u32Ctr2];
             }
+
             /* copy the last unaligned bytes (if any) */
             /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -303,8 +302,8 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
             pcoau8Src2 = (const uint8_t *)(&pcoau32Src2[u32Ctr2]);
             u32Length2 -= u32Ctr2 * UINT_SIZE; /* update u32Length2 to be copied */
-            for ( u32Ctr2 = 0U; u32Ctr2 < u32Length2; u32Ctr2++ )
-            {
+
+            for ( u32Ctr2 = 0U; u32Ctr2 < u32Length2; u32Ctr2++ ) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -318,12 +317,12 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
             }
         }
         /* Check whether offset between pointers is multiple of 2 (last 1 bit is zero) */
-        else if ( 0U == (u8ShiftDif & 1U) )
-        {   /* Copy along 2B */
+        else if ( 0U == (u8ShiftDif & 1U) ) {
+            /* Copy along 2B */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
-            if ( 0U != (((uaddr_t)(&pau8Dst2[u32Ctr2])) & 1U) )
-            { /* copy first unaligned part of data */
+            if ( 0U != (((uaddr_t)(&pau8Dst2[u32Ctr2])) & 1U) ) {
+                /* copy first unaligned part of data */
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -336,6 +335,7 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
                 pau8Dst2[u32Ctr2] = pcoau8Src2[u32Ctr2];
                 u32Ctr2++;
             }
+
             /* copy 2B aligned part of data */
             /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -347,8 +347,8 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
             /* u32Length2 is >= MIN_OPT_LENGTH here, u32Ctr2 is at most 3 */
             u32Length2 -= u32Ctr2;
             u32IntCount2 = u32Length2 >> 1U; /* = u32Length2 / 2U */
-            for ( u32Ctr2 = 0U; u32Ctr2 < u32IntCount2; u32Ctr2++ )
-            {
+
+            for ( u32Ctr2 = 0U; u32Ctr2 < u32IntCount2; u32Ctr2++ ) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -369,9 +369,9 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
             /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
             pcoau8Src2 = (const uint8_t *)(&pcoau16Src2[u32Ctr2]);
-            u32Length2 -= u32Ctr2 * (UINT_SIZE>>1U); /* update u32Length2 to be copied */
-            for ( u32Ctr2 = 0U; u32Ctr2 < u32Length2; u32Ctr2++ )
-            {
+            u32Length2 -= u32Ctr2 * (UINT_SIZE >> 1U); /* update u32Length2 to be copied */
+
+            for ( u32Ctr2 = 0U; u32Ctr2 < u32Length2; u32Ctr2++ ) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -386,11 +386,9 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
             }
         }
         /* any other shifting */
-        else
-        {
+        else {
             /* copying along 1B */
-            while (u32Length2-u32Ctr2)
-            {
+            while (u32Length2 - u32Ctr2) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -405,6 +403,7 @@ void *fsl_memcpy(void *pavDest2, const void *pcoavSource2, uint32_t u32Length2)
             }
         }
     }
+
     return pavDest2;
 }
 
@@ -436,11 +435,10 @@ void *fsl_memset(void *pavDest3, uint8_t u8Fill3, uint32_t u32Length3)
     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
     CA_SetRange1( (uaddr_t)pavDest3,   u32Length3, 1U);
 #endif
+
     /* too short for optimizations */
-    if ( u32Length3 < MEMSET_OPT_LENGTH )
-    {
-        for (u32Ctr3 = 0U; u32Ctr3 < u32Length3; u32Ctr3++)
-        {
+    if ( u32Length3 < MEMSET_OPT_LENGTH ) {
+        for (u32Ctr3 = 0U; u32Ctr3 < u32Length3; u32Ctr3++) {
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -453,14 +451,14 @@ void *fsl_memset(void *pavDest3, uint8_t u8Fill3, uint32_t u32Length3)
         }
     }
     /* optimized code */
-    else
-    {
+    else {
         u32Ctr3 = 0U;
+
         /* filling along 4B */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
         /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
-        while ( 0U != ((uaddr_t)(&pau8Dst3[u32Ctr3]) & 3U) )
-        { /* set first unaligned bytes */
+        while ( 0U != ((uaddr_t)(&pau8Dst3[u32Ctr3]) & 3U) ) {
+            /* set first unaligned bytes */
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -472,6 +470,7 @@ void *fsl_memset(void *pavDest3, uint8_t u8Fill3, uint32_t u32Length3)
             pau8Dst3[u32Ctr3] = u8Fill3;
             u32Ctr3++;
         }
+
         /* write integer aligned part of data */
         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -481,8 +480,8 @@ void *fsl_memset(void *pavDest3, uint8_t u8Fill3, uint32_t u32Length3)
         u32Length3 -= u32Ctr3;
         u32IntCount3 = u32Length3 >> 2U; /* = u32Length3 / 4U */
         u32Fill3 = 0x01010101U * u8Fill3; /* set u8Fill3 to each byte in int */
-        for ( u32Ctr3 = 0U; u32Ctr3 < u32IntCount3 ; u32Ctr3++ )
-        {
+
+        for ( u32Ctr3 = 0U; u32Ctr3 < u32IntCount3 ; u32Ctr3++ ) {
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -500,8 +499,8 @@ void *fsl_memset(void *pavDest3, uint8_t u8Fill3, uint32_t u32Length3)
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
         pau8Dst3 = (uint8_t *)(&pau32Dst3[u32Ctr3]);
         u32Length3 -= u32Ctr3 * UINT_SIZE; /* update to length to be copied */
-        for ( u32Ctr3 = 0U; u32Ctr3 < u32Length3; u32Ctr3++ )
-        {
+
+        for ( u32Ctr3 = 0U; u32Ctr3 < u32Length3; u32Ctr3++ ) {
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -513,6 +512,7 @@ void *fsl_memset(void *pavDest3, uint8_t u8Fill3, uint32_t u32Length3)
             pau8Dst3[u32Ctr3] = u8Fill3;
         }
     }
+
     return pavDest3;
 }
 
@@ -553,20 +553,19 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
 #endif
 
     /* Temporary spaces cannot be used because malloc is not available */
-    if (pavDest4 == pcoavSource4)
-    {   /* Both buffers are same */
+    if (pavDest4 == pcoavSource4) {
+        /* Both buffers are same */
         ; /* Nothing to copy, it is already done */
     }
     /** @violates @ref AutoLibc_REF_10 MISRA 2004 Required Rule 17.2 */
-    else if ( pavDest4 < pcoavSource4 )
-    {   /* Source start possibly overlaps the destination end which means the
+    else if ( pavDest4 < pcoavSource4 ) {
+        /* Source start possibly overlaps the destination end which means the
            start of the pcoavSource4 could be overwritten. It is save to copy
            from the beginning, which is what memcpy does. */
         /* MISRA NOTE: the return value does not contain error information */
         fsl_memcpy( pavDest4, pcoavSource4, u32Length4);
-    }
-    else
-    {   /* Destination start possibly overlaps the end of source which means
+    } else {
+        /* Destination start possibly overlaps the end of source which means
            the end of the source could be overwritten. It is safe to copy from
            the end. */
         pu8FirstDst4 = (uint8_t *)pavDest4;
@@ -598,11 +597,9 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
         */
 
         /* too short for optimizations, move along 1B */
-        if ( u32Length4 < MEMMOVE_OPT_LENGTH )
-        {
+        if ( u32Length4 < MEMMOVE_OPT_LENGTH ) {
             /** @violates @ref AutoLibc_REF_10 MISRA 2004 Required Rule 17.2 */
-            while ( pu8AfterDst4 > pu8FirstDst4 ) /* pointers to same array */
-            {
+            while ( pu8AfterDst4 > pu8FirstDst4 ) { /* pointers to same array */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                 pu8AfterDst4--;
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -618,18 +615,18 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
             }
         }
         /* optimized copying */
-        else
-        {
+        else {
             /* warning - conversion to smaller type (lost of higher bytes) - required behaviour here */
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             u8ShiftDif = (uint8_t)((uaddr_t)pavDest4 - (uaddr_t)pcoavSource4);
+
             /* Check whether offset between pointers is multiple of 4 (last 2 bits are zero) */
-            if ( 0U == (u8ShiftDif & 3U) )
-            {   /* move along 4B */
+            if ( 0U == (u8ShiftDif & 3U) ) {
+                /* move along 4B */
                 /* align the end of Dst to uint32_t size, copy bytes (if any) */
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
-                while ( 0U != ((uaddr_t)pu8AfterDst4 & 3U) )
-                { /* 0 != (address % 4U), address not aligned to 4 */
+                while ( 0U != ((uaddr_t)pu8AfterDst4 & 3U) ) {
+                    /* 0 != (address % 4U), address not aligned to 4 */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pu8AfterDst4--;
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -645,12 +642,13 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
 
                 /* copy integer aligned part of data by whole integers */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-                pu32AfterDst4 = (uint32_t*)pu8AfterDst4;
+                pu32AfterDst4 = (uint32_t *)pu8AfterDst4;
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-                pcou32AfterSrc4 = (const uint32_t*)pcou8AfterSrc4;
+                pcou32AfterSrc4 = (const uint32_t *)pcou8AfterSrc4;
+
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
-                while ( (uaddr_t)pu32AfterDst4 >= ((uaddr_t)pu8FirstDst4 + 4U) )
-                { /* --AfterDst >= FirstDst, syntax above prevents underflow */
+                while ( (uaddr_t)pu32AfterDst4 >= ((uaddr_t)pu8FirstDst4 + 4U) ) {
+                    /* --AfterDst >= FirstDst, syntax above prevents underflow */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pu32AfterDst4--;
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -668,12 +666,12 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
 
                 /* copy the remaining unaligned bytes on the beginning (if any) */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-                pu8AfterDst4 = (uint8_t*)pu32AfterDst4;
+                pu8AfterDst4 = (uint8_t *)pu32AfterDst4;
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-                pcou8AfterSrc4 = (const uint8_t*)pcou32AfterSrc4;
+                pcou8AfterSrc4 = (const uint8_t *)pcou32AfterSrc4;
+
                 /** @violates @ref AutoLibc_REF_10 MISRA 2004 Required Rule 17.2 */
-                while ( pu8AfterDst4 > pu8FirstDst4 ) /* pointers to same array */
-                {
+                while ( pu8AfterDst4 > pu8FirstDst4 ) { /* pointers to same array */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pu8AfterDst4--;
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -688,13 +686,12 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
                 }
             }
             /* 2B shift between destination and source data addresses */
-            else if ( 0U == (u8ShiftDif & 1U) )
-            {
+            else if ( 0U == (u8ShiftDif & 1U) ) {
                 /* move along 2B */
                 /* Align the end of Dst to uint16_t size, copy even byte (if any) */
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
-                if ( 0U != ((uaddr_t)pu8AfterDst4 & 1U) )
-                { /* 0 != (address % 4U), address not aligned to 4 */
+                if ( 0U != ((uaddr_t)pu8AfterDst4 & 1U) ) {
+                    /* 0 != (address % 4U), address not aligned to 4 */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pu8AfterDst4--;
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -707,14 +704,16 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
                              );
 #endif
                 }
+
                 /* Move 2B-aligned part of data by 2 bytes */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-                pu16AfterDst4 = (uint16_t*)pu8AfterDst4;
+                pu16AfterDst4 = (uint16_t *)pu8AfterDst4;
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-                pcou16AfterSrc4 = (const uint16_t*)pcou8AfterSrc4;
+                pcou16AfterSrc4 = (const uint16_t *)pcou8AfterSrc4;
+
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
-                while ( (uaddr_t)pu16AfterDst4 >= ((uaddr_t)pu8FirstDst4 + 2U) )
-                { /* --AfterDst >= FirstDst, syntax above prevents underflow */
+                while ( (uaddr_t)pu16AfterDst4 >= ((uaddr_t)pu8FirstDst4 + 2U) ) {
+                    /* --AfterDst >= FirstDst, syntax above prevents underflow */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pu16AfterDst4--;
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -729,15 +728,16 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
                              );
 #endif
                 }
+
                 /* move the remaining unaligned bytes on the beginning (if any) */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-                pu8AfterDst4 = (uint8_t*)pu16AfterDst4;
+                pu8AfterDst4 = (uint8_t *)pu16AfterDst4;
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-                pcou8AfterSrc4 = (const uint8_t*)pcou16AfterSrc4;
+                pcou8AfterSrc4 = (const uint8_t *)pcou16AfterSrc4;
+
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_10 MISRA 2004 Required Rule 17.2 */
-                if ( pu8AfterDst4 > pu8FirstDst4 ) /* pointers to same array */
-                {
+                if ( pu8AfterDst4 > pu8FirstDst4 ) { /* pointers to same array */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pu8AfterDst4--;
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -752,11 +752,10 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
                 }
             }
             /* any other shifting */
-            else
-            {   /* move along 1B */
+            else {
+                /* move along 1B */
                 /** @violates @ref AutoLibc_REF_10 MISRA 2004 Required Rule 17.2 */
-                while ( pu8AfterDst4 > pu8FirstDst4 ) /* pointers to same array */
-                {
+                while ( pu8AfterDst4 > pu8FirstDst4 ) { /* pointers to same array */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pu8AfterDst4--;
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -772,6 +771,7 @@ void *fsl_memmove(void *pavDest4, const void *pcoavSource4, uint32_t u32Length4)
             }
         }
     }
+
     /* Note - no special copy process is needed when buffers do not overlap
        because overlap handling process copies also non-overlapping data - so
        actual overlap is not checked but only the type of possible overlap which
@@ -804,7 +804,7 @@ int32_t fsl_memcmp( const void *pcoavMemA5, const void *pcoavMemB5, uint32_t u32
     int32_t s32Result5;
     uint8_t u8ShiftDif;
 
- #ifdef AUTOLIB_TESTING
+#ifdef AUTOLIB_TESTING
     /* init access address checking */
     CA_SetTest( 2U, 1U );
     /* set ranges */
@@ -815,47 +815,45 @@ int32_t fsl_memcmp( const void *pcoavMemA5, const void *pcoavMemB5, uint32_t u32
 #endif
 
     /* too short for optimizations */
-    if (u32Size5 < MEMCMP_OPT_LENGTH )
-    {
+    if (u32Size5 < MEMCMP_OPT_LENGTH ) {
         s32Result5 = fsl_memcmp_aux( pcoavMemA5, pcoavMemB5, u32Size5 );
     }
     /* optimized comparing */
-    else
-    {
-        pcoau8MemA5 = (const uint8_t*)pcoavMemA5;
-        pcoau8MemB5 = (const uint8_t*)pcoavMemB5;
+    else {
+        pcoau8MemA5 = (const uint8_t *)pcoavMemA5;
+        pcoau8MemB5 = (const uint8_t *)pcoavMemB5;
         /* In this optimizations aligning by first string */
         /* warning - conversion to smaller type (lost of higher bytes) - required behaviour here */
         /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
-        u8ShiftDif = (uint8_t)((uaddr_t)pcoavMemB5-(uaddr_t)pcoavMemA5);
+        u8ShiftDif = (uint8_t)((uaddr_t)pcoavMemB5 - (uaddr_t)pcoavMemA5);
+
         /* Check whether offset between pointers is multiple of 4 (last 2 bits are zero) */
-        if ( 0U == (u8ShiftDif & 3U) )
-        {
+        if ( 0U == (u8ShiftDif & 3U) ) {
             u32FirstBytes5 = 0U;
+
             /* comparing along 4B */
             /* solve first unaligned bytes */
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            while (0U!=(((uaddr_t)(&pcoau8MemA5[u32FirstBytes5])) & 3U))
-            {
+            while (0U != (((uaddr_t)(&pcoau8MemA5[u32FirstBytes5])) & 3U)) {
                 u32FirstBytes5++;
             }
+
             s32Result5 = fsl_memcmp_aux( pcoavMemA5, pcoavMemB5, u32FirstBytes5 );
 
-            if ( 0 == s32Result5 )
-            {
+            if ( 0 == s32Result5 ) {
                 /* solve integer aligned part */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau32MemA5 = (const uint32_t*) ( &pcoau8MemA5[u32FirstBytes5] );
+                pcoau32MemA5 = (const uint32_t *) ( &pcoau8MemA5[u32FirstBytes5] );
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau32MemB5 = (const uint32_t*) ( &pcoau8MemB5[u32FirstBytes5] );
+                pcoau32MemB5 = (const uint32_t *) ( &pcoau8MemB5[u32FirstBytes5] );
 
                 u32Size5 -= u32FirstBytes5;  /* update to remaining byte count */
                 u32IntCount5 = u32Size5 >> 2U; /* = u32Size5 / 4U */
-                for ( u32Ctr5=0U; u32Ctr5 < u32IntCount5; u32Ctr5++ )
-                {
+
+                for ( u32Ctr5 = 0U; u32Ctr5 < u32IntCount5; u32Ctr5++ ) {
 #ifdef AUTOLIB_TESTING
                     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                     /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -865,75 +863,72 @@ int32_t fsl_memcmp( const void *pcoavMemA5, const void *pcoavMemB5, uint32_t u32
                                sizeof(*pcoau32MemA5)
                              );
 #endif
+
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                    if ( pcoau32MemA5[u32Ctr5] != pcoau32MemB5[u32Ctr5] )
-                    {
+                    if ( pcoau32MemA5[u32Ctr5] != pcoau32MemB5[u32Ctr5] ) {
                         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                        s32Result5 = fsl_memcmp_aux( (const void*)(&pcoau32MemA5[u32Ctr5]), \
-                                              (const void*)(&pcoau32MemB5[u32Ctr5]), \
-                                              4U
-                                            );
+                        s32Result5 = fsl_memcmp_aux( (const void *)(&pcoau32MemA5[u32Ctr5]), \
+                                                     (const void *)(&pcoau32MemB5[u32Ctr5]), \
+                                                     4U
+                                                   );
                         break;
                     }
                 }
+
                 /* solve last unaligned bytes */
-                if ( 0 == s32Result5 )
-                {
+                if ( 0 == s32Result5 ) {
                     u32Size5 -= u32Ctr5 * UINT_SIZE; /* update to remaining byte count */
                     /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                     /* let the inline function solve the remainder */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                    s32Result5 = fsl_memcmp_aux( (const void*)(&pcoau32MemA5[u32Ctr5]), \
-                                          (const void*)(&pcoau32MemB5[u32Ctr5]), \
-                                          u32Size5
-                                        );
+                    s32Result5 = fsl_memcmp_aux( (const void *)(&pcoau32MemA5[u32Ctr5]), \
+                                                 (const void *)(&pcoau32MemB5[u32Ctr5]), \
+                                                 u32Size5
+                                               );
                 }
             }
         }
         /* 2B shift between destination and source data addresses */
-        else if ( 0U == (u8ShiftDif & 1U) )
-        {
-        /* comparing along 2B */
+        else if ( 0U == (u8ShiftDif & 1U) ) {
+            /* comparing along 2B */
             /* Compare first unaligned byte (if any) */
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             u32FirstBytes5 = (uint32_t)(((uaddr_t)pcoavMemA5) & 1U);
-            if ( 0U == u32FirstBytes5 )
-            {
+
+            if ( 0U == u32FirstBytes5 ) {
                 /* there is no unaligned bytes continue to compare along 2B */
                 s32Result5 = 0;
-            }
-            else
-            {
+            } else {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                CA_Check2( (const uint8_t*)pcoavMemA5, \
-                           (const uint8_t*)pcoavMemB5, \
-                           sizeof(*((const uint8_t*)(&pcoau16MemA5[u32Ctr5])))
+                CA_Check2( (const uint8_t *)pcoavMemA5, \
+                           (const uint8_t *)pcoavMemB5, \
+                           sizeof(*((const uint8_t *)(&pcoau16MemA5[u32Ctr5])))
                          );
 #endif
-                s32Result5 = (sint32_t)(*((const uint8_t*)pcoavMemA5)) - (sint32_t)(*((const uint8_t*)pcoavMemB5));
+                s32Result5 = (sint32_t)(*((const uint8_t *)pcoavMemA5)) - (sint32_t)(*((const uint8_t *)pcoavMemB5));
             }
-            if ( 0 == s32Result5 )
-            {
+
+            if ( 0 == s32Result5 ) {
                 /* solve 2B aligned part */
-                pcoau8MemA5 = (const uint8_t*)pcoavMemA5;
-                pcoau8MemB5 = (const uint8_t*)pcoavMemB5;
+                pcoau8MemA5 = (const uint8_t *)pcoavMemA5;
+                pcoau8MemB5 = (const uint8_t *)pcoavMemB5;
                 /* solve integer aligned part */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau16MemA5 = (const uint16_t*) ( &pcoau8MemA5[u32FirstBytes5] );
+                pcoau16MemA5 = (const uint16_t *) ( &pcoau8MemA5[u32FirstBytes5] );
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau16MemB5 = (const uint16_t*) ( &pcoau8MemB5[u32FirstBytes5] );
+                pcoau16MemB5 = (const uint16_t *) ( &pcoau8MemB5[u32FirstBytes5] );
 
                 u32Size5 -= u32FirstBytes5; /* update to remaining byte count */
                 u32IntCount5 = u32Size5 >> 1U; /* = u32Size5 / 2U */
+
                 /* u32Size5 is at least 26 so this loop always proceeds at least once time */
-                for ( u32Ctr5=0U; u32Ctr5 < u32IntCount5; u32Ctr5++ )
-                {
+                for ( u32Ctr5 = 0U; u32Ctr5 < u32IntCount5; u32Ctr5++ ) {
 #ifdef AUTOLIB_TESTING
                     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                     /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -942,44 +937,45 @@ int32_t fsl_memcmp( const void *pcoavMemA5, const void *pcoavMemB5, uint32_t u32
                                sizeof(*pcoau16MemB5)
                              );
 #endif
+
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                    if ( pcoau16MemA5[u32Ctr5] != pcoau16MemB5[u32Ctr5] )
-                    {
+                    if ( pcoau16MemA5[u32Ctr5] != pcoau16MemB5[u32Ctr5] ) {
                         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                        s32Result5 = fsl_memcmp_aux( (const void*)(&pcoau16MemA5[u32Ctr5]), \
-                                              (const void*)(&pcoau16MemB5[u32Ctr5]),
-                                              2U
-                                            );
+                        s32Result5 = fsl_memcmp_aux( (const void *)(&pcoau16MemA5[u32Ctr5]), \
+                                                     (const void *)(&pcoau16MemB5[u32Ctr5]),
+                                                     2U
+                                                   );
                         break;
                     }
                 }
+
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau8MemA5 = (const uint8_t*) ( &pcoau16MemA5[u32Ctr5] );
+                pcoau8MemA5 = (const uint8_t *) ( &pcoau16MemA5[u32Ctr5] );
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau8MemB5 = (const uint8_t*) ( &pcoau16MemB5[u32Ctr5] );
-                 /* solve last unaligned bytes */
-                if ( 0 == s32Result5 )
-                {
-                    u32Size5 -= (u32Ctr5 * UINT_SIZE)>>1U; /* update to remaining byte count */
+                pcoau8MemB5 = (const uint8_t *) ( &pcoau16MemB5[u32Ctr5] );
+
+                /* solve last unaligned bytes */
+                if ( 0 == s32Result5 ) {
+                    u32Size5 -= (u32Ctr5 * UINT_SIZE) >> 1U; /* update to remaining byte count */
                     /* let the inline function solve the remainder */
                     /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                    s32Result5 = fsl_memcmp_aux( (const void*)(&pcoau16MemA5[u32Ctr5]), \
-                                          (const void*)(&pcoau16MemB5[u32Ctr5]), \
-                                          u32Size5
-                                        );
+                    s32Result5 = fsl_memcmp_aux( (const void *)(&pcoau16MemA5[u32Ctr5]), \
+                                                 (const void *)(&pcoau16MemB5[u32Ctr5]), \
+                                                 u32Size5
+                                               );
                 }
             }
         }
         /* any other shifting */
-        else
-        {
+        else {
             s32Result5 = fsl_memcmp_aux( pcoavMemA5, pcoavMemB5, u32Size5 );
         }
     }
+
     return s32Result5;
 }
 
@@ -1033,11 +1029,10 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
     CA_SetRange2( (uaddr_t)pcoszSrc7, u32Length7, 0U);
 #endif
+
     /* too short for optimizations */
-    if ( u32Length7 < STRNCPY_OPT_LENGTH )
-    {
-        for (u32Ctr7 = 0U; u32Ctr7 < u32Length7; u32Ctr7++)
-        {
+    if ( u32Length7 < STRNCPY_OPT_LENGTH ) {
+        for (u32Ctr7 = 0U; u32Ctr7 < u32Length7; u32Ctr7++) {
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1046,19 +1041,17 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                        sizeof(*pau8Dst7)
                      );
 #endif
+
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            if ( 0U == pcoau8Src7[u32Ctr7] )
-            {
+            if ( 0U == pcoau8Src7[u32Ctr7] ) {
                 break;
-            }
-            else
-            {
+            } else {
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                 pau8Dst7[u32Ctr7] = pcoau8Src7[u32Ctr7];
             }
         }
-        while ( u32Ctr7 < u32Length7 )
-        {
+
+        while ( u32Ctr7 < u32Length7 ) {
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1073,21 +1066,20 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
         }
     }
     /* optimized copying */
-    else
-    {
+    else {
         u32Ctr7 = 0U;
         /* warning - convertion to smaller type (lost of higher bytes) - required behaviour here */
         /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
         u8ShiftDif = (uint8_t)((uaddr_t)pszDest7 - (uaddr_t)pcoszSrc7);
+
         /* Check whether offset between pointers is multiple of 4 (last 2 bits are zero) */
-        if ( 0U == (u8ShiftDif & 3U) )
-        {/* copying along 4B */
+        if ( 0U == (u8ShiftDif & 3U) ) {
+            /* copying along 4B */
             /* align the beginning of Dst to uint32_t size, copy bytes (if any) */
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            while ( 0U != ((uaddr_t)(&pau8Dst7[u32Ctr7]) & 3U) )
-            {
+            while ( 0U != ((uaddr_t)(&pau8Dst7[u32Ctr7]) & 3U) ) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1096,23 +1088,21 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                            sizeof(*pau8Dst7)
                          );
 #endif
-                if ( 1U == u32WriteZeroes7 )
-                {
-                /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
+
+                if ( 1U == u32WriteZeroes7 ) {
+                    /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = 0U;
                 }
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                else if ( 0U == pcoau8Src7[u32Ctr7] )
-                {
+                else if ( 0U == pcoau8Src7[u32Ctr7] ) {
                     u32WriteZeroes7 = 1U; /* true */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = 0U;
-                }
-                else
-                {
+                } else {
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = pcoau8Src7[u32Ctr7];
                 }
+
                 u32Ctr7++;
             }
 
@@ -1129,11 +1119,10 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
             u32IntCount7 = u32Length7 >> 2U; /* = u32Length7 / 4U */
             /* reset counter */
             u32Ctr7 = 0U;
+
             /* integer copy loop */
-            if ( 0U == u32WriteZeroes7 )
-            {
-                while ( u32Ctr7 < u32IntCount7 )
-                {
+            if ( 0U == u32WriteZeroes7 ) {
+                while ( u32Ctr7 < u32IntCount7 ) {
 #ifdef AUTOLIB_TESTING
                     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                     /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -1143,21 +1132,22 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                                sizeof(*pau32Dst7)
                              );
 #endif
+
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     if ( (0U == (pcoau32Src7[u32Ctr7] & 0xFF000000U)) || \
-                        (0U == (pcoau32Src7[u32Ctr7] & 0x00FF0000U)) || \
-                        (0U == (pcoau32Src7[u32Ctr7] & 0x0000FF00U)) || \
-                        (0U == (pcoau32Src7[u32Ctr7] & 0x000000FFU))
-                      )
-                    { /* terminating '\0' found, which byte? Start writing '\0' */
+                            (0U == (pcoau32Src7[u32Ctr7] & 0x00FF0000U)) || \
+                            (0U == (pcoau32Src7[u32Ctr7] & 0x0000FF00U)) || \
+                            (0U == (pcoau32Src7[u32Ctr7] & 0x000000FFU))
+                       ) {
+                        /* terminating '\0' found, which byte? Start writing '\0' */
                         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                        pau8TempDst7 = (uint8_t*)(&pau32Dst7[u32Ctr7]);
+                        pau8TempDst7 = (uint8_t *)(&pau32Dst7[u32Ctr7]);
                         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                        pcoau8TempSrc7 = (const uint8_t*)(&pcoau32Src7[u32Ctr7]);
-                        for (u32TempCtr7=0U; u32TempCtr7 < UINT_SIZE; u32TempCtr7++)
-                        {
+                        pcoau8TempSrc7 = (const uint8_t *)(&pcoau32Src7[u32Ctr7]);
+
+                        for (u32TempCtr7 = 0U; u32TempCtr7 < UINT_SIZE; u32TempCtr7++) {
 #ifdef AUTOLIB_TESTING
                             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1166,40 +1156,37 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                                        sizeof(*pau8TempDst7)
                                      );
 #endif
-                            if ( 1U == u32WriteZeroes7 )
-                            {
+
+                            if ( 1U == u32WriteZeroes7 ) {
                                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                                 pau8TempDst7[u32TempCtr7] = 0U;
                             }
                             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                            else if ( 0U == pcoau8TempSrc7[u32TempCtr7] )
-                            {
+                            else if ( 0U == pcoau8TempSrc7[u32TempCtr7] ) {
                                 u32WriteZeroes7 = 1U; /* true */
                                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                                 pau8TempDst7[u32TempCtr7] = 0U;
-                            }
-                            else
-                            {
+                            } else {
                                 /* copy last bytes before null character */
                                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                                 pau8TempDst7[u32TempCtr7] \
-                                                      = pcoau8TempSrc7[u32TempCtr7];
+                                    = pcoau8TempSrc7[u32TempCtr7];
                             }
                         }
+
                         u32Ctr7++; /* was processed, increment before leaving */
                         break; /* exit loop, will continue in zero writing loop */
-                    }
-                    else
-                    {
+                    } else {
                         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                         pau32Dst7[u32Ctr7] = pcoau32Src7[u32Ctr7];
                     }
+
                     u32Ctr7++;
                 }
             }
+
             /* integer zero writing loop */
-            while ( u32Ctr7 < u32IntCount7 )
-            {
+            while ( u32Ctr7 < u32IntCount7 ) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -1213,6 +1200,7 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                 pau32Dst7[u32Ctr7] = 0U;
                 u32Ctr7++;
             }
+
             /* copy the last unaligned bytes (if any) */
             /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1221,8 +1209,8 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
             pcoau8Src7 = (const uint8_t *)(&pcoau32Src7[u32Ctr7]);
             u32Length7 -= u32Ctr7 * UINT_SIZE; /* update u32Length7 to be copied */
-            for (u32Ctr7 = 0U; u32Ctr7 < u32Length7; u32Ctr7++)
-            {
+
+            for (u32Ctr7 = 0U; u32Ctr7 < u32Length7; u32Ctr7++) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1231,34 +1219,31 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                            sizeof(*pau8Dst7)
                          );
 #endif
-                if ( 1U == u32WriteZeroes7 )
-                {
+
+                if ( 1U == u32WriteZeroes7 ) {
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = 0U;
                 }
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                else if ( 0U == pcoau8Src7[u32Ctr7] )
-                {
+                else if ( 0U == pcoau8Src7[u32Ctr7] ) {
                     u32WriteZeroes7 = 1U; /* true */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = 0U;
-                }
-                else
-                {
+                } else {
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = pcoau8Src7[u32Ctr7];
                 }
             }
         }
         /* 2B shift between destination and source data addresses */
-        else if ( 0U == (u8ShiftDif & 1U) )
-        {    /* copying along 2B */
+        else if ( 0U == (u8ShiftDif & 1U) ) {
+            /* copying along 2B */
 
             /* if there is one unaligned byte */
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            if ( 0U != ((uaddr_t)(&pau8Dst7[u32Ctr7]) & 1U) )
-            { /* 0 != (address % 2U), address not aligned to 2 */
+            if ( 0U != ((uaddr_t)(&pau8Dst7[u32Ctr7]) & 1U) ) {
+                /* 0 != (address % 2U), address not aligned to 2 */
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1267,20 +1252,20 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                            sizeof(*pau8Dst7)
                          );
 #endif
+
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                if ( 0U == pcoau8Src7[u32Ctr7] )
-                {
+                if ( 0U == pcoau8Src7[u32Ctr7] ) {
                     u32WriteZeroes7 = 1U; /* true */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = 0U;
-                }
-                else
-                {
+                } else {
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = pcoau8Src7[u32Ctr7];
                 }
+
                 u32Ctr7++;
             }
+
             /* copy 2B integer aligned part of data */
             /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1294,11 +1279,10 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
             u16IntCount7 = u32Length7 >> 1U; /* = u32Length7 / 2U */
             /* reset counter */
             u32Ctr7 = 0U;
+
             /* 2B copy loop */
-            if ( 0U == u32WriteZeroes7 )
-            {
-                while ( u32Ctr7 < u16IntCount7 )
-                {
+            if ( 0U == u32WriteZeroes7 ) {
+                while ( u32Ctr7 < u16IntCount7 ) {
 #ifdef AUTOLIB_TESTING
                     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                     /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -1308,19 +1292,20 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                                sizeof(*pau16Dst7)
                              );
 #endif
+
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                    if ( (0U == (pcoau16Src7[u32Ctr7]&0xFF00U)) || \
-                        (0U == (pcoau16Src7[u32Ctr7]&0x00FFU))
-                      )
-                    { /* terminating '\0' found, which byte? Start writing '\0' */
+                    if ( (0U == (pcoau16Src7[u32Ctr7] & 0xFF00U)) || \
+                            (0U == (pcoau16Src7[u32Ctr7] & 0x00FFU))
+                       ) {
+                        /* terminating '\0' found, which byte? Start writing '\0' */
                         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                        pau8TempDst7 = (uint8_t*)(&pau16Dst7[u32Ctr7]);
+                        pau8TempDst7 = (uint8_t *)(&pau16Dst7[u32Ctr7]);
                         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                        pcoau8TempSrc7 = (const uint8_t*)(&pcoau16Src7[u32Ctr7]);
-                        for (u32TempCtr7=0U; u32TempCtr7 < (UINT_SIZE>>1U); u32TempCtr7++)
-                        {
+                        pcoau8TempSrc7 = (const uint8_t *)(&pcoau16Src7[u32Ctr7]);
+
+                        for (u32TempCtr7 = 0U; u32TempCtr7 < (UINT_SIZE >> 1U); u32TempCtr7++) {
 #ifdef AUTOLIB_TESTING
                             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1329,41 +1314,38 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                                        sizeof(*pau8TempDst7)
                                      );
 #endif
-                            if ( 1U == u32WriteZeroes7 )
-                            {
+
+                            if ( 1U == u32WriteZeroes7 ) {
                                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                                 pau8TempDst7[u32TempCtr7] = 0U;
                             }
                             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                            else if ( 0U == pcoau8TempSrc7[u32TempCtr7] )
-                            {
+                            else if ( 0U == pcoau8TempSrc7[u32TempCtr7] ) {
                                 u32WriteZeroes7 = 1U; /* true */
                                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                                 pau8TempDst7[u32TempCtr7] = 0U;
 
-                            }
-                            else
-                            {
+                            } else {
                                 /* copy last bytes before null character */
                                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                                 pau8TempDst7[u32TempCtr7] \
-                                                      = pcoau8TempSrc7[u32TempCtr7];
+                                    = pcoau8TempSrc7[u32TempCtr7];
                             }
                         }
+
                         u32Ctr7++; /* was processed, increment before leaving */
                         break; /* exit loop, will continue in zero writing loop */
-                    }
-                    else
-                    {
+                    } else {
                         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                         pau16Dst7[u32Ctr7] = pcoau16Src7[u32Ctr7];
                     }
+
                     u32Ctr7++;
                 }
             }
+
             /* 2B zero writing loop */
-            while ( u32Ctr7 < u16IntCount7 )
-            {
+            while ( u32Ctr7 < u16IntCount7 ) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -1378,6 +1360,7 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                 pau16Dst7[u32Ctr7] = 0U;
                 u32Ctr7++;
             }
+
             /* copy the last unaligned byte (if any) */
             /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1387,22 +1370,21 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
             pcoau8Src7 = (const uint8_t *)(&pcoau16Src7[u32Ctr7]);
             u32Length7 -= u32Ctr7 * 2U; /* update u32Length7 to be copied */
             u32Ctr7 = 0U;
-            if ( 0U != u32Length7 )
-            {
+
+            if ( 0U != u32Length7 ) {
 #ifdef AUTOLIB_TESTING
                 CA_Check2( pau8Dst7, \
                            pcoau8Src7, \
                            sizeof(*pau8Dst7)
                          );
 #endif
-                if ( 1U == u32WriteZeroes7 )
-                {
+
+                if ( 1U == u32WriteZeroes7 ) {
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = 0U;
                 }
                 /* Last byte -> no need to check its value, just copy */
-                else
-                {
+                else {
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = pcoau8Src7[u32Ctr7];
                 }
@@ -1410,10 +1392,9 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
 
         }
         /* any other shifting */
-        else
-        {   /* copying along 1B */
-            for (u32Ctr7 = 0U; u32Ctr7 < u32Length7; u32Ctr7++)
-            {
+        else {
+            /* copying along 1B */
+            for (u32Ctr7 = 0U; u32Ctr7 < u32Length7; u32Ctr7++) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1422,19 +1403,17 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
                            sizeof(*pau8Dst7)
                          );
 #endif
+
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                if ( 0U == pcoau8Src7[u32Ctr7] )
-                {
+                if ( 0U == pcoau8Src7[u32Ctr7] ) {
                     break;
-                }
-                else
-                {
+                } else {
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     pau8Dst7[u32Ctr7] = pcoau8Src7[u32Ctr7];
                 }
             }
-            while ( u32Ctr7 < u32Length7 )
-            {
+
+            while ( u32Ctr7 < u32Length7 ) {
 #ifdef AUTOLIB_TESTING
                 /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1449,6 +1428,7 @@ char_t *fsl_strncpy(char_t *pszDest7, const char_t *pcoszSrc7, uint32_t u32Lengt
             }
         }
     }
+
     return pszDest7;
 }
 
@@ -1471,9 +1451,9 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
     uint32_t u32LittleCtr6;
     /* BYTE pointers */
     /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-    const uint8_t *pcoau8StrA6 = (const uint8_t*)pcoszStrA6;
+    const uint8_t *pcoau8StrA6 = (const uint8_t *)pcoszStrA6;
     /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
-    const uint8_t *pcoau8StrB6 = (const uint8_t*)pcoszStrB6;
+    const uint8_t *pcoau8StrB6 = (const uint8_t *)pcoszStrB6;
     /* INTEGER pointers */
     const uint16_t *pcoau16StrA6;
     const uint16_t *pcoau16StrB6;
@@ -1492,15 +1472,16 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
     u8ShiftDif = (uint8_t)((uaddr_t)pcoszStrB6 - (uaddr_t)pcoszStrA6);
+
     /* Check whether offset between pointers is multiple of 4 (last 2 bits are zero) */
-    if ( 0U == (u8ShiftDif & 3U) )
-    {   /* comparing along 4B */
+    if ( 0U == (u8ShiftDif & 3U) ) {
+        /* comparing along 4B */
 
         /* first unaligned bytes */
         /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-        while ( 0U != ((uaddr_t)(&pcoau8StrA6[u32Ctr6]) & 3U) )
-        { /* 0 != (address % 4U), address not aligned to 4 */
+        while ( 0U != ((uaddr_t)(&pcoau8StrA6[u32Ctr6]) & 3U) ) {
+            /* 0 != (address % 4U), address not aligned to 4 */
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1511,26 +1492,29 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
 #endif
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
             s32Result6 = (int32_t)pcoau8StrA6[u32Ctr6] - (int32_t)pcoau8StrB6[u32Ctr6];
-            if ( s32Result6 != 0 )
-            {
+
+            if ( s32Result6 != 0 ) {
                 /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                 return s32Result6;
             }
+
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            if ( 0U == pcoau8StrA6[u32Ctr6] ) /* just need to check one value */
-            {
+            if ( 0U == pcoau8StrA6[u32Ctr6] ) { /* just need to check one value */
                 /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                 return 0;
             }
+
             u32Ctr6++;
         }
+
         /* integer aligned part of strings */
         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-        pcoau32StrA6 = (const uint32_t*)(&pcoau8StrA6[u32Ctr6]);
+        pcoau32StrA6 = (const uint32_t *)(&pcoau8StrA6[u32Ctr6]);
         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-        pcoau32StrB6 = (const uint32_t*)(&pcoau8StrB6[u32Ctr6]);
+        pcoau32StrB6 = (const uint32_t *)(&pcoau8StrB6[u32Ctr6]);
+
         /* It is difficult and/or ineffective to construct single condition and it
          * would be difficult to understand the condition. We are using multiple
          * return statements to exit the loop instead.It is the most straight
@@ -1539,8 +1523,8 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
          * bytes and there are 2 different possible outcomes.
          * The loop is running till zero byte or non-matching bytes are found. */
         /** @violates @ref AutoLibc_REF_6 MISRA 2004 Required Rule 13.7 */
-        for ( u32Ctr6=0U; 1==1; u32Ctr6++ )
-        {    /* multiple return statements are used to leave the loop */
+        for ( u32Ctr6 = 0U; 1 == 1; u32Ctr6++ ) {
+            /* multiple return statements are used to leave the loop */
 
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
@@ -1551,18 +1535,19 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
                        sizeof(*pcoau32StrA6)
                      );
 #endif
+
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            if ( pcoau32StrA6[u32Ctr6] != pcoau32StrB6[u32Ctr6] )
-            { /* there is at least 1 not matching byte */
+            if ( pcoau32StrA6[u32Ctr6] != pcoau32StrB6[u32Ctr6] ) {
+                /* there is at least 1 not matching byte */
                 /* accessing by bytes again */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau8StrA6 = (const uint8_t*)&pcoau32StrA6[u32Ctr6];
+                pcoau8StrA6 = (const uint8_t *)&pcoau32StrA6[u32Ctr6];
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau8StrB6 = (const uint8_t*)&pcoau32StrB6[u32Ctr6];
-                for ( u32LittleCtr6=0U; u32LittleCtr6 < 4U; u32LittleCtr6++ )
-                {
+                pcoau8StrB6 = (const uint8_t *)&pcoau32StrB6[u32Ctr6];
+
+                for ( u32LittleCtr6 = 0U; u32LittleCtr6 < 4U; u32LittleCtr6++ ) {
 #ifdef AUTOLIB_TESTING
                     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1574,42 +1559,39 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     s32Result6 = (int32_t)pcoau8StrA6[u32LittleCtr6] \
                                  - (int32_t)pcoau8StrB6[u32LittleCtr6];
-                    if ( s32Result6 != 0 )
-                    {
+
+                    if ( s32Result6 != 0 ) {
                         /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                         return s32Result6; /* strings not same, unmatching bytes */
                     }
+
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                    if ( 0U == pcoau8StrA6[u32LittleCtr6] )/*no need to check both*/
-                    {
+                    if ( 0U == pcoau8StrA6[u32LittleCtr6] ) { /*no need to check both*/
                         /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                         return 0; /* string end found, strings are identical */
                     }
                 }
-            }
-            else
-            { /* integers are identical */
+            } else {
+                /* integers are identical */
                 /* need check for '\0' byte in one of integers */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                 if ( ( 0U == (pcoau32StrA6[u32Ctr6] & 0xFF000000U) ) || \
-                    ( 0U == (pcoau32StrA6[u32Ctr6] & 0x00FF0000U) ) || \
-                    ( 0U == (pcoau32StrA6[u32Ctr6] & 0x0000FF00U) ) || \
-                    ( 0U == (pcoau32StrA6[u32Ctr6] & 0x000000FFU) )
-                  )
-                {
+                        ( 0U == (pcoau32StrA6[u32Ctr6] & 0x00FF0000U) ) || \
+                        ( 0U == (pcoau32StrA6[u32Ctr6] & 0x0000FF00U) ) || \
+                        ( 0U == (pcoau32StrA6[u32Ctr6] & 0x000000FFU) )
+                   ) {
                     /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                     return 0; /* string end found, strings are identical */
                 }
             }
         }
-    }
-    else if ( 0U == (u8ShiftDif & 1U) )
-    {   /* Compare along 2B */
+    } else if ( 0U == (u8ShiftDif & 1U) ) {
+        /* Compare along 2B */
         /* first unaligned byte */
         /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-        if ( 0U != ((uaddr_t)(&pcoau8StrA6[u32Ctr6]) & 1U) )
-        { /* 0 != (address % 2U), address not aligned to 2 */
+        if ( 0U != ((uaddr_t)(&pcoau8StrA6[u32Ctr6]) & 1U) ) {
+            /* 0 != (address % 2U), address not aligned to 2 */
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1621,29 +1603,32 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
             s32Result6 = (int32_t)pcoau8StrA6[u32Ctr6] \
                          - (int32_t)pcoau8StrB6[u32Ctr6];
-            if ( s32Result6 != 0 )
-            {
+
+            if ( s32Result6 != 0 ) {
                 /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                 return s32Result6;
             }
+
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            if ( 0U == pcoau8StrA6[u32Ctr6] ) /* just need to check one value */
-            {
+            if ( 0U == pcoau8StrA6[u32Ctr6] ) { /* just need to check one value */
                 /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                 return 0;
             }
+
             u32Ctr6++;
         }
+
         /* integer aligned part of strings */
         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-        pcoau16StrA6 = (const uint16_t*)(&pcoau8StrA6[u32Ctr6]);
+        pcoau16StrA6 = (const uint16_t *)(&pcoau8StrA6[u32Ctr6]);
         /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
         /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-        pcoau16StrB6 = (const uint16_t*)(&pcoau8StrB6[u32Ctr6]);
+        pcoau16StrB6 = (const uint16_t *)(&pcoau8StrB6[u32Ctr6]);
         u32Ctr6 = 0U;
-        while (1)
-        {   /* multiple return statements are used to leave the loop */
+
+        while (1) {
+            /* multiple return statements are used to leave the loop */
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
@@ -1653,19 +1638,19 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
                        sizeof(*pcoau16StrA6)
                      );
 #endif
+
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            if ( pcoau16StrA6[u32Ctr6] != pcoau16StrB6[u32Ctr6] )
-            { /* there is at least 1 not matching byte */
+            if ( pcoau16StrA6[u32Ctr6] != pcoau16StrB6[u32Ctr6] ) {
+                /* there is at least 1 not matching byte */
                 /* accessing by bytes again */
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau8StrA6 = (const uint8_t*)&pcoau16StrA6[u32Ctr6];
+                pcoau8StrA6 = (const uint8_t *)&pcoau16StrA6[u32Ctr6];
                 /** @violates @ref AutoLibc_REF_4 MISRA 2004 Required Rule 11.4 */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                pcoau8StrB6 = (const uint8_t*)&pcoau16StrB6[u32Ctr6];
+                pcoau8StrB6 = (const uint8_t *)&pcoau16StrB6[u32Ctr6];
 
-                for ( u32LittleCtr6=0U; u32LittleCtr6 < 2U; u32LittleCtr6++ )
-                {
+                for ( u32LittleCtr6 = 0U; u32LittleCtr6 < 2U; u32LittleCtr6++ ) {
 #ifdef AUTOLIB_TESTING
                     /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1677,40 +1662,39 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                     s32Result6 = (int32_t)pcoau8StrA6[u32LittleCtr6] \
                                  - (int32_t)pcoau8StrB6[u32LittleCtr6];
-                    if ( s32Result6 != 0 )
-                    {
+
+                    if ( s32Result6 != 0 ) {
                         /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                         return s32Result6; /* strings not same, unmatching bytes */
                     }
+
                     /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                    if ( 0U == pcoau8StrA6[u32LittleCtr6] )/*no need to check both*/
-                    {
+                    if ( 0U == pcoau8StrA6[u32LittleCtr6] ) { /*no need to check both*/
                         /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                         return 0; /* string end found, strings are identical */
                     }
                 }
-            }
-            else
-            { /* integers are identical */
+            } else {
+                /* integers are identical */
                 /* need check for '\0' byte in one of integers */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                 if ( ( 0U == (pcoau16StrA6[u32Ctr6] & 0xFF00U) ) || \
-                    ( 0U == (pcoau16StrA6[u32Ctr6] & 0x00FFU) )
-                  )
-                {
+                        ( 0U == (pcoau16StrA6[u32Ctr6] & 0x00FFU) )
+                   ) {
                     /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                     return 0; /* string end found, strings are identical */
                 }
             }
+
             u32Ctr6++;
         }
     }
     /* any other shifting */
-    else
-    {
+    else {
         u32Ctr6 = 0U;
-        while (1)
-        {   /* multiple return statements are used to leave the loop */
+
+        while (1) {
+            /* multiple return statements are used to leave the loop */
 #ifdef AUTOLIB_TESTING
             /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
@@ -1719,29 +1703,29 @@ int32_t fsl_strcmp(const char_t *pcoszStrA6, const char_t *pcoszStrB6)
                        sizeof(*pcoau8StrA6)
                      );
 #endif
+
             /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-            if ( pcoau8StrA6[u32Ctr6] != pcoau8StrB6[u32Ctr6] )
-            {
+            if ( pcoau8StrA6[u32Ctr6] != pcoau8StrB6[u32Ctr6] ) {
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
                 s32Result6 = (int32_t)pcoau8StrA6[u32Ctr6]\
-                                 - (int32_t)pcoau8StrB6[u32Ctr6];
+                             - (int32_t)pcoau8StrB6[u32Ctr6];
                 /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                 return s32Result6; /* strings not same, not matching bytes */
-            }
-            else
-            { /* bytes are identical */
+            } else {
+                /* bytes are identical */
                 /* need check for '\0' byte in one of bytes */
                 /** @violates @ref AutoLibc_REF_7 MISRA 2004 Required Rule 17.4 */
-                if ( 0U == (pcoau8StrA6[u32Ctr6] ) )
-                {
+                if ( 0U == (pcoau8StrA6[u32Ctr6] ) ) {
                     /** @violates @ref AutoLibc_REF_5 MISRA 2004 Required Rule 14.7 */
                     return 0; /* string end found, strings are identical */
                 }
             }
+
             u32Ctr6++;
         }
 
     }
+
     /** @violates @ref AutoLibc_REF_9 MISRA 2004 Required Rule 16.8 */
 }
 
@@ -1771,8 +1755,7 @@ uint32_t fsl_strlen(const char_t pcozsStr8[])
              );
 #endif
 
-    while ( pcozsStr8[u32Length8] != '\0' )
-    {
+    while ( pcozsStr8[u32Length8] != '\0' ) {
         u32Length8++;
 #ifdef AUTOLIB_TESTING
         /** @violates @ref AutoLibc_REF_3 MISRA 2004 Required Rule 11.3 */
@@ -1782,6 +1765,7 @@ uint32_t fsl_strlen(const char_t pcozsStr8[])
                  );
 #endif
     }
+
     return u32Length8;
 }
 
@@ -1796,12 +1780,13 @@ uint32_t fsl_strlen(const char_t pcozsStr8[])
 */
 void fsl_srand (uint32_t u32Seed9)
 {
-     /* Value 0 is forbidden because it would block the LFSR */
-     if (0U == u32Seed9)
-     {   /* Forbidden value */
-         u32Seed9++; /* Correct the value */
-     }
-     u32RandVal = u32Seed9; /* Set the seed */
+    /* Value 0 is forbidden because it would block the LFSR */
+    if (0U == u32Seed9) {
+        /* Forbidden value */
+        u32Seed9++; /* Correct the value */
+    }
+
+    u32RandVal = u32Seed9; /* Set the seed */
 }
 
 /**
@@ -1827,14 +1812,13 @@ uint32_t fsl_rand(void)
 int32_t fsl_abs(int32_t s32Number)
 {
     sint32_t s32RetVal;
-    if ( s32Number < 0 )
-    {
+
+    if ( s32Number < 0 ) {
         s32RetVal = -s32Number;
-    }
-    else
-    {
+    } else {
         s32RetVal = s32Number;
     }
+
     return s32RetVal;
 }
 
@@ -1848,14 +1832,13 @@ int32_t fsl_abs(int32_t s32Number)
 int64_t fsl_abs64(int64_t s64Number)
 {
     sint64_t s64RetVal;
-    if ( s64Number < 0 )
-    {
+
+    if ( s64Number < 0 ) {
         s64RetVal = -s64Number;
-    }
-    else
-    {
+    } else {
         s64RetVal = s64Number;
     }
+
     return s64RetVal;
 }
 

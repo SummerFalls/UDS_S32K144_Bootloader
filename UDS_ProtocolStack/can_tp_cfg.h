@@ -51,8 +51,7 @@ typedef void (*tpfAbortTxMsg)(void);
 #define NORMAL_ADDRESSING (0u) /*normal addressing*/
 #define MIXED_ADDRESSING (1u)  /*mixed addressing*/
 
-typedef struct
-{
+typedef struct {
     uint8 ucCalledPeriod;/*called CAN tp main function period*/
     tUdsId xRxFunId;             /*rx function ID*/
     tUdsId xRxPhyId;             /*Rx phy ID*/
@@ -69,7 +68,7 @@ typedef struct
     tNetTxMsg pfNetTxMsg;/*net tx message with non blocking*/
     tNetRx pfNetRx;              /*net rx*/
     tpfAbortTxMsg pfAbortTXMsg;  /*abort tx message*/
-}tUdsCANNetLayerCfg;
+} tUdsCANNetLayerCfg;
 
 
 /*uds netwrok layer cfg info */

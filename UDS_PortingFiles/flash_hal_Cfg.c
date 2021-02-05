@@ -24,14 +24,13 @@
 #define EN_WRITE_RESET_HANDLER_IN_FLASH (FALSE)  /*enable write reset handler in flash or not*/
 
 
-typedef struct
-{
+typedef struct {
     uint32 imageAStartAddr;
     uint32 imageBStartAddr;
     uint32 imageAMirrorAddr;
     uint32 imageBMirrorAddr;
     uint32 remapApplicationAddr;
-}CoreInfo_t;
+} CoreInfo_t;
 
 /*
 define eras flash sector max time
@@ -88,10 +87,10 @@ const uint32 gs_blockNumB = sizeof(gs_astBlockNumB) / sizeof(gs_astBlockNumB[0u]
 /*multi-core configure*/
 #if (CORE_NO >= 1u)
 static const CoreInfo_t gs_astMultiCoreAPPRemapInfo[CORE_NO] = {
-{
-    /*imageAStartAddr, imageBStartAddr, imageAMirrorAddr, imageBMirrorAddr, remapApplicationAddr*/
-    0x1000000u, 0x1200000u, 0xA000000u, 0xA200000u, 0x2000000u
-},
+    {
+        /*imageAStartAddr, imageBStartAddr, imageAMirrorAddr, imageBMirrorAddr, remapApplicationAddr*/
+        0x1000000u, 0x1200000u, 0xA000000u, 0xA200000u, 0x2000000u
+    },
 
 };
 #endif
@@ -104,13 +103,10 @@ boolean FLASH_HAL_APPAddrCheck(void)
     uint32 item = 0u;
 
 
-    if(TRUE == FLASH_HAL_GetFlashConfigInfo(APP_A_TYPE, &pBlockInfo, &item))
-    {
-        while(item)
-        {
-            if((0u != (pBlockInfo->xBlockStartLogicalAddr & flashAddrLowByte)) ||
-                (0u != (pBlockInfo->xBlockEndLogicalAddr & flashAddrLowByte)))
-            {
+    if (TRUE == FLASH_HAL_GetFlashConfigInfo(APP_A_TYPE, &pBlockInfo, &item)) {
+        while (item) {
+            if ((0u != (pBlockInfo->xBlockStartLogicalAddr & flashAddrLowByte)) ||
+                    (0u != (pBlockInfo->xBlockEndLogicalAddr & flashAddrLowByte))) {
                 return FALSE;
             }
 
@@ -120,13 +116,11 @@ boolean FLASH_HAL_APPAddrCheck(void)
     }
 
 #ifdef EN_SUPPORT_APP_B
-    if(TRUE == FLASH_HAL_GetFlashConfigInfo(APP_B_TYPE, &pBlockInfo, &item))
-    {
-        while(item)
-        {
-            if((0u != (pBlockInfo->xBlockStartLogicalAddr & flashAddrLowByte)) ||
-                (0u != (pBlockInfo->xBlockEndLogicalAddr & flashAddrLowByte)))
-            {
+
+    if (TRUE == FLASH_HAL_GetFlashConfigInfo(APP_B_TYPE, &pBlockInfo, &item)) {
+        while (item) {
+            if ((0u != (pBlockInfo->xBlockStartLogicalAddr & flashAddrLowByte)) ||
+                    (0u != (pBlockInfo->xBlockEndLogicalAddr & flashAddrLowByte))) {
                 return FALSE;
             }
 
@@ -154,21 +148,20 @@ boolean FLASH_HAL_GetMultiCoreMirrorAddr(const tAPPType i_appType, const uint32 
     boolean result = FALSE;
 
 #if (CORE_NO >= 1)
-    if((APP_A_TYPE == i_appType) && (i_coreNo < CORE_NO))
-    {
+
+    if ((APP_A_TYPE == i_appType) && (i_coreNo < CORE_NO)) {
         *o_pMirrorAddr = gs_astMultiCoreAPPRemapInfo[i_coreNo].imageAMirrorAddr;
 
         result = TRUE;
-    }
-    else
-    {
+    } else {
 #ifdef EN_SUPPORT_APP_B
-        if((APP_B_TYPE == i_appType) && (i_coreNo < CORE_NO))
-        {
+
+        if ((APP_B_TYPE == i_appType) && (i_coreNo < CORE_NO)) {
             *o_pMirrorAddr = gs_astMultiCoreAPPRemapInfo[i_coreNo].imageBMirrorAddr;
 
             result = TRUE;
         }
+
 #endif /*#ifdef EN_SUPPORT_APP_B*/
     }
 
@@ -183,21 +176,20 @@ boolean FLASH_HAL_GetMultiCoreRemapAddr(const tAPPType i_appType, const uint32 i
     boolean result = FALSE;
 
 #if (CORE_NO >= 1)
-    if((APP_A_TYPE == i_appType) && (i_coreNo < CORE_NO))
-    {
+
+    if ((APP_A_TYPE == i_appType) && (i_coreNo < CORE_NO)) {
         *o_pReampAddr = gs_astMultiCoreAPPRemapInfo[i_coreNo].remapApplicationAddr;
 
         result = TRUE;
-    }
-    else
-    {
+    } else {
 #ifdef EN_SUPPORT_APP_B
-        if((APP_B_TYPE == i_appType) && (i_coreNo < CORE_NO))
-        {
+
+        if ((APP_B_TYPE == i_appType) && (i_coreNo < CORE_NO)) {
             *o_pReampAddr = gs_astMultiCoreAPPRemapInfo[i_coreNo].remapApplicationAddr;
 
             result = TRUE;
         }
+
 #endif /*#ifdef EN_SUPPORT_APP_B*/
     }
 
@@ -207,28 +199,26 @@ boolean FLASH_HAL_GetMultiCoreRemapAddr(const tAPPType i_appType, const uint32 i
 }
 
 boolean FLASH_HAL_GetFlashConfigInfo(const tAPPType i_appType,
-                            BlockInfo_t ** o_ppBlockInfo,
-                            uint32 *o_pItemLen)
+                                     BlockInfo_t **o_ppBlockInfo,
+                                     uint32 *o_pItemLen)
 {
     boolean result = FALSE;
 
-    if(APP_A_TYPE == i_appType)
-    {
+    if (APP_A_TYPE == i_appType) {
         *o_ppBlockInfo = (BlockInfo_t *)gs_astBlockNumA;
         *o_pItemLen = gs_blockNumA;
 
         result = TRUE;
-    }
-    else
-    {
+    } else {
 #ifdef EN_SUPPORT_APP_B
-        if(APP_B_TYPE == i_appType)
-        {
+
+        if (APP_B_TYPE == i_appType) {
             *o_ppBlockInfo = (BlockInfo_t *)gs_astBlockNumB;
             *o_pItemLen = gs_blockNumB;
 
             result = TRUE;
         }
+
 #endif
     }
 
@@ -241,23 +231,21 @@ boolean FLASH_HAL_GetAPPInfo(const tAPPType i_appType, uint32 *o_pAppInfoStartAd
 {
     boolean result = FALSE;
 
-    if(APP_A_TYPE == i_appType)
-    {
+    if (APP_A_TYPE == i_appType) {
         *o_pAppInfoStartAddr = gs_astBlockNumA[0u].xBlockStartLogicalAddr;
         *o_pBlockSize = gs_astBlockNumA[0u].xBlockEndLogicalAddr - gs_astBlockNumA[0u].xBlockStartLogicalAddr;
 
         result = TRUE;
-    }
-    else
-    {
+    } else {
 #ifdef EN_SUPPORT_APP_B
-        if(APP_B_TYPE == i_appType)
-        {
+
+        if (APP_B_TYPE == i_appType) {
             *o_pAppInfoStartAddr = gs_astBlockNumB[0u].xBlockStartLogicalAddr;
             *o_pBlockSize = gs_astBlockNumB[0u].xBlockEndLogicalAddr - gs_astBlockNumB[0u].xBlockStartLogicalAddr;
 
             result = TRUE;
         }
+
 #endif
     }
 
@@ -280,28 +268,22 @@ uint32 FLASH_HAL_GetFlashLengthToSectors(const uint32 i_startFlashAddr, const ui
 
     flashAddrTmp = (i_startFlashAddr & flashAddrLowByte);
 
-    if(i_len <= SECTOR_LEN)
-    {
+    if (i_len <= SECTOR_LEN) {
         flashAddrTmp += i_len;
-        if(flashAddrTmp <= SECTOR_LEN)
-        {
+
+        if (flashAddrTmp <= SECTOR_LEN) {
             sectorNo = 1u;
-        }
-        else
-        {
+        } else {
             sectorNo = 2u;
         }
-    }
-    else
-    {
+    } else {
         sectorNo = i_len / SECTOR_LEN;
-        if(0u != (i_len & flashAddrLowByte))
-        {
+
+        if (0u != (i_len & flashAddrLowByte)) {
             sectorNo += 1u;
         }
 
-        if((0u != flashAddrTmp) && (flashAddrTmp != ((flashAddrTmp + i_len) & flashAddrLowByte)))
-        {
+        if ((0u != flashAddrTmp) && (flashAddrTmp != ((flashAddrTmp + i_len) & flashAddrLowByte))) {
             sectorNo += 1u;
         }
     }
@@ -323,7 +305,7 @@ boolean FLASH_HAL_GetFlashDriverInfo(uint32 *o_pFlashDriverAddrStart, uint32 *o_
 }
 
 /*get reset handler information*/
-void FLASH_HAL_GetRestHanlderInfo(boolean *o_pIsEnableWriteResetHandlerInFlash, uint32 *o_pResetHanderOffset, uint32* o_pResetHandlerLength)
+void FLASH_HAL_GetRestHanlderInfo(boolean *o_pIsEnableWriteResetHandlerInFlash, uint32 *o_pResetHanderOffset, uint32 *o_pResetHandlerLength)
 {
     ASSERT(NULL_PTR == o_pIsEnableWriteResetHandlerInFlash);
     ASSERT(NULL_PTR == o_pResetHanderOffset);
@@ -396,10 +378,8 @@ uint32 FLASH_HAL_GetTotalSectors(const tAPPType i_appType)
     uint32 flashLength = 0u;
     uint32 index = 0u;
 
-    if(TRUE == FLASH_HAL_GetFlashConfigInfo(i_appType, &pBlockInfo, &itemNo))
-    {
-        for(index = 0u; index < itemNo; index++)
-        {
+    if (TRUE == FLASH_HAL_GetFlashConfigInfo(i_appType, &pBlockInfo, &itemNo)) {
+        for (index = 0u; index < itemNo; index++) {
             flashLength = pBlockInfo[index].xBlockEndLogicalAddr - pBlockInfo[index].xBlockStartLogicalAddr;
             sectors += FLASH_HAL_GetFlashLengthToSectors(pBlockInfo[index].xBlockEndLogicalAddr, flashLength);
         }
@@ -421,26 +401,23 @@ boolean FLASH_HAL_SectorNumberToFlashAddress(const tAPPType i_appType, const uin
     const uint32 flashAddrLowByte = (SECTOR_LEN) - 1u;
     uint32 flashAddrTmp = 0u;
 
-    if(TRUE == FLASH_HAL_GetFlashConfigInfo(i_appType, &pBlockInfo, &itemNo))
-    {
+    if (TRUE == FLASH_HAL_GetFlashConfigInfo(i_appType, &pBlockInfo, &itemNo)) {
         totalSectors = FLASH_HAL_GetTotalSectors(i_appType);
-        if(i_secotrNo < totalSectors)
-        {
+
+        if (i_secotrNo < totalSectors) {
             sectorsTmp = 0u;
 
-            while(index < itemNo)
-            {
+            while (index < itemNo) {
                 flashAddrTmp = pBlockInfo[index].xBlockStartLogicalAddr & flashAddrLowByte;
-                if(flashAddrTmp)
-                {
+
+                if (flashAddrTmp) {
                     sectorsTmp += 1u;
                 }
 
                 flashAddrTmp = pBlockInfo[index].xBlockStartLogicalAddr - flashAddrTmp;
-                while(flashAddrTmp < pBlockInfo[index].xBlockEndLogicalAddr)
-                {
-                    if(sectorsTmp == i_secotrNo)
-                    {
+
+                while (flashAddrTmp < pBlockInfo[index].xBlockEndLogicalAddr) {
+                    if (sectorsTmp == i_secotrNo) {
                         *o_pFlashAddr = flashAddrTmp;
 
                         result = TRUE;
@@ -453,17 +430,14 @@ boolean FLASH_HAL_SectorNumberToFlashAddress(const tAPPType i_appType, const uin
                     sectorsTmp++;
                 }
 
-                if(TRUE == result)
-                {
+                if (TRUE == result) {
                     break;
                 }
 
                 index++;
             }
 
-        }
-        else
-        {
+        } else {
             result = FALSE;
         }
     }

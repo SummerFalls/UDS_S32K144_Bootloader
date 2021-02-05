@@ -41,8 +41,7 @@ typedef void (*tpfAbortTxMsg)(void);
 
 #define MAX_CF_DATA_LEN (150u) /*max first frame data len */
 
-typedef struct
-{
+typedef struct {
     unsigned char ucCalledPeriod;/*called LIN tp main function period*/
     tUdsId xRxBoardcastId;           /*rx boardcast ID*/
     tUdsId xRxFunId;             /*rx function ID*/
@@ -60,7 +59,7 @@ typedef struct
     tNetTxMsg pfNetTxMsg;/*net tx message with non blocking*/
     tNetRx pfNetRx;              /*net rx*/
     tpfAbortTxMsg pfAbortTXMsg;  /*abort tx message*/
-}tUdsLINNetLayerCfg;
+} tUdsLINNetLayerCfg;
 
 /*uds netwrok layer cfg info */
 extern const tUdsLINNetLayerCfg g_stUdsLINNetLayerCfgInfo;

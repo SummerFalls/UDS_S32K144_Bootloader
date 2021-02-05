@@ -74,28 +74,25 @@ typedef void (*tpfTxSuccesfullCallBack)(void);
 
 #if 0
 /*can hardware config*/
-typedef struct
-{
+typedef struct {
     unsigned long ulCANClock;    /*can clock unit MHz*/
     unsigned short usCANBaudRate; /*can baud rate unit K*/
-}tCANHardwareConfig;
+} tCANHardwareConfig;
 #endif
 
-typedef struct
-{
+typedef struct {
     uint32_t usTxID;        /*tx can id*/
     uint8_t ucTxMailBox;   /*used tx mail box*/
     flexcan_msgbuff_id_type_t TxID_Type;    /* rx mask ID type:  Standard ID or Extended ID*/
     tpfTxSuccesfullCallBack pfCallBack;
-}tTxMsgConfig;
+} tTxMsgConfig;
 
-typedef struct
-{
+typedef struct {
     uint8_t usRxMailBox;        /*used rx mail box*/
     uint32_t usRxID;        /*rx can id*/
     uint32_t usRxMask;      /*rx mask*/
     flexcan_msgbuff_id_type_t RxID_Type;    /* rx mask ID type:  Standard ID or Extended ID*/
-}tRxMsgConfig;
+} tRxMsgConfig;
 
 //#ifdef NXF47391
 /* TODO Bootloader: #03 use SDK2.0 CAN PAL or FlexCAN Driver */
@@ -108,22 +105,22 @@ typedef struct
      *  - Flexible data rate enabled
      *  - Use zeros for FD padding
      */
-   extern can_buff_config_t buff_RxTx_Cfg;
+extern can_buff_config_t buff_RxTx_Cfg;
 
-    /* Define receive buffer */
-   extern can_message_t recvMsg;
+/* Define receive buffer */
+extern can_message_t recvMsg;
 
 #else
-   /* Set information about the data to be receive and sent
-        *  - Standard message ID
-        *  - Bit rate switch enabled to use a different bitrate for the data segment
-        *  - Flexible data rate enabled
-        *  - Use zeros for FD padding
-        */
-   extern flexcan_data_info_t buff_RxTx_Cfg;
+/* Set information about the data to be receive and sent
+     *  - Standard message ID
+     *  - Bit rate switch enabled to use a different bitrate for the data segment
+     *  - Flexible data rate enabled
+     *  - Use zeros for FD padding
+     */
+extern flexcan_data_info_t buff_RxTx_Cfg;
 
-   /* Define receive buffer */
-   extern flexcan_msgbuff_t recvMsg;
+/* Define receive buffer */
+extern flexcan_msgbuff_t recvMsg;
 #endif  //end of IsUse_CAN_Pal_Driver
 
 //#endif    //end of NXF47391

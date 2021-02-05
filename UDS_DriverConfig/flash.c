@@ -14,8 +14,7 @@
 
 //#ifdef NXF47391
 /*! @brief Configuration structure flashCfg_0 */
-static const flash_user_config_t Flash_InitConfig0 =
-{
+static const flash_user_config_t Flash_InitConfig0 = {
     .PFlashBase  = 0x00000000U,                     /* Base address of Program Flash block */
     .PFlashSize  = 0x00080000U,                     /* Size of Program Flash block         */
     .DFlashBase  = 0x10000000U,                     /* Base address of Data Flash block    */
@@ -31,8 +30,7 @@ static flash_ssd_config_t flashSSDConfig;
 
 #ifdef USE_FLASH_DRIVER
 //#pragma CONST_SEG FLASH_HEADER
-const tFlashOptInfo g_stFlashOptInfo =
-{
+const tFlashOptInfo g_stFlashOptInfo = {
     FALSH_DRIVER_START,
     FALSH_DRIVER_END,
     NULL_PTR,//&InitFlash,
@@ -56,60 +54,75 @@ static tFlashOptInfo *g_pstFlashOptInfo = (void *)0;
  * Description   : Gets DFlash size from FlexNVM Partition Code.
  *
  *END**************************************************************************/
-static void FLASH_DRV_GetDEPartitionCode(flash_ssd_config_t * const pSSDConfig,
+static void FLASH_DRV_GetDEPartitionCode(flash_ssd_config_t *const pSSDConfig,
                                          uint8_t DEPartitionCode)
 {
     /* Select D-Flash size */
-    switch (DEPartitionCode)
-    {
+    switch (DEPartitionCode) {
         case 0x00U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_0000;
             break;
+
         case 0x01U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_0001;
             break;
+
         case 0x02U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_0010;
             break;
+
         case 0x03U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_0011;
             break;
+
         case 0x04U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_0100;
             break;
+
         case 0x05U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_0101;
             break;
+
         case 0x06U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_0110;
             break;
+
         case 0x07U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_0111;
             break;
+
         case 0x08U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_1000;
             break;
+
         case 0x09U:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_1001;
             break;
+
         case 0x0AU:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_1010;
             break;
+
         case 0x0BU:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_1011;
             break;
+
         case 0x0CU:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_1100;
             break;
+
         case 0x0DU:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_1101;
             break;
+
         case 0x0EU:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_1110;
             break;
+
         case 0x0FU:
             pSSDConfig->DFlashSize = (uint32_t)FEATURE_FLS_DF_SIZE_1111;
             break;
+
         default:
             /* Undefined value */
             break;
@@ -124,8 +137,8 @@ static void FLASH_DRV_GetDEPartitionCode(flash_ssd_config_t * const pSSDConfig,
  *
  * Implements    : FLASH_DRV_Init_Activity
  *END**************************************************************************/
-static status_t FLASH_DRV_Init(const flash_user_config_t * const pUserConf,
-                               flash_ssd_config_t * const pSSDConfig)
+static status_t FLASH_DRV_Init(const flash_user_config_t *const pUserConf,
+                               flash_ssd_config_t *const pSSDConfig)
 {
     DEV_ASSERT(pUserConf != NULL);
     DEV_ASSERT(pSSDConfig != NULL);
@@ -146,14 +159,13 @@ static status_t FLASH_DRV_Init(const flash_user_config_t * const pUserConf,
     DEPartitionCode = (uint8_t)((SIM->FCFG1 & SIM_FCFG1_DEPART_MASK) >> SIM_FCFG1_DEPART_SHIFT);
     /* Get data flash size */
     FLASH_DRV_GetDEPartitionCode(pSSDConfig, DEPartitionCode);
-    if (pSSDConfig->DFlashSize < FEATURE_FLS_DF_BLOCK_SIZE)
-    {
+
+    if (pSSDConfig->DFlashSize < FEATURE_FLS_DF_BLOCK_SIZE) {
         pSSDConfig->EEESize = FEATURE_FLS_FLEX_RAM_SIZE;
-    }
-    else
-    {
+    } else {
         pSSDConfig->EEESize = 0U;
     }
+
 #else /* FEATURE_FLS_HAS_FLEX_NVM == 0 */
     /* If size of D/E-Flash = 0 */
     pSSDConfig->DFlashSize = 0U;
@@ -182,8 +194,7 @@ void InitFlashAPI(void)
     FLASH_HAL_GetFlashDriverInfo(&flashDriverStartAdd, &flashDriverEndAdd);
     tmp = (uint32 *)flashDriverStartAdd;
 
-    for (uint32_t i = 0; i < sizeof(tFlashOptInfo) / 4; i++)
-    {
+    for (uint32_t i = 0; i < sizeof(tFlashOptInfo) / 4; i++) {
         /* XXX Bootloader: #01 此处 tmp[i] 用来给 Flash Driver 头部的函数偏移量偏移到目前 Bootloader 中实际的 RAM 地址
          * 官方 Bootloader 例程配合官方编译好的 12 个 Flash Driver 函数，为何要减去（向左偏移） 0x410 原因不明，
          * 自己编译出的 4 个 Flash Driver 函数不需要减 0x410
@@ -238,7 +249,7 @@ unsigned char WriteFlash(const uint32_t i_xStartAddr,
 
 #if 0
 /*launch flash cmd*/
-static status_t FLASH_DRV_CommandSequence(const flash_ssd_config_t * pSSDConfig)
+static status_t FLASH_DRV_CommandSequence(const flash_ssd_config_t *pSSDConfig)
 {
     return FALSE;
 }
@@ -279,15 +290,14 @@ unsigned char ReadFlashByte(const unsigned long i_ulGloabalAddress)
 *********************************************************/
 void ReadFlashMemory(const unsigned long i_ulLogicalAddr,
                      const unsigned long i_ulLength,
-                     unsigned char* o_pucDataBuf)
+                     unsigned char *o_pucDataBuf)
 {
     unsigned long ulGlobalAddr;
     unsigned long ulIndex = 0u;
 
     ulGlobalAddr = i_ulLogicalAddr;
 
-    for(ulIndex = 0u; ulIndex < i_ulLength; ulIndex++)
-    {
+    for (ulIndex = 0u; ulIndex < i_ulLength; ulIndex++) {
         o_pucDataBuf[ulIndex] = ReadFlashByte(ulGlobalAddr);
         ulGlobalAddr++;
     }
@@ -306,8 +316,7 @@ void Flash_test(void)
     uint32_t failAddr;
 
     /* Init source data */
-    for (uint32_t i = 0u; i < BUFFER_SIZE; i++)
-    {
+    for (uint32_t i = 0u; i < BUFFER_SIZE; i++) {
         sourceBuffer[i] = i;
     }
 

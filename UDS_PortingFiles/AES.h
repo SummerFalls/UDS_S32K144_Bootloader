@@ -22,7 +22,7 @@
 **  key:  AES key
 **  ciper:cipertext
 **/
-void aes(sint8 *p, sint32 plen, sint8 *key, sint8 * cipher);
+void aes(sint8 *p, sint32 plen, sint8 *key, sint8 *cipher);
 
 /**
 ** c         : ciphertext
@@ -30,7 +30,7 @@ void aes(sint8 *p, sint32 plen, sint8 *key, sint8 * cipher);
 ** key       : AES key
 ** pPlainText: plaintxt
 **/
-void deAes(sint8 *c, sint32 clen, sint8 *key, sint8 * pPlainText);
+void deAes(sint8 *c, sint32 clen, sint8 *key, sint8 *pPlainText);
 #endif
 
 #endif /* AES_H_ */

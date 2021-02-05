@@ -17,12 +17,12 @@ static boolean FLASH_HAL_Init(void);
 static boolean FLASH_HAL_EraseSector(const uint32 i_startAddr, const uint32 i_noEraseSectors);
 
 static boolean FLASH_HAL_WriteData(const uint32 i_startAddr,
-                                 const uint8 *i_pDataBuf,
-                                 const uint32 i_dataLen);
+                                   const uint8 *i_pDataBuf,
+                                   const uint32 i_dataLen);
 
 static boolean FLASH_HAL_ReadData(const uint32 i_startAddr,
-                                const uint32 i_readLen,
-                                uint8 *o_pDataBuf);
+                                  const uint32 i_readLen,
+                                  uint8 *o_pDataBuf);
 
 static void FLASH_HAL_Deinit(void);
 
@@ -61,8 +61,7 @@ static boolean FLASH_HAL_EraseSector(const uint32 i_startAddr, const uint32 i_no
 
     ret = EraseFlashSector(i_startAddr, length);
 
-    if(0u == ret)
-    {
+    if (0u == ret) {
         retstates = TRUE;
     }
 
@@ -81,8 +80,8 @@ static boolean FLASH_HAL_EraseSector(const uint32 i_startAddr, const uint32 i_no
  *END**************************************************************************/
 
 static boolean FLASH_HAL_WriteData(const uint32 i_startAddr,
-                                 const uint8 *i_pDataBuf,
-                                 const uint32 i_dataLen)
+                                   const uint8 *i_pDataBuf,
+                                   const uint32 i_dataLen)
 {
     boolean retstates = FALSE;
     uint8 lessWriteLen = 8u;
@@ -91,51 +90,38 @@ static boolean FLASH_HAL_WriteData(const uint32 i_startAddr,
     uint8 index = 0u;
 
     DisableAllInterrupts();
-    if(i_dataLen  & (lessWriteLen - 1))
-    {
+
+    if (i_dataLen  & (lessWriteLen - 1)) {
         /*if write data more than 8 bytes*/
-        if(i_dataLen > lessWriteLen)
-        {
+        if (i_dataLen > lessWriteLen) {
             writeDataLen = i_dataLen - (i_dataLen  & (lessWriteLen - 1));
-            if(0u == WriteFlash(i_startAddr, i_pDataBuf, writeDataLen))
-            {
+
+            if (0u == WriteFlash(i_startAddr, i_pDataBuf, writeDataLen)) {
                 retstates = TRUE;
-            }
-            else
-            {
+            } else {
                 retstates = FALSE;
             }
 
-            if((TRUE == retstates))
-            {
-                for(index = 0u; index < (i_dataLen  & (lessWriteLen - 1)); index++)
-                {
+            if ((TRUE == retstates)) {
+                for (index = 0u; index < (i_dataLen  & (lessWriteLen - 1)); index++) {
                     aDataBuf[index] = i_pDataBuf[writeDataLen + index];
                 }
 
-                if(0u == WriteFlash(i_startAddr + writeDataLen, aDataBuf, 8u))
-                {
+                if (0u == WriteFlash(i_startAddr + writeDataLen, aDataBuf, 8u)) {
                     retstates = TRUE;
                 }
             }
-        }
-        else
-        {
-            for(index = 0u; index < i_dataLen; index++)
-            {
+        } else {
+            for (index = 0u; index < i_dataLen; index++) {
                 aDataBuf[index] = i_pDataBuf[writeDataLen + index];
             }
 
-            if(0u == WriteFlash(i_startAddr + writeDataLen, aDataBuf, 8u))
-            {
+            if (0u == WriteFlash(i_startAddr + writeDataLen, aDataBuf, 8u)) {
                 retstates = TRUE;
             }
         }
-    }
-    else
-    {
-        if(0u == WriteFlash(i_startAddr, i_pDataBuf, i_dataLen))
-        {
+    } else {
+        if (0u == WriteFlash(i_startAddr, i_pDataBuf, i_dataLen)) {
             retstates = TRUE;
         }
     }
@@ -157,8 +143,8 @@ static boolean FLASH_HAL_WriteData(const uint32 i_startAddr,
  * Implements : FLASH_HAL_Init_Activity
  *END**************************************************************************/
 static boolean FLASH_HAL_ReadData(const uint32 i_startAddr,
-                                const uint32 i_readLen,
-                                uint8 *o_pDataBuf)
+                                  const uint32 i_readLen,
+                                  uint8 *o_pDataBuf)
 {
     FLSDebugPrintf("\n %s\n", __func__);
 
@@ -190,8 +176,7 @@ boolean FLASH_HAL_RegisterFlashAPI(tFlashOperateAPI *o_pstFlashOperateAPI)
 {
     boolean result = FALSE;
 
-    if(NULL_PTR != o_pstFlashOperateAPI)
-    {
+    if (NULL_PTR != o_pstFlashOperateAPI) {
         o_pstFlashOperateAPI->pfFlashInit = FLASH_HAL_Init;
         o_pstFlashOperateAPI->pfEraserSecotr = FLASH_HAL_EraseSector;
         o_pstFlashOperateAPI->pfProgramData = FLASH_HAL_WriteData;

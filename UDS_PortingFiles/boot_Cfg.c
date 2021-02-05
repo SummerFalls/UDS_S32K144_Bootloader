@@ -14,15 +14,14 @@
 #include "fls_app.h"
 #include "CRC_hal.h"
 
-typedef struct
-{
+typedef struct {
     uint8 infoDataLen;             /*Exchange inforamtion length must N * 4.*/
     uint8 requestEnterBootloader;  /*Request enter bootloader mode flag*/
     uint8 downloadAPPSuccessful;   /*downlaod APP successful flag*/
     uint32 infoStartAddr;          /*exchange information start address*/
     uint32 requestEnterBootloaderAddr; /*Request enter bootloader flag address */
     uint32 downloadAppSuccessfulAddr;  /*download APP successful flag address*/
-}tBootInfo;
+} tBootInfo;
 
 static const tBootInfo gs_stBootInfo = {
     16u,    /*Exchange inforamtion length must N * 4.*/
@@ -61,13 +60,12 @@ boolean IsRequestEnterBootloader(void)
 {
     boolean result = FALSE;
 
-    if(TRUE == Boot_IsInfoValid())
-    {
-        if(gs_stBootInfo.requestEnterBootloader == *((uint8 *)gs_stBootInfo.requestEnterBootloaderAddr))
-        {
+    if (TRUE == Boot_IsInfoValid()) {
+        if (gs_stBootInfo.requestEnterBootloader == *((uint8 *)gs_stBootInfo.requestEnterBootloaderAddr)) {
             result = TRUE;
         }
     }
+
     return result;
 }
 
@@ -98,8 +96,7 @@ void Boot_PowerONClearAllFlag(void)
     uint8 index = 0u;
 
     /*clear RAM with 4 bytes for ECC*/
-    for(index = 0u; index < (gs_stBootInfo.infoDataLen >> 2u); index++)
-    {
+    for (index = 0u; index < (gs_stBootInfo.infoDataLen >> 2u); index++) {
         *((uint32 *)gs_stBootInfo.infoStartAddr + index) = 0u;
     }
 
@@ -117,19 +114,15 @@ void Boot_RemapApplication(void)
     uint32 appRemapAddr = 0u;
 
     totalCoreNo = FLASH_HAL_GetConfigCoreNo();
-    if(totalCoreNo > 0u)
-    {
+
+    if (totalCoreNo > 0u) {
         appType = Flash_GetNewestAPPType();
 
-        for(index = 0u; index < totalCoreNo; index++)
-        {
-            if((TRUE == FLASH_HAL_GetMultiCoreMirrorAddr(appType,index,&appMirrorAddr)) &&
-                (TRUE == FLASH_HAL_GetMultiCoreRemapAddr(appType,index,&appRemapAddr)))
-            {
+        for (index = 0u; index < totalCoreNo; index++) {
+            if ((TRUE == FLASH_HAL_GetMultiCoreMirrorAddr(appType, index, &appMirrorAddr)) &&
+                    (TRUE == FLASH_HAL_GetMultiCoreRemapAddr(appType, index, &appRemapAddr))) {
                 /*do remap multi core application*/
-            }
-            else
-            {
+            } else {
                 /*trigger MCU reset*/
             }
         }
@@ -143,7 +136,7 @@ void Boot_RemapApplication(void)
  *
  * Implements :
  *END**************************************************************************/
- typedef void (*AppAddr)(void);
+typedef void (*AppAddr)(void);
 AppAddr JumpAppAddr = NULL;
 void Boot_JumpToApp(const uint32 i_AppAddr)
 {
@@ -175,8 +168,7 @@ static boolean Boot_IsInfoValid(void)
 
     storageCrc = GetInfoStorageCRC();
 
-    if(storageCrc == infoCrc)
-    {
+    if (storageCrc == infoCrc) {
         result = TRUE;
     }
 

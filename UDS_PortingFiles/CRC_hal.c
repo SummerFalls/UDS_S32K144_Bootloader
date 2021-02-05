@@ -31,8 +31,7 @@
   *RefOut: false
   *XorOut: 0x0000
 */
-static const uint16 gs_aCrc16Tab[] =
-{
+static const uint16 gs_aCrc16Tab[] = {
     0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
     0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
     0x1231, 0x0210, 0x3273, 0x2252, 0x52B5, 0x4294, 0x72F7, 0x62D6,
@@ -114,11 +113,13 @@ static const uint16 g_dnpCrcTable[256u] = {
 #if 0
 static unsigned short calcDnpCrc(unsigned char *p, unsigned int count )
 {
-unsigned int crc = 0 ;
+    unsigned int crc = 0 ;
 
-while ( count-- ) crc = ( crc >> 8 ) ^ dnpCrcTable[( crc ^ *p++) & 0x00ff] ;
+    while ( count-- ) {
+        crc = ( crc >> 8 ) ^ dnpCrcTable[( crc ^ *p++) & 0x00ff] ;
+    }
 
-return( (unsigned short) ( ~crc ) ) ;
+    return ( (unsigned short) ( ~crc ) ) ;
 }
 #endif
 /************************************************************
@@ -176,7 +177,7 @@ void CRC_HAL_CreatHardwareCrc(const uint8 *i_pucDataBuf, const uint32 i_ulDataLe
 #elif (defined EN_CRC_SOFTWARE)
     CreatSoftwareCrc16(i_pucDataBuf, i_ulDataLen, m_pCurCrc);
 #else
-    #error "Non CRC module enabled!"
+#error "Non CRC module enabled!"
 #endif
 }
 
@@ -221,8 +222,8 @@ static void CreatSoftwareCrc16(const uint8 *i_pDataBuf, const uint32 i_dataLen, 
 #if (defined FALSH_ADDRESS_CONTINUE) && (FALSH_ADDRESS_CONTINUE == TRUE)
     crc = *m_pCurCrc;
 #endif
-    for(index = 0u; index < i_dataLen; index++)
-    {
+
+    for (index = 0u; index < i_dataLen; index++) {
         crc = ( crc >> 8 ) ^ g_dnpCrcTable[( crc ^ i_pDataBuf[index]) & 0x00ff] ;
     }
 

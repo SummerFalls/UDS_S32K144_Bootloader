@@ -20,19 +20,17 @@ typedef void (*tpfUDSTxMsgCallBack)(uint8);
 /*a signle message buf len*/
 #define MAX_MESSAGE_LEN (64u)
 
-typedef struct
-{
+typedef struct {
     uint32 rxDataLen;      /*RX can harware data len*/
     uint32 rxDataId;      /*RX data len*/
     uint8 aucDataBuf[MAX_MESSAGE_LEN];   /*RX data buf*/
-}tRxMsgInfo;
+} tRxMsgInfo;
 
-typedef struct
-{
+typedef struct {
     uint32 msgID;                   /*message ID*/
     uint32 dataLen;                 /*data length*/
     tpfUDSTxMsgCallBack pfCallBack; /*call back*/
-}tUDSAndTPExchangeMsgInfo;
+} tUDSAndTPExchangeMsgInfo;
 
 #define RX_TP_QUEUE_ID ('R')  /*TP RX  FIFO ID*/
 #define TX_TP_QUEUE_ID ('T')  /*TP TX  FIFO ID*/
@@ -41,19 +39,17 @@ typedef struct
 #define TX_TP_QUEUE_LEN (50u)  /*UDS send message to  TP max length*/
 #define RX_TP_QUEUE_LEN (150)  /*UDS read message from TP max length*/
 
-typedef enum
-{
+typedef enum {
     TX_MSG_SUCCESSFUL = 0u,
     TX_MSG_FAILD,
     TX_MSG_TIMEOUT
-}tTxMsgStatus;
+} tTxMsgStatus;
 
-typedef struct
-{
+typedef struct {
     uint32 TxMsgID;       /*Tx message ID*/
     uint32 TxMsgLength;   /*TX message length*/
     uint32 TxMsgCallBack; /*Tx message callback*/
-}tTPTxMsgHeader;
+} tTPTxMsgHeader;
 
 
 /*Get TP config TX message ID*/
@@ -80,7 +76,7 @@ extern void TP_DoTransmittedAFrameMsgCallBack(const uint8 i_result);
 extern boolean TP_DriverWriteDataInTP(const uint32 i_RxID, const uint32 i_RxDataLen, const uint8 *i_pRxDataBuf);
 
 /*Driver read data from TP for Tx message to BUS*/
-extern boolean TP_DriverReadDataFromTP(const uint32 i_readDataLen, uint8 * o_pReadDatabuf, uint32 *o_pTxMsgID, uint32 *o_pTxMsgLength);
+extern boolean TP_DriverReadDataFromTP(const uint32 i_readDataLen, uint8 *o_pReadDatabuf, uint32 *o_pTxMsgID, uint32 *o_pTxMsgLength);
 
 /*register abort tx message*/
 extern void TP_RegisterAbortTxMsg(void (*i_pfAbortTxMsg)(void));

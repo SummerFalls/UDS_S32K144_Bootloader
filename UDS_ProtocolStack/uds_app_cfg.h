@@ -17,8 +17,7 @@
 
 typedef uint16 tUdsTime;
 
-typedef struct
-{
+typedef struct {
     tUdsId xUdsId;
     tUdsLen xDataLen;
     uint8 aDataBuf[150u];
@@ -26,13 +25,12 @@ typedef struct
     void (*pfUDSTxMsgServiceCallBack)(uint8);
 } tUdsAppMsgInfo;
 
-typedef struct UDSServiceInfo
-{
+typedef struct UDSServiceInfo {
     uint8 SerNum;     /*service num. eg 0x3e/0x87...*/
     uint8 SessionMode;/*default session / program session / extend session*/
     uint8 SupReqMode; /*support physical / function addr*/
     uint8 ReqLevel;   /*request level.Lock/unlock*/
-    void (*pfSerNameFun)(struct UDSServiceInfo*, tUdsAppMsgInfo *);
+    void (*pfSerNameFun)(struct UDSServiceInfo *, tUdsAppMsgInfo *);
 } tUDSService;
 
 /*********************************************************/
@@ -66,8 +64,7 @@ typedef struct UDSServiceInfo
 //    NRC_SERVICE_NOT_SUPPORTED_IN_ACTIVE_SESSION = 0x7F,
 //};
 
-enum __UDS_NRC__
-{
+enum __UDS_NRC__ {
     GR      = 0x10,
     SNS     = 0x11, /*service not support*/
     SFNS    = 0x12, /*subfunction not support*/
@@ -127,7 +124,7 @@ extern void SetSecurityLevel(const uint8 i_SerSecurityLevel);
 extern uint8 IsCurSecurityLevelRequet(uint8 i_SerSecurityLevel);
 
 /* Get UDS config Service information */
-tUDSService* GetUDSServiceInfo(uint8 *m_pSupServItem);
+tUDSService *GetUDSServiceInfo(uint8 *m_pSupServItem);
 
 /* If Rx UDS msg, set g_ucIsRxUdsMsg TURE */
 extern void SetIsRxUdsMsg(const uint8 i_SetValue);

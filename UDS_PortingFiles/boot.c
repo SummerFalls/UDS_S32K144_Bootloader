@@ -21,8 +21,7 @@ static boolean Boot_IsAPPValid(void)
     /*check app code flash status. If app code update successfull, this api return TRUE, else return FALSE.*/
     bResult = Flash_IsReadAppInfoFromFlashValid();
 
-    if(TRUE == bResult)
-    {
+    if (TRUE == bResult) {
         bResult = Flash_IsAppInFlashValid();
     }
 
@@ -42,8 +41,7 @@ void Boot_JumpToAppOrNot(void)
 {
     uint32 resetHandlerAddr = 0u;
 
-    if((TRUE == Boot_IsAPPValid()) && (TRUE != IsRequestEnterBootloader()))
-    {
+    if ((TRUE == Boot_IsAPPValid()) && (TRUE != IsRequestEnterBootloader())) {
         Boot_RemapApplication();
 
         resetHandlerAddr = Flash_GetResetHandlerAddr();
@@ -57,18 +55,14 @@ boolean Boot_CheckReqBootloaderMode(void)
 {
     boolean ret = FALSE;
 
-    if(TRUE == IsRequestEnterBootloader())
-    {
+    if (TRUE == IsRequestEnterBootloader()) {
         ClearRequestEnterBootloaderFlag();
 
         /*write a message to host based on TP*/
-        if(TRUE == UDS_TxMsgToHost())
-        {
+        if (TRUE == UDS_TxMsgToHost()) {
             ret = TRUE;
             APPDebugPrintf("\n Enter bootloader mode\n");
-        }
-        else
-        {
+        } else {
             APPDebugPrintf("\n Enter bootloader mode and transmit confirm message failed!\n");
         }
     }

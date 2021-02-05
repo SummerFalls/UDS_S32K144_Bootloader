@@ -26,8 +26,7 @@
 #endif
 
 /*define erro code */
-typedef enum
-{
+typedef enum {
     ERRO_NONE = 0u,         /*no erro*/
     ERRO_LEES_MIN,          /*less than min*/
     ERRO_NO_NODE,
@@ -39,7 +38,7 @@ typedef enum
     ERRO_TIMEOUT,           /*timeout*/
     ERRO_WRITE_ERRO,
     ERRO_READ_ERRO
-}tErroCode;
+} tErroCode;
 
 typedef unsigned short tId;
 typedef unsigned short tLen;
@@ -82,9 +81,9 @@ extern void ApplyFifo(tLen i_xApplyFifoLen, tLen i_xFifoId, tErroCode *o_peApply
 **  Created Date        :   2013-3-27
 **********************************************************/
 extern void WriteDataInFifo(tId i_xFifoId,
-                              unsigned char *i_pucWriteDataBuf,
-                              tLen i_xWriteDatalen,
-                              tErroCode *o_peWriteStatus);
+                            unsigned char *i_pucWriteDataBuf,
+                            tLen i_xWriteDatalen,
+                            tErroCode *o_peWriteStatus);
 
 /**********************************************************
 **  Function Name   :   ReadDataFromFifo
@@ -101,9 +100,9 @@ extern void WriteDataInFifo(tId i_xFifoId,
 **  Created Date        :   2013-3-27
 **********************************************************/
 extern void ReadDataFromFifo(tId i_xFifoId, tLen i_xNeedReadDataLen,
-                                  unsigned char *o_pucReadDataBuf,
-                                  tLen *o_pxReadLen,
-                                  tErroCode *o_peReadStatus);
+                             unsigned char *o_pucReadDataBuf,
+                             tLen *o_pxReadLen,
+                             tErroCode *o_peReadStatus);
 
 /**********************************************************
 **  Function Name   :   GetCanReadLen

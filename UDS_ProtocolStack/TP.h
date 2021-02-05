@@ -40,14 +40,14 @@ extern void TP_SystemTickCtl(void);
 
 /*read a frame  tp data  from UDS to Tp TxFIFO. If no data can read return FALSE, else return TRUE*/
 extern boolean TP_ReadAFrameDataFromTP(uint32 *o_pRxMsgID,
-                                      uint32 *o_pxRxDataLen,
-                                      uint8 *o_pDataBuf);
+                                       uint32 *o_pxRxDataLen,
+                                       uint8 *o_pDataBuf);
 
 /*write a frame data from  Tp to UDS RxFIFO*/
 extern boolean TP_WriteAFrameDataInTP(const uint32 i_TxMsgID,
-                                     const tpfUDSTxMsgCallBack i_pfUDSTxMsgCallBack,
-                                     const uint32 i_xTxDataLen,
-                                     const uint8 *i_pDataBuf);
+                                      const tpfUDSTxMsgCallBack i_pfUDSTxMsgCallBack,
+                                      const uint32 i_xTxDataLen,
+                                      const uint8 *i_pDataBuf);
 
 extern void TP_Deinit(void);
 

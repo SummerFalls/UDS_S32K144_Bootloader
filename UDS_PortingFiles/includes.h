@@ -34,29 +34,29 @@
 
 #ifdef EN_ASSERT
 #define ASSERT(xValue)\
-do{\
-    if(xValue)\
-    {\
-        while(1){}\
-    }\
-}while(0)
+    do{\
+        if(xValue)\
+        {\
+            while(1){}\
+        }\
+    }while(0)
 
 #define ASSERT_Printf(pString, xValue)\
-do{\
-    if(FALSE != xValue)\
-    {\
-        DebugPrintf(pString);\
-    }\
-}while(0)
+    do{\
+        if(FALSE != xValue)\
+        {\
+            DebugPrintf(pString);\
+        }\
+    }while(0)
 
 #define ASSERT_DebugPrintf(pString, xValue)\
-do{\
-    if(FALSE != xValue)\
-    {\
-        DebugPrintf((pString));\
-        while(1u){}\
-    }\
-}while(0)
+    do{\
+        if(FALSE != xValue)\
+        {\
+            DebugPrintf((pString));\
+            while(1u){}\
+        }\
+    }while(0)
 #else
 #define ASSERT(xValue)
 #define ASSERT_Printf(pString, xValue)

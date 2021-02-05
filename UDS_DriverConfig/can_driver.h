@@ -17,12 +17,11 @@
 
 //#define RX_CAN_FIFO ('r') /*Rx can fifo number*/
 
-typedef struct
-{
+typedef struct {
     uint32_t ucRxDataLen;      /*RX can harware data len*/
     uint32_t usRxDataId;      /*RX data ID*/
     uint8_t aucDataBuf[64u];   /*RX data buf*/
-}tRxCanMsg;
+} tRxCanMsg;
 #define DLEN_ID_LEN 8u  /* DLEN_ID_LEN include ucRxDataLen len add usRxDataId len */
 
 /*init can */
@@ -38,10 +37,10 @@ extern void TxCANMsgMainFun(void);
 
 /*can transmite message*/
 extern uint8_t TransmiteCANMsg(const uint32_t i_usCANMsgID,
-                                const uint8_t i_ucDataLen,
-                                const uint8_t *i_pucDataBuf,
-                                const tpfNetTxCallBack i_pfNetTxCallBack,
-                                const uint32_t i_txBlockingMaxtime);
+                               const uint8_t i_ucDataLen,
+                               const uint8_t *i_pucDataBuf,
+                               const tpfNetTxCallBack i_pfNetTxCallBack,
+                               const uint32_t i_txBlockingMaxtime);
 
 /*transmitted can message callback*/
 extern void TransmittedCanMsgCallBack(void);

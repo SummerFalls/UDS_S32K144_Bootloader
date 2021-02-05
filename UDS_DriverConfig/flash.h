@@ -1,7 +1,7 @@
 /*
  * @ 名称: flash.h
  * @ 描述:
- * @ 作者: Tomy
+ * @作者: Tomy
  * @ 日期: 2021年2月5日
  * @ 版本: V1.0
  * @ 历史: V1.0 2021年2月5日 Summary
@@ -46,8 +46,7 @@ typedef void (* flash_callback_t)(void);
  *
  * Implements : flash_user_config_t_Class
  */
-typedef struct
-{
+typedef struct {
     uint32_t PFlashBase;            /*!< The base address of P-Flash memory */
     uint32_t PFlashSize;            /*!< The size in byte of P-Flash memory */
     uint32_t DFlashBase;            /*!< For FlexNVM device, this is the base address of D-Flash memory
@@ -70,8 +69,7 @@ typedef struct
  *
  * Implements : flash_ssd_config_t_Class
  */
-typedef struct
-{
+typedef struct {
     uint32_t PFlashBase;          /*!< The base address of P-Flash memory */
     uint32_t PFlashSize;          /*!< The size in byte of P-Flash memory */
     uint32_t DFlashBase;          /*!< For FlexNVM device, this is the base address of D-Flash memory (FlexNVM memory);
@@ -90,16 +88,15 @@ typedef struct
 
 
 
-typedef struct
-{
+typedef struct {
 //    status_t (*FLASH_EraseAllBlock)(const flash_ssd_config_t * pSSDConfig);
 //    status_t (*FLASH_VerifyAllBlock)(const flash_ssd_config_t * pSSDConfig,uint8_t marginLevel);
-    status_t (*FLASH_EraseSector)(const flash_ssd_config_t * pSSDConfig,uint32_t dest,uint32_t size);
-    status_t (*FLASH_VerifySection)(const flash_ssd_config_t * pSSDConfig,uint32_t dest,uint16_t number,uint8_t marginLevel);
+    status_t (*FLASH_EraseSector)(const flash_ssd_config_t *pSSDConfig, uint32_t dest, uint32_t size);
+    status_t (*FLASH_VerifySection)(const flash_ssd_config_t *pSSDConfig, uint32_t dest, uint16_t number, uint8_t marginLevel);
 //    void (*FLASH_EraseSuspend)(void);
 //    void (*FLASH_EraseResume)(void);
-    status_t (*FLASH_Program)(const flash_ssd_config_t * pSSDConfig,uint32_t dest, uint32_t size,const uint8_t * pData);
-    status_t (*FLASH_ProgramCheck)(const flash_ssd_config_t * pSSDConfig,uint32_t dest,uint32_t size,const uint8_t * pExpectedData,uint32_t * pFailAddr,uint8_t marginLevel);
+    status_t (*FLASH_Program)(const flash_ssd_config_t *pSSDConfig, uint32_t dest, uint32_t size, const uint8_t *pData);
+    status_t (*FLASH_ProgramCheck)(const flash_ssd_config_t *pSSDConfig, uint32_t dest, uint32_t size, const uint8_t *pExpectedData, uint32_t *pFailAddr, uint8_t marginLevel);
 //    status_t (*FLASH_ProgramSection)(const flash_ssd_config_t * pSSDConfig,uint32_t dest,uint16_t number);
 //    status_t (*FLASH_EraseBlock)(const flash_ssd_config_t * pSSDConfig, uint32_t dest);
 //    status_t (*FLASH_CommandSequence)(const flash_ssd_config_t * pSSDConfig);
@@ -149,7 +146,7 @@ extern unsigned char ReadFlashByte(const unsigned long i_ulGloabalAddress);
 *********************************************************/
 extern void ReadFlashMemory(const unsigned long i_ulLogicalAddr,
                             const unsigned long i_ulLength,
-                            unsigned char* o_pucDataBuf);
+                            unsigned char *o_pucDataBuf);
 
 #endif /* FLASH_H_ */
 

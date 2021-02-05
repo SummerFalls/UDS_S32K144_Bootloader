@@ -46,7 +46,7 @@ void Bootloader_DebugPrint(const char *fmt, ...)
     vsnprintf(buffer, DEBUG_LOG_BUF_SIZE, fmt, ap);
     va_end(ap);
 
-    LPUART_DRV_SendDataBlocking(INST_LPUART1,(uint8 *)buffer, strlen(buffer), 1000);
+    LPUART_DRV_SendDataBlocking(INST_LPUART1, (uint8 *)buffer, strlen(buffer), 1000);
 }
 #endif
 

@@ -16,11 +16,10 @@
 
 typedef uint32 tLogicalAddr;
 
-typedef struct
-{
+typedef struct {
     tLogicalAddr xBlockStartLogicalAddr; /*block start logical addr*/
     tLogicalAddr xBlockEndLogicalAddr;   /*block end logical addr*/
-}BlockInfo_t;
+} BlockInfo_t;
 
 /*program data buf max length*/
 #define MAX_FLASH_DATA_LEN (200u)
@@ -34,7 +33,7 @@ typedef struct
 extern boolean FLASH_HAL_APPAddrCheck(void);
 
 /*Get configure flash information*/
-extern  boolean FLASH_HAL_GetFlashConfigInfo(const tAPPType i_appType,BlockInfo_t ** o_ppBlockInfo, uint32 *o_pItemLen);
+extern  boolean FLASH_HAL_GetFlashConfigInfo(const tAPPType i_appType, BlockInfo_t **o_ppBlockInfo, uint32 *o_pItemLen);
 
 /*get application information(storage start address, block size)*/
 extern  boolean FLASH_HAL_GetAPPInfo(const tAPPType i_appType, uint32 *o_pAppInfoStartAddr, uint32 *o_pBlockSize);
@@ -46,7 +45,7 @@ extern uint32 FLASH_HAL_GetFlashLengthToSectors(const uint32 i_startFlashAddr, c
 extern boolean FLASH_HAL_GetFlashDriverInfo(uint32 *o_pFlashDriverAddrStart, uint32 *o_pFlashDriverEndAddr);
 
 /*get reset handler information*/
-extern void FLASH_HAL_GetRestHanlderInfo(boolean *o_pIsEnableWriteResetHandlerInFlash, uint32 *o_pResetHanderOffset, uint32* o_pResetHandlerLength);
+extern void FLASH_HAL_GetRestHanlderInfo(boolean *o_pIsEnableWriteResetHandlerInFlash, uint32 *o_pResetHanderOffset, uint32 *o_pResetHandlerLength);
 
 /*Get storage reset handler infomation*/
 extern uint32 FLASH_HAL_GetStorageRestHandlerAddr(void);

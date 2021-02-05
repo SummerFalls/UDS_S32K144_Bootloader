@@ -20,14 +20,13 @@ typedef boolean (*tpfEraseSecotr)(const uint32, const uint32);
 typedef boolean (*tpfProgramData)(const uint32, const uint8 *, const uint32);
 typedef boolean (*tpfReadFlashData)(const uint32, const uint32, uint8 *);
 
-typedef struct
-{
+typedef struct {
     tpfFlashInit pfFlashInit;
     tpfEraseSecotr pfEraserSecotr;     /*erase sector*/
     tpfProgramData pfProgramData;      /*program data*/
     tpfReadFlashData pfReadFlashData;  /*read flash data*/
     tpfFlashDeInit pfFlashDeinit;
-}tFlashOperateAPI;
+} tFlashOperateAPI;
 
 /*!
  * @brief To Register operate API.

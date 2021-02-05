@@ -137,8 +137,7 @@
 
 /**********************FOTA A/B config************************/
 //#define EN_SUPPORT_APP_B
-typedef enum
-{
+typedef enum {
     APP_A_TYPE = 0u,         /*APP A type*/
 
 #ifdef EN_SUPPORT_APP_B
@@ -146,7 +145,7 @@ typedef enum
 #endif
 
     APP_INVLID_TYPE = 0xFFu, /*APP invalid type*/
-}tAPPType;
+} tAPPType;
 
 #ifdef EN_SUPPORT_APP_B
 /*enable,  newest is invalid, jump to old app*/

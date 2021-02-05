@@ -32,7 +32,7 @@ void WATCHDOG_HAL_Init(void)
  *END**************************************************************************/
 void WATCHDOG_HAL_Fed(void)
 {
-   WDOG_DRV_Trigger(INST_WATCHDOG1);
+    WDOG_DRV_Trigger(INST_WATCHDOG1);
 }
 
 
