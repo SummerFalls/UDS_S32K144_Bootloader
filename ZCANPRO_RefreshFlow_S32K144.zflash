@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!--Created By ZLG ZCANPro.-->
+<flow>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>10</sid>
+  <desc>进入Bootloader</desc>
+  <data>82 </data>
+  <suppress_response>true</suppress_response>
+ </item>
+ <item type="delay">
+  <desc>延时</desc>
+  <value>500</value>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>10</sid>
+  <desc>进入扩展模式</desc>
+  <data>03 </data>
+  <suppress_response>false</suppress_response>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>28</sid>
+  <desc>关闭非诊断通信</desc>
+  <data>03 03</data>
+  <suppress_response>false</suppress_response>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>false</is_crc_cmd>
+  <sid>10</sid>
+  <desc>进入编程模式</desc>
+  <data>02 </data>
+  <suppress_response>false</suppress_response>
+ </item>
+ <item type="security">
+  <functionaddr>false</functionaddr>
+  <level>1</level>
+  <dll>D:/SrcCode/VS2019/UDS_SecurityAccess/Release/UDS_SecurityAccess.dll</dll>
+  <desc>安全访问 - ECU解锁</desc>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>2E</sid>
+  <desc>写指纹信息</desc>
+  <data>F1 5A 55 55 </data>
+  <suppress_response>false</suppress_response>
+ </item>
+ <item type="download">
+  <desc>文件下载 - Flash Driver</desc>
+  <functionaddr>false</functionaddr>
+  <file>D:/SrcCode/S32DS_2.2/UDS_S32K144_FlashDriver/UDS_S32K144_FlashDriverExtracted.hex</file>
+  <addresssize>4</addresssize>
+  <lengthsize>4</lengthsize>
+  <category>1</category>
+  <crc_type>1</crc_type>
+  <crc_poly>3d65</crc_poly>
+  <crc_init_value>0</crc_init_value>
+  <crc_xor_value>ffff</crc_xor_value>
+  <crc_in_reverse>1</crc_in_reverse>
+  <crc_out_reverse>1</crc_out_reverse>
+  <crc_cmd>31 01 02 02 </crc_cmd>
+  <crc_enable>1</crc_enable>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>31</sid>
+  <desc>例程控制</desc>
+  <data>01 02 02 88 1D</data>
+  <suppress_response>false</suppress_response>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>31</sid>
+  <desc>例程控制 - 擦除Flash</desc>
+  <data>01 FF 00 </data>
+  <suppress_response>false</suppress_response>
+ </item>
+ <item type="download">
+  <desc>文件下载 - APP</desc>
+  <functionaddr>false</functionaddr>
+  <file>D:/SrcCode/S32DS_2.2/UDS_S32K144_APP/Debug_FLASH/UDS_S32K144_APP.hex</file>
+  <addresssize>4</addresssize>
+  <lengthsize>4</lengthsize>
+  <category>0</category>
+  <crc_type>1</crc_type>
+  <crc_poly>3d65</crc_poly>
+  <crc_init_value>0</crc_init_value>
+  <crc_xor_value>ffff</crc_xor_value>
+  <crc_in_reverse>1</crc_in_reverse>
+  <crc_out_reverse>1</crc_out_reverse>
+  <crc_cmd>31 01 02 02 </crc_cmd>
+  <crc_enable>1</crc_enable>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>31</sid>
+  <desc>例程控制</desc>
+  <data>01 02 02 AB 76</data>
+  <suppress_response>false</suppress_response>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>31</sid>
+  <desc>例程控制 - 检查APP合法性</desc>
+  <data>01 FF 01</data>
+  <suppress_response>false</suppress_response>
+ </item>
+ <item type="general">
+  <functionaddr>false</functionaddr>
+  <is_crc_cmd>true</is_crc_cmd>
+  <sid>11</sid>
+  <desc>ECU复位</desc>
+  <data>01 </data>
+  <suppress_response>false</suppress_response>
+ </item>
+</flow>

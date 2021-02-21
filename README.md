@@ -16,22 +16,24 @@
  */
 ```
 
-## :book: ¼ò½é
+## :book: ç®€ä»‹
 
-S32K1xx µÄ CAN ½Ó `ÖÜÁ¢¹¦ USBCANFD-100U-mini`£¬Ê¹ÓÃ `ZCANPRO` Èí¼þµÄ `ECUË¢ÐÂ` ¹¦ÄÜ½øÐÐ²âÊÔ¡£Í¨¹ýÏàÓ¦µÄ UDS ·þÎñ½« :package: [UDS_S32K144_FlashDriver](https://github.com/SummerFalls/UDS_S32K144_FlashDriver) µÄ hex ÎÄ¼þÏÂÔØÖÁ±¾ `Bootloader` ÔÚÁ´½ÓÎÄ¼þÖÐÎªÆäÔ¤ÏÈÖ¸¶¨ÆðÊ¼µØÖ·µÄ RAM ¿Õ¼äÖÐ£¬²¢Í¨¹ý `Flash Driver` ÄÚÊµ¼Ê°üº¬µÄÏàÓ¦µÄ Flash Çý¶¯º¯ÊýµÄÏà¶ÔÆ«ÒÆÁ¿ÒÔ¼°Çý¶¯º¯Êý±¾ÉíÀ´¼ÆËãÏàÓ¦Çý¶¯º¯ÊýµÄÈë¿ÚµãÔÚ RAM ÄÚµÄÆ«ÒÆµØÖ·ºó£¬ÔÙÍ¨¹ýº¯ÊýÖ¸ÕëµÄ·½Ê½½øÐÐµ÷ÓÃÏàÓ¦µÄ `Flash API` ÒÔÊµÏÖ¶ÔÆ¬ÄÚ Flash µÄ±à³Ì¡¢²ÁÐ´¡¢Ð£Ñé£¬×îÖÕÊµÏÖ `ECUË¢ÐÂ` µÄÕû¸ö APP ¸üÐÂÁ÷³Ì¡£
+S32K1xx çš„ CAN æŽ¥ `å‘¨ç«‹åŠŸ USBCANFD-100U-mini`ï¼Œä½¿ç”¨ `ZCANPRO` è½¯ä»¶çš„ `ECUåˆ·æ–°` åŠŸèƒ½è¿›è¡Œæµ‹è¯•ã€‚é€šè¿‡ç›¸åº”çš„ UDS æœåŠ¡å°† :package: [UDS_S32K144_FlashDriver](https://github.com/SummerFalls/UDS_S32K144_FlashDriver) çš„ hex æ–‡ä»¶ä¸‹è½½è‡³æœ¬ `Bootloader` åœ¨é“¾æŽ¥æ–‡ä»¶ä¸­ä¸ºå…¶é¢„å…ˆæŒ‡å®šèµ·å§‹åœ°å€çš„ RAM ç©ºé—´ä¸­ï¼Œå¹¶é€šè¿‡ `Flash Driver` å†…å®žé™…åŒ…å«çš„ç›¸åº”çš„ Flash é©±åŠ¨å‡½æ•°çš„ç›¸å¯¹åç§»é‡ä»¥åŠé©±åŠ¨å‡½æ•°æœ¬èº«æ¥è®¡ç®—ç›¸åº”é©±åŠ¨å‡½æ•°çš„å…¥å£ç‚¹åœ¨ RAM å†…çš„åç§»åœ°å€åŽï¼Œå†é€šè¿‡å‡½æ•°æŒ‡é’ˆçš„æ–¹å¼è¿›è¡Œè°ƒç”¨ç›¸åº”çš„ `Flash API` ä»¥å®žçŽ°å¯¹ç‰‡å†… Flash çš„ç¼–ç¨‹ã€æ“¦å†™ã€æ ¡éªŒï¼Œæœ€ç»ˆå®žçŽ° `ECUåˆ·æ–°` çš„æ•´ä¸ª APP æ›´æ–°æµç¨‹ã€‚
+
+:file_folder: ZCANPRO_RefreshFlow_S32K144.zflash ä¸ºå¯è¢« `ZCANPRO` çš„ `ECUåˆ·æ–°` åŠŸèƒ½æ‰€åŠ è½½çš„ UDS åˆ·æ–°æµç¨‹æ–‡ä»¶ã€‚
 
 ![Pic_ZCANPRO_ECU_Refresh][Pic_ZCANPRO_ECU_Refresh]
 
-## :gear: Ó²¼þ & Èí¼þ ÐèÇó
+## :gear: ç¡¬ä»¶ & è½¯ä»¶ éœ€æ±‚
 
-### Ó²¼þÐèÇó
+### ç¡¬ä»¶éœ€æ±‚
 
 - S32K144-EVB
 - J-Link
 - USBCANFD-100U-mini
 - 12V External Power Supply
 
-### Èí¼þÐèÇó
+### è½¯ä»¶éœ€æ±‚
 
 - S32 Design Studio for ARM Version 2.2
 - ZCANPRO
@@ -43,15 +45,15 @@ S32K1xx µÄ CAN ½Ó `ÖÜÁ¢¹¦ USBCANFD-100U-mini`£¬Ê¹ÓÃ `ZCANPRO` Èí¼þµÄ `ECUË¢ÐÂ` ¹
 
 <br/>
 
-## :detective: UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©
+## :detective: UDSï¼ˆUnified Diagnostic Servicesï¼Œç»Ÿä¸€è¯Šæ–­æœåŠ¡ï¼‰
 
 <div align="center">
 
-## :page_with_curl: UDS Ð­ÒéËµÃ÷
+## :page_with_curl: UDS åè®®è¯´æ˜Ž
 
 </div>
 
-UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 14229` ¶¨ÒåµÄÒ»ÖÖÆû³µÍ¨ÓÃÕï¶ÏÐ­Òé£¬Î»ÓÚ OSI Ä£ÐÍÖÐµÄÓ¦ÓÃ²ã£¬Ëü¿ÉÔÚ²»Í¬µÄÆû³µ×ÜÏß£¨ÀýÈçCAN¡¢LIN¡¢Flexray¡¢Internet¡¢K-line£©ÉÏÊµÏÖ¡£UDSÐ­ÒéµÄÓ¦ÓÃ²ã¶¨ÒåÊÇ `ISO 14229-1`£¬Ä¿Ç°´ó²¿·ÖÆû³µ³§ÉÌ¾ù²ÉÓÃ UDS on CAN µÄÕï¶ÏÐ­Òé¡£
+UDSï¼ˆUnified Diagnostic Servicesï¼Œç»Ÿä¸€è¯Šæ–­æœåŠ¡ï¼‰è¯Šæ–­åè®®æ˜¯ `ISO 15765` å’Œ `ISO 14229` å®šä¹‰çš„ä¸€ç§æ±½è½¦é€šç”¨è¯Šæ–­åè®®ï¼Œä½äºŽ OSI æ¨¡åž‹ä¸­çš„åº”ç”¨å±‚ï¼Œå®ƒå¯åœ¨ä¸åŒçš„æ±½è½¦æ€»çº¿ï¼ˆä¾‹å¦‚CANã€LINã€Flexrayã€Internetã€K-lineï¼‰ä¸Šå®žçŽ°ã€‚UDSåè®®çš„åº”ç”¨å±‚å®šä¹‰æ˜¯ `ISO 14229-1`ï¼Œç›®å‰å¤§éƒ¨åˆ†æ±½è½¦åŽ‚å•†å‡é‡‡ç”¨ UDS on CAN çš„è¯Šæ–­åè®®ã€‚
 
 <div align="center">
 
@@ -60,61 +62,61 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 <br/>
 </div>
 
-### :triangular_flag_on_post: UDS ÊõÓï¸ÅÒª
+### :triangular_flag_on_post: UDS æœ¯è¯­æ¦‚è¦
 
-| ËõÐ´              | Ó¢ÎÄÈ«³Æ                                                          | ÖÐÎÄº¬Òå                                                                                                |
+| ç¼©å†™              | è‹±æ–‡å…¨ç§°                                                          | ä¸­æ–‡å«ä¹‰                                                                                                |
 |-------------------|-------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| UDS               | Unified Diagnostic Services                                       | Í³Ò»Õï¶Ï·þÎñ                                                                                            |
-| OBD               | On-Board Diagnostics                                              | ³µÔØÕï¶ÏÏµÍ³                                                                                            |
-| WWH-OBD           | World-wide Harmonized OBD                                         | È«ÇòÍ³Ò»µÄÖØÐÍ·¢¶¯»úµÄ³µÔØÕï¶ÏÏµÍ³                                                                      |
-| DoCAN             | Diagnostic Communication Over CAN                                 | »ùÓÚCANµÄÕï¶ÏÍ¨ÐÅ                                                                                       |
-| OSI               | Open System Interconnection                                       | ¿ª·ÅÊ½ÏµÍ³»¥Áª                                                                                          |
-| ECU               | Electronic Control Unit                                           | µç×Ó¿ØÖÆµ¥Ôª                                                                                            |
-| SID               | Service ID                                                        | Õï¶Ï·þÎñ±êÊ¶·û                                                                                          |
-| Sub-Function      | Sub-Function                                                      | ×Ó·þÎñ£¬Õï¶Ï·þÎñ°üº¬µÄ×Ó¹¦ÄÜ                                                                            |
-| DTC               | Diagnostic Trouble Code                                           | Õï¶Ï¹ÊÕÏÂë                                                                                              |
-| NRC               | Negative Response Code                                            | ¸ºÏìÓ¦Âë                                                                                                |
-| FTB               | Fault Type Byte                                                   | ¹ÊÕÏÀàÐÍ×Ö½Ú                                                                                            |
-| PCI               | Protocol Control Information                                      | Ð­Òé¿ØÖÆÐÅÏ¢                                                                                            |
-| SF                | Single Frame                                                      | µ¥Ö¡                                                                                                    |
-| FF                | First Frame                                                       | Ê×Ö¡                                                                                                    |
-| CF                | Consecutive Frame                                                 | Á¬ÐøÖ¡                                                                                                  |
-| FC                | Flow Control Frame                                                | Á÷¿ØÖ¡                                                                                                  |
-| DL                | Data Length                                                       | Êý¾Ý³¤¶È                                                                                                |
-| FF_DL             | First Frame Data Length                                           | Ê×Ö¡Êý¾Ý³¤¶È                                                                                            |
-| SN                | Sequence Number                                                   | ÐòºÅ                                                                                                    |
-| SPN               | Suspect Parameter Number                                          | ¿ÉÒÉ²ÎÊýÐòºÅ                                                                                            |
-| FS                | Flow Status                                                       | Á÷¿ØÖÆ×´Ì¬                                                                                              |
-| BS                | Block Size                                                        | ¿éµÄ´óÐ¡                                                                                                |
-| STmin             | Separation Time Minimum                                           | ×îÐ¡¼ä¸ôÊ±¼ä                                                                                            |
-| CTS               | Continue to Send                                                  | ¼ÌÐø·¢ËÍ                                                                                                |
-| FMI               | Failure Mode Indicator                                            | Ê§Ð§Ä£Ê½Ö¸Ê¾                                                                                            |
-| Mtype             | Message Type                                                      | ÐÅÏ¢ÀàÐÍ                                                                                                |
-| Indication        | Indication Service Primitive                                      | Ö¸Ê¾·þÎñÔ­Óï                                                                                            |
-| Confirm           | Confirm Service Primitive                                         | È·ÈÏ·þÎñÔ­Óï                                                                                            |
-| N_AE              | Network Address Extension                                         | ÍøÂç²ãÀ©Õ¹µØÖ·                                                                                          |
-| N_AI              | Network Address Information                                       | ÍøÂç²ãµØÖ·ÐÅÏ¢                                                                                          |
-| N_Ar              | Network Layer Timing Parameter Ar                                 | ÍøÂç²ã¶¨Ê±²ÎÊý Ar                                                                                       |
-| N_As              | Network Layer Timing Parameter As                                 | ÍøÂç²ã¶¨Ê±²ÎÊý As                                                                                       |
-| N_Br              | Network Layer Timing Parameter Br                                 | ÍøÂç²ã¶¨Ê±²ÎÊý Br                                                                                       |
-| N_Bs              | Network Layer Timing Parameter Bs                                 | ÍøÂç²ã¶¨Ê±²ÎÊý Bs                                                                                       |
-| N_Cr              | Network Layer Timing Parameter Cr                                 | ÍøÂç²ã¶¨Ê±²ÎÊý Cr                                                                                       |
-| N_Cs              | Network Layer Timing Parameter Cs                                 | ÍøÂç²ã¶¨Ê±²ÎÊý Cs                                                                                       |
-| N_ChangeParameter | Network Layer Service Name                                        | ÍøÂç²ãµÄ·þÎñÃû³Æ                                                                                        |
-| N_Data            | Network Data                                                      | ÍøÂç²ãÊý¾Ý                                                                                              |
-| N_PCI             | Network Protocol Control Information                              | ÍøÂç²ãÐ­Òé¿ØÖÆÐÅÏ¢                                                                                      |
-| N_PCItype         | Network Protocol Control Information Type                         | ÍøÂç²ãÐ­Òé¿ØÖÆÐÅÏ¢ÀàÐÍ                                                                                  |
-| N_PDU             | Network Protocol Data Unit                                        | ÍøÂç²ãÐ­ÒéÊý¾Ýµ¥Ôª                                                                                      |
-| N_SDU             | Network Service Data Unit                                         | ÍøÂç²ã·þÎñÊý¾Ýµ¥Ôª                                                                                      |
-| N_SA              | Network Source Address                                            | ÍøÂç²ãÔ´µØÖ· Ô´µØÖ· -> Õï¶ÏÒÇ                                                                           |
-| N_TA              | Network Target Address                                            | ÍøÂç²ãÄ¿±êµØÖ· Ä¿±êµØÖ· -> ECU                                                                          |
-| N_TAtype          | Network Target Address Type                                       | ÍøÂç²ãÄ¿±êµØÖ·ÀàÐÍ                                                                                      |
-| N_USData          | Network Layer Unacknowledged Segmented Data Transfer Service Name | ÍøÂç²ãÎ´È·ÈÏ·Ö¶ÎÊý¾Ý´«Êä·þÎñÃû³Æ                                                                        |
-| NW                | Network                                                           | ÍøÂç²ã                                                                                                  |
-| NWL               | Network Layer                                                     | ÍøÂç²ã                                                                                                  |
-| UDS_PHYSREQ_CANID | Physical Address                                                  | ÎïÀíÑ°Ö· - µ¥²¥Í¨Ñ¶£¬Í¬Ò»×ÜÏßÉÏÃ¿¸ö ECU µÄÎïÀíÑ°Ö· CAN ID »¥²»ÏàÍ¬£¬Ö»ÓÐÒ»¸ö ECU »á½ÓÊÕ´¦Àí             |
-| UDS_FUNCREQ_CANID | Functional Address                                                | ¹¦ÄÜÑ°Ö· - ¶à²¥Í¨Ñ¶£¬Í¬Ò»×ÜÏßÉÏËùÓÐ ECU µÄ¹¦ÄÜÑ°Ö· CAN ID ¶¼ÏàÍ¬£¬ËùÓÐ¾ß±¸Õï¶Ï¹¦ÄÜµÄ ECU ¶¼»á½ÓÊÕ²¢´¦Àí |
-| UDS_RESPOND_CANID | Response Address                                                  | ÏìÓ¦µØÖ· - ÓÉ ECU ·¢ËÍ£¬Õï¶ÏÒÇ½ÓÊÕ£¬¸÷ ECU »¥²»ÏàÍ¬                                                     |
+| UDS               | Unified Diagnostic Services                                       | ç»Ÿä¸€è¯Šæ–­æœåŠ¡                                                                                            |
+| OBD               | On-Board Diagnostics                                              | è½¦è½½è¯Šæ–­ç³»ç»Ÿ                                                                                            |
+| WWH-OBD           | World-wide Harmonized OBD                                         | å…¨çƒç»Ÿä¸€çš„é‡åž‹å‘åŠ¨æœºçš„è½¦è½½è¯Šæ–­ç³»ç»Ÿ                                                                      |
+| DoCAN             | Diagnostic Communication Over CAN                                 | åŸºäºŽCANçš„è¯Šæ–­é€šä¿¡                                                                                       |
+| OSI               | Open System Interconnection                                       | å¼€æ”¾å¼ç³»ç»Ÿäº’è”                                                                                          |
+| ECU               | Electronic Control Unit                                           | ç”µå­æŽ§åˆ¶å•å…ƒ                                                                                            |
+| SID               | Service ID                                                        | è¯Šæ–­æœåŠ¡æ ‡è¯†ç¬¦                                                                                          |
+| Sub-Function      | Sub-Function                                                      | å­æœåŠ¡ï¼Œè¯Šæ–­æœåŠ¡åŒ…å«çš„å­åŠŸèƒ½                                                                            |
+| DTC               | Diagnostic Trouble Code                                           | è¯Šæ–­æ•…éšœç                                                                                               |
+| NRC               | Negative Response Code                                            | è´Ÿå“åº”ç                                                                                                 |
+| FTB               | Fault Type Byte                                                   | æ•…éšœç±»åž‹å­—èŠ‚                                                                                            |
+| PCI               | Protocol Control Information                                      | åè®®æŽ§åˆ¶ä¿¡æ¯                                                                                            |
+| SF                | Single Frame                                                      | å•å¸§                                                                                                    |
+| FF                | First Frame                                                       | é¦–å¸§                                                                                                    |
+| CF                | Consecutive Frame                                                 | è¿žç»­å¸§                                                                                                  |
+| FC                | Flow Control Frame                                                | æµæŽ§å¸§                                                                                                  |
+| DL                | Data Length                                                       | æ•°æ®é•¿åº¦                                                                                                |
+| FF_DL             | First Frame Data Length                                           | é¦–å¸§æ•°æ®é•¿åº¦                                                                                            |
+| SN                | Sequence Number                                                   | åºå·                                                                                                    |
+| SPN               | Suspect Parameter Number                                          | å¯ç–‘å‚æ•°åºå·                                                                                            |
+| FS                | Flow Status                                                       | æµæŽ§åˆ¶çŠ¶æ€                                                                                              |
+| BS                | Block Size                                                        | å—çš„å¤§å°                                                                                                |
+| STmin             | Separation Time Minimum                                           | æœ€å°é—´éš”æ—¶é—´                                                                                            |
+| CTS               | Continue to Send                                                  | ç»§ç»­å‘é€                                                                                                |
+| FMI               | Failure Mode Indicator                                            | å¤±æ•ˆæ¨¡å¼æŒ‡ç¤º                                                                                            |
+| Mtype             | Message Type                                                      | ä¿¡æ¯ç±»åž‹                                                                                                |
+| Indication        | Indication Service Primitive                                      | æŒ‡ç¤ºæœåŠ¡åŽŸè¯­                                                                                            |
+| Confirm           | Confirm Service Primitive                                         | ç¡®è®¤æœåŠ¡åŽŸè¯­                                                                                            |
+| N_AE              | Network Address Extension                                         | ç½‘ç»œå±‚æ‰©å±•åœ°å€                                                                                          |
+| N_AI              | Network Address Information                                       | ç½‘ç»œå±‚åœ°å€ä¿¡æ¯                                                                                          |
+| N_Ar              | Network Layer Timing Parameter Ar                                 | ç½‘ç»œå±‚å®šæ—¶å‚æ•° Ar                                                                                       |
+| N_As              | Network Layer Timing Parameter As                                 | ç½‘ç»œå±‚å®šæ—¶å‚æ•° As                                                                                       |
+| N_Br              | Network Layer Timing Parameter Br                                 | ç½‘ç»œå±‚å®šæ—¶å‚æ•° Br                                                                                       |
+| N_Bs              | Network Layer Timing Parameter Bs                                 | ç½‘ç»œå±‚å®šæ—¶å‚æ•° Bs                                                                                       |
+| N_Cr              | Network Layer Timing Parameter Cr                                 | ç½‘ç»œå±‚å®šæ—¶å‚æ•° Cr                                                                                       |
+| N_Cs              | Network Layer Timing Parameter Cs                                 | ç½‘ç»œå±‚å®šæ—¶å‚æ•° Cs                                                                                       |
+| N_ChangeParameter | Network Layer Service Name                                        | ç½‘ç»œå±‚çš„æœåŠ¡åç§°                                                                                        |
+| N_Data            | Network Data                                                      | ç½‘ç»œå±‚æ•°æ®                                                                                              |
+| N_PCI             | Network Protocol Control Information                              | ç½‘ç»œå±‚åè®®æŽ§åˆ¶ä¿¡æ¯                                                                                      |
+| N_PCItype         | Network Protocol Control Information Type                         | ç½‘ç»œå±‚åè®®æŽ§åˆ¶ä¿¡æ¯ç±»åž‹                                                                                  |
+| N_PDU             | Network Protocol Data Unit                                        | ç½‘ç»œå±‚åè®®æ•°æ®å•å…ƒ                                                                                      |
+| N_SDU             | Network Service Data Unit                                         | ç½‘ç»œå±‚æœåŠ¡æ•°æ®å•å…ƒ                                                                                      |
+| N_SA              | Network Source Address                                            | ç½‘ç»œå±‚æºåœ°å€ æºåœ°å€ -> è¯Šæ–­ä»ª                                                                           |
+| N_TA              | Network Target Address                                            | ç½‘ç»œå±‚ç›®æ ‡åœ°å€ ç›®æ ‡åœ°å€ -> ECU                                                                          |
+| N_TAtype          | Network Target Address Type                                       | ç½‘ç»œå±‚ç›®æ ‡åœ°å€ç±»åž‹                                                                                      |
+| N_USData          | Network Layer Unacknowledged Segmented Data Transfer Service Name | ç½‘ç»œå±‚æœªç¡®è®¤åˆ†æ®µæ•°æ®ä¼ è¾“æœåŠ¡åç§°                                                                        |
+| NW                | Network                                                           | ç½‘ç»œå±‚                                                                                                  |
+| NWL               | Network Layer                                                     | ç½‘ç»œå±‚                                                                                                  |
+| UDS_PHYSREQ_CANID | Physical Address                                                  | ç‰©ç†å¯»å€ - å•æ’­é€šè®¯ï¼ŒåŒä¸€æ€»çº¿ä¸Šæ¯ä¸ª ECU çš„ç‰©ç†å¯»å€ CAN ID äº’ä¸ç›¸åŒï¼Œåªæœ‰ä¸€ä¸ª ECU ä¼šæŽ¥æ”¶å¤„ç†             |
+| UDS_FUNCREQ_CANID | Functional Address                                                | åŠŸèƒ½å¯»å€ - å¤šæ’­é€šè®¯ï¼ŒåŒä¸€æ€»çº¿ä¸Šæ‰€æœ‰ ECU çš„åŠŸèƒ½å¯»å€ CAN ID éƒ½ç›¸åŒï¼Œæ‰€æœ‰å…·å¤‡è¯Šæ–­åŠŸèƒ½çš„ ECU éƒ½ä¼šæŽ¥æ”¶å¹¶å¤„ç† |
+| UDS_RESPOND_CANID | Response Address                                                  | å“åº”åœ°å€ - ç”± ECU å‘é€ï¼Œè¯Šæ–­ä»ªæŽ¥æ”¶ï¼Œå„ ECU äº’ä¸ç›¸åŒ                                                     |
 
 <br/>
 
@@ -122,21 +124,21 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 
 <br/>
 
-### :earth_asia: UDS ÍøÂç²ã¸ÅÊö
+### :earth_asia: UDS ç½‘ç»œå±‚æ¦‚è¿°
 
-ÍøÂç²ã×îÖ÷ÒªµÄÄ¿µÄ¾ÍÊÇ **°ÑÊý¾Ý×ª»»³ÉÄÜÊÊÓ¦ CAN ×ÜÏß¹æ·¶µÄµ¥Ò»Êý¾ÝÖ¡£¬´Ó¶ø½øÐÐ´«Êä¡£** Èç¹û½«Òª´«ÊäµÄ±¨ÎÄ³¤¶È³¬¹ýÁË CAN Êý¾ÝÖ¡µÄ³¤¶È£¬ÔòÐèÒª½«±¨ÎÄÐÅÏ¢½øÐÐ²ð·Öºó´«Êä£¬Ã¿´ÎÖÁ¶à¿ÉÒÔ´«Êä4095¸ö×Ö½Ú³¤¶ÈµÄ±¨ÎÄ¡£
+ç½‘ç»œå±‚æœ€ä¸»è¦çš„ç›®çš„å°±æ˜¯ **æŠŠæ•°æ®è½¬æ¢æˆèƒ½é€‚åº” CAN æ€»çº¿è§„èŒƒçš„å•ä¸€æ•°æ®å¸§ï¼Œä»Žè€Œè¿›è¡Œä¼ è¾“ã€‚** å¦‚æžœå°†è¦ä¼ è¾“çš„æŠ¥æ–‡é•¿åº¦è¶…è¿‡äº† CAN æ•°æ®å¸§çš„é•¿åº¦ï¼Œåˆ™éœ€è¦å°†æŠ¥æ–‡ä¿¡æ¯è¿›è¡Œæ‹†åˆ†åŽä¼ è¾“ï¼Œæ¯æ¬¡è‡³å¤šå¯ä»¥ä¼ è¾“4095ä¸ªå­—èŠ‚é•¿åº¦çš„æŠ¥æ–‡ã€‚
 
-ËùÓÐµÄÍøÂç²ã·þÎñ¶¼¾ßÓÐÏàÍ¬µÄÍ¨ÓÃ½á¹¹¡£ÎªÁË¶¨ÒåÕâÖÖ·þÎñ£¬ÐèÒª¶¨ÒåÈýÖÖÀàÐÍµÄ·þÎñÔ­Óï£º
+æ‰€æœ‰çš„ç½‘ç»œå±‚æœåŠ¡éƒ½å…·æœ‰ç›¸åŒçš„é€šç”¨ç»“æž„ã€‚ä¸ºäº†å®šä¹‰è¿™ç§æœåŠ¡ï¼Œéœ€è¦å®šä¹‰ä¸‰ç§ç±»åž‹çš„æœåŠ¡åŽŸè¯­ï¼š
 
-- ÇëÇó·þÎñ£¨**Request**£©£ºÓÃÓÚ**ÏòÍøÂç²ã´«µÝ¿ØÖÆ±¨ÎÄÐÅÏ¢¼°Òª·¢ËÍµÄÊý¾Ý**£¬Ó¦ÓÃÓÚ¸ü¸ß²ã»òÓ¦ÓÃ²ã¡£ÈçÕï¶ÏÒÇÏò ECU ·¢³öÊý¾Ý¡£
-- Ö¸Ê¾·þÎñ£¨**Indication**£©£ºÓÃÓÚ**Ïò¸ü¸ß²ã»òÓ¦ÓÃ²ã´«µÝ×´Ì¬ÐÅÏ¢¼°½ÓÊÕµ½µÄÊý¾Ý**£¬Ó¦ÓÃÓÚÍøÂç²ã¡£Èç ECU ÊÕµ½ÁËÕï¶ÏÒÇµÄÊý¾Ý£¬´«ÖÁÓ¦ÓÃ²ã¡£
-- È·ÈÏ·þÎñ£¨**Confirm**£©£º±»ÍøÂç²ãÊ¹ÓÃ£¬ÓÃÓÚÏò¸ü¸ß²ã»òÓ¦ÓÃ²ã´«µÝ×´Ì¬ÐÅÏ¢¡£ÈçÕï¶ÏÒÇÊÕµ½ÁË ECU ·½ÃæµÄÊý¾Ý¡£
+- è¯·æ±‚æœåŠ¡ï¼ˆ**Request**ï¼‰ï¼šç”¨äºŽ**å‘ç½‘ç»œå±‚ä¼ é€’æŽ§åˆ¶æŠ¥æ–‡ä¿¡æ¯åŠè¦å‘é€çš„æ•°æ®**ï¼Œåº”ç”¨äºŽæ›´é«˜å±‚æˆ–åº”ç”¨å±‚ã€‚å¦‚è¯Šæ–­ä»ªå‘ ECU å‘å‡ºæ•°æ®ã€‚
+- æŒ‡ç¤ºæœåŠ¡ï¼ˆ**Indication**ï¼‰ï¼šç”¨äºŽ**å‘æ›´é«˜å±‚æˆ–åº”ç”¨å±‚ä¼ é€’çŠ¶æ€ä¿¡æ¯åŠæŽ¥æ”¶åˆ°çš„æ•°æ®**ï¼Œåº”ç”¨äºŽç½‘ç»œå±‚ã€‚å¦‚ ECU æ”¶åˆ°äº†è¯Šæ–­ä»ªçš„æ•°æ®ï¼Œä¼ è‡³åº”ç”¨å±‚ã€‚
+- ç¡®è®¤æœåŠ¡ï¼ˆ**Confirm**ï¼‰ï¼šè¢«ç½‘ç»œå±‚ä½¿ç”¨ï¼Œç”¨äºŽå‘æ›´é«˜å±‚æˆ–åº”ç”¨å±‚ä¼ é€’çŠ¶æ€ä¿¡æ¯ã€‚å¦‚è¯Šæ–­ä»ªæ”¶åˆ°äº† ECU æ–¹é¢çš„æ•°æ®ã€‚
 
-¾ßÌåËµÀ´£¬Indication Ç°¶ËÓ¦¸ÃÖ´ÐÐµÄÊÇµ×²ã´«ÈëÊý¾ÝµÄ´¦Àíº¯Êý£¬¼´¶ÁÈ¡ PDU ÐÅÏ¢£¬ÕâÒ»Ö¡¾ßÌåÊÇ SF¡¢FC¡¢CF »¹ÊÇ FF¡£ÈôÂú×ãÌõ¼þ£¬¼ÌÐøÏòÉÏ£¬¼´Ó¦ÓÃ²ã´«µÝ¡£
+å…·ä½“è¯´æ¥ï¼ŒIndication å‰ç«¯åº”è¯¥æ‰§è¡Œçš„æ˜¯åº•å±‚ä¼ å…¥æ•°æ®çš„å¤„ç†å‡½æ•°ï¼Œå³è¯»å– PDU ä¿¡æ¯ï¼Œè¿™ä¸€å¸§å…·ä½“æ˜¯ SFã€FCã€CF è¿˜æ˜¯ FFã€‚è‹¥æ»¡è¶³æ¡ä»¶ï¼Œç»§ç»­å‘ä¸Šï¼Œå³åº”ç”¨å±‚ä¼ é€’ã€‚
 
-¾ßÌåËµÀ´£¬**Confirm ºÍ Indication ºÜÏñµÄÊÇ¶¼ÊÇ´ÓÍøÂç²ãÏòÓ¦ÓÃ²ã´«µÝÐÅÏ¢£¬ÓÐºÎÇø±ðÄØ£¿**
+å…·ä½“è¯´æ¥ï¼Œ**Confirm å’Œ Indication å¾ˆåƒçš„æ˜¯éƒ½æ˜¯ä»Žç½‘ç»œå±‚å‘åº”ç”¨å±‚ä¼ é€’ä¿¡æ¯ï¼Œæœ‰ä½•åŒºåˆ«å‘¢ï¼Ÿ**
 
-ÔÚ´úÂëµÄ´¦ÀíÖÐ£¬Confirm µÄÇ°¶ËÓ¦Ïòµ×²ãÍâ·¢ Tx Êý¾Ý»ò³¬Ê±´¦Àíº¯Êý£¬·´À¡µÄÐÅÏ¢²»ÐèÒª°üº¬Êý¾Ý¡£¶ø Indication ´«µÝµÄÐÅÏ¢Ôò·ÖÎªÁ½ÖÖ£¬Ò»ÖÖ°üº¬ÕæÊµÊý¾Ý£¬ÁíÒ»ÖÖ²»°üº¬¡£
+åœ¨ä»£ç çš„å¤„ç†ä¸­ï¼ŒConfirm çš„å‰ç«¯åº”å‘åº•å±‚å¤–å‘ Tx æ•°æ®æˆ–è¶…æ—¶å¤„ç†å‡½æ•°ï¼Œåé¦ˆçš„ä¿¡æ¯ä¸éœ€è¦åŒ…å«æ•°æ®ã€‚è€Œ Indication ä¼ é€’çš„ä¿¡æ¯åˆ™åˆ†ä¸ºä¸¤ç§ï¼Œä¸€ç§åŒ…å«çœŸå®žæ•°æ®ï¼Œå¦ä¸€ç§ä¸åŒ…å«ã€‚
 
 <br/>
 
@@ -144,17 +146,17 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 
 <br/>
 
-### :earth_asia: UDS ÍøÂç²ãÐ­ÒéÊý¾Ýµ¥Ôª N_PDU
+### :earth_asia: UDS ç½‘ç»œå±‚åè®®æ•°æ®å•å…ƒ N_PDU
 
-ÍøÂç²ãÐ­ÒéÊý¾Ýµ¥Ôª£¨N_PDU£¬Network Protocol Data Unit£©°üº¬ `N_AI£¬N_PCI£¬N_Data`¡£¼´µØÖ·ÐÅÏ¢£¬Ð­Òé¿ØÖÆÐÅÏ¢ºÍÊý¾Ý¡£
+ç½‘ç»œå±‚åè®®æ•°æ®å•å…ƒï¼ˆN_PDUï¼ŒNetwork Protocol Data Unitï¼‰åŒ…å« `N_AIï¼ŒN_PCIï¼ŒN_Data`ã€‚å³åœ°å€ä¿¡æ¯ï¼Œåè®®æŽ§åˆ¶ä¿¡æ¯å’Œæ•°æ®ã€‚
 
-| ²ÎÊýÃû³Æ     | ËõÐ´   | ÃèÊö                               |
+| å‚æ•°åç§°     | ç¼©å†™   | æè¿°                               |
 |--------------|--------|------------------------------------|
-| Ñ°Ö·ÐÅÏ¢     | N_AI   | Òþº¬Ô´µØÖ·¡¢Ä¿µÄµØÖ·ºÍÑ°Ö··½Ê½ÐÅÏ¢ |
-| Ð­Òé¿ØÖÆÐÅÏ¢ | N_PCI  | ±êÊ¶ÍøÂç²ãÖ¡ÀàÐÍ                   |
-| Êý¾Ý         | N_Data | °üº¬Ó¦ÓÃ²ãÐ­Òé¿ØÖÆÐÅÏ¢ºÍÊý¾Ý       |
+| å¯»å€ä¿¡æ¯     | N_AI   | éšå«æºåœ°å€ã€ç›®çš„åœ°å€å’Œå¯»å€æ–¹å¼ä¿¡æ¯ |
+| åè®®æŽ§åˆ¶ä¿¡æ¯ | N_PCI  | æ ‡è¯†ç½‘ç»œå±‚å¸§ç±»åž‹                   |
+| æ•°æ®         | N_Data | åŒ…å«åº”ç”¨å±‚åè®®æŽ§åˆ¶ä¿¡æ¯å’Œæ•°æ®       |
 
-**ÍøÂç²ãÐ­ÒéÊý¾Ýµ¥Ôª£¨N_PDU£©ÓÐËÄÖÖÀàÐÍ**£¬¼´µ¥Ö¡£¨SF£©¡¢Ê×Ö¡£¨FF£©¡¢Á¬ÐøÖ¡£¨CF£©¡¢Á÷¿ØÖÆÖ¡£¨FC£©£¬ÓÃÓÚ½¨Á¢¶ÔµÈÊµÌå¼äµÄÍ¨ÐÅ¡£
+**ç½‘ç»œå±‚åè®®æ•°æ®å•å…ƒï¼ˆN_PDUï¼‰æœ‰å››ç§ç±»åž‹**ï¼Œå³å•å¸§ï¼ˆSFï¼‰ã€é¦–å¸§ï¼ˆFFï¼‰ã€è¿žç»­å¸§ï¼ˆCFï¼‰ã€æµæŽ§åˆ¶å¸§ï¼ˆFCï¼‰ï¼Œç”¨äºŽå»ºç«‹å¯¹ç­‰å®žä½“é—´çš„é€šä¿¡ã€‚
 
 <br/>
 
@@ -162,17 +164,17 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 
 <br/>
 
-### :earth_asia: UDS ÍøÂç²ãÐ­Òé¿ØÖÆÐÅÏ¢ N_PCI
+### :earth_asia: UDS ç½‘ç»œå±‚åè®®æŽ§åˆ¶ä¿¡æ¯ N_PCI
 
-> :warning: ×¢Òâ
->> ±¾ÍøÂç´«Êä²ãµÄ±¨ÎÄ¸ñÊ½Îª£º`ISO 15765-2 2004`
->>> ¶øÔÚ `ISO 15765-2 2016` ÖÐ£¬µ¥Ö¡ SF ÓÃµÚ 2 ×Ö½Ú´æ·Å³¤¶È DL£¬Ê×Ö¡ FF ÓÃµÚ 3 ~ 6 ×Ö½Ú´æ·Å³¤¶È DL£¬¹Ê±¾Ð­ÒéÕ»ÉÐ²»Ö§³Ö `ISO 15765-2 2016`
+> :warning: æ³¨æ„
+>> æœ¬ç½‘ç»œä¼ è¾“å±‚çš„æŠ¥æ–‡æ ¼å¼ä¸ºï¼š`ISO 15765-2 2004`
+>>> è€Œåœ¨ `ISO 15765-2 2016` ä¸­ï¼Œå•å¸§ SF ç”¨ç¬¬ 2 å­—èŠ‚å­˜æ”¾é•¿åº¦ DLï¼Œé¦–å¸§ FF ç”¨ç¬¬ 3 ~ 6 å­—èŠ‚å­˜æ”¾é•¿åº¦ DLï¼Œæ•…æœ¬åè®®æ ˆå°šä¸æ”¯æŒ `ISO 15765-2 2016`
 
-`ISO 15765-2` ¶¨ÒåÁËÒ»ÖÖ CAN Ö¡·Ö¸îµÄÍøÂç´«Êä²ãÍ¨ÐÅÐ­Òé£¬¸ÃÐ­Òé¶Ô CAN Ö¡µÄ `Byte0 - Byte2` ½øÐÐÁË¶¨Òå£¬ÓÉ´Ë²úÉúÁË`µ¥Ö¡£¨SF£©`¡¢`Ê×Ö¡£¨FF£©`¡¢`Á¬ÐøÖ¡£¨CF£©`¡¢`Á÷¿ØÖ¡£¨FC£©`¡£µ±·¢ËÍ¶ËÐèÒª·¢ËÍÊý¾ÝÊ±£¬ÍøÂç´«Êä²ã»á×öÈçÏÂ´¦Àí£¬Èç¹ûÊý¾ÝÄÜÓÃÒ»Ö¡ CAN ±¨ÎÄ´«ÊäÍêÔò·â×°Îªµ¥Ö¡´«Êä£¬·ñÔò¾ÍÐèÒªÉæ¼°µ½Ê×Ö¡¡¢Á¬ÐøÖ¡ºÍÁ÷¿ØÖ¡¡£
+`ISO 15765-2` å®šä¹‰äº†ä¸€ç§ CAN å¸§åˆ†å‰²çš„ç½‘ç»œä¼ è¾“å±‚é€šä¿¡åè®®ï¼Œè¯¥åè®®å¯¹ CAN å¸§çš„ `Byte0 - Byte2` è¿›è¡Œäº†å®šä¹‰ï¼Œç”±æ­¤äº§ç”Ÿäº†`å•å¸§ï¼ˆSFï¼‰`ã€`é¦–å¸§ï¼ˆFFï¼‰`ã€`è¿žç»­å¸§ï¼ˆCFï¼‰`ã€`æµæŽ§å¸§ï¼ˆFCï¼‰`ã€‚å½“å‘é€ç«¯éœ€è¦å‘é€æ•°æ®æ—¶ï¼Œç½‘ç»œä¼ è¾“å±‚ä¼šåšå¦‚ä¸‹å¤„ç†ï¼Œå¦‚æžœæ•°æ®èƒ½ç”¨ä¸€å¸§ CAN æŠ¥æ–‡ä¼ è¾“å®Œåˆ™å°è£…ä¸ºå•å¸§ä¼ è¾“ï¼Œå¦åˆ™å°±éœ€è¦æ¶‰åŠåˆ°é¦–å¸§ã€è¿žç»­å¸§å’ŒæµæŽ§å¸§ã€‚
 
-**µ¥Ö¡**£ºÓÃÓÚ·¢ËÍÐ¡ÓÚµÈÓÚ 7 ×Ö½ÚµÄÊý¾Ý£¬ÈçÏÂÍ¼ËùÊ¾£¬Byte0 ¸ß 4bit Îª 0 µÄÊÇµ¥Ö¡£¬Byte0 µÍ 4bit Îª±¨ÎÄÓÐÐ§×Ö½ÚÊý¡£Byte1-Byte7 ÎªÊý¾Ý£¨°üÀ¨ÎÞÐ§µÄÌî³ä×Ö½Ú£¬Ìî³äÊý¾Ý¿ÉÎªÈÎÒâÖµ£¬Í¨³£Îª `AA` »ò `55`£©¡£±ÈÈçÓ¦ÓÃ²ãÐèÒª·¢ËÍÊý¾Ý `[10 03]`£¬¾­¹ýÍøÂç´«Êä²ã·â×°£¬×îÖÕ·¢ËÍÖÁ×ÜÏßµÄÊµ¼ÊÊý¾ÝÎª `[02 10 03 AA AA AA AA AA]`
+**å•å¸§**ï¼šç”¨äºŽå‘é€å°äºŽç­‰äºŽ 7 å­—èŠ‚çš„æ•°æ®ï¼Œå¦‚ä¸‹å›¾æ‰€ç¤ºï¼ŒByte0 é«˜ 4bit ä¸º 0 çš„æ˜¯å•å¸§ï¼ŒByte0 ä½Ž 4bit ä¸ºæŠ¥æ–‡æœ‰æ•ˆå­—èŠ‚æ•°ã€‚Byte1-Byte7 ä¸ºæ•°æ®ï¼ˆåŒ…æ‹¬æ— æ•ˆçš„å¡«å……å­—èŠ‚ï¼Œå¡«å……æ•°æ®å¯ä¸ºä»»æ„å€¼ï¼Œé€šå¸¸ä¸º `AA` æˆ– `55`ï¼‰ã€‚æ¯”å¦‚åº”ç”¨å±‚éœ€è¦å‘é€æ•°æ® `[10 03]`ï¼Œç»è¿‡ç½‘ç»œä¼ è¾“å±‚å°è£…ï¼Œæœ€ç»ˆå‘é€è‡³æ€»çº¿çš„å®žé™…æ•°æ®ä¸º `[02 10 03 AA AA AA AA AA]`
 
-**¶àÖ¡**£ºµ±ÐèÒª·¢ËÍµÄÊý¾Ý×Ö½ÚÊý´óÓÚ 7 ×Ö½Ú£¬ÐèÒªÓÃµ½Ê×Ö¡¡¢Á¬ÐøÖ¡ºÍÁ÷¿ØÖ¡µÄ¶àÖ¡´«Êä·½Ê½
+**å¤šå¸§**ï¼šå½“éœ€è¦å‘é€çš„æ•°æ®å­—èŠ‚æ•°å¤§äºŽ 7 å­—èŠ‚ï¼Œéœ€è¦ç”¨åˆ°é¦–å¸§ã€è¿žç»­å¸§å’ŒæµæŽ§å¸§çš„å¤šå¸§ä¼ è¾“æ–¹å¼
 
 <div align="center">
 
@@ -180,18 +182,18 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 
 </div>
 
-½ÓÊÕÕßÍ¨¹ý `Flow Control Frame£¨Á÷¿ØÖ¡£©`µÄ»úÖÆ£¬¸æÖª·¢ËÍÕß×Ô¼ºÓÐ¶à´óµÄ½ÓÊÕÄÜÁ¦¡££¨ÆäÊµ¾ÍÊÇÃ¿Á½¸ö FC Ö®¼äÔÊÐíÁ¬Ðø·¢ËÍ¶àÉÙ¸ö CF£¬Ã¿Á½¸ö CF Ö®¼äµÄÊ±¼ä²»ÄÜ¹ý¿ì£©
+æŽ¥æ”¶è€…é€šè¿‡ `Flow Control Frameï¼ˆæµæŽ§å¸§ï¼‰`çš„æœºåˆ¶ï¼Œå‘ŠçŸ¥å‘é€è€…è‡ªå·±æœ‰å¤šå¤§çš„æŽ¥æ”¶èƒ½åŠ›ã€‚ï¼ˆå…¶å®žå°±æ˜¯æ¯ä¸¤ä¸ª FC ä¹‹é—´å…è®¸è¿žç»­å‘é€å¤šå°‘ä¸ª CFï¼Œæ¯ä¸¤ä¸ª CF ä¹‹é—´çš„æ—¶é—´ä¸èƒ½è¿‡å¿«ï¼‰
 
-ÆäÖÐ£º
+å…¶ä¸­ï¼š
 
-- `DL`£ºÓÐÐ§Êý¾ÝµÄ³¤¶È£¬²»°üÀ¨ PCIbyte£¬¾ßÌå¶¨Òå¼û `network_layer_private.h`
-  - UDS_SF_DL_MAX = 7 £¨µ¥Ö¡ DL È¡Öµ×î´ó 7 ×Ö½Ú£©
-  - UDS_FF_DL_MIN = 8 £¨Ê×Ö¡ DL È¡Öµ×îÐ¡ 8 ×Ö½Ú£©
-  - UDS_FF_DL_MAX = 4095 £¨Ê×Ö¡ DL È¡Öµ×î´ó 4095 £¨0xFFF£©×Ö½Ú£©
-- `SN`£ºÁ¬ÐøÖ¡µÄÐòÁÐºÅ 0 ~ 15£¬FF Ö¡Ã»ÓÐ SN Óò£¬µ«ÊÇËü¡°Ëã¡± CF Ö¡µÄÐòÁÐºÅ0£¬ËùÒÔµÚÒ»Ö¡ CF Ö¡µÄ SN = 1
-- `FS`£º±íÊ¾·¢ËÍ·½ÊÇ·ñ¿ÉÒÔ¼ÌÐø´«ÊäÏûÏ¢£¬`0`±íÊ¾¿ÉÒÔ¼ÌÐø·¢ËÍ Continue To Send£¨`CTS`£©£¬`1`±íÊ¾µÈ´ý·¢ËÍ Wait£¨`WT`£©£¬`2`±íÊ¾Êý¾ÝÒç³ö Overflow£¨`OVFLW`£©£¬Ò»´Î·¢ËÍµÄÊý¾Ý´óÓÚ½ÓÊÕ·½ËùÄÜ½ÓÊÕµÄÁ¿
-- `BS`£º½ÓÊÕ·½Ò»´ÎÄÜ½ÓÊÕµÄÊý¾Ý×î´óÁ¿£¬BS = 0£¬ÔÙÎÞ FC Ö¡£¬CF Ö¡¿ÉÎÞÏÞÖÆ·¢ËÍ
-- `STmin`£º±íÊ¾Á½¸öÁ¬ÐøÖ¡Ö®¼äµÄ×îÐ¡Ê±¼ä¼ä¸ô£¬²ÎÕÕÍ¼1ÖÐµÄ¶¨Òå
+- `DL`ï¼šæœ‰æ•ˆæ•°æ®çš„é•¿åº¦ï¼Œä¸åŒ…æ‹¬ PCIbyteï¼Œå…·ä½“å®šä¹‰è§ `network_layer_private.h`
+  - UDS_SF_DL_MAX = 7 ï¼ˆå•å¸§ DL å–å€¼æœ€å¤§ 7 å­—èŠ‚ï¼‰
+  - UDS_FF_DL_MIN = 8 ï¼ˆé¦–å¸§ DL å–å€¼æœ€å° 8 å­—èŠ‚ï¼‰
+  - UDS_FF_DL_MAX = 4095 ï¼ˆé¦–å¸§ DL å–å€¼æœ€å¤§ 4095 ï¼ˆ0xFFFï¼‰å­—èŠ‚ï¼‰
+- `SN`ï¼šè¿žç»­å¸§çš„åºåˆ—å· 0 ~ 15ï¼ŒFF å¸§æ²¡æœ‰ SN åŸŸï¼Œä½†æ˜¯å®ƒâ€œç®—â€ CF å¸§çš„åºåˆ—å·0ï¼Œæ‰€ä»¥ç¬¬ä¸€å¸§ CF å¸§çš„ SN = 1
+- `FS`ï¼šè¡¨ç¤ºå‘é€æ–¹æ˜¯å¦å¯ä»¥ç»§ç»­ä¼ è¾“æ¶ˆæ¯ï¼Œ`0`è¡¨ç¤ºå¯ä»¥ç»§ç»­å‘é€ Continue To Sendï¼ˆ`CTS`ï¼‰ï¼Œ`1`è¡¨ç¤ºç­‰å¾…å‘é€ Waitï¼ˆ`WT`ï¼‰ï¼Œ`2`è¡¨ç¤ºæ•°æ®æº¢å‡º Overflowï¼ˆ`OVFLW`ï¼‰ï¼Œä¸€æ¬¡å‘é€çš„æ•°æ®å¤§äºŽæŽ¥æ”¶æ–¹æ‰€èƒ½æŽ¥æ”¶çš„é‡
+- `BS`ï¼šæŽ¥æ”¶æ–¹ä¸€æ¬¡èƒ½æŽ¥æ”¶çš„æ•°æ®æœ€å¤§é‡ï¼ŒBS = 0ï¼Œå†æ—  FC å¸§ï¼ŒCF å¸§å¯æ— é™åˆ¶å‘é€
+- `STmin`ï¼šè¡¨ç¤ºä¸¤ä¸ªè¿žç»­å¸§ä¹‹é—´çš„æœ€å°æ—¶é—´é—´éš”ï¼Œå‚ç…§å›¾1ä¸­çš„å®šä¹‰
 
 <br/>
 
@@ -199,27 +201,27 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 
 <br/>
 
-### :earth_asia: UDS ÍøÂç²ãÊ±¼ä¿ØÖÆ·ÖÎö
+### :earth_asia: UDS ç½‘ç»œå±‚æ—¶é—´æŽ§åˆ¶åˆ†æž
 
-ÍøÂç²ã¶¨Ê±²ÎÊý¶¨ÒåÁË`N_As`¡¢`N_Ar`¡¢`N_Bs`¡¢`N_Br`¡¢`N_Cs`¡¢`N_Cr`Áù¸ö²ÎÊý¡£
+ç½‘ç»œå±‚å®šæ—¶å‚æ•°å®šä¹‰äº†`N_As`ã€`N_Ar`ã€`N_Bs`ã€`N_Br`ã€`N_Cs`ã€`N_Cr`å…­ä¸ªå‚æ•°ã€‚
 
-- N_As ³¬Ê±£º·¢ËÍ·½Ã»ÓÐ¼°Ê±·¢ËÍ N_PDU¡£
-- N_Ar ³¬Ê±£º½ÓÊÕ·½Ã»ÓÐ¼°Ê±·¢ËÍ N_PDU¡£
-- N_Bs ³¬Ê±£º·¢ËÍ·½Ã»ÓÐ½ÓÊÕµ½Á÷¿ØÖ¡¡£
-- N_Br ³¬Ê±£º½ÓÊÕ·½Ã»ÓÐ·¢³öÁ÷¿ØÖ¡¡£
-- N_Cr ³¬Ê±£º½ÓÊÕ·½Ã»ÓÐÊÕµ½Á¬ÐøÖ¡¡£
-- N_Cs£º¼´STmin£¬·¢ËÍÁ½¸öÁ¬ÐøÖ¡ÐèÒªµÈ´ýµÄ×î¶ÌÊ±¼ä¡£
+- N_As è¶…æ—¶ï¼šå‘é€æ–¹æ²¡æœ‰åŠæ—¶å‘é€ N_PDUã€‚
+- N_Ar è¶…æ—¶ï¼šæŽ¥æ”¶æ–¹æ²¡æœ‰åŠæ—¶å‘é€ N_PDUã€‚
+- N_Bs è¶…æ—¶ï¼šå‘é€æ–¹æ²¡æœ‰æŽ¥æ”¶åˆ°æµæŽ§å¸§ã€‚
+- N_Br è¶…æ—¶ï¼šæŽ¥æ”¶æ–¹æ²¡æœ‰å‘å‡ºæµæŽ§å¸§ã€‚
+- N_Cr è¶…æ—¶ï¼šæŽ¥æ”¶æ–¹æ²¡æœ‰æ”¶åˆ°è¿žç»­å¸§ã€‚
+- N_Csï¼šå³STminï¼Œå‘é€ä¸¤ä¸ªè¿žç»­å¸§éœ€è¦ç­‰å¾…çš„æœ€çŸ­æ—¶é—´ã€‚
 
-`s = ·¢ËÍÕß£¬r = ½ÓÊÕÕß`
+`s = å‘é€è€…ï¼Œr = æŽ¥æ”¶è€…`
 
-| ¶¨Ê±²ÎÊý | ·½Ïò          | ½âÊÍ                                                                                              |
+| å®šæ—¶å‚æ•° | æ–¹å‘          | è§£é‡Š                                                                                              |
 |----------|---------------|---------------------------------------------------------------------------------------------------|
-| N_As     | ·¢ËÍ·½¡ú½ÓÊÕ·½ | `Ê×Ö¡ºÍÁ¬ÐøÖ¡`ÔÚÊý¾ÝÁ´Â·²ã´«²¥µÄÊ±¼ä                                                              |
-| N_Ar     | ½ÓÊÕ·½¡ú·¢ËÍ·½ | `Á÷¿ØÖ¡`ÔÚÊý¾ÝÁ´Â·²ã´«²¥µÄÊ±¼ä                                                                    |
-| N_Bs     | ·¢ËÍ·½¡ú½ÓÊÕ·½ | ½ÓÊÕ·½ÊÕµ½`Ê×Ö¡`Ê±·¢³öµÄ ACK ÏìÓ¦£¬Óë×Ô¼º£¨·¢ËÍ·½£©ÊÕµ½`Á÷¿ØÖ¡`µÄ¼ä¸ôÊ±¼ä                         |
-| N_Br     | ½ÓÊÕ·½¡ú·¢ËÍ·½ | ×Ô¼º£¨½ÓÊÕ·½£©ÊÕµ½`Ê×Ö¡`£¬Óë×Ô¼º¿ªÊ¼·¢³ö`Á÷¿ØÖ¡`µÄ¼ä¸ôÊ±¼ä                                        |
-| N_Cs     | ·¢ËÍ·½¡ú½ÓÊÕ·½ | ×Ô¼º£¨·¢ËÍ·½£©ÊÕµ½`Á÷¿ØÖ¡`£¬»òÊÇ`Á¬ÐøÖ¡ËÍ´ïÊ±²úÉúµÄ ACK ÏìÓ¦`£¬Óë×Ô¼º¿ªÊ¼·¢³ö`ÐÂÁ¬ÐøÖ¡`µÄ¼ä¸ôÊ±¼ä |
-| N_Cr     | ½ÓÊÕ·½¡ú·¢ËÍ·½ | ×Ô¼º£¨½ÓÊÕ·½£©ÊÕµ½`Á¬ÐøÖ¡`£¬µ½ÏÂÒ»´Î×Ô¼ºÊÕµ½`Á¬ÐøÖ¡`µÄ¼ä¸ôÊ±¼ä                                    |
+| N_As     | å‘é€æ–¹â†’æŽ¥æ”¶æ–¹ | `é¦–å¸§å’Œè¿žç»­å¸§`åœ¨æ•°æ®é“¾è·¯å±‚ä¼ æ’­çš„æ—¶é—´                                                              |
+| N_Ar     | æŽ¥æ”¶æ–¹â†’å‘é€æ–¹ | `æµæŽ§å¸§`åœ¨æ•°æ®é“¾è·¯å±‚ä¼ æ’­çš„æ—¶é—´                                                                    |
+| N_Bs     | å‘é€æ–¹â†’æŽ¥æ”¶æ–¹ | æŽ¥æ”¶æ–¹æ”¶åˆ°`é¦–å¸§`æ—¶å‘å‡ºçš„ ACK å“åº”ï¼Œä¸Žè‡ªå·±ï¼ˆå‘é€æ–¹ï¼‰æ”¶åˆ°`æµæŽ§å¸§`çš„é—´éš”æ—¶é—´                         |
+| N_Br     | æŽ¥æ”¶æ–¹â†’å‘é€æ–¹ | è‡ªå·±ï¼ˆæŽ¥æ”¶æ–¹ï¼‰æ”¶åˆ°`é¦–å¸§`ï¼Œä¸Žè‡ªå·±å¼€å§‹å‘å‡º`æµæŽ§å¸§`çš„é—´éš”æ—¶é—´                                        |
+| N_Cs     | å‘é€æ–¹â†’æŽ¥æ”¶æ–¹ | è‡ªå·±ï¼ˆå‘é€æ–¹ï¼‰æ”¶åˆ°`æµæŽ§å¸§`ï¼Œæˆ–æ˜¯`è¿žç»­å¸§é€è¾¾æ—¶äº§ç”Ÿçš„ ACK å“åº”`ï¼Œä¸Žè‡ªå·±å¼€å§‹å‘å‡º`æ–°è¿žç»­å¸§`çš„é—´éš”æ—¶é—´ |
+| N_Cr     | æŽ¥æ”¶æ–¹â†’å‘é€æ–¹ | è‡ªå·±ï¼ˆæŽ¥æ”¶æ–¹ï¼‰æ”¶åˆ°`è¿žç»­å¸§`ï¼Œåˆ°ä¸‹ä¸€æ¬¡è‡ªå·±æ”¶åˆ°`è¿žç»­å¸§`çš„é—´éš”æ—¶é—´                                    |
 
 <br/>
 
@@ -227,132 +229,132 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 
 <br/>
 
-### :id: UDS Æû³µÕï¶ÏÐ­Òé£¨ISO 14229£©ËùÓÐ·þÎñÒÔ¼°¶ÔÓ¦·þÎñÖ§³ÖµÄ·ñ¶¨ÏìÓ¦´úÂë NRC
+### :id: UDS æ±½è½¦è¯Šæ–­åè®®ï¼ˆISO 14229ï¼‰æ‰€æœ‰æœåŠ¡ä»¥åŠå¯¹åº”æœåŠ¡æ”¯æŒçš„å¦å®šå“åº”ä»£ç  NRC
 
-ÏÂ±í½« **ISO 14229-Part 1:Specification and requirements** ÖÐÐÅÏ¢½øÐÐÕûÀí£¬ÊáÀíÁË UDS Æû³µÕï¶ÏÐ­ÒéËùÓÐ·þÎñÒÔ¼°¶ÔÓ¦·þÎñÖ§³ÖµÄ·ñ¶¨ÏìÓ¦´úÂë NRC£º
+ä¸‹è¡¨å°† **ISO 14229-Part 1:Specification and requirements** ä¸­ä¿¡æ¯è¿›è¡Œæ•´ç†ï¼Œæ¢³ç†äº† UDS æ±½è½¦è¯Šæ–­åè®®æ‰€æœ‰æœåŠ¡ä»¥åŠå¯¹åº”æœåŠ¡æ”¯æŒçš„å¦å®šå“åº”ä»£ç  NRCï¼š
 
 <div class="table-box">
     <table cellspacing="0">
         <tbody>
             <tr>
-                <td style="text-align:center;vertical-align:middle;width:40pt;"><strong><span>ÐòºÅ</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;width:153pt;"><strong><span>·þÎñÀàÐÍ</span></strong></td>
+                <td style="text-align:center;vertical-align:middle;width:40pt;"><strong><span>åºå·</span></strong></td>
+                <td style="text-align:center;vertical-align:middle;width:153pt;"><strong><span>æœåŠ¡ç±»åž‹</span></strong></td>
                 <td style="text-align:center;vertical-align:middle;width:53pt;"><strong><span>SID</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;width:234pt;"><strong><span>·þÎñÃû</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;width:387pt;"><strong><span>ÃèÊö</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;width:103pt;"><strong><span>Ä¬ÈÏ»á»°</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;width:131pt;"><strong><span>·ÇÄ¬ÈÏ»á»°</span></strong></td>
-                <td colspan="16" style="text-align:center;vertical-align:middle;"><strong><span>Ö§³ÖµÄ¸ºÏìÓ¦Âë (NRC_)</span></strong></td>
+                <td style="text-align:center;vertical-align:middle;width:234pt;"><strong><span>æœåŠ¡å</span></strong></td>
+                <td style="text-align:center;vertical-align:middle;width:387pt;"><strong><span>æè¿°</span></strong></td>
+                <td style="text-align:center;vertical-align:middle;width:103pt;"><strong><span>é»˜è®¤ä¼šè¯</span></strong></td>
+                <td style="text-align:center;vertical-align:middle;width:131pt;"><strong><span>éžé»˜è®¤ä¼šè¯</span></strong></td>
+                <td colspan="16" style="text-align:center;vertical-align:middle;"><strong><span>æ”¯æŒçš„è´Ÿå“åº”ç  (NRC_)</span></strong></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>1</span></td>
-                <td rowspan="10" style="text-align:center;vertical-align:middle;width:153pt;"><span>Õï¶ÏºÍÍ¨ÐÅ¹ÜÀí¹¦ÄÜµ¥Ôª Diagnostic and Communication Management functional unit</span></td>
+                <td rowspan="10" style="text-align:center;vertical-align:middle;width:153pt;"><span>è¯Šæ–­å’Œé€šä¿¡ç®¡ç†åŠŸèƒ½å•å…ƒ Diagnostic and Communication Management functional unit</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x10</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>Õï¶Ï»á»°¿ØÖÆ DiagnosticSessionControl service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>è¯Šæ–­ä¼šè¯æŽ§åˆ¶ DiagnosticSessionControl service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to
                         control a diagnostic session with a server(s).</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>2</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x11</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>µç¿Øµ¥Ôª¸´Î» ECUReset service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>ç”µæŽ§å•å…ƒå¤ä½ ECUReset service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client forces the
                         server(s) to perform a reset.</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>3</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x27</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>°²È«·ÃÎÊ SecurityAccess
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>å®‰å…¨è®¿é—® SecurityAccess
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to
                         unlock a secured server(s).</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x24</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x35</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x36</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x37</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>4</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x28</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;"><span>Í¨ÐÅ¿ØÖÆ CommunicationControl
+                <td style="text-align:center;vertical-align:middle;"><span>é€šä¿¡æŽ§åˆ¶ CommunicationControl
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client controls the
                         setting of communication parameters in the server (e.g.,communication baudrate).</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>5</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x3E</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>Õï¶ÏÉè±¸ÔÚÏß£¬»á»°±£³Ö£¨ZLG ZCANPRO£©TesterPresent
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>è¯Šæ–­è®¾å¤‡åœ¨çº¿ï¼Œä¼šè¯ä¿æŒï¼ˆZLG ZCANPROï¼‰TesterPresent
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client indicates to the
                         server(s) that it is still present.</span></td>
@@ -360,106 +362,106 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>6</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x83</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;"><span>·ÃÎÊÊ±Ðò²ÎÊý AccessTimingParameter
+                <td style="text-align:center;vertical-align:middle;"><span>è®¿é—®æ—¶åºå‚æ•° AccessTimingParameter
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client uses this service
                         to read/modify the timing parameters for an active communication.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>7</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x84</span></strong></td>
                 <td style="text-align:center;vertical-align:middle;"><span
-                       >°²È«Êý¾Ý´«Êä SecuredDataTransmission service</span></td>
+                       >å®‰å…¨æ•°æ®ä¼ è¾“ SecuredDataTransmission service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client uses this service
                         to perform data transmission with an extended data link security.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x38-0x4F</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>8</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x85</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>Õï¶Ï¹ÊÕÏÂëÉèÖÃ¿ØÖÆ ControlDTCSetting
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>è¯Šæ–­æ•…éšœç è®¾ç½®æŽ§åˆ¶ ControlDTCSetting
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client controls the
                         setting of DTCs in the server.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>9</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x86</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;"><span>ÊÂ¼þÏìÓ¦ ResponseOnEvent
+                <td style="text-align:center;vertical-align:middle;"><span>äº‹ä»¶å“åº” ResponseOnEvent
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to setup
                         and/or control an event mechanism in the server.</span></td>
@@ -467,160 +469,160 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>10</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x87</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;"><span>Á´Â·¿ØÖÆ LinkControl
+                <td style="text-align:center;vertical-align:middle;"><span>é“¾è·¯æŽ§åˆ¶ LinkControl
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests control
                         of the communication baudrate.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x24</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>11</span></td>
                 <td rowspan="7" style="text-align:center;vertical-align:middle;width:153pt;"><span
-                       >Êý¾Ý´«Êä¹¦ÄÜµ¥Ôª Data Transmission functional unit</span></td>
+                       >æ•°æ®ä¼ è¾“åŠŸèƒ½å•å…ƒ Data Transmission functional unit</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x22</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>°´±êÊ¶·ûID¶ÁÈ¡Êý¾Ý ReadDataByIdentifier
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>æŒ‰æ ‡è¯†ç¬¦IDè¯»å–æ•°æ® ReadDataByIdentifier
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to read
                         the current value of a record identified by a provided dataIdentifier.</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X<span>b</span></span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x14</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x23</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;"><span>°´µØÖ·¶ÁÈ¡ÄÚÈÝ ReadMemoryByAddress
+                <td style="text-align:center;vertical-align:middle;"><span>æŒ‰åœ°å€è¯»å–å†…å®¹ ReadMemoryByAddress
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to read
                         the current value of the provided memory range.</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X<span>c</span></span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>13</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x24</span></strong></td>
                 <td style="text-align:center;vertical-align:middle;"><span
-                       >°´±êÊ¶·ûID¶ÁÈ¡»»ËãÊý¾Ý ReadScalingDataByIdentifier service</span></td>
+                       >æŒ‰æ ‡è¯†ç¬¦IDè¯»å–æ¢ç®—æ•°æ® ReadScalingDataByIdentifier service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to read
                         the scaling information of a record identified by a provided dataIdentifier.</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X<span>b</span></span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>14</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x2A</span></strong></td>
                 <td style="text-align:center;vertical-align:middle;"><span
-                       >°´ÖÜÆÚÐÔ±êÊ¶·ûID¶ÁÈ¡Êý¾Ý ReadDataByPeriodicIdentifier service</span></td>
+                       >æŒ‰å‘¨æœŸæ€§æ ‡è¯†ç¬¦IDè¯»å–æ•°æ® ReadDataByPeriodicIdentifier service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to
                         schedule data in the server for periodic transmission.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>15</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x2C</span></strong></td>
                 <td style="text-align:center;vertical-align:middle;"><span
-                       >¶¯Ì¬¶¨ÒåÊý¾Ý±êÊ¶·ûID DynamicallyDefineDataIdentifier service</span></td>
+                       >åŠ¨æ€å®šä¹‰æ•°æ®æ ‡è¯†ç¬¦ID DynamicallyDefineDataIdentifier service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to
                         dynamically define data Identifiers that may subsequently be read by the readDataByIdentifier
                         service.</span></td>
@@ -628,251 +630,251 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>16</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x2E</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>°´±êÊ¶·ûIDÐ´ÈëÊý¾Ý WriteDataByIdentifier
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>æŒ‰æ ‡è¯†ç¬¦IDå†™å…¥æ•°æ® WriteDataByIdentifier
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to write
                         a record specified by a provided dataIdentifier.</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X<span>b</span></span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x72</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>17</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x3D</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;"><span>°´µØÖ·Ð´ÄÚ´æ WriteMemoryByAddress service</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>æŒ‰åœ°å€å†™å†…å­˜ WriteMemoryByAddress service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to
                         overwrite a provided memory range.</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X<span>c</span></span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x72</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>18</span></td>
                 <td rowspan="2" style="text-align:center;vertical-align:middle;width:153pt;"><span
-                       >´æ´¢Êý¾Ý´«Êä¹¦ÄÜµ¥Ôª Stored Data Transmission functional unit</span></td>
+                       >å­˜å‚¨æ•°æ®ä¼ è¾“åŠŸèƒ½å•å…ƒ Stored Data Transmission functional unit</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x14</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>Çå³ýÕï¶ÏÐÅÏ¢ ClearDiagnosticInformation Service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>æ¸…é™¤è¯Šæ–­ä¿¡æ¯ ClearDiagnosticInformation Service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>Allows the client to clear
                         diagnostic information from the server (including DTCs,captured data, etc.)</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x72</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>19</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x19</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>¶ÁÈ¡DTCÐÅÏ¢ ReadDTCInformation Service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>è¯»å–DTCä¿¡æ¯ ReadDTCInformation Service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>Allows the client to request
                         diagnostic information from the server (including DTCs, captured data, etc.)</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>20</span></td>
-                <td style="text-align:center;vertical-align:middle;width:153pt;"><span>ÊäÈëÊä³ö¿ØÖÆ¹¦ÄÜµ¥Ôª InputOutput Control functional unit</span></td>
+                <td style="text-align:center;vertical-align:middle;width:153pt;"><span>è¾“å…¥è¾“å‡ºæŽ§åˆ¶åŠŸèƒ½å•å…ƒ InputOutput Control functional unit</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x2F</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>°´±êÊ¶·ûIDµÄÊäÈëÊä³ö¿ØÖÆ InputOutputControlByIdentifier service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>æŒ‰æ ‡è¯†ç¬¦IDçš„è¾“å…¥è¾“å‡ºæŽ§åˆ¶ InputOutputControlByIdentifier service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests the
                         control of an input/output specific to the server.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>21</span></td>
-                <td style="text-align:center;vertical-align:middle;width:153pt;"><span>ÀýÐÐ³ÌÐò¹¦ÄÜµ¥Ôª Routine functional unit</span></td>
+                <td style="text-align:center;vertical-align:middle;width:153pt;"><span>ä¾‹è¡Œç¨‹åºåŠŸèƒ½å•å…ƒ Routine functional unit</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x31</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>Àý³Ì¿ØÖÆ RoutineControl service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>ä¾‹ç¨‹æŽ§åˆ¶ RoutineControl service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests to
                         start, stop a routine in the server(s) or requests the routine results.</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X<span>e</span></span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x12</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x24</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x72</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>22</span></td>
-                <td rowspan="5" style="text-align:center;vertical-align:middle;width:153pt;"><span>ÉÏ´«ÏÂÔØ¹¦ÄÜµ¥Ôª Upload Download functional unit</span></td>
+                <td rowspan="5" style="text-align:center;vertical-align:middle;width:153pt;"><span>ä¸Šä¼ ä¸‹è½½åŠŸèƒ½å•å…ƒ Upload Download functional unit</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x34</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>ÇëÇóÏÂÔØ RequestDownload service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>è¯·æ±‚ä¸‹è½½ RequestDownload service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests the
                         negotiation of a data transfer from the client to the server.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x70</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>23</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x35</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;"><span>ÇëÇóÉÏ´« RequestUpload service</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>è¯·æ±‚ä¸Šä¼  RequestUpload service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests the
                         negotiation of a data transfer from the server to the client.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x33</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x70</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>24</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x36</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>Êý¾Ý´«Êä TransferData service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>æ•°æ®ä¼ è¾“ TransferData service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client transmits data to
                         the server (download) or requests data from the server(upload).</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x24</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x71</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x72</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x73</span></td>
@@ -881,71 +883,71 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>25</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x37</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;color:red;"><span>ÇëÇóÍË³ö´«Êä RequestTransferExit service</span></td>
+                <td style="text-align:center;vertical-align:middle;color:red;"><span>è¯·æ±‚é€€å‡ºä¼ è¾“ RequestTransferExit service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests the
                         termination of a data transfer.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x24</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x72</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td style="text-align:center;vertical-align:middle;"><span>26</span></td>
                 <td style="text-align:center;vertical-align:middle;"><strong><span>0x38</span></strong></td>
-                <td style="text-align:center;vertical-align:middle;"><span>ÇëÇóÎÄ¼þ´«Êä RequestFileTransfer
+                <td style="text-align:center;vertical-align:middle;"><span>è¯·æ±‚æ–‡ä»¶ä¼ è¾“ RequestFileTransfer
                         service</span></td>
                 <td style="vertical-align:middle;width:387pt;"><span>The client requests the
                         negotiation of a file transfer between server and client.</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>²»ÊÊÓÃ not applicable</span>
+                <td style="text-align:center;vertical-align:middle;"><span>ä¸é€‚ç”¨ not applicable</span>
                 </td>
                 <td style="text-align:center;vertical-align:middle;"><span>X</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x13</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x22</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x31</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
                 <td style="text-align:center;vertical-align:middle;"><span>0x70</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
-                <td style="text-align:center;vertical-align:middle;"><span>¡¡</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
+                <td style="text-align:center;vertical-align:middle;"><span>ã€€</span></td>
             </tr>
             <tr>
                 <td colspan="23" style="text-align:left;vertical-align:middle;">
                 <span>
-                        a&nbsp;&nbsp;ÔÚÄ¬ÈÏ»á»°ÆÚ¼äÊÇ·ñÒ²ÔÊÐí ResponseOnEvent ·þÎñÊÇÌØ¶¨ÓÚÊµÏÖµÄ¡£ It is implementation specific whether the ResponseOnEvent service is also allowed during the defaultSession.<br>
-                        b&nbsp;&nbsp;°²È«µÄÊý¾Ý±êÊ¶·ûÐèÒª SecurityAccess ·þÎñ£¬Òò´ËÐèÒª·ÇÄ¬ÈÏÕï¶Ï»á»°¡£ Secured dataIdentifiers require a SecurityAccess service and therefore a non-default diagnostic session.<br>
-                        c&nbsp;&nbsp;°²È«ÄÚ´æÇøÓòÐèÒª SecurityAccess ·þÎñ£¬Òò´ËÐèÒª·ÇÄ¬ÈÏÕï¶Ï»á»°¡£ Secured memory areas require a SecurityAccess service and therefore a non-default diagnostic session.<br>
-                        d&nbsp;&nbsp;¿ÉÒÔÔÚÄ¬ÈÏºÍ·ÇÄ¬ÈÏÕï¶Ï»á»°ÖÐ¶¯Ì¬¶¨Òå dataIdentifier¡£ A dataIdentifier can be defined dynamically in the default and non-default diagnostic session.<br>
-                        e&nbsp;&nbsp;°²È«Àý³ÌÐèÒª SecurityAccess ·þÎñ£¬Òò´ËÐèÒª·ÇÄ¬ÈÏÕï¶Ï»á»°¡£ Secured routines require a SecurityAccess service and therefore a non-default diagnostic session.<br>
-                        &nbsp;&nbsp;&nbsp;ÐèÒª¿Í»§¶ËÖ÷¶¯Í£Ö¹µÄÀý³ÌÒ²ÐèÒª·ÇÄ¬ÈÏ»á»°¡£ A routine that requires to be stopped actively by the client also requires a non-default session.
+                        a&nbsp;&nbsp;åœ¨é»˜è®¤ä¼šè¯æœŸé—´æ˜¯å¦ä¹Ÿå…è®¸ ResponseOnEvent æœåŠ¡æ˜¯ç‰¹å®šäºŽå®žçŽ°çš„ã€‚ It is implementation specific whether the ResponseOnEvent service is also allowed during the defaultSession.<br>
+                        b&nbsp;&nbsp;å®‰å…¨çš„æ•°æ®æ ‡è¯†ç¬¦éœ€è¦ SecurityAccess æœåŠ¡ï¼Œå› æ­¤éœ€è¦éžé»˜è®¤è¯Šæ–­ä¼šè¯ã€‚ Secured dataIdentifiers require a SecurityAccess service and therefore a non-default diagnostic session.<br>
+                        c&nbsp;&nbsp;å®‰å…¨å†…å­˜åŒºåŸŸéœ€è¦ SecurityAccess æœåŠ¡ï¼Œå› æ­¤éœ€è¦éžé»˜è®¤è¯Šæ–­ä¼šè¯ã€‚ Secured memory areas require a SecurityAccess service and therefore a non-default diagnostic session.<br>
+                        d&nbsp;&nbsp;å¯ä»¥åœ¨é»˜è®¤å’Œéžé»˜è®¤è¯Šæ–­ä¼šè¯ä¸­åŠ¨æ€å®šä¹‰ dataIdentifierã€‚ A dataIdentifier can be defined dynamically in the default and non-default diagnostic session.<br>
+                        e&nbsp;&nbsp;å®‰å…¨ä¾‹ç¨‹éœ€è¦ SecurityAccess æœåŠ¡ï¼Œå› æ­¤éœ€è¦éžé»˜è®¤è¯Šæ–­ä¼šè¯ã€‚ Secured routines require a SecurityAccess service and therefore a non-default diagnostic session.<br>
+                        &nbsp;&nbsp;&nbsp;éœ€è¦å®¢æˆ·ç«¯ä¸»åŠ¨åœæ­¢çš„ä¾‹ç¨‹ä¹Ÿéœ€è¦éžé»˜è®¤ä¼šè¯ã€‚ A routine that requires to be stopped actively by the client also requires a non-default session.
                 </span>
                 </td>
             </tr>
             <tr>
                 <td colspan="23" style="text-align:left;vertical-align:middle;">
-                <span style="color:red;">ºìÉ«±ê×¢</span><span>µÄ·þÎñÎª×î³£ÓÃ¡¢Ò²ÊÇ×î»ù±¾µÄUDS·þÎñ£¬Ö÷ÒªÁË½âÕâÐ©·þÎñÎªÖ÷¡££¨GitlabÉÏ¿ÉÄÜÎÞ·¨¿´µ½ºìÉ«±ê×¢£©</span>
+                <span style="color:red;">çº¢è‰²æ ‡æ³¨</span><span>çš„æœåŠ¡ä¸ºæœ€å¸¸ç”¨ã€ä¹Ÿæ˜¯æœ€åŸºæœ¬çš„UDSæœåŠ¡ï¼Œä¸»è¦äº†è§£è¿™äº›æœåŠ¡ä¸ºä¸»ã€‚ï¼ˆGitlabä¸Šå¯èƒ½æ— æ³•çœ‹åˆ°çº¢è‰²æ ‡æ³¨ï¼‰</span>
                 </td>
             </tr>
         </tbody>
@@ -958,24 +960,24 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 
 <br/>
 
-### :construction: UDS ·ñ¶¨ÏìÓ¦´úÂë NRC ¶¨Òå
+### :construction: UDS å¦å®šå“åº”ä»£ç  NRC å®šä¹‰
 
-| ÐòºÅ | ¸ºÏìÓ¦Âë (NRC CODE) | Ãû³Æ                                        | ÊÍÒå                                               |
+| åºå· | è´Ÿå“åº”ç  (NRC CODE) | åç§°                                        | é‡Šä¹‰                                               |
 |------|---------------------|---------------------------------------------|----------------------------------------------------|
-| 01   | 0x10                | NRC_GENERAL_REJECT                          | Í¨ÓÃ¾Ü¾øÖ¸Áî                                       |
-| 02   | 0x11                | NRC_SERVICE_NOT_SUPPORTED                   | ·þÎñ²»Ö§³Ö                                         |
-| 03   | 0x12                | NRC_SUBFUNCTION_NOT_SUPPORTED               | ×Ó¹¦ÄÜ²»Ö§³Ö                                       |
-| 04   | 0x13                | NRC_INVALID_MESSAGE_LENGTH_OR_FORMAT        | ´íÎóµÄÏûÏ¢³¤¶È»ò¸ñÊ½                               |
-| 05   | 0x22                | NRC_CONDITIONS_NOT_CORRECT                  | ²»ÕýÈ·µÄÊäÈëÌõ¼þ                                   |
-| 06   | 0x24                | NRC_REQUEST_SEQUENCE_ERROR                  | ÇëÇóË³Ðò´íÎó                                       |
-| 07   | 0x31                | NRC_REQUEST_OUT_OF_RANGE                    | ÇëÇó³¬³ö·¶Î§                                       |
-| 08   | 0x33                | NRC_SECURITY_ACCESS_DENIED                  | °²È«·ÃÎÊ¾Ü¾ø                                       |
-| 09   | 0x35                | NRC_INVALID_KEY                             | ´íÎóµÄ·ÃÎÊÃÜ³×                                     |
-| 10   | 0x36                | NRC_EXCEEDED_NUMBER_OF_ATTEMPTS             | ³¬³öÁË´íÎóµÄ°²È«·ÃÎÊ´ÎÊý                           |
-| 11   | 0x37                | NRC_REQUIRED_TIME_DELAY_NOT_EXPIRED         | ³¬³ö´íÎóµÄ°²È«·ÃÎÊ´ÎÊýºóÑÓÊ±ÀäÈ´Ê±¼äÎ´½áÊø         |
-| 12   | 0x72                | NRC_GENERAL_PROGRAMMING_FAILURE             | Í¨ÓÃ±à³Ì´íÎó£¬Ò»°ãÎª²Á³ý»òÕßÐ´Èë´íÎó               |
-| 13   | 0x78                | NRC_SERVICE_BUSY                            | ·þÎñÃ¦£¨ÑÏ¸ñÀ´½²²»ËãÊÇ´íÎó£¬Ö»ÊÇ¹ÒÆðÐÂµÄ·þÎñÇëÇó£© |
-| 14   | 0x7F                | NRC_SERVICE_NOT_SUPPORTED_IN_ACTIVE_SESSION | ·þÎñ²»Ö§³Öµ±Ç°»á»°                                 |
+| 01   | 0x10                | NRC_GENERAL_REJECT                          | é€šç”¨æ‹’ç»æŒ‡ä»¤                                       |
+| 02   | 0x11                | NRC_SERVICE_NOT_SUPPORTED                   | æœåŠ¡ä¸æ”¯æŒ                                         |
+| 03   | 0x12                | NRC_SUBFUNCTION_NOT_SUPPORTED               | å­åŠŸèƒ½ä¸æ”¯æŒ                                       |
+| 04   | 0x13                | NRC_INVALID_MESSAGE_LENGTH_OR_FORMAT        | é”™è¯¯çš„æ¶ˆæ¯é•¿åº¦æˆ–æ ¼å¼                               |
+| 05   | 0x22                | NRC_CONDITIONS_NOT_CORRECT                  | ä¸æ­£ç¡®çš„è¾“å…¥æ¡ä»¶                                   |
+| 06   | 0x24                | NRC_REQUEST_SEQUENCE_ERROR                  | è¯·æ±‚é¡ºåºé”™è¯¯                                       |
+| 07   | 0x31                | NRC_REQUEST_OUT_OF_RANGE                    | è¯·æ±‚è¶…å‡ºèŒƒå›´                                       |
+| 08   | 0x33                | NRC_SECURITY_ACCESS_DENIED                  | å®‰å…¨è®¿é—®æ‹’ç»                                       |
+| 09   | 0x35                | NRC_INVALID_KEY                             | é”™è¯¯çš„è®¿é—®å¯†åŒ™                                     |
+| 10   | 0x36                | NRC_EXCEEDED_NUMBER_OF_ATTEMPTS             | è¶…å‡ºäº†é”™è¯¯çš„å®‰å…¨è®¿é—®æ¬¡æ•°                           |
+| 11   | 0x37                | NRC_REQUIRED_TIME_DELAY_NOT_EXPIRED         | è¶…å‡ºé”™è¯¯çš„å®‰å…¨è®¿é—®æ¬¡æ•°åŽå»¶æ—¶å†·å´æ—¶é—´æœªç»“æŸ         |
+| 12   | 0x72                | NRC_GENERAL_PROGRAMMING_FAILURE             | é€šç”¨ç¼–ç¨‹é”™è¯¯ï¼Œä¸€èˆ¬ä¸ºæ“¦é™¤æˆ–è€…å†™å…¥é”™è¯¯               |
+| 13   | 0x78                | NRC_SERVICE_BUSY                            | æœåŠ¡å¿™ï¼ˆä¸¥æ ¼æ¥è®²ä¸ç®—æ˜¯é”™è¯¯ï¼Œåªæ˜¯æŒ‚èµ·æ–°çš„æœåŠ¡è¯·æ±‚ï¼‰ |
+| 14   | 0x7F                | NRC_SERVICE_NOT_SUPPORTED_IN_ACTIVE_SESSION | æœåŠ¡ä¸æ”¯æŒå½“å‰ä¼šè¯                                 |
 
 <br/>
 
@@ -983,18 +985,18 @@ UDS£¨Unified Diagnostic Services£¬Í³Ò»Õï¶Ï·þÎñ£©Õï¶ÏÐ­ÒéÊÇ `ISO 15765` ºÍ `ISO 1
 
 <br/>
 
-### :construction: UDS SID Sub-Function ×Ó·þÎñ×Ö½Ú×é³É
+### :construction: UDS SID Sub-Function å­æœåŠ¡å­—èŠ‚ç»„æˆ
 
 Resulting sub-function parameter byte value (bit 7 ~ 0)
 
 | Bit 7                                               | Bit 6 ~ 0                                                                                          |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| ÕýÏìÓ¦ÏûÏ¢ÒÖÖÆÖ¸Ê¾Î» SuppressPosRspMsgIndicationBit | Sub-Function parameter value as specified in the Sub-Function parameter value table of the service |
+| æ­£å“åº”æ¶ˆæ¯æŠ‘åˆ¶æŒ‡ç¤ºä½ SuppressPosRspMsgIndicationBit | Sub-Function parameter value as specified in the Sub-Function parameter value table of the service |
 
-- SuppressPosRspMsgIndicationBit = 1 ÒÖÖÆÕýÏìÓ¦
-- SuppressPosRspMsgIndicationBit = 0 ÕýÏìÓ¦²»±»ÒÖÖÆ
+- SuppressPosRspMsgIndicationBit = 1 æŠ‘åˆ¶æ­£å“åº”
+- SuppressPosRspMsgIndicationBit = 0 æ­£å“åº”ä¸è¢«æŠ‘åˆ¶
 
-ÕýÏìÓ¦ÒÖÖÆÎ»ÊÇÔÚ Sub-Function ÀïµÄÕâ¸ö×Ö½ÚµÄ×î¸ßÎ»£¬ÎÒÃÇ°ÑËü½Ð×öÕýÏìÓ¦ÒÖÖÆÎ»¡£Ö»ÓÐÕâ¸ö·þÎñÖ§³Ö Sub-Function µÄÊ±ºò£¬²ÅÓÐ¿ÉÄÜÖ§³ÖÕýÏìÓ¦ÒÖÖÆÎ»¡£ÕâÀïÒª×¢ÒâµÄÊÇËüÖ»ÊÇÒÖÖÆÕýÏìÓ¦£¬¶ø¸ºÏìÓ¦ÊÇ²»±»ÒÖÖÆµÄ¡£
+æ­£å“åº”æŠ‘åˆ¶ä½æ˜¯åœ¨ Sub-Function é‡Œçš„è¿™ä¸ªå­—èŠ‚çš„æœ€é«˜ä½ï¼Œæˆ‘ä»¬æŠŠå®ƒå«åšæ­£å“åº”æŠ‘åˆ¶ä½ã€‚åªæœ‰è¿™ä¸ªæœåŠ¡æ”¯æŒ Sub-Function çš„æ—¶å€™ï¼Œæ‰æœ‰å¯èƒ½æ”¯æŒæ­£å“åº”æŠ‘åˆ¶ä½ã€‚è¿™é‡Œè¦æ³¨æ„çš„æ˜¯å®ƒåªæ˜¯æŠ‘åˆ¶æ­£å“åº”ï¼Œè€Œè´Ÿå“åº”æ˜¯ä¸è¢«æŠ‘åˆ¶çš„ã€‚
 
 [Pic_ZCANPRO_ECU_Refresh]: ./Pic_ZCANPRO_ECU_Refresh.png
 [UDS_OSI_Model]: ./Pic_UDS_OSI.png
