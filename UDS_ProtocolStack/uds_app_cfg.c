@@ -754,8 +754,9 @@ static void RoutineControl(struct UDSServiceInfo *i_pstUDSServiceInfo, tUdsAppMs
     else if (TRUE == IsCheckSumRoutineControl(m_pstPDUMsg)) {
         ReceivedCrc = m_pstPDUMsg->aDataBuf[4u];
         ReceivedCrc = (ReceivedCrc << 8u) | m_pstPDUMsg->aDataBuf[5u];
-        ReceivedCrc = (ReceivedCrc << 8u) | m_pstPDUMsg->aDataBuf[6u];
-        ReceivedCrc = (ReceivedCrc << 8u) | m_pstPDUMsg->aDataBuf[7u];
+        /* TODO Bootloader: #04 SID_31 Uncomment this 2 lines when CRC32 used */
+//        ReceivedCrc = (ReceivedCrc << 8u) | m_pstPDUMsg->aDataBuf[6u];
+//        ReceivedCrc = (ReceivedCrc << 8u) | m_pstPDUMsg->aDataBuf[7u];
         Flash_SavedReceivedCheckSumCrc(ReceivedCrc);
 
         /*request client timeout time*/
