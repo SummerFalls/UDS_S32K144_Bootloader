@@ -13,7 +13,7 @@
 #define INCLUDES_H_
 
 /*common_types.h define uint32/sint32...*/
-#include "cstdint"
+#include "stdint.h"
 #include "cpu.h"
 
 #include "common_types.h"
@@ -68,25 +68,25 @@
 #ifdef EN_DEBUG_FLS_MODULE
 #define FLSDebugPrintf DebugPrintf
 #else
-#define FLSDebugPrintf(fmt, args...)
+#define FLSDebugPrintf(...)
 #endif
 
 #ifdef EN_UDS_DEBUG
 #define UDSDebugPrintf DebugPrintf
 #else
-#define UDSDebugPrintf(fmt, args...)
+#define UDSDebugPrintf(...)
 #endif
 
 #ifdef EN_TP_DEBUG
 #define TPDebugPrintf DebugPrintf
 #else
-#define TPDebugPrintf(fmt, args...)
+#define TPDebugPrintf(...)
 #endif
 
 #ifdef EN_APP_DEBUG
 #define APPDebugPrintf DebugPrintf
 #else
-#define APPDebugPrintf(fmt, args...)
+#define APPDebugPrintf(...)
 #endif
 
 #ifdef EN_DEBUG_FIFO

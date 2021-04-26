@@ -199,7 +199,7 @@ void InitFlashAPI(void)
          * 官方 Bootloader 例程配合官方编译好的 12 个 Flash Driver 函数，为何要减去（向左偏移） 0x410 原因不明，
          * 自己编译出的 4 个 Flash Driver 函数不需要减 0x410
          */
-//        tmp[i] -= 0x410;
+        //        tmp[i] -= 0x410;
         tmp[i] += (uint32_t) flashDriverStartAdd;
     }
 
@@ -208,9 +208,9 @@ void InitFlashAPI(void)
     /* Disable cache to ensure that all flash operations will take effect instantly,
        this is device dependent */
 #ifdef S32K144_SERIES
-//  MSCM->OCMDR[0u] |= MSCM_OCMDR_OCM1(0xFu);
-//  MSCM->OCMDR[1u] |= MSCM_OCMDR_OCM1(0xFu);
-//  MSCM->OCMDR[2u] |= MSCM_OCMDR_OCM1(0xFu);
+    //  MSCM->OCMDR[0u] |= MSCM_OCMDR_OCM1(0xFu);
+    //  MSCM->OCMDR[1u] |= MSCM_OCMDR_OCM1(0xFu);
+    //  MSCM->OCMDR[2u] |= MSCM_OCMDR_OCM1(0xFu);
 #endif /* S32K144_SERIES */
 }
 

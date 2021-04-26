@@ -94,6 +94,28 @@ enum __UDS_NRC__ {
 #define SECURITY_LEVEL_1 ((1 << 1u) | NONE_SECURITY)      /*security level 1 request*/
 #define SECURITY_LEVEL_2 ((1u << 2u) | SECURITY_LEVEL_1)  /*security level 2 request*/
 
+typedef struct {
+    uint8 CalledPeriod;         /*called uds period*/
+    /*security request count. If over this security request count, locked server some time.*/
+    uint8 SecurityRequestCnt;
+    tUdsTime xLockTime;         /*lock time*/
+    tUdsTime xS3Server;         /*s3 server time. */
+} tUdsTimeInfo;
+
+extern const tUdsTimeInfo gs_stUdsAppCfg;
+
+/*uds app time to count*/
+#define UdsAppTimeToCount(xTime) ((xTime) / gs_stUdsAppCfg.CalledPeriod)
+
+#ifdef EN_DELAY_TIME
+typedef struct {
+    boolean isReceiveUDSMsg;
+    uint32 jumpToAPPDelayTime;
+} tJumpAppDelayTimeInfo;
+
+extern tJumpAppDelayTimeInfo gs_stJumpAPPDelayTimeInfo;
+#endif
+
 /*********************************************************/
 /*set currrent session mode. DEFAULT_SESSION/PROGRAM_SESSION/EXTEND_SESSION */
 extern void SetCurrentSession(const uint8 i_SerSessionMode);

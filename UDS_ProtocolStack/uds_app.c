@@ -21,7 +21,7 @@
 void UDS_Init(void)
 {
 #ifdef EN_DELAY_TIME
-    //    gs_stJumpAPPDelayTimeInfo.jumpToAPPDelayTime = UdsAppTimeToCount(DELAY_MAX_TIME_MS);
+    gs_stJumpAPPDelayTimeInfo.jumpToAPPDelayTime = UdsAppTimeToCount(DELAY_MAX_TIME_MS);
 #endif
 
     /*UDS alg hal init*/

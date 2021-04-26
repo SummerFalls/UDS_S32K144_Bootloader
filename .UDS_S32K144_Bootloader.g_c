@@ -413,6 +413,78 @@
         <NotCreatedByDefault>false</NotCreatedByDefault>
       </SynchronizedStaticFile>
       <SynchronizedStaticFile>
+        <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\drivers\src\power\power_manager.c</SrcFileName>
+        <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
+        <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
+        <PrjFileName>SDK\platform\drivers\src\power\power_manager.c</PrjFileName>
+        <PrjFileHash>{hash-not-available}</PrjFileHash>
+        <NoMoreGenerated>false</NoMoreGenerated>
+        <NotCreatedByDefault>false</NotCreatedByDefault>
+      </SynchronizedStaticFile>
+      <SynchronizedStaticFile>
+        <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\drivers\src\power\S32K1xx\power_manager_S32K1xx.c</SrcFileName>
+        <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
+        <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
+        <PrjFileName>SDK\platform\drivers\src\power\S32K1xx\power_manager_S32K1xx.c</PrjFileName>
+        <PrjFileHash>{hash-not-available}</PrjFileHash>
+        <NoMoreGenerated>false</NoMoreGenerated>
+        <NotCreatedByDefault>false</NotCreatedByDefault>
+      </SynchronizedStaticFile>
+      <SynchronizedStaticFile>
+        <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\drivers\src\power\S32K1xx\power_smc_hw_access.c</SrcFileName>
+        <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
+        <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
+        <PrjFileName>SDK\platform\drivers\src\power\S32K1xx\power_smc_hw_access.c</PrjFileName>
+        <PrjFileHash>{hash-not-available}</PrjFileHash>
+        <NoMoreGenerated>false</NoMoreGenerated>
+        <NotCreatedByDefault>false</NotCreatedByDefault>
+      </SynchronizedStaticFile>
+      <SynchronizedStaticFile>
+        <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\drivers\src\power\S32K1xx\power_manager_S32K1xx.h</SrcFileName>
+        <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
+        <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
+        <PrjFileName>SDK\platform\drivers\src\power\S32K1xx\power_manager_S32K1xx.h</PrjFileName>
+        <PrjFileHash>{hash-not-available}</PrjFileHash>
+        <NoMoreGenerated>false</NoMoreGenerated>
+        <NotCreatedByDefault>false</NotCreatedByDefault>
+      </SynchronizedStaticFile>
+      <SynchronizedStaticFile>
+        <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\drivers\src\power\S32K1xx\power_rcm_hw_access.h</SrcFileName>
+        <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
+        <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
+        <PrjFileName>SDK\platform\drivers\src\power\S32K1xx\power_rcm_hw_access.h</PrjFileName>
+        <PrjFileHash>{hash-not-available}</PrjFileHash>
+        <NoMoreGenerated>false</NoMoreGenerated>
+        <NotCreatedByDefault>false</NotCreatedByDefault>
+      </SynchronizedStaticFile>
+      <SynchronizedStaticFile>
+        <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\drivers\src\power\S32K1xx\power_scg_hw_access.h</SrcFileName>
+        <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
+        <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
+        <PrjFileName>SDK\platform\drivers\src\power\S32K1xx\power_scg_hw_access.h</PrjFileName>
+        <PrjFileHash>{hash-not-available}</PrjFileHash>
+        <NoMoreGenerated>false</NoMoreGenerated>
+        <NotCreatedByDefault>false</NotCreatedByDefault>
+      </SynchronizedStaticFile>
+      <SynchronizedStaticFile>
+        <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\drivers\src\power\S32K1xx\power_smc_hw_access.h</SrcFileName>
+        <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
+        <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
+        <PrjFileName>SDK\platform\drivers\src\power\S32K1xx\power_smc_hw_access.h</PrjFileName>
+        <PrjFileHash>{hash-not-available}</PrjFileHash>
+        <NoMoreGenerated>false</NoMoreGenerated>
+        <NotCreatedByDefault>false</NotCreatedByDefault>
+      </SynchronizedStaticFile>
+      <SynchronizedStaticFile>
+        <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\drivers\inc\power_manager.h</SrcFileName>
+        <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
+        <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
+        <PrjFileName>SDK\platform\drivers\inc\power_manager.h</PrjFileName>
+        <PrjFileHash>{hash-not-available}</PrjFileHash>
+        <NoMoreGenerated>false</NoMoreGenerated>
+        <NotCreatedByDefault>false</NotCreatedByDefault>
+      </SynchronizedStaticFile>
+      <SynchronizedStaticFile>
         <SrcFileName>C:\NXP\S32DS_ARM_v2.2\eclipse\ProcessorExpert\..\..\S32DS\software\S32SDK_S32K1xx_RTM_3.0.0\platform\devices\devassert.h</SrcFileName>
         <OrigSrcFileHash>{hash-not-available}</OrigSrcFileHash>
         <ReviewedSrcFileHash>{hash-not-available}</ReviewedSrcFileHash>
@@ -515,7 +587,7 @@
         <Line>Events</Line>
       </GenEventModules>
       <GenMethodsInEvents lines_count="0" />
-      <GenAllModules lines_count="9">
+      <GenAllModules lines_count="10">
         <Line>canCom1</Line>
         <Line>clockMan1</Line>
         <Line>Cpu</Line>
@@ -524,10 +596,11 @@
         <Line>lpTmr1</Line>
         <Line>lpuart1</Line>
         <Line>pin_mux</Line>
+        <Line>pwrMan1</Line>
         <Line>watchdog1</Line>
       </GenAllModules>
       <GenExternModules lines_count="0" />
-      <GenBeanModules lines_count="7">
+      <GenBeanModules lines_count="8">
         <Line>pin_mux</Line>
         <Line>clockMan1</Line>
         <Line>lpuart1</Line>
@@ -535,11 +608,12 @@
         <Line>lpTmr1</Line>
         <Line>watchdog1</Line>
         <Line>canCom1</Line>
+        <Line>pwrMan1</Line>
       </GenBeanModules>
     </GenFiles>
     <SignalListFile />
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>3</ProjectModificationStamp>
+    <ProjectModificationStamp>4</ProjectModificationStamp>
   </Options>
   <CpuID_1>
     <Generated>true</Generated>
@@ -547,7 +621,7 @@
     <GenComponentVersion>01.197</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1380297315</HeaderAge>
+    <HeaderAge>1385863889</HeaderAge>
     <CodeAge>1380285996</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>3</GenNumMethods>
@@ -941,62 +1015,100 @@
     <ExtraFile4>SDK\platform\drivers\src\flexcan\flexcan_hw_access.h</ExtraFile4>
     <ExtraFile5>SDK\platform\drivers\src\flexcan\flexcan_hw_access.c</ExtraFile5>
   </ComponentID_11>
+  <ComponentID_12>
+    <Generated>true</Generated>
+    <GenCompName>pwrMan1</GenCompName>
+    <GenComponentVersion>SDK_S32K1xx_15</GenComponentVersion>
+    <GenDriverVersion>01.00</GenDriverVersion>
+    <GenEventModule />
+    <HeaderAge>1385863889</HeaderAge>
+    <CodeAge>1385863889</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>10</GenNumMethods>
+    <POWER_SYS_Init>true</POWER_SYS_Init>
+    <POWER_SYS_Deinit>true</POWER_SYS_Deinit>
+    <POWER_SYS_SetMode>true</POWER_SYS_SetMode>
+    <POWER_SYS_GetLastMode>true</POWER_SYS_GetLastMode>
+    <POWER_SYS_GetLastModeConfig>true</POWER_SYS_GetLastModeConfig>
+    <POWER_SYS_GetCurrentMode>true</POWER_SYS_GetCurrentMode>
+    <POWER_SYS_GetErrorCallbackIndex>true</POWER_SYS_GetErrorCallbackIndex>
+    <POWER_SYS_GetErrorCallback>true</POWER_SYS_GetErrorCallback>
+    <POWER_SYS_GetDefaultConfig>true</POWER_SYS_GetDefaultConfig>
+    <POWER_SYS_GetResetSrcStatusCmd>true</POWER_SYS_GetResetSrcStatusCmd>
+    <GenNumEvents>0</GenNumEvents>
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>0</GenMethodPos>
+    <GenExtraFilesCount>8</GenExtraFilesCount>
+    <ExtraFile0>SDK\platform\drivers\inc\power_manager.h</ExtraFile0>
+    <ExtraFile1>SDK\platform\drivers\src\power\S32K1xx\power_smc_hw_access.h</ExtraFile1>
+    <ExtraFile2>SDK\platform\drivers\src\power\S32K1xx\power_scg_hw_access.h</ExtraFile2>
+    <ExtraFile3>SDK\platform\drivers\src\power\S32K1xx\power_rcm_hw_access.h</ExtraFile3>
+    <ExtraFile4>SDK\platform\drivers\src\power\S32K1xx\power_manager_S32K1xx.h</ExtraFile4>
+    <ExtraFile5>SDK\platform\drivers\src\power\S32K1xx\power_smc_hw_access.c</ExtraFile5>
+    <ExtraFile6>SDK\platform\drivers\src\power\S32K1xx\power_manager_S32K1xx.c</ExtraFile6>
+    <ExtraFile7>SDK\platform\drivers\src\power\power_manager.c</ExtraFile7>
+  </ComponentID_12>
   <UsedSrcFiles>
     <SrcFile0>Drivers\interrupt_manager.src=-1</SrcFile0>
     <SrcFile1>Drivers\osifcommon\osif.drv=-1</SrcFile1>
     <SrcFile2>Drivers\flexcan_code.drv=-1</SrcFile2>
-    <SrcFile3>Beans\_SDK\SdkOptions.chg=1353490899</SrcFile3>
-    <SrcFile4>Drivers\Common\EBGNSupport\StringLib.prg=1316652646</SrcFile4>
-    <SrcFile5>Drivers\Common\S32KSettings.inc=1316652645</SrcFile5>
-    <SrcFile6>Drivers\S32K\PinSettings_S32K144_100.prg=-1</SrcFile6>
-    <SrcFile7>Drivers\Common\HeaderFreescale.C=1316652645</SrcFile7>
-    <SrcFile8>Drivers\Common\RTOSAdaptor.prg=1316652645</SrcFile8>
-    <SrcFile9>Drivers\S32K\S32K144_SDK01\HAL_Port_Bridge.prg=1316652646</SrcFile9>
-    <SrcFile10>Drivers\sw\PinSettings.drv=-1</SrcFile10>
-    <SrcFile11>Drivers\Common\Header.doxy=1345390891</SrcFile11>
-    <SrcFile12>Drivers\Common\GenInitConfigSequence.prg=1316652645</SrcFile12>
-    <SrcFile13>Drivers\S32K\S32K144_SDK01\StaticSdk_S32K.prg=1316652646</SrcFile13>
-    <SrcFile14>Drivers\PinSettings.src=-1</SrcFile14>
-    <SrcFile15>Drivers\Common\PinSettingsAbstract.inc=-1</SrcFile15>
-    <SrcFile16>Drivers\S32K\S32K144_SDK01\lptmr.drv=-1</SrcFile16>
-    <SrcFile17>Drivers\S32K\HAL_Port_Bridge_V2.prg=1316652646</SrcFile17>
-    <SrcFile18>Drivers\S32K\S32K144_SDK01\lpuart_code.drv=-1</SrcFile18>
-    <SrcFile19>Drivers\S32K\S32_SDK\wdog.drv=-1</SrcFile19>
-    <SrcFile20>Drivers\Common\InitReg32Block.prg=1316652645</SrcFile20>
-    <SrcFile21>Drivers\S32K\StaticSdk_S32K_V4.drv=1316652646</SrcFile21>
-    <SrcFile22>Drivers\Common\ToolChain_Settings.prg=1316652645</SrcFile22>
-    <SrcFile23>Drivers\S32K\S32_SDK\wdog_code.drv=-1</SrcFile23>
-    <SrcFile24>Drivers\S32_SDK_DMA_16CH\edma.drv=-1</SrcFile24>
-    <SrcFile25>Drivers\Common\HeaderFreescale.h=1316652645</SrcFile25>
-    <SrcFile26>Drivers\Common\EBGNSupport\TimingLib.prg=1316652646</SrcFile26>
-    <SrcFile27>Drivers\S32K\S32_SDK_S32K\clock_manager.drv=-1</SrcFile27>
-    <SrcFile28>Drivers\S32K\S32K144_SDK01\lptmr_code.drv=-1</SrcFile28>
-    <SrcFile29>Drivers\Common\Header.h=1316652645</SrcFile29>
-    <SrcFile30>Drivers\sw\RTOSAdaptor\Common_RTOSAdaptor.prg=1345390891</SrcFile30>
-    <SrcFile31>Drivers\Common\Header.c=1316652645</SrcFile31>
-    <SrcFile32>Drivers\osif.src=-1</SrcFile32>
-    <SrcFile33>Drivers\sw\RTOSAdaptor\Default_RTOSAdaptor.prg=1345390891</SrcFile33>
-    <SrcFile34>Drivers\Common\WriteBlock_NotRst.prg=1316652645</SrcFile34>
-    <SrcFile35>Drivers\lptmr.src=-1</SrcFile35>
-    <SrcFile36>Drivers\Common\lpuartAbstract.inc=-1</SrcFile36>
-    <SrcFile37>Drivers\S32_SDK_DMA_16CH\edma_code.drv=-1</SrcFile37>
-    <SrcFile38>Drivers\S32K\S32K144_SDK01\interrupt_manager.drv=1316652646</SrcFile38>
-    <SrcFile39>Drivers\S32K\S32K144_SDK01\lpuart.drv=-1</SrcFile39>
-    <SrcFile40>Drivers\Common\InitRegBlock.prg=1316652645</SrcFile40>
-    <SrcFile41>Drivers\lpuart.src=-1</SrcFile41>
-    <SrcFile42>Drivers\PEx_S32K.src=1316652645</SrcFile42>
-    <SrcFile43>Drivers\Common\Static_SupportSubroutines.prg=1316652645</SrcFile43>
-    <SrcFile44>Drivers\S32K\S32_SDK_S32K\clock_manager_code.drv=-1</SrcFile44>
-    <SrcFile45>Drivers\edma.src=-1</SrcFile45>
-    <SrcFile46>Drivers\Common\S32KAbstract.inc=1316652645</SrcFile46>
-    <SrcFile47>Drivers\S32K\S32_SDK_S32K14x\flexcan.drv=-1</SrcFile47>
-    <SrcFile48>Drivers\wdog.src=-1</SrcFile48>
-    <SrcFile49>Drivers\flexcan.src=-1</SrcFile49>
-    <SrcFile50>Drivers\Common\HeaderCopyright.inc=1316652645</SrcFile50>
-    <SrcFile51>Drivers\S32K\StaticSdk_S32K.drv=1316652646</SrcFile51>
-    <SrcFile52>Drivers\GlobalConfigFiles.drv=1316652645</SrcFile52>
-    <SrcFile53>Drivers\Common\Header.end=1316652645</SrcFile53>
-    <SrcFile54>Drivers\clock_manager.src=-1</SrcFile54>
+    <SrcFile3>Drivers\power_manager.src=-1</SrcFile3>
+    <SrcFile4>Beans\_SDK\SdkOptions.chg=1353490899</SrcFile4>
+    <SrcFile5>Drivers\Common\EBGNSupport\StringLib.prg=1316652646</SrcFile5>
+    <SrcFile6>Drivers\Common\S32KSettings.inc=1316652645</SrcFile6>
+    <SrcFile7>Drivers\S32K\PinSettings_S32K144_100.prg=-1</SrcFile7>
+    <SrcFile8>Drivers\Common\HeaderFreescale.C=1316652645</SrcFile8>
+    <SrcFile9>Drivers\Common\RTOSAdaptor.prg=1316652645</SrcFile9>
+    <SrcFile10>Drivers\S32K\S32K144_SDK01\HAL_Port_Bridge.prg=1316652646</SrcFile10>
+    <SrcFile11>Drivers\sw\PinSettings.drv=-1</SrcFile11>
+    <SrcFile12>Drivers\Common\Header.doxy=1345390891</SrcFile12>
+    <SrcFile13>Drivers\Common\GenInitConfigSequence.prg=1316652645</SrcFile13>
+    <SrcFile14>Drivers\S32K\S32K144_SDK01\StaticSdk_S32K.prg=1316652646</SrcFile14>
+    <SrcFile15>Drivers\PinSettings.src=-1</SrcFile15>
+    <SrcFile16>Drivers\Common\PinSettingsAbstract.inc=-1</SrcFile16>
+    <SrcFile17>Drivers\S32K\S32K144_SDK01\lptmr.drv=-1</SrcFile17>
+    <SrcFile18>Drivers\S32K\HAL_Port_Bridge_V2.prg=1316652646</SrcFile18>
+    <SrcFile19>Drivers\S32K\S32K144_SDK01\lpuart_code.drv=-1</SrcFile19>
+    <SrcFile20>Drivers\S32K\S32_SDK\wdog.drv=-1</SrcFile20>
+    <SrcFile21>Drivers\Common\InitReg32Block.prg=1316652645</SrcFile21>
+    <SrcFile22>Drivers\S32K\StaticSdk_S32K_V4.drv=1316652646</SrcFile22>
+    <SrcFile23>Drivers\Common\ToolChain_Settings.prg=1316652645</SrcFile23>
+    <SrcFile24>Drivers\S32K\S32_SDK\wdog_code.drv=-1</SrcFile24>
+    <SrcFile25>Drivers\S32_SDK_DMA_16CH\edma.drv=-1</SrcFile25>
+    <SrcFile26>Drivers\Common\HeaderFreescale.h=1316652645</SrcFile26>
+    <SrcFile27>Drivers\Common\EBGNSupport\TimingLib.prg=1316652646</SrcFile27>
+    <SrcFile28>Drivers\S32K\S32_SDK_S32K\clock_manager.drv=-1</SrcFile28>
+    <SrcFile29>Drivers\S32K\S32K144_SDK01\lptmr_code.drv=-1</SrcFile29>
+    <SrcFile30>Drivers\Common\Header.h=1316652645</SrcFile30>
+    <SrcFile31>Drivers\sw\RTOSAdaptor\Common_RTOSAdaptor.prg=1345390891</SrcFile31>
+    <SrcFile32>Drivers\Common\Header.c=1316652645</SrcFile32>
+    <SrcFile33>Drivers\osif.src=-1</SrcFile33>
+    <SrcFile34>Drivers\sw\RTOSAdaptor\Default_RTOSAdaptor.prg=1345390891</SrcFile34>
+    <SrcFile35>Drivers\Common\WriteBlock_NotRst.prg=1316652645</SrcFile35>
+    <SrcFile36>Drivers\lptmr.src=-1</SrcFile36>
+    <SrcFile37>Drivers\Common\lpuartAbstract.inc=-1</SrcFile37>
+    <SrcFile38>Drivers\S32_SDK_DMA_16CH\edma_code.drv=-1</SrcFile38>
+    <SrcFile39>Drivers\S32K\S32K144_SDK01\interrupt_manager.drv=1316652646</SrcFile39>
+    <SrcFile40>Drivers\S32K\S32K144_SDK01\lpuart.drv=-1</SrcFile40>
+    <SrcFile41>Drivers\Common\InitRegBlock.prg=1316652645</SrcFile41>
+    <SrcFile42>Drivers\lpuart.src=-1</SrcFile42>
+    <SrcFile43>Drivers\PEx_S32K.src=1316652645</SrcFile43>
+    <SrcFile44>Drivers\Common\Static_SupportSubroutines.prg=1316652645</SrcFile44>
+    <SrcFile45>Drivers\S32K\S32K144_SDK01\power_manager_code.drv=-1</SrcFile45>
+    <SrcFile46>Drivers\S32K\S32_SDK_S32K\clock_manager_code.drv=-1</SrcFile46>
+    <SrcFile47>Drivers\edma.src=-1</SrcFile47>
+    <SrcFile48>Drivers\S32K\S32K144_SDK01\power_manager.drv=-1</SrcFile48>
+    <SrcFile49>Drivers\Common\S32KAbstract.inc=1316652645</SrcFile49>
+    <SrcFile50>Drivers\S32K\S32_SDK_S32K14x\flexcan.drv=-1</SrcFile50>
+    <SrcFile51>Drivers\wdog.src=-1</SrcFile51>
+    <SrcFile52>Drivers\flexcan.src=-1</SrcFile52>
+    <SrcFile53>Drivers\Common\HeaderCopyright.inc=1316652645</SrcFile53>
+    <SrcFile54>Drivers\S32K\StaticSdk_S32K.drv=1316652646</SrcFile54>
+    <SrcFile55>Drivers\GlobalConfigFiles.drv=1316652645</SrcFile55>
+    <SrcFile56>Drivers\Common\Header.end=1316652645</SrcFile56>
+    <SrcFile57>Drivers\clock_manager.src=-1</SrcFile57>
   </UsedSrcFiles>
 </GenerationInfo_G_C>
 

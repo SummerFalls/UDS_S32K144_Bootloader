@@ -120,7 +120,7 @@ static uint8 CANTP_TxMsg(const tUdsId i_xTxId,
     }
 
     return TRUE;
-    //ret = TransmiteCANMsg(i_xTxId, i_DataLen, i_pDataBuf, i_pfNetTxCallBack, txBlockingMaxtime);
+    //ret = TransmitCANMsg(i_xTxId, i_DataLen, i_pDataBuf, i_pfNetTxCallBack, txBlockingMaxtime);
 }
 
 /*can tp rx message: read rx msg from CAN driver RxFIFO*/

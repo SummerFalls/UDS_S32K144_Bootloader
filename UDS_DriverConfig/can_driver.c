@@ -301,12 +301,12 @@ void CANErroMainFun(void)
 }
 #endif  //end of USE_CAN_ERRO == CAN_ERRO_INTERRUPUT
 
-/*can transmite message*/
-uint8_t TransmiteCANMsg(const uint32_t i_usCANMsgID,
-                        const uint8_t i_ucDataLen,
-                        const uint8_t *i_pucDataBuf,
-                        const tpfNetTxCallBack i_pfNetTxCallBack,
-                        const uint32_t i_txBlockingMaxtime)
+/*can transmit message*/
+uint8_t TransmitCANMsg(const uint32_t i_usCANMsgID,
+                       const uint8_t i_ucDataLen,
+                       const uint8_t *i_pucDataBuf,
+                       const tpfNetTxCallBack i_pfNetTxCallBack,
+                       const uint32_t i_txBlockingMaxtime)
 {
 
     status_t CANTxStatus = STATUS_BUSY;

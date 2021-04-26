@@ -55,24 +55,13 @@ typedef enum {
 
 /*********************************************************/
 /***********************UDS App Const configuration Information************************/
-typedef struct {
-    uint8 CalledPeriod;         /*called uds period*/
-    /*security request count. If over this security request count, locked server some time.*/
-    uint8 SecurityRequestCnt;
-    tUdsTime xLockTime;         /*lock time*/
-    tUdsTime xS3Server;         /*s3 server time. */
-} tUdsTimeInfo;
-
 /* UDS time control information config table*/
-static const tUdsTimeInfo gs_stUdsAppCfg = {
+const tUdsTimeInfo gs_stUdsAppCfg = {
     1u,
     3u,
     10000u,
     5000u
 };
-
-/*uds app time to count*/
-#define UdsAppTimeToCount(xTime) ((xTime) / gs_stUdsAppCfg.CalledPeriod)
 
 /*get UDS s3 watermark timer. return s3 * S3_TIMER_WATERMARK_PERCENT / 100*/
 uint32 UDS_GetUDSS3WatermarkTimerMs(void)
@@ -83,13 +72,7 @@ uint32 UDS_GetUDSS3WatermarkTimerMs(void)
 }
 
 #ifdef EN_DELAY_TIME
-typedef struct {
-    boolean isReceiveUDSMsg;
-    uint32 jumpToAPPDelayTime;
-} tJumpAppDelayTimeInfo;
-
-/* it should be UdsAppTimeToCount(DELAY_MAX_TIME_MS) for Parameter [jumpToAPPDelayTime], but it will occur Error when compiling... */
-static tJumpAppDelayTimeInfo gs_stJumpAPPDelayTimeInfo = {FALSE, DELAY_MAX_TIME_MS};
+tJumpAppDelayTimeInfo gs_stJumpAPPDelayTimeInfo = {FALSE, 0u};
 #endif
 
 /*********************************************************/

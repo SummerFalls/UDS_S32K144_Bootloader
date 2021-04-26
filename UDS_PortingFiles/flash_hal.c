@@ -57,7 +57,7 @@ static boolean FLASH_HAL_EraseSector(const uint32 i_startAddr, const uint32 i_no
 
     uint32 length = 0u;
 
-    length = i_noEraseSectors << 12u;
+    length = i_noEraseSectors * FLASH_HAL_Get1SectorBytes();
 
     ret = EraseFlashSector(i_startAddr, length);
 

@@ -165,6 +165,7 @@ typedef enum {
 /*MCU type for erase flash time*/
 #define MCU_S12Z (1)
 #define MCU_S32K14x (2)
+#define MCU_S32K11x (3)
 
 #define MCU_TYPE (MCU_S32K14x)
 /***********************************************************/

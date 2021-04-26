@@ -223,6 +223,20 @@ Module "canCom1"   (component flexcan)
    - canCom1_FLEXCAN_DRV_GetTDCFail -Gets the value of the TDC Fail flag.
    - canCom1_FLEXCAN_DRV_ClearTDCFail -Clears the TDC Fail flag.
 
+Module "pwrMan1"   (component power_manager)
+   - pwrMan1_POWER_SYS_Init -Power manager initialization for operation.
+   - pwrMan1_POWER_SYS_Deinit -This function deinitializes the Power manager.
+   - pwrMan1_POWER_SYS_SetMode -This function configures the power mode.
+   - pwrMan1_POWER_SYS_GetLastMode -This function returns the last successfully set power mode.
+   - pwrMan1_POWER_SYS_GetLastModeConfig -This function returns the user configuration structure of the last successfully set 
+                power mode.
+   - pwrMan1_POWER_SYS_GetCurrentMode -This function returns currently running power mode.
+   - pwrMan1_POWER_SYS_GetErrorCallbackIndex -This function returns the last failed notification callback.
+   - pwrMan1_POWER_SYS_GetErrorCallback -This function returns the callback configuration structure for the last failed 
+                notification.
+   - pwrMan1_POWER_SYS_GetDefaultConfig -This function gets the power_manager configuration structure of the default power mode.
+   - pwrMan1_POWER_SYS_GetResetSrcStatusCmd -This function gets the current reset source status for specified source.
+
 Module "Cpu"       (component S32K144_100)
    - Cpu_SystemInit -This function disables the watchdog, enables FPU and the power mode protection. SystemInit is called from 
                 startup_device file.

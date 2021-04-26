@@ -30,9 +30,9 @@
 
 //#define STARTUP_ADDR (0x00000000u) /*startup address*/
 
-
+/* 以下参数与链接文件相对应 */
 /*appliction flash status info addr*/
-extern uint32_t __APP_FLASH_INFO_ADDR[];
+//extern uint32_t __APP_FLASH_INFO_ADDR[];
 //#define APP_FLASH_INFO_ADDR ((uint32_t*)__APP_FLASH_INFO_ADDR)
 #define APP_FLASH_INFO_ADDR (0x00014000u)
 
@@ -42,12 +42,12 @@ extern uint32_t __APP_FLASH_INFO_ADDR[];
 /*flash driver start addr*/
 //extern uint32_t __FLASH_DRIVER_START_ADDR[];
 ////#define FLASH_DRIVER_START_ADDR ((uint32_t*)__FLASH_DRIVER_START_ADDR)
-//#define FLASH_DRIVER_START_ADDR (0x1FFF8010u)
+//#define FLASH_DRIVER_START_ADDR (0x1FFF8000u)
 //
 ///*flash driver end addr*/
 //extern uint32_t __FLASH_DRIVER_END_ADDR[];
 ////#define FLASH_DRIVER_START_ADDR ((uint32_t*)__FLASH_DRIVER_END_ADDR)
-//#define FLASH_DRIVER_END_ADDR   (0x1FFF8810u)
+//#define FLASH_DRIVER_END_ADDR   (0x1FFF8800u)
 
 
 /*flash driver max data len*/

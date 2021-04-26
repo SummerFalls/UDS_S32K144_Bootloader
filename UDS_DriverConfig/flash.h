@@ -1,7 +1,7 @@
 /*
  * @ 名称: flash.h
  * @ 描述:
- * @作者: Tomy
+ * @ 作者: Tomy
  * @ 日期: 2021年2月5日
  * @ 版本: V1.0
  * @ 历史: V1.0 2021年2月5日 Summary
@@ -89,18 +89,18 @@ typedef struct {
 
 
 typedef struct {
-//    status_t (*FLASH_EraseAllBlock)(const flash_ssd_config_t * pSSDConfig);
-//    status_t (*FLASH_VerifyAllBlock)(const flash_ssd_config_t * pSSDConfig,uint8_t marginLevel);
+    //    status_t (*FLASH_EraseAllBlock)(const flash_ssd_config_t * pSSDConfig);
+    //    status_t (*FLASH_VerifyAllBlock)(const flash_ssd_config_t * pSSDConfig,uint8_t marginLevel);
     status_t (*FLASH_EraseSector)(const flash_ssd_config_t *pSSDConfig, uint32_t dest, uint32_t size);
     status_t (*FLASH_VerifySection)(const flash_ssd_config_t *pSSDConfig, uint32_t dest, uint16_t number, uint8_t marginLevel);
-//    void (*FLASH_EraseSuspend)(void);
-//    void (*FLASH_EraseResume)(void);
+    //    void (*FLASH_EraseSuspend)(void);
+    //    void (*FLASH_EraseResume)(void);
     status_t (*FLASH_Program)(const flash_ssd_config_t *pSSDConfig, uint32_t dest, uint32_t size, const uint8_t *pData);
     status_t (*FLASH_ProgramCheck)(const flash_ssd_config_t *pSSDConfig, uint32_t dest, uint32_t size, const uint8_t *pExpectedData, uint32_t *pFailAddr, uint8_t marginLevel);
-//    status_t (*FLASH_ProgramSection)(const flash_ssd_config_t * pSSDConfig,uint32_t dest,uint16_t number);
-//    status_t (*FLASH_EraseBlock)(const flash_ssd_config_t * pSSDConfig, uint32_t dest);
-//    status_t (*FLASH_CommandSequence)(const flash_ssd_config_t * pSSDConfig);
-//    status_t (*FLASH_VerifyBlock)(const flash_ssd_config_t * pSSDConfig,uint32_t dest,uint8_t marginLevel);
+    //    status_t (*FLASH_ProgramSection)(const flash_ssd_config_t * pSSDConfig,uint32_t dest,uint16_t number);
+    //    status_t (*FLASH_EraseBlock)(const flash_ssd_config_t * pSSDConfig, uint32_t dest);
+    //    status_t (*FLASH_CommandSequence)(const flash_ssd_config_t * pSSDConfig);
+    //    status_t (*FLASH_VerifyBlock)(const flash_ssd_config_t * pSSDConfig,uint32_t dest,uint8_t marginLevel);
 } tFlashOptInfo;
 
 //#define FLASH_API_DEBUG

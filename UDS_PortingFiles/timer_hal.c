@@ -39,6 +39,8 @@ void TIMER_HAL_Init(void)
     /* Enable IRQ for LPTMR */
     INT_SYS_EnableIRQ(LPTMR0_IRQn);
 
+    INT_SYS_EnableIRQGlobal();
+
     /* Start LPTMR counter */
     LPTMR_DRV_StartCounter(INST_LPTMR1);
 }

@@ -16,6 +16,8 @@
 #define SECTOR_LEN (4096u)
 #elif (defined MCU_TYPE) && (MCU_TYPE == MCU_S12Z)
 #define SECTOR_LEN (512u)
+#elif (defined MCU_TYPE) && (MCU_TYPE == MCU_S32K11x)
+#define SECTOR_LEN (2048u)
 #else
 #error "Please config the MCU Type"
 #endif
@@ -42,12 +44,24 @@ MagniV S12ZVL/S32ZVM   --                       21ms
 #define MAX_ERASE_SECTOR_FLASH_MS (130u)
 #endif
 
+#if  (defined MCU_TYPE) && (MCU_TYPE == MCU_S32K11x)
+#define MAX_ERASE_SECTOR_FLASH_MS (130u)
+#endif
+
+
 #if  (defined MCU_TYPE) && (MCU_TYPE == MCU_S12Z)
 #define MAX_ERASE_SECTOR_FLASH_MS (21u)
 #endif
 
 /*define vector table offset and reset handle offset*/
 #if  (defined MCU_TYPE) && (MCU_TYPE == MCU_S32K14x)
+#define APP_VECTOR_TABLE_OFFSET (0x200u) /*vector table offset from gs_astBlockNumA/B*/
+#define RESET_HANDLE_OFFSET (4u)        /*from top vector table to reset handle*/
+#define RESET_HANDLER_ADDR_LEN (4u)     /*pointer length or reset hanlder length*/
+#endif
+
+/*define vector table offset and reset handle offset*/
+#if  (defined MCU_TYPE) && (MCU_TYPE == MCU_S32K11x)
 #define APP_VECTOR_TABLE_OFFSET (0x200u) /*vector table offset from gs_astBlockNumA/B*/
 #define RESET_HANDLE_OFFSET (4u)        /*from top vector table to reset handle*/
 #define RESET_HANDLER_ADDR_LEN (4u)     /*pointer length or reset hanlder length*/
@@ -63,7 +77,7 @@ MagniV S12ZVL/S32ZVM   --                       21ms
 
 /*flash driver config*/
 const BlockInfo_t gs_astFlashDriverBlock[] = {
-    {0x1FFF8010u, 0x1FFF8810u},
+    {0x1FFF8000u, 0x1FFF8800u},
 };
 
 /*application can used space*/

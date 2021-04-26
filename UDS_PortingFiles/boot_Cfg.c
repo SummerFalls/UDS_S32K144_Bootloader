@@ -83,8 +83,9 @@ void ClearRequestEnterBootloaderFlag(void)
 /*Is power on trigger reset?*/
 boolean Boot_IsPowerOnTriggerReset(void)
 {
-    boolean result = FALSE;
+    boolean result = TRUE;
 
+    result = POWER_SYS_GetResetSrcStatusCmd(RCM, RCM_POWER_ON);
 
     return result;
 }
@@ -97,7 +98,7 @@ void Boot_PowerONClearAllFlag(void)
 
     /*clear RAM with 4 bytes for ECC*/
     for (index = 0u; index < (gs_stBootInfo.infoDataLen >> 2u); index++) {
-        *((uint32 *)gs_stBootInfo.infoStartAddr + index) = 0u;
+        *(((uint32 *)gs_stBootInfo.infoStartAddr) + index) = 0u;
     }
 
     infoCrc = Boot_CalculateInfoCRC();

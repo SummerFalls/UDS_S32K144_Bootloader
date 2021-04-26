@@ -35,12 +35,12 @@ extern void RxCANMsgMainFun(void);
 
 extern void TxCANMsgMainFun(void);
 
-/*can transmite message*/
-extern uint8_t TransmiteCANMsg(const uint32_t i_usCANMsgID,
-                               const uint8_t i_ucDataLen,
-                               const uint8_t *i_pucDataBuf,
-                               const tpfNetTxCallBack i_pfNetTxCallBack,
-                               const uint32_t i_txBlockingMaxtime);
+/*can transmit message*/
+extern uint8_t TransmitCANMsg(const uint32_t i_usCANMsgID,
+                              const uint8_t i_ucDataLen,
+                              const uint8_t *i_pucDataBuf,
+                              const tpfNetTxCallBack i_pfNetTxCallBack,
+                              const uint32_t i_txBlockingMaxtime);
 
 /*transmitted can message callback*/
 extern void TransmittedCanMsgCallBack(void);

@@ -60,7 +60,7 @@ extern void Bootloader_DebugPrint(const char *fmt, ...);
 #else
 /*Some MCU cannot called printf lib. E.g., S12Gxxx*/
 #define InitDebugPrint()
-#define DebugPrintf(fmt, args...)
+#define DebugPrintf(...)
 #endif
 
 

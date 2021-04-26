@@ -15,11 +15,11 @@
 ** @brief
 **         Main module.
 **         This module contains user's application code.
-*/         
+*/
 /*!
 **  @addtogroup main_module main module documentation
 **  @{
-*/         
+*/
 /* MODULE main */
 
 
@@ -62,13 +62,13 @@ void SendMsgMainFun(void)
     uint32 msgLength = 0u;
 
     /*get message from TP*/
-    if(TRUE == TP_DriverReadDataFromTP(8u,&aucMsgBuf[0u],&msgId, &msgLength))
+    if (TRUE == TP_DriverReadDataFromTP(8u, &aucMsgBuf[0u], &msgId, &msgLength))
     {
-        TransmiteCANMsg(msgId, msgLength, aucMsgBuf, &TP_DoTxMsgSuccesfulCallback, 0u);
+        TransmitCANMsg(msgId, msgLength, aucMsgBuf, &TP_DoTxMsgSuccesfulCallback, 0u);
     }
 }
 
-/*! 
+/*!
   \brief The main function for the project.
   \details The startup initialization sequence is the following:
  * - startup asm routine
