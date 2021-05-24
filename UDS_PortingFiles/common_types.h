@@ -27,7 +27,7 @@
 
 #ifndef NULL
 #define NULL ((void *)0)
-#endif  /* NULL */
+#endif
 
 #ifndef NULL_PTR
 #define NULL_PTR ((void *)0)
@@ -35,11 +35,11 @@
 
 #ifndef FALSE
 #define FALSE 0U
-#endif /* FALSE */
+#endif
 
 #ifndef TRUE
 #define TRUE 1U
-#endif /* TRUE */
+#endif
 
 #ifndef LITTLE
 #define LITTLE 1
@@ -156,9 +156,9 @@ typedef sint8_t sint8;
 typedef sint16_t sint16;
 typedef sint32_t sint32;
 
-//#if(!defined TYPEDEFS_H) && (!defined _STDINT) /* eCos & S32K SDK- workaround for typedefs collisions */
+//#if(!defined TYPEDEFS_H) && (!defined _STDINT) /* eCos & S32K SDK - workaround for typedefs collisions */
 //    typedef unsigned long long uint64_t;
-//#endif  /* _TYPEDEFS_H_ */
+//#endif
 
 typedef int int_t;
 typedef char char_t;

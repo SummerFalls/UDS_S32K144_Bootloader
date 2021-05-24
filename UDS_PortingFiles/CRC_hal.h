@@ -14,27 +14,27 @@
 
 #include "includes.h"
 
-#define CRC_SEED_INIT_VALUE 0xffff
+#define CRC_SEED_INIT_VALUE 0xFFFF
 typedef uint32 tCrc;
 
-extern boolean CRC_HAL_Init(void);
+boolean CRC_HAL_Init(void);
 /*!
  * @brief To create CRC.
  *
  * This function returns the state of the initial.
  *
  * @param[in] instance instance number
- * @param[in] data buf
+ * @param[in] data buffer
  * @param[in] data len
  * @param[out] CRC value
  * @return the initial state.
  */
-extern void CRC_HAL_CreatHardwareCrc(const uint8 *i_pucDataBuf, const uint32 i_ulDataLen, uint32 *m_pCurCrc);
+void CRC_HAL_CreatHardwareCrc(const uint8 *i_pucDataBuf, const uint32 i_ulDataLen, uint32 *m_pCurCrc);
 
 /*FUNCTION**********************************************************************
  *
  * Function Name : CRC_HAL_CreatHardwareCrc
- * Description   : This function use software lookup table or calculate  to create crc..
+ * Description   : This function use software lookup table or calculate  to create CRC..
  *
  * Implements : CreatCrc_Activity
  *END**************************************************************************/

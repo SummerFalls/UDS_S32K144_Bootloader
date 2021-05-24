@@ -14,10 +14,19 @@
 
 #include "boot_Cfg.h"
 
-extern void Boot_JumpToAppOrNot(void);
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
 
-/*request bootloader mode check*/
-extern boolean Boot_CheckReqBootloaderMode(void);
+void Boot_JumpToAppOrNot(void);
+
+boolean Boot_CheckReqBootloaderMode(void);
+
+#endif
+
+#ifdef UDS_PROJECT_FOR_APP
+
+boolean Boot_CheckDownlaodAPPStatus(void);
+
+#endif
 
 #endif /* BOOT_H_ */
 

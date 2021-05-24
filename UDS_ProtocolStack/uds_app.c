@@ -15,20 +15,18 @@
 #include "fls_app.h"
 #include "uds_alg_hal.h"
 
-/*********************************************************/
 
-/*UDS init*/
 void UDS_Init(void)
 {
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
 #ifdef EN_DELAY_TIME
     gs_stJumpAPPDelayTimeInfo.jumpToAPPDelayTime = UdsAppTimeToCount(DELAY_MAX_TIME_MS);
 #endif
+#endif
 
-    /*UDS alg hal init*/
     UDS_ALG_HAL_Init();
 }
 
-/*uds main function. ISO14229*/
 void UDS_MainFun(void)
 {
     uint8 UDSSerIndex = 0u;
@@ -37,77 +35,85 @@ void UDS_MainFun(void)
     uint8 isFindService = FALSE;
     uint8 SupSerItem = 0u;
     tUDSService *pstUDSService = NULL_PTR;
-
-#ifdef EN_ALG_SW
+#if defined (EN_AES_SA_ALGORITHM_SW) || defined (EN_ZLG_SA_ALGORITHM)
     UDS_ALG_HAL_AddSWTimerTickCnt();
 #endif
 
-    if (TRUE == IsS3ServerTimeout()) {
-        /*If s3 server timeout, back default session mode.*/
+    if (TRUE == IsS3ServerTimeout())
+    {
+        /* If s3 server timeout, back default session mode */
         SetCurrentSession(DEFALUT_SESSION);
-
-        /*set security level. If S3server timeout, clear current security.*/
+        /* Set security level. If S3server timeout, clear current security */
         SetSecurityLevel(NONE_SECURITY);
-
         Flash_InitDowloadInfo();
     }
 
-    /*read data from can tp*/
+    /* Read data from can TP */
     if (TRUE == TP_ReadAFrameDataFromTP(&stUdsAppMsg.xUdsId,
                                         &stUdsAppMsg.xDataLen,
-                                        stUdsAppMsg.aDataBuf)) {
+                                        stUdsAppMsg.aDataBuf))
+    {
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
         SetIsRxUdsMsg(TRUE);
+#endif
 
-        if (TRUE != IsCurDefaultSession()) {
-            /*restart s3server time*/
+        if (TRUE != IsCurDefaultSession())
+        {
+            /* Restart S3Server time */
             RestartS3Server();
         }
 
-        /*save request id type.*/
+        /* Save request ID type */
         SaveRequestIdType(stUdsAppMsg.xUdsId);
-    } else {
+    }
+    else
+    {
         return;
     }
 
-    /*get UDS service Information, start PTR and service item*/
+    /* Get UDS service Information, start PTR and service item */
     pstUDSService = GetUDSServiceInfo(&SupSerItem);
-
-    /*get UDS service ID*/
+    /* Get UDS service ID */
     UDSSerNum = stUdsAppMsg.aDataBuf[0u];
 
-    while ((UDSSerIndex < SupSerItem) && (NULL_PTR != pstUDSService)) {
-        if (UDSSerNum == pstUDSService[UDSSerIndex].SerNum) {
+    while ((UDSSerIndex < SupSerItem) && (NULL_PTR != pstUDSService))
+    {
+        if (UDSSerNum == pstUDSService[UDSSerIndex].SerNum)
+        {
             isFindService = TRUE;
 
-            if (TRUE != IsCurRxIdCanRequest(pstUDSService[UDSSerIndex].SupReqMode)) {
-                /*received ID cann't request this service.*/
-                SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], SNS, &stUdsAppMsg);
-
+            if (TRUE != IsCurRxIdCanRequest(pstUDSService[UDSSerIndex].SupReqMode))
+            {
+                /* received ID can't request this service */
+                SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], NRC_SERVICE_NOT_SUPPORTED, &stUdsAppMsg);
                 break;
             }
 
-            if (TRUE != IsCurSeesionCanRequest(pstUDSService[UDSSerIndex].SessionMode)) {
-                /*currnet session mode cann't request ths service.*/
-                SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], SNS, &stUdsAppMsg);
-
+            if (TRUE != IsCurSeesionCanRequest(pstUDSService[UDSSerIndex].SessionMode))
+            {
+                /* Current session mode can't request this service */
+                SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], NRC_SERVICE_NOT_SUPPORTED, &stUdsAppMsg);
                 break;
             }
 
-            if (TRUE != IsCurSecurityLevelRequet(pstUDSService[UDSSerIndex].ReqLevel)) {
-                /*current security level cann't request this service.*/
-                SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], SNS, &stUdsAppMsg);
-
+            if (TRUE != IsCurSecurityLevelRequet(pstUDSService[UDSSerIndex].ReqLevel))
+            {
+                /* Current security level can't request this service */
+                SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], NRC_SERVICE_NOT_SUPPORTED, &stUdsAppMsg);
                 break;
             }
 
             stUdsAppMsg.pfUDSTxMsgServiceCallBack = NULL_PTR;
 
-            /*find service, and do it.*/
-            if (NULL_PTR != pstUDSService[UDSSerIndex].pfSerNameFun) {
+            /* Find service and do it */
+            if (NULL_PTR != pstUDSService[UDSSerIndex].pfSerNameFun)
+            {
                 pstUDSService[UDSSerIndex].pfSerNameFun((tUDSService *)&pstUDSService[UDSSerIndex], &stUdsAppMsg);
-            } else {
-                /*current security level cann't request this service.*/
-                SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], SNS, &stUdsAppMsg);
+            }
+            else
+            {
+                /* Current security level cann't request this service */
+                SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], NRC_SERVICE_NOT_SUPPORTED, &stUdsAppMsg);
             }
 
             break;
@@ -116,14 +122,15 @@ void UDS_MainFun(void)
         UDSSerIndex++;
     }
 
-    if (TRUE != isFindService) {
-        /*response not support service.*/
-        SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], SNS, &stUdsAppMsg);
+    if (TRUE != isFindService)
+    {
+        /* Response not support service */
+        SetNegativeErroCode(stUdsAppMsg.aDataBuf[0u], NRC_SERVICE_NOT_SUPPORTED, &stUdsAppMsg);
     }
 
-    if (0u != stUdsAppMsg.xDataLen) {
+    if (0u != stUdsAppMsg.xDataLen)
+    {
         stUdsAppMsg.xUdsId = TP_GetConfigTxMsgID();
-
         (void)TP_WriteAFrameDataInTP(stUdsAppMsg.xUdsId,
                                      stUdsAppMsg.pfUDSTxMsgServiceCallBack,
                                      stUdsAppMsg.xDataLen,

@@ -12,7 +12,6 @@
 #include "bootloader_debug.h"
 
 #ifdef EN_DEBUG_PRINT
-/*here include platform headers for driver*/
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -21,7 +20,7 @@
 /*FUNCTION**********************************************************************
  *
  * Function Name : BOOTLOADER_DEBUG_Init
- * Description   : This function initial this module.
+ * Description   : This function init this module.
  *
  * Implements : BOOTLOADER_DEBUG_Init_Activity
  *END**************************************************************************/
@@ -40,12 +39,10 @@ void Bootloader_DebugPrintInit(void)
 void Bootloader_DebugPrint(const char *fmt, ...)
 {
     static char buffer [DEBUG_LOG_BUF_SIZE];
-
     va_list ap;
     va_start(ap, fmt);
     vsnprintf(buffer, DEBUG_LOG_BUF_SIZE, fmt, ap);
     va_end(ap);
-
     LPUART_DRV_SendDataBlocking(INST_LPUART1, (uint8 *)buffer, strlen(buffer), 1000);
 }
 #endif

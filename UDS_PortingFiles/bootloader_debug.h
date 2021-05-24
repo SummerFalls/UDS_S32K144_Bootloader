@@ -16,13 +16,11 @@
 
 #ifdef EN_DEBUG_IO
 #include "debug_IO.h"
-#endif /*#ifdef EN_DEBUG_IO*/
+#endif
 
 #ifdef EN_DEBUG_TIMER
 #include "debug_timer.h"
-#endif /*#ifdef EN_DEBUG_TIMER*/
-
-
+#endif
 
 #ifdef EN_DEBUG_IO
 #define InitDebugIO() DEBUG_IO_Init()
@@ -34,9 +32,7 @@
 #define SetDebugIOHigh()
 #define SetDebugIOLow()
 #define ToggleDebugIO()
-#endif /*#ifdef EN_DEBUG_IO*/
-
-
+#endif
 
 #ifdef EN_DEBUG_TIMER
 #define InitDebugTimer() DEBUG_TIMER_Init()
@@ -44,27 +40,24 @@
 #else
 #define InitDebugTimer()
 #define GetDegbuTimerValue()
-#endif /*#ifdef EN_DEBUG_TIMER*/
-
-
+#endif
 
 #ifdef EN_DEBUG_PRINT
 #define DEBUG_LOG_BUF_SIZE (200u)
-extern void Bootloader_DebugPrintInit(void);
-extern void Bootloader_DebugPrint(const char *fmt, ...);
+void Bootloader_DebugPrintInit(void);
+void Bootloader_DebugPrint(const char *fmt, ...);
 
 #define InitDebugPrint() Bootloader_DebugPrintInit()
 //LPUART_DRV_Init(INST_LPUART1, &lpuart1_State, &lpuart1_InitConfig0);
 //#define DebugPrintf(fmt, args...) Bootloader_DebugPrint(fmt, ##args)
 #define DebugPrintf Bootloader_DebugPrint
 #else
-/*Some MCU cannot called printf lib. E.g., S12Gxxx*/
+/* Some MCUs can't call printf lib. E.g., S12Gxxx */
 #define InitDebugPrint()
 #define DebugPrintf(...)
 #endif
 
-
-extern void BOOTLOADER_DEBUG_Init(void);
+void BOOTLOADER_DEBUG_Init(void);
 
 #endif /* BOOTLOADER_DEBUG_H_ */
 

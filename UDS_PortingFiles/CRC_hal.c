@@ -16,22 +16,19 @@
 #include "crc_cfg.h"
 #endif
 
-/*******************************************************************************
- * User Include
- ******************************************************************************/
-
 #ifdef EN_CRC_SOFTWARE
-/*crc table*/
+/* CRC lookup table(LUT) */
 #if 0
 /*
-  *CRC-16/CCITT crc table
-  *Poly:   0x1021
-  *Init:   0xFFFF
-  *RefIn:  false
-  *RefOut: false
-  *XorOut: 0x0000
-*/
-static const uint16 gs_aCrc16Tab[] = {
+ * CRC-16/CCITT
+ * Poly:        0x1021
+ * Init:        0xFFFF
+ * Reverse In:  false
+ * Reverse Out: false
+ * XOR Out:     0x0000
+ */
+static const uint16 gs_aCrc16Tab[] =
+{
     0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
     0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
     0x1231, 0x0210, 0x3273, 0x2252, 0x52B5, 0x4294, 0x72F7, 0x62D6,
@@ -68,80 +65,67 @@ static const uint16 gs_aCrc16Tab[] = {
 #endif
 
 /*
-  *CRC-16/DNP crc table
-  *Poly: 0x3D65
-  *Init:  0x0000
-  *RefIn:true
-  *RefOut:true
-  *XorOut:0xFFFF
-*/
-static const uint16 g_dnpCrcTable[256u] = {
-    0x0000, 0x365e, 0x6cbc, 0x5ae2, 0xd978, 0xef26, 0xb5c4, 0x839a,
-    0xff89, 0xc9d7, 0x9335, 0xa56b, 0x26f1, 0x10af, 0x4a4d, 0x7c13,
-    0xb26b, 0x8435, 0xded7, 0xe889, 0x6b13, 0x5d4d, 0x07af, 0x31f1,
-    0x4de2, 0x7bbc, 0x215e, 0x1700, 0x949a, 0xa2c4, 0xf826, 0xce78,
-    0x29af, 0x1ff1, 0x4513, 0x734d, 0xf0d7, 0xc689, 0x9c6b, 0xaa35,
-    0xd626, 0xe078, 0xba9a, 0x8cc4, 0x0f5e, 0x3900, 0x63e2, 0x55bc,
-    0x9bc4, 0xad9a, 0xf778, 0xc126, 0x42bc, 0x74e2, 0x2e00, 0x185e,
-    0x644d, 0x5213, 0x08f1, 0x3eaf, 0xbd35, 0x8b6b, 0xd189, 0xe7d7,
-    0x535e, 0x6500, 0x3fe2, 0x09bc, 0x8a26, 0xbc78, 0xe69a, 0xd0c4,
-    0xacd7, 0x9a89, 0xc06b, 0xf635, 0x75af, 0x43f1, 0x1913, 0x2f4d,
-    0xe135, 0xd76b, 0x8d89, 0xbbd7, 0x384d, 0x0e13, 0x54f1, 0x62af,
-    0x1ebc, 0x28e2, 0x7200, 0x445e, 0xc7c4, 0xf19a, 0xab78, 0x9d26,
-    0x7af1, 0x4caf, 0x164d, 0x2013, 0xa389, 0x95d7, 0xcf35, 0xf96b,
-    0x8578, 0xb326, 0xe9c4, 0xdf9a, 0x5c00, 0x6a5e, 0x30bc, 0x06e2,
-    0xc89a, 0xfec4, 0xa426, 0x9278, 0x11e2, 0x27bc, 0x7d5e, 0x4b00,
-    0x3713, 0x014d, 0x5baf, 0x6df1, 0xee6b, 0xd835, 0x82d7, 0xb489,
-    0xa6bc, 0x90e2, 0xca00, 0xfc5e, 0x7fc4, 0x499a, 0x1378, 0x2526,
-    0x5935, 0x6f6b, 0x3589, 0x03d7, 0x804d, 0xb613, 0xecf1, 0xdaaf,
-    0x14d7, 0x2289, 0x786b, 0x4e35, 0xcdaf, 0xfbf1, 0xa113, 0x974d,
-    0xeb5e, 0xdd00, 0x87e2, 0xb1bc, 0x3226, 0x0478, 0x5e9a, 0x68c4,
-    0x8f13, 0xb94d, 0xe3af, 0xd5f1, 0x566b, 0x6035, 0x3ad7, 0x0c89,
-    0x709a, 0x46c4, 0x1c26, 0x2a78, 0xa9e2, 0x9fbc, 0xc55e, 0xf300,
-    0x3d78, 0x0b26, 0x51c4, 0x679a, 0xe400, 0xd25e, 0x88bc, 0xbee2,
-    0xc2f1, 0xf4af, 0xae4d, 0x9813, 0x1b89, 0x2dd7, 0x7735, 0x416b,
-    0xf5e2, 0xc3bc, 0x995e, 0xaf00, 0x2c9a, 0x1ac4, 0x4026, 0x7678,
-    0x0a6b, 0x3c35, 0x66d7, 0x5089, 0xd313, 0xe54d, 0xbfaf, 0x89f1,
-    0x4789, 0x71d7, 0x2b35, 0x1d6b, 0x9ef1, 0xa8af, 0xf24d, 0xc413,
-    0xb800, 0x8e5e, 0xd4bc, 0xe2e2, 0x6178, 0x5726, 0x0dc4, 0x3b9a,
-    0xdc4d, 0xea13, 0xb0f1, 0x86af, 0x0535, 0x336b, 0x6989, 0x5fd7,
-    0x23c4, 0x159a, 0x4f78, 0x7926, 0xfabc, 0xcce2, 0x9600, 0xa05e,
-    0x6e26, 0x5878, 0x029a, 0x34c4, 0xb75e, 0x8100, 0xdbe2, 0xedbc,
-    0x91af, 0xa7f1, 0xfd13, 0xcb4d, 0x48d7, 0x7e89, 0x246b, 0x1235,
+ * CRC-16/DNP
+ * Poly:        0x3D65
+ * Init:        0x0000
+ * Reverse In:  true
+ * Reverse Out: true
+ * XOR Out:     0xFFFF
+ */
+static const uint16 g_dnpCrcTable[256u] =
+{
+    0x0000, 0x365E, 0x6CBC, 0x5AE2, 0xD978, 0xEF26, 0xB5C4, 0x839A,
+    0xFF89, 0xC9D7, 0x9335, 0xA56B, 0x26F1, 0x10AF, 0x4A4D, 0x7C13,
+    0xB26B, 0x8435, 0xDED7, 0xE889, 0x6B13, 0x5D4D, 0x07AF, 0x31F1,
+    0x4DE2, 0x7BBC, 0x215E, 0x1700, 0x949A, 0xA2C4, 0xF826, 0xCE78,
+    0x29AF, 0x1FF1, 0x4513, 0x734D, 0xF0D7, 0xC689, 0x9C6B, 0xAA35,
+    0xD626, 0xE078, 0xBA9A, 0x8CC4, 0x0F5E, 0x3900, 0x63E2, 0x55BC,
+    0x9BC4, 0xAD9A, 0xF778, 0xC126, 0x42BC, 0x74E2, 0x2E00, 0x185E,
+    0x644D, 0x5213, 0x08F1, 0x3EAF, 0xBD35, 0x8B6B, 0xD189, 0xE7D7,
+    0x535E, 0x6500, 0x3FE2, 0x09BC, 0x8A26, 0xBC78, 0xE69A, 0xD0C4,
+    0xACD7, 0x9A89, 0xC06B, 0xF635, 0x75AF, 0x43F1, 0x1913, 0x2F4D,
+    0xE135, 0xD76B, 0x8D89, 0xBBD7, 0x384D, 0x0E13, 0x54F1, 0x62AF,
+    0x1EBC, 0x28E2, 0x7200, 0x445E, 0xC7C4, 0xF19A, 0xAB78, 0x9D26,
+    0x7AF1, 0x4CAF, 0x164D, 0x2013, 0xA389, 0x95D7, 0xCF35, 0xF96B,
+    0x8578, 0xB326, 0xE9C4, 0xDF9A, 0x5C00, 0x6A5E, 0x30BC, 0x06E2,
+    0xC89A, 0xFEC4, 0xA426, 0x9278, 0x11E2, 0x27BC, 0x7D5E, 0x4B00,
+    0x3713, 0x014D, 0x5BAF, 0x6DF1, 0xEE6B, 0xD835, 0x82D7, 0xB489,
+    0xA6BC, 0x90E2, 0xCA00, 0xFC5E, 0x7FC4, 0x499A, 0x1378, 0x2526,
+    0x5935, 0x6F6B, 0x3589, 0x03D7, 0x804D, 0xB613, 0xECF1, 0xDAAF,
+    0x14D7, 0x2289, 0x786B, 0x4E35, 0xCDAF, 0xFBF1, 0xA113, 0x974D,
+    0xEB5E, 0xDD00, 0x87E2, 0xB1BC, 0x3226, 0x0478, 0x5E9A, 0x68C4,
+    0x8F13, 0xB94D, 0xE3AF, 0xD5F1, 0x566B, 0x6035, 0x3AD7, 0x0C89,
+    0x709A, 0x46C4, 0x1C26, 0x2A78, 0xA9E2, 0x9FBC, 0xC55E, 0xF300,
+    0x3D78, 0x0B26, 0x51C4, 0x679A, 0xE400, 0xD25E, 0x88BC, 0xBEE2,
+    0xC2F1, 0xF4AF, 0xAE4D, 0x9813, 0x1B89, 0x2DD7, 0x7735, 0x416B,
+    0xF5E2, 0xC3BC, 0x995E, 0xAF00, 0x2C9A, 0x1AC4, 0x4026, 0x7678,
+    0x0A6B, 0x3C35, 0x66D7, 0x5089, 0xD313, 0xE54D, 0xBFAF, 0x89F1,
+    0x4789, 0x71D7, 0x2B35, 0x1D6B, 0x9EF1, 0xA8AF, 0xF24D, 0xC413,
+    0xB800, 0x8E5E, 0xD4BC, 0xE2E2, 0x6178, 0x5726, 0x0DC4, 0x3B9A,
+    0xDC4D, 0xEA13, 0xB0F1, 0x86AF, 0x0535, 0x336B, 0x6989, 0x5FD7,
+    0x23C4, 0x159A, 0x4F78, 0x7926, 0xFABC, 0xCCE2, 0x9600, 0xA05E,
+    0x6E26, 0x5878, 0x029A, 0x34C4, 0xB75E, 0x8100, 0xDBE2, 0xEDBC,
+    0x91AF, 0xA7F1, 0xFD13, 0xCB4D, 0x48D7, 0x7E89, 0x246B, 0x1235,
 };
 
-#if 0
-static unsigned short calcDnpCrc(unsigned char *p, unsigned int count )
-{
-    unsigned int crc = 0 ;
-
-    while ( count-- ) {
-        crc = ( crc >> 8 ) ^ dnpCrcTable[( crc ^ *p++) & 0x00ff] ;
-    }
-
-    return ( (unsigned short) ( ~crc ) ) ;
-}
-#endif
 /************************************************************
-**  Description :   using software lookup table to create crc. Input data in @ i_pucDataBuf
-**  and data len in @ i_ulDataLen. When create crc successful
-**  return CRC.
+**  Description : Using software lookup table to create CRC. Input data in @i_pDataBuf
+**  and data len in @i_dataLen. When create CRC successful return CRC.
 ************************************************************/
 static void CreatSoftwareCrc16(const uint8 *i_pDataBuf, const uint32 i_dataLen, uint32 *m_pCurCrc);
 #endif
 
 #ifdef EN_CRC_HARDWARE
 /************************************************************
-**  Description :   init hardware crc
-**  data            NULL
-**  return          Null
+**  Description : Init hardware CRC
+**  data          NULL
+**  return        NULL
 ************************************************************/
 static void Crc_Init(void);
 
 /************************************************************
-**  Description :   using MCU hardware to create crc. Input data in @ i_pucDataBuf
-**  and data len in @ i_ulDataLen. When create crc successful
-**  return CRC.
+**  Description : Using MCU hardware to create CRC. Input data in @i_pucDataBuf
+**  and data len in @i_ulDataLen. When create CRC successful return CRC.
 ************************************************************/
 static void CreatHardwareCrc16(const uint8_t *i_pucDataBuf, const uint32_t i_ulDataLen, uint32_t *m_pCurCrc);
 #endif
@@ -149,7 +133,7 @@ static void CreatHardwareCrc16(const uint8_t *i_pucDataBuf, const uint32_t i_ulD
 /*FUNCTION**********************************************************************
  *
  * Function Name : CRC_Init
- * Description   : This function initial this module.
+ * Description   : This function init this module.
  *
  * Implements : CRC_Init_Activity
  *END**************************************************************************/
@@ -158,15 +142,13 @@ boolean CRC_HAL_Init(void)
 #ifdef EN_CRC_HARDWARE
     Crc_Init();
 #endif
-
-
     return TRUE;
 }
 
 /*FUNCTION**********************************************************************
  *
  * Function Name : CRC_HAL_CreatHardwareCrc
- * Description   : This function use MCU hardware to create crc.
+ * Description   : This function use MCU hardware to create CRC.
  *
  * Implements : CreatCrc_Activity
  *END**************************************************************************/
@@ -184,7 +166,7 @@ void CRC_HAL_CreatHardwareCrc(const uint8 *i_pucDataBuf, const uint32 i_ulDataLe
 /*FUNCTION**********************************************************************
  *
  * Function Name : CRC_HAL_CreatHardwareCrc
- * Description   : This function use software lookup table or calculate  to create crc..
+ * Description   : This function use software lookup table or calculate to create CRC..
  *
  * Implements : CreatCrc_Activity
  *END**************************************************************************/
@@ -204,26 +186,23 @@ void CRC_HAL_CreatSoftwareCrc(const uint8_t *i_pucDataBuf, const uint32_t i_ulDa
  *END**************************************************************************/
 void CRC_HAL_Deinit(void)
 {
-
-
 }
 
 #ifdef EN_CRC_SOFTWARE
 /************************************************************
-**  Description :   using software lookup table to create crc. Input data in @ i_pucDataBuf
-**  and data len in @ i_ulDataLen. When create crc successful
-**  return CRC.
+**  Description : Using software lookup table to create CRC. Input data in @i_pucDataBuf
+**  and data len in @i_ulDataLen. When create CRC successful return CRC.
 ************************************************************/
 static void CreatSoftwareCrc16(const uint8 *i_pDataBuf, const uint32 i_dataLen, uint32 *m_pCurCrc)
 {
     uint16 crc = 0u;
     uint32 index = 0u;
-
 #if (defined FALSH_ADDRESS_CONTINUE) && (FALSH_ADDRESS_CONTINUE == TRUE)
     crc = *m_pCurCrc;
 #endif
 
-    for (index = 0u; index < i_dataLen; index++) {
+    for (index = 0u; index < i_dataLen; index++)
+    {
         crc = ( crc >> 8 ) ^ g_dnpCrcTable[( crc ^ i_pDataBuf[index]) & 0x00ff] ;
     }
 
@@ -233,48 +212,36 @@ static void CreatSoftwareCrc16(const uint8 *i_pDataBuf, const uint32 i_dataLen, 
 
 #ifdef EN_CRC_HARDWARE
 /************************************************************
-**  Description :   using MCU hardware to create crc. Input data in @ i_pucDataBuf
-**  and data len in @ i_ulDataLen. When create crc successful
-**  return CRC.
+**  Description : Using MCU hardware to create CRC. Input data in @i_pucDataBuf
+**  and data len in @i_ulDataLen. When create CRC successful return CRC.
 ************************************************************/
 static void CreatHardwareCrc16(const uint8_t *i_pucDataBuf, const uint32_t i_ulDataLen, uint32_t *m_pCurCrc)
 {
-    /* Write your local variable definition here */
     uint32_t result = 0u;
-
 #if (defined FALSH_ADDRESS_CONTINUE) && (FALSH_ADDRESS_CONTINUE == TRUE)
     crc1_UserConfig0.seed = *m_pCurCrc;
-#endif  //end of MCU_USE_PAGING
-
-    /* Init crc hardware */
+#endif
+    /* Init CRC hardware */
     CRC_DRV_Init(INST_CRC1, &crc1_UserConfig0);
-
-
     /* Calculate CRC value for CRC_data with configuration of 16 of 32bit wide result */
     CRC_DRV_WriteData(INST_CRC1, i_pucDataBuf, i_ulDataLen);
     result = CRC_DRV_GetCrcResult(INST_CRC1);
-
     *m_pCurCrc = result;
 }
 
 /************************************************************
-**  Description :   init hardware crc
-**  data            NULL
-**  return          Null
+**  Description : Init hardware CRC
 ************************************************************/
 static void Crc_Init(void)
 {
 #ifdef USING_HARDWARE_CRC
-    /* call crc init before system clock init */
+    /* Call CRC init before system clock init */
     PCC->PCCn[PCC_CRC_INDEX] |= PCC_PCCn_CGC_MASK;
-
-    /* Init crc hardware */
+    /* Init CRC hardware */
     CRC_DRV_Init(INST_CRC1, &crc1_InitConfig0);
-
-    /* Config user crcWidth, seed, polynomial, writeTranspose, readTranspose, complementChecksum */
+    /* Configure user crcWidth, seed, polynomial, writeTranspose, readTranspose, complementChecksum */
     //CRC_DRV_Configure(INST_CRC1, &crc1_UserConfig0);
-
-#endif //end of USING_HARDWARE_CRC
+#endif
 }
 #endif
 

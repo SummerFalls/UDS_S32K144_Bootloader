@@ -14,12 +14,8 @@
 
 #include "includes.h"
 
-extern void BOOTLOADER_MAIN_Init(void (*pfBSP_Init)(void), void (*pfAbortTxMsg)(void));
-
-/*Bootloader main demo*/
-extern void BOOTLOADER_MAIN_Demo(void);
-
-void BOOTLOADER_MAIN_Deinit(void);
+void UDS_MAIN_Init(void (*pfBSP_Init)(void), void (*pfAbortTxMsg)(void));
+void UDS_MAIN_Process(void);
 
 #endif /* BOOTLOADER_MAIN_H_ */
 

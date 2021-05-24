@@ -24,6 +24,8 @@ S32K1xx 的 CAN 接 `周立功 USBCANFD-100U-mini`，使用 `ZCANPRO` 软件的 
 
 :warning: 注意：S32K144-EVB 开发板需要 12V 独立供电，CAN Transceiver 方可正常工作。
 
+:game_die: 已做通用性适配，目前一套代码理论同时支持多个型号，已测试 `S32K144` 和 `S32K118` 可以同时支持。
+
 ![Pic_ZCANPRO_ECU_Refresh][Pic_ZCANPRO_ECU_Refresh]
 
 ## :link: 关联工程
@@ -47,6 +49,23 @@ S32K1xx 的 CAN 接 `周立功 USBCANFD-100U-mini`，使用 `ZCANPRO` 软件的 
 - S32 Design Studio for ARM Version 2.2
 - ZCANPRO
 - J-Flash
+
+<br/>
+
+---
+
+<br/>
+
+### :warning: 注意
+
+![Pic_ZCANPRO_ECU_Refresh_Note_ProgramSession][Pic_ZCANPRO_ECU_Refresh_Note_ProgramSession]
+![Pic_ZCANPRO_ECU_Refresh_Note_ResetECU][Pic_ZCANPRO_ECU_Refresh_Note_ResetECU]
+
+---
+
+- 程序不能自动运行的解决办法
+
+![Note_00_程序不能自动运行的解决办法][Note_00_程序不能自动运行的解决办法]
 
 <br/>
 
@@ -1008,6 +1027,9 @@ Resulting sub-function parameter byte value (bit 7 ~ 0)
 正响应抑制位是在 Sub-Function 里的这个字节的最高位，我们把它叫做正响应抑制位。只有这个服务支持 Sub-Function 的时候，才有可能支持正响应抑制位。这里要注意的是它只是抑制正响应，而负响应是不被抑制的。
 
 [Pic_ZCANPRO_ECU_Refresh]: ./Pic_ZCANPRO_ECU_Refresh.png
+[Pic_ZCANPRO_ECU_Refresh_Note_ProgramSession]: ./Pic_ZCANPRO_ECU_Refresh_Note_ProgramSession.png
+[Pic_ZCANPRO_ECU_Refresh_Note_ResetECU]: ./Pic_ZCANPRO_ECU_Refresh_Note_ResetECU.png
+[Note_00_程序不能自动运行的解决办法]: ./Note_00_程序不能自动运行的解决办法.png
 [UDS_OSI_Model]: ./Pic_UDS_OSI.png
 [UDS_PCI_Frame]: ./Pic_UDS_PCI_Frame.png
 

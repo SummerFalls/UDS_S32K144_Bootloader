@@ -16,13 +16,13 @@
 
 #ifdef EN_DEBUG_TIMER
 
-extern void DEBUG_TIMER_Init(void);
+void DEBUG_TIMER_Init(void);
 
-extern  uint32 DEBUG_TIMER_GetTimerValue(void);
+uint32 DEBUG_TIMER_GetTimerValue(void);
 
-extern void DEBUG_TIMER_Deinit(void);
+void DEBUG_TIMER_Deinit(void);
 
-#endif /*#ifdef EN_DEBUG_TIMER*/
+#endif
 
 #endif /* DEBUG_TIMER_H_ */
 

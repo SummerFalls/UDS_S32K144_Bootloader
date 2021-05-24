@@ -14,54 +14,58 @@
 #include "fls_app.h"
 #include "CRC_hal.h"
 
-typedef struct {
-    uint8 infoDataLen;             /*Exchange inforamtion length must N * 4.*/
-    uint8 requestEnterBootloader;  /*Request enter bootloader mode flag*/
-    uint8 downloadAPPSuccessful;   /*downlaod APP successful flag*/
-    uint32 infoStartAddr;          /*exchange information start address*/
-    uint32 requestEnterBootloaderAddr; /*Request enter bootloader flag address */
-    uint32 downloadAppSuccessfulAddr;  /*download APP successful flag address*/
+typedef struct
+{
+    uint8 infoDataLen;                  /* Exchange information length must be N * 4 */
+    uint8 requestEnterBootloader;       /* Request enter bootloader mode flag */
+    uint8 downloadAPPSuccessful;        /* Download APP successful flag */
+    uint32 infoStartAddr;               /* Exchange information start address */
+    uint32 requestEnterBootloaderAddr;  /* Request enter bootloader flag address */
+    uint32 downloadAppSuccessfulAddr;   /* Download APP successful flag address */
 } tBootInfo;
 
-static const tBootInfo gs_stBootInfo = {
-    16u,    /*Exchange inforamtion length must N * 4.*/
+static const tBootInfo gs_stBootInfo =
+{
+    16u,
     0x5Au,
     0xA5u,
-    0x20006FF0u,
-    0x20006FF1u,
-    0x20006FF0u,
+    INFO_START_ADDR,
+    REQUEST_ENTER_BOOTLOADER_ADDR,
+    DOWNLOAD_APP_SUCCESSFUL_ADDR,
 };
 
-/*get information storage CRC*/
+/* Get information storage CRC */
 #define GetInfoStorageCRC() (*(uint16 *)(gs_stBootInfo.infoStartAddr + 14))
 
-/*set information CRC */
+/* Set information CRC */
 #define SetInforCRC(xCrc) ((*(uint16 *)(gs_stBootInfo.infoStartAddr + 14)) = (uint16)(xCrc))
 
-/*Is information valid?*/
+/* Is information valid? */
 static boolean Boot_IsInfoValid(void);
 
-/*calculate information CRC*/
+/* Calculate information CRC */
 static uint16 Boot_CalculateInfoCRC(void);
 
-/*set download app successful */
+
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
+/* Set download APP successful */
 void SetDownloadAppSuccessful(void)
 {
     uint16 infoCrc = 0u;
-
     *((uint8 *)gs_stBootInfo.downloadAppSuccessfulAddr) = gs_stBootInfo.downloadAPPSuccessful;
-
     infoCrc = Boot_CalculateInfoCRC();
     SetInforCRC(infoCrc);
 }
 
-/*Is request enter bootloader?*/
+/* Is request enter bootloader? */
 boolean IsRequestEnterBootloader(void)
 {
     boolean result = FALSE;
 
-    if (TRUE == Boot_IsInfoValid()) {
-        if (gs_stBootInfo.requestEnterBootloader == *((uint8 *)gs_stBootInfo.requestEnterBootloaderAddr)) {
+    if (TRUE == Boot_IsInfoValid())
+    {
+        if (gs_stBootInfo.requestEnterBootloader == *((uint8 *)gs_stBootInfo.requestEnterBootloaderAddr))
+        {
             result = TRUE;
         }
     }
@@ -69,35 +73,33 @@ boolean IsRequestEnterBootloader(void)
     return result;
 }
 
-/*clear request enter bootloader flag*/
+/* Clear request enter bootloader flag */
 void ClearRequestEnterBootloaderFlag(void)
 {
     uint16 infoCrc = 0u;
-
     *((uint8 *)gs_stBootInfo.requestEnterBootloaderAddr) = 0u;
-
     infoCrc = Boot_CalculateInfoCRC();
     SetInforCRC(infoCrc);
 }
 
-/*Is power on trigger reset?*/
+/* Is power on trigger reset?(POR) */
 boolean Boot_IsPowerOnTriggerReset(void)
 {
     boolean result = TRUE;
-
+    /* TODO Bootloader: #06 必须执行，否则在刷入一次APP后无法再次刷入 */
     result = POWER_SYS_GetResetSrcStatusCmd(RCM, RCM_POWER_ON);
-
     return result;
 }
 
-/*when power on, clear all flag in RAM for ECC.*/
+/* When power on, clear all flag in RAM for ECC */
 void Boot_PowerONClearAllFlag(void)
 {
     uint16 infoCrc = 0u;
     uint8 index = 0u;
 
-    /*clear RAM with 4 bytes for ECC*/
-    for (index = 0u; index < (gs_stBootInfo.infoDataLen >> 2u); index++) {
+    /* Clear RAM with 4 bytes for ECC */
+    for (index = 0u; index < (gs_stBootInfo.infoDataLen >> 2u); index++)
+    {
         *(((uint32 *)gs_stBootInfo.infoStartAddr) + index) = 0u;
     }
 
@@ -105,7 +107,7 @@ void Boot_PowerONClearAllFlag(void)
     SetInforCRC(infoCrc);
 }
 
-/*remap multi-core application*/
+/* Remap multi-core application */
 void Boot_RemapApplication(void)
 {
     uint32 totalCoreNo = 0u;
@@ -113,18 +115,22 @@ void Boot_RemapApplication(void)
     tAPPType appType = APP_A_TYPE;
     uint32 appMirrorAddr = 0u;
     uint32 appRemapAddr = 0u;
-
     totalCoreNo = FLASH_HAL_GetConfigCoreNo();
 
-    if (totalCoreNo > 0u) {
+    if (totalCoreNo > 0u)
+    {
         appType = Flash_GetNewestAPPType();
 
-        for (index = 0u; index < totalCoreNo; index++) {
+        for (index = 0u; index < totalCoreNo; index++)
+        {
             if ((TRUE == FLASH_HAL_GetMultiCoreMirrorAddr(appType, index, &appMirrorAddr)) &&
-                    (TRUE == FLASH_HAL_GetMultiCoreRemapAddr(appType, index, &appRemapAddr))) {
-                /*do remap multi core application*/
-            } else {
-                /*trigger MCU reset*/
+                    (TRUE == FLASH_HAL_GetMultiCoreRemapAddr(appType, index, &appRemapAddr)))
+            {
+                /* Do remap multi-core application */
+            }
+            else
+            {
+                /* Trigger MCU reset */
             }
         }
     }
@@ -133,7 +139,7 @@ void Boot_RemapApplication(void)
 /*FUNCTION**********************************************************************
  *
  * Function Name : Boot_JumpToApp
- * Description   : This function is jump to app.
+ * Description   : This function is jump to APP.
  *
  * Implements :
  *END**************************************************************************/
@@ -142,14 +148,12 @@ AppAddr JumpAppAddr = NULL;
 void Boot_JumpToApp(const uint32 i_AppAddr)
 {
     AppAddr resetHandle = (AppAddr)(i_AppAddr);
-
     (resetHandle)();
-
 #if 0
-    /*example for CodeWarroir -- MagniV*/
+    /* Example for CodeWarroir - MagniV */
     AppAddr appAddr;
-
-    __asm{
+    __asm
+    {
         LD D6, i_AppAddr
         TFR D6, X
         ST X, appAddr
@@ -157,32 +161,65 @@ void Boot_JumpToApp(const uint32 i_AppAddr)
     }
 #endif
 }
+#endif
 
-/*Is information valid?*/
+#ifdef UDS_PROJECT_FOR_APP
+void RequestEnterBootloader(void)
+{
+    uint16 infoCrc = 0u;
+    *((uint8 *)gs_stBootInfo.requestEnterBootloaderAddr) = gs_stBootInfo.requestEnterBootloader;
+    infoCrc = Boot_CalculateInfoCRC();
+    SetInforCRC(infoCrc);
+}
+
+/* Is download APP successful? */
+boolean IsDownloadAPPSccessful(void)
+{
+    boolean result = FALSE;
+
+    if (TRUE == Boot_IsInfoValid())
+    {
+        if (gs_stBootInfo.downloadAPPSuccessful == *((uint8 *)gs_stBootInfo.downloadAppSuccessfulAddr))
+        {
+            result = TRUE;
+        }
+    }
+
+    return result;
+}
+
+/* Clear download APP successful flag */
+void ClearDownloadAPPSuccessfulFlag(void)
+{
+    uint16 infoCrc = 0u;
+    *((uint8 *)gs_stBootInfo.downloadAppSuccessfulAddr) = 0u;
+    infoCrc = Boot_CalculateInfoCRC();
+    SetInforCRC(infoCrc);
+}
+#endif
+
+/* Is information valid? */
 static boolean Boot_IsInfoValid(void)
 {
     uint16 infoCrc = 0u;
     uint16 storageCrc = 0u;
     boolean result = FALSE;
-
     infoCrc = Boot_CalculateInfoCRC();
-
     storageCrc = GetInfoStorageCRC();
 
-    if (storageCrc == infoCrc) {
+    if (storageCrc == infoCrc)
+    {
         result = TRUE;
     }
 
     return result;
 }
 
-/*calculate information CRC*/
+/* Calculate information CRC */
 static uint16 Boot_CalculateInfoCRC(void)
 {
     uint32 infoCrc = 0u;
-
     CRC_HAL_CreatSoftwareCrc((const uint8 *)gs_stBootInfo.infoStartAddr, gs_stBootInfo.infoDataLen - 2u, &infoCrc);
-
     return (uint16)infoCrc;
 }
 

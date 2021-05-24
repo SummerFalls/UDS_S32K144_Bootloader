@@ -14,26 +14,32 @@
 
 #include "includes.h"
 
-/*set download app successful */
-extern void SetDownloadAppSuccessful(void);
 
-/*Is request enter bootloader?*/
-extern boolean IsRequestEnterBootloader(void);
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
 
-/*clear request enter bootloader flag*/
-extern void ClearRequestEnterBootloaderFlag(void);
+void SetDownloadAppSuccessful(void);
 
-/*Jump to APP.*/
-extern void Boot_JumpToApp(const uint32 i_AppAddr);
+boolean IsRequestEnterBootloader(void);
 
-/*remap multi-core application*/
-extern void Boot_RemapApplication(void);
+void ClearRequestEnterBootloaderFlag(void);
 
-/*when power on, clear all flag in RAM for ECC.*/
-extern void Boot_PowerONClearAllFlag(void);
+void Boot_JumpToApp(const uint32 i_AppAddr);
 
-/*Is power on trigger reset?*/
-extern boolean Boot_IsPowerOnTriggerReset(void);
+void Boot_RemapApplication(void);
+
+void Boot_PowerONClearAllFlag(void);
+
+boolean Boot_IsPowerOnTriggerReset(void);
+#endif
+
+#ifdef UDS_PROJECT_FOR_APP
+
+void RequestEnterBootloader(void);
+
+boolean IsDownloadAPPSccessful(void);
+
+void ClearDownloadAPPSuccessfulFlag(void);
+#endif
 
 #endif /* BOOT_CFG_H_ */
 

@@ -18,7 +18,6 @@ static uint16 gs_100msCnt = 0u;
 static void LPTimerISR(void)
 {
     LPTMR_DRV_ClearCompareFlag(INST_LPTMR1);
-
     TIMER_HAL_1msPeriod();
 }
 
@@ -32,15 +31,11 @@ static void LPTimerISR(void)
 void TIMER_HAL_Init(void)
 {
     LPTMR_DRV_Init(INST_LPTMR1, &lpTmr1_config0, false);
-
     /* Install IRQ handler for LPTMR interrupt */
     INT_SYS_InstallHandler(LPTMR0_IRQn, &LPTimerISR, (isr_t *)0);
-
     /* Enable IRQ for LPTMR */
     INT_SYS_EnableIRQ(LPTMR0_IRQn);
-
     INT_SYS_EnableIRQGlobal();
-
     /* Start LPTMR counter */
     LPTMR_DRV_StartCounter(INST_LPTMR1);
 }
@@ -49,17 +44,18 @@ void TIMER_HAL_Init(void)
 void TIMER_HAL_1msPeriod(void)
 {
     uint16 cntTmp = 0u;
-
     /* Just for check time overflow or not? */
     cntTmp = gs_1msCnt + 1u;
 
-    if (0u != cntTmp) {
+    if (0u != cntTmp)
+    {
         gs_1msCnt++;
     }
 
     cntTmp = gs_100msCnt + 1u;
 
-    if (0u != cntTmp) {
+    if (0u != cntTmp)
+    {
         gs_100msCnt++;
     }
 }
@@ -71,13 +67,13 @@ void TIMER_HAL_1msPeriod(void)
  *
  * Implements : Is1msTickTimeout_Activity
  *END**************************************************************************/
-boolean  TIMER_HAL_Is1msTickTimeout(void)
+boolean TIMER_HAL_Is1msTickTimeout(void)
 {
     boolean result = FALSE;
 
-    if (gs_1msCnt) {
+    if (gs_1msCnt)
+    {
         result = TRUE;
-
         gs_1msCnt--;
     }
 
@@ -91,35 +87,31 @@ boolean  TIMER_HAL_Is1msTickTimeout(void)
  *
  * Implements : Is10msTickTimeout_Activity
  *END**************************************************************************/
-
 boolean TIMER_HAL_Is100msTickTimeout(void)
 {
     boolean result = FALSE;
 
-    if (gs_100msCnt >= 100u) {
+    if (gs_100msCnt >= 100u)
+    {
         result = TRUE;
-
         gs_100msCnt -= 100u;
     }
 
     return result;
 }
 
-/* get timer tick cnt for random seed. */
+/* Get timer tick cnt for random seed. */
 uint32 TIMER_HAL_GetTimerTickCnt(void)
 {
     /* This two variables not init before used, because it used for generate random */
     uint32 hardwareTimerTickCnt;
     uint32 timerTickCnt;
-
 #if 0
-    /*For S32K1xx get timer counter(LPTIMER), get timer count will trigger the period incorrect.*/
+    /* For S32K1xx get timer counter(LPTIMER), get timer count will trigger the period incorrect. */
     hardwareTimerTickCnt = LPTMR_DRV_GetCounterValueByCount(INST_LPTMR1);
 #endif
-
 #pragma GCC diagnostic ignored "-Wuninitialized"
     timerTickCnt = ((hardwareTimerTickCnt & 0xFFFFu)) | (timerTickCnt << 16u);
-
     return timerTickCnt;
 }
 
@@ -133,7 +125,6 @@ uint32 TIMER_HAL_GetTimerTickCnt(void)
  *END**************************************************************************/
 void TIMER_HAL_Deinit(void)
 {
-
 }
 
 /* -------------------------------------------- END OF FILE -------------------------------------------- */

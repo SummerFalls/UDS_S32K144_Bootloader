@@ -11,23 +11,15 @@
 
 #include "TP.h"
 
-/*******************************************************************************
- * User Include
- ******************************************************************************/
 #ifdef EN_CAN_TP
 #include "can_tp.h"
-#endif /*#ifdef EN_CAN_TP*/
+#endif
 
 #ifdef EN_LIN_TP
 #include "LIN_TP.h"
-#endif /*#ifdef EN_LIN_TP*/
+#endif
 
 #include "multi_cyc_fifo.h"
-
-/*******************************************************************************
- * Variables
- ******************************************************************************/
-
 
 /*FUNCTION**********************************************************************
  *
@@ -38,23 +30,19 @@
  *END**************************************************************************/
 void TP_Init(void)
 {
-
 #ifdef EN_CAN_TP
     CANTP_Init();
-
-#endif /*#ifdef EN_CAN_TP*/
+#endif
 
 #ifdef EN_LIN_TP
     LINTP_Init();
-#endif /*#ifdef EN_LIN_TP*/
-
-
+#endif
 }
 
 /*FUNCTION**********************************************************************
  *
  * Function Name : TP_mainFunc
- * Description   : This function main function this module.
+ * Description   : To period run the function for TP.
  *
  * Implements : TP_Init_Activity
  *END**************************************************************************/
@@ -62,81 +50,76 @@ void TP_MainFun(void)
 {
 #ifdef EN_CAN_TP
     CANTP_MainFun();
-#endif   /*#ifdef EN_CAN_TP*/
+#endif
 
 #ifdef EN_LIN_TP
     LINTP_MainFun();
-#endif /*#ifdef EN_LIN_TP*/
-
-
+#endif
 }
 
-/*TP system tick control*/
+/* TP system tick control */
 void TP_SystemTickCtl(void)
 {
 #ifdef EN_CAN_TP
     CANTP_SytstemTickControl();
-#endif   /*#ifdef EN_CAN_TP*/
+#endif
 
 #ifdef EN_LIN_TP
     LINTP_SytstemTickControl();
-#endif /*#ifdef EN_LIN_TP*/
-
+#endif
 }
 
-
-/*read a frame from TP Rx FIFO. If no data can read return FALSE, else return TRUE*/
+/* Read a frame from TP RX FIFO. If no data can read return FALSE, else return TRUE */
 boolean TP_ReadAFrameDataFromTP(uint32 *o_pRxMsgID,
                                 uint32 *o_pxRxDataLen,
                                 uint8 *o_pDataBuf)
 {
     tErroCode eStatus;
     tLen xReadDataLen = 0u;
-
     tUDSAndTPExchangeMsgInfo exchangeMsgInfo;
-
     ASSERT(NULL_PTR == o_pRxMsgID);
     ASSERT(NULL_PTR == o_pDataBuf);
     ASSERT(NULL_PTR == o_pxRxDataLen);
-
-    /*can read data from buf*/
+    /* CAN read data from buffer */
     GetCanReadLen(RX_TP_QUEUE_ID, &xReadDataLen, &eStatus);
 
-    if (ERRO_NONE != eStatus || (xReadDataLen < sizeof(tUDSAndTPExchangeMsgInfo))) {
+    if (ERRO_NONE != eStatus || (xReadDataLen < sizeof(tUDSAndTPExchangeMsgInfo)))
+    {
         return FALSE;
     }
 
-    /*read receive ID and data len*/
+    /* Read receive ID and data len */
     ReadDataFromFifo(RX_TP_QUEUE_ID,
                      sizeof(exchangeMsgInfo),
                      (uint8 *)&exchangeMsgInfo,
                      &xReadDataLen,
                      &eStatus);
 
-    if (ERRO_NONE != eStatus || sizeof(exchangeMsgInfo) != xReadDataLen) {
-        TPDebugPrintf("Read data len erro!\n");
+    if (ERRO_NONE != eStatus || sizeof(exchangeMsgInfo) != xReadDataLen)
+    {
+        TPDebugPrintf("Read data len error!\n");
         return FALSE;
     }
 
-    /*read data from fifo*/
+    /* Read data from FIFO */
     ReadDataFromFifo(RX_TP_QUEUE_ID,
                      exchangeMsgInfo.dataLen,
                      o_pDataBuf,
                      &xReadDataLen,
                      &eStatus);
 
-    if (ERRO_NONE != eStatus || (exchangeMsgInfo.dataLen != xReadDataLen)) {
-        TPDebugPrintf("Read data erro!\n");
+    if (ERRO_NONE != eStatus || (exchangeMsgInfo.dataLen != xReadDataLen))
+    {
+        TPDebugPrintf("Read data error!\n");
         return FALSE;
     }
 
     *o_pRxMsgID = exchangeMsgInfo.msgID;
     *o_pxRxDataLen = exchangeMsgInfo.dataLen;
-
     return TRUE;
 }
 
-/*write a frame data  to tp TX FIFO*/
+/* Write a frame data to TP TX FIFO */
 boolean TP_WriteAFrameDataInTP(const uint32 i_TxMsgID,
                                const tpfUDSTxMsgCallBack i_pfUDSTxMsgCallBack,
                                const uint32 i_xTxDataLen,
@@ -145,61 +128,49 @@ boolean TP_WriteAFrameDataInTP(const uint32 i_TxMsgID,
     tErroCode eStatus;
     tLen xCanWriteLen = 0u;
     tLen xWritDataLen = (tLen)i_xTxDataLen;
-
     tUDSAndTPExchangeMsgInfo exchangeMsgInfo;
     uint32 totalWriteDataLen = i_xTxDataLen + sizeof(tUDSAndTPExchangeMsgInfo);
-
     exchangeMsgInfo.msgID = (uint32)i_TxMsgID;
     exchangeMsgInfo.dataLen = (uint32)i_xTxDataLen;
     exchangeMsgInfo.pfCallBack = (tpfUDSTxMsgCallBack)i_pfUDSTxMsgCallBack;
-
     ASSERT(NULL_PTR == i_pDataBuf);
 
-    /*check transmit ID*/
-    if (i_TxMsgID != TP_GetConfigTxMsgID()) {
+    /* Check transmit ID */
+    if (i_TxMsgID != TP_GetConfigTxMsgID())
+    {
         return FALSE;
     }
 
-    if (0u == xWritDataLen) {
+    if (0u == xWritDataLen)
+    {
         return FALSE;
     }
 
-    /*check can wirte data len*/
+    /* Check can write data len */
     GetCanWriteLen(TX_TP_QUEUE_ID, &xCanWriteLen, &eStatus);
 
-    if (ERRO_NONE != eStatus || xCanWriteLen < totalWriteDataLen) {
+    if (ERRO_NONE != eStatus || xCanWriteLen < totalWriteDataLen)
+    {
         return FALSE;
     }
 
-    /*write uds transmitt ID*/
+    /* Write UDS transmit ID */
     WriteDataInFifo(TX_TP_QUEUE_ID, (uint8 *)&exchangeMsgInfo, sizeof(tUDSAndTPExchangeMsgInfo), &eStatus);
 
-    if (ERRO_NONE != eStatus) {
+    if (ERRO_NONE != eStatus)
+    {
         return FALSE;
     }
 
-    /*write data in fifo*/
+    /* Write data in FIFO */
     WriteDataInFifo(TX_TP_QUEUE_ID, (uint8 *)i_pDataBuf, xWritDataLen, &eStatus);
 
-    if (ERRO_NONE != eStatus) {
+    if (ERRO_NONE != eStatus)
+    {
         return FALSE;
     }
 
     return TRUE;
-}
-
-
-
-/*FUNCTION**********************************************************************
- *
- * Function Name : TP_Deinit
- * Description   : This function initial this module.
- *
- * Implements : TP_Deinit_Activity
- *END**************************************************************************/
-void TP_Deinit(void)
-{
-
 }
 
 /* -------------------------------------------- END OF FILE -------------------------------------------- */

@@ -10,10 +10,7 @@
  */
 
 #include "ZLGKey.h"
-#ifdef EN_ALG_SW
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
+#ifdef EN_ZLG_SA_ALGORITHM
 
 /*******************************************************************************
 * @name   : deZLGKey
@@ -25,11 +22,13 @@ void deZLGKey(sint8 *c, sint32 clen, sint8 *pPlainText)
 {
     sint32 i;
 
-    if (clen == 0 || clen % 16 != 0) {
+    if (clen == 0 || clen % 16 != 0)
+    {
         return;
     }
 
-    for (i = 0; i < clen; i++) {
+    for (i = 0; i < clen; i++)
+    {
         pPlainText[i] = c[i] - 1;
     }
 }

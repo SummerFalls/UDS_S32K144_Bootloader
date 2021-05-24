@@ -14,11 +14,9 @@
 
 #include "uds_app_cfg.h"
 
-/*uds main function. ISO14229*/
-extern void UDS_MainFun(void);
+void UDS_MainFun(void);
 
-/*UDS init*/
-extern void UDS_Init(void);
+void UDS_Init(void);
 
 #endif /* UDS_APP_H_ */
 

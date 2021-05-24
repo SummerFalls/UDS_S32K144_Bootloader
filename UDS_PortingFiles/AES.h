@@ -14,23 +14,24 @@
 
 #include "includes.h"
 
-#ifdef EN_ALG_SW
+#ifdef EN_AES_SA_ALGORITHM_SW
 
 /**
-**  p:    plaintxt
-**  plen: plaintxt length
-**  key:  AES key
-**  ciper:cipertext
+**  p:      plain text
+**  plen:   plain text length
+**  key:    AES key
+**  cipher: cipher text
 **/
 void aes(sint8 *p, sint32 plen, sint8 *key, sint8 *cipher);
 
 /**
-** c         : ciphertext
-** clen      : ciphertext length
+** c         : cipher text
+** clen      : cipher text length
 ** key       : AES key
-** pPlainText: plaintxt
+** pPlainText: plain text
 **/
 void deAes(sint8 *c, sint32 clen, sint8 *key, sint8 *pPlainText);
+
 #endif
 
 #endif /* AES_H_ */

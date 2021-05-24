@@ -3,7 +3,7 @@
   <Header>
     <Name>UDS_S32K144_Bootloader</Name>
     <SavedBy>Tomy</SavedBy>
-    <ModificationStamp>4</ModificationStamp>
+    <ModificationStamp>5</ModificationStamp>
     <Date>2021-02-05</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1743-0713</PEversion>
@@ -3678,7 +3678,7 @@
         <ItemSymbol>LPUART1_lpuart_tx_Dir</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Input/Output</Value>
+        <Value>Output</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>LPUART2_UserName</ItemSymbol>
@@ -18287,7 +18287,7 @@
         <ReadOnly>false</ReadOnly>
         <ListItemCount>1</ListItemCount>
         <UserReadOnly>false</UserReadOnly>
-        <Expanded>false</Expanded>
+        <Expanded>true</Expanded>
         <ItemsTypeState>Beans\power_manager\Items\S32K144_SDK01\power_manager_power_managerCfg.item</ItemsTypeState>
       </ItemState>
       <ItemState>

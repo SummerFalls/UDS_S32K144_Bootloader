@@ -14,7 +14,7 @@
 
 #include "includes.h"
 
-#ifdef EN_ALG_SW
+#ifdef EN_ZLG_SA_ALGORITHM
 
 void deZLGKey(sint8 *c, sint32 clen, sint8 *pPlainText);
 

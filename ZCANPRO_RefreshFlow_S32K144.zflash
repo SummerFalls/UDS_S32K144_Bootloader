@@ -6,12 +6,8 @@
   <is_crc_cmd>true</is_crc_cmd>
   <sid>10</sid>
   <desc>进入Bootloader</desc>
-  <data>82 </data>
-  <suppress_response>true</suppress_response>
- </item>
- <item type="delay">
-  <desc>延时</desc>
-  <value>500</value>
+  <data>02 </data>
+  <suppress_response>false</suppress_response>
  </item>
  <item type="general">
   <functionaddr>false</functionaddr>
@@ -66,6 +62,8 @@
   <crc_out_reverse>1</crc_out_reverse>
   <crc_cmd>31 01 02 02 </crc_cmd>
   <crc_enable>1</crc_enable>
+  <crc_block_enable>1</crc_block_enable>
+  <file_blocks_enable>0,1</file_blocks_enable>
  </item>
  <item type="general">
   <functionaddr>false</functionaddr>
@@ -98,13 +96,15 @@
   <crc_out_reverse>1</crc_out_reverse>
   <crc_cmd>31 01 02 02 </crc_cmd>
   <crc_enable>1</crc_enable>
+  <crc_block_enable>1</crc_block_enable>
+  <file_blocks_enable>0,1</file_blocks_enable>
  </item>
  <item type="general">
   <functionaddr>false</functionaddr>
   <is_crc_cmd>true</is_crc_cmd>
   <sid>31</sid>
   <desc>例程控制</desc>
-  <data>01 02 02 AB 76</data>
+  <data>01 02 02 33 78</data>
   <suppress_response>false</suppress_response>
  </item>
  <item type="general">

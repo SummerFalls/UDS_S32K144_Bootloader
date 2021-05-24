@@ -14,26 +14,28 @@
 #include "fls_app.h"
 #include "uds_app.h"
 
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
+
 static boolean Boot_IsAPPValid(void)
 {
     boolean bResult = FALSE;
 
-    /*check app code flash status. If app code update successfull, this api return TRUE, else return FALSE.*/
+    /* Check APP code flash status */
     bResult = Flash_IsReadAppInfoFromFlashValid();
 
-    if (TRUE == bResult) {
+    if (TRUE == bResult)
+    {
         bResult = Flash_IsAppInFlashValid();
     }
 
     return bResult;
 }
 
-
 /*FUNCTION**********************************************************************
  *
  * Function Name : Boot_JumpToAppOrNot
- * Description   : This function is jump to app or not. If app valid and APP not request enter bootloader, then jump to APP.
- *               Some MCU call this function need in startup, because jump to APP need to before init Peripheral (clock...).
+ * Description   : This function is jump to APP or not. If APP valid and APP not request enter bootloader, then jump to APP.
+ *                 Some MCU call this function in startup, because 'JumpToAPP' is need to be called before peripheral initialization (clock...).
  *
  * Implements :
  *END*************************************************************************/
@@ -41,33 +43,64 @@ void Boot_JumpToAppOrNot(void)
 {
     uint32 resetHandlerAddr = 0u;
 
-    if ((TRUE == Boot_IsAPPValid()) && (TRUE != IsRequestEnterBootloader())) {
+    if ((TRUE == Boot_IsAPPValid()) && (TRUE != IsRequestEnterBootloader()))
+    {
         Boot_RemapApplication();
-
         resetHandlerAddr = Flash_GetResetHandlerAddr();
-
         Boot_JumpToApp(resetHandlerAddr);
     }
 }
 
-/*request bootloader mode check*/
+/* Request bootloader mode check */
 boolean Boot_CheckReqBootloaderMode(void)
 {
     boolean ret = FALSE;
 
-    if (TRUE == IsRequestEnterBootloader()) {
+    if (TRUE == IsRequestEnterBootloader())
+    {
         ClearRequestEnterBootloaderFlag();
 
-        /*write a message to host based on TP*/
-        if (TRUE == UDS_TxMsgToHost()) {
+        /* Write a message to host based on TP */
+        if (TRUE == UDS_TxMsgToHost())
+        {
             ret = TRUE;
-            APPDebugPrintf("\n Enter bootloader mode\n");
-        } else {
-            APPDebugPrintf("\n Enter bootloader mode and transmit confirm message failed!\n");
+            APPDebugPrintf("\nEnter bootloader mode\n");
+        }
+        else
+        {
+            APPDebugPrintf("\nEnter bootloader mode and transmit confirm message failed!\n");
         }
     }
 
     return ret;
 }
 
+#endif
+
+#ifdef UDS_PROJECT_FOR_APP
+
+boolean Boot_CheckDownlaodAPPStatus(void)
+{
+    boolean ret = FALSE;
+
+    if (TRUE == IsDownloadAPPSccessful())
+    {
+        ClearDownloadAPPSuccessfulFlag();
+
+        /* Write a message to host based on TP */
+        if (TRUE == UDS_TxMsgToHost())
+        {
+            ret = TRUE;
+            APPDebugPrintf("\nDownlaod APP successful!\n");
+        }
+        else
+        {
+            APPDebugPrintf("\nEnter APP mode and transmit confirm message failed!\n");
+        }
+    }
+
+    return ret;
+}
+
+#endif
 /* -------------------------------------------- END OF FILE -------------------------------------------- */

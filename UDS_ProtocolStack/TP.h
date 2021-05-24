@@ -12,9 +12,6 @@
 #ifndef TP_H_
 #define TP_H_
 
-/*******************************************************************************
- * User Include
- ******************************************************************************/
 #include "includes.h"
 #include "TP_cfg.h"
 
@@ -26,30 +23,20 @@
 #include "LIN_TP.h"
 #endif
 
-extern void TP_Init(void);
+void TP_Init(void);
 
-/*!
- * @brief To peroid run the function for TP.
- *
- */
-extern void TP_MainFun(void);
+void TP_MainFun(void);
 
-/*TP system tick control*/
-extern void TP_SystemTickCtl(void);
+void TP_SystemTickCtl(void);
 
+boolean TP_ReadAFrameDataFromTP(uint32 *o_pRxMsgID,
+                                uint32 *o_pxRxDataLen,
+                                uint8 *o_pDataBuf);
 
-/*read a frame  tp data  from UDS to Tp TxFIFO. If no data can read return FALSE, else return TRUE*/
-extern boolean TP_ReadAFrameDataFromTP(uint32 *o_pRxMsgID,
-                                       uint32 *o_pxRxDataLen,
-                                       uint8 *o_pDataBuf);
-
-/*write a frame data from  Tp to UDS RxFIFO*/
-extern boolean TP_WriteAFrameDataInTP(const uint32 i_TxMsgID,
-                                      const tpfUDSTxMsgCallBack i_pfUDSTxMsgCallBack,
-                                      const uint32 i_xTxDataLen,
-                                      const uint8 *i_pDataBuf);
-
-extern void TP_Deinit(void);
+boolean TP_WriteAFrameDataInTP(const uint32 i_TxMsgID,
+                               const tpfUDSTxMsgCallBack i_pfUDSTxMsgCallBack,
+                               const uint32 i_xTxDataLen,
+                               const uint8 *i_pDataBuf);
 
 #endif /* TP_H_ */
 

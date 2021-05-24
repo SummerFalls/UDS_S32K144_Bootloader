@@ -14,20 +14,20 @@
 
 #include "includes.h"
 
-extern void TIMER_HAL_Init(void);
+void TIMER_HAL_Init(void);
 
-extern boolean TIMER_HAL_Is1msTickTimeout(void);
+boolean TIMER_HAL_Is1msTickTimeout(void);
 
-/*Timer 1ms period called*/
-extern void TIMER_HAL_1msPeriod(void);
+/* Timer 1ms period called */
+void TIMER_HAL_1msPeriod(void);
 
-/*check 100ms timeout?*/
-extern boolean TIMER_HAL_Is100msTickTimeout(void);
+/* check 100ms timeout? */
+boolean TIMER_HAL_Is100msTickTimeout(void);
 
-/*get timer tick cnt for random seed.*/
-extern uint32 TIMER_HAL_GetTimerTickCnt(void);
+/* get timer tick cnt for random seed. */
+uint32 TIMER_HAL_GetTimerTickCnt(void);
 
-extern void TIMER_HAL_Deinit(void);
+void TIMER_HAL_Deinit(void);
 
 #endif /* TIMER_HAL_H_ */
 

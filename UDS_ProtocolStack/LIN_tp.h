@@ -18,17 +18,13 @@
 
 #include "multi_cyc_fifo.h"
 
-/*uds network man function*/
-extern void LINTP_MainFun(void);
+void LINTP_MainFun(void);
 
-/*LIN tp system tick control*/
-extern void LINTP_SytstemTickControl(void);
+void LINTP_SytstemTickControl(void);
 
+void LINTP_Init(void);
 
-/*Init LIN TP list*/
-extern void LINTP_Init(void);
-
-#endif /*#ifdef EN_LIN_TP*/
+#endif /* EN_LIN_TP */
 
 #endif /* LIN_TP_H_ */
 

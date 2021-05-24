@@ -26,7 +26,7 @@ void UDS_ALG_HAL_Init(void);
  * @param[out]  o_pCipherText point ciphertext
  * @return encrypt data status.
  */
-extern boolean UDS_ALG_HAL_EncryptData(const uint8 *i_pPlainText, const uint32 i_dataLen, uint8 *o_pCipherText);
+boolean UDS_ALG_HAL_EncryptData(const uint8 *i_pPlainText, const uint32 i_dataLen, uint8 *o_pCipherText);
 
 /*!
  * @brief To UDS decrypt data.
@@ -38,7 +38,7 @@ extern boolean UDS_ALG_HAL_EncryptData(const uint8 *i_pPlainText, const uint32 i
  * @param[out]  o_pPlainText point plaintext
  * @return decrypt data status.
  */
-extern boolean UDS_ALG_HAL_DecryptData(const uint8 *i_pCipherText, const uint32 i_dataLen, uint8 *o_pPlainText);
+boolean UDS_ALG_HAL_DecryptData(const uint8 *i_pCipherText, const uint32 i_dataLen, uint8 *o_pPlainText);
 
 /*!
  * @brief To UDS get random data.
@@ -49,10 +49,10 @@ extern boolean UDS_ALG_HAL_DecryptData(const uint8 *i_pCipherText, const uint32 
  * @param[out]  o_pRandomBuf point random data buff
  * @return get random data status.
  */
-extern boolean UDS_ALG_HAL_GetRandom(const uint32 i_needRandomDataLen, uint8 *o_pRandomDataBuf);
+boolean UDS_ALG_HAL_GetRandom(const uint32 i_needRandomDataLen, uint8 *o_pRandomDataBuf);
 
-/*UDS software timer tick*/
-extern void UDS_ALG_HAL_AddSWTimerTickCnt(void);
+/* UDS software timer tick */
+void UDS_ALG_HAL_AddSWTimerTickCnt(void);
 
 void UDS_ALG_HAL_Deinit(void);
 

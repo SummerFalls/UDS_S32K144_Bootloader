@@ -11,36 +11,35 @@
 
 #include "multi_cyc_fifo.h"
 
-typedef enum {
-    FIFO_EMPTY,           /*fifo empty*/
-    FIFO_USING,           /*fifo using*/
-    FIFO_FULL            /*fifo full */
+typedef enum
+{
+    FIFO_EMPTY, /* FIFO empty */
+    FIFO_USING, /* FIFO using */
+    FIFO_FULL   /* FIFO full */
 } tFifoStatus;
 
-typedef struct {
-    tId xOwnerId;                  /*owner fifo id*/
-    tLen xFifoLen;                 /*fifo len*/
-    tLen xReadAddr;                /*read fifo addr*/
-    tLen xWriteAddr;               /*write fifo addr*/
-    tFifoStatus eFifoStatus;       /*fifo status*/
-    unsigned char *pStartFifoAddr; /*start fifo addr*/
-    void *pvNextFifoList;          /*next fifo list*/
+typedef struct
+{
+    tId xOwnerId;                  /* Owner FIFO ID */
+    tLen xFifoLen;                 /* FIFO len */
+    tLen xReadAddr;                /* Read FIFO addr */
+    tLen xWriteAddr;               /* Write FIFO addr */
+    tFifoStatus eFifoStatus;       /* FIFO status */
+    unsigned char *pStartFifoAddr; /* Start FIFO addr */
+    void *pvNextFifoList;          /* Next FIFO list */
 } tFifoInfo;
 
-/*********************Marco define***************************/
-#define STRUCT_LEN (20u) /*every fifo struct used space*/
-#define TOTAL_BYTES ((STRUCT_LEN) * (FIFO_NUM) + TOTAL_FIFO_BYTES) /*config total bytes*/
-/**********************************************************/
+#define STRUCT_LEN (20u) /* Every FIFO struct used space */
+#define TOTAL_BYTES ((STRUCT_LEN) * (FIFO_NUM) + TOTAL_FIFO_BYTES) /* config total bytes */
 
-/*********************Static value define**********************/
-static unsigned char gs_ucFifo[TOTAL_BYTES] = {0};           /*total fifo len*/
-static tFifoInfo *gs_pstListHeader = (tFifoInfo *)0u;        /*manage list fifo header*/
-static tLen gs_xCleanFifoLen = TOTAL_BYTES;                  /*can used fifo len*/
+static unsigned char gs_ucFifo[TOTAL_BYTES] = {0};    /* Total FIFO len */
+static tFifoInfo *gs_pstListHeader = (tFifoInfo *)0u; /* Manage list FIFO header */
+static tLen gs_xCleanFifoLen = TOTAL_BYTES;           /* Can used FIFO len */
 
 /**********************************************************
-** Description          :   Add counter
-** Input Parameter  :   i_xFifoLen total fifo len
-** Modify Paramerer :   m_pxCounter need modify counter  Read/Write counter
+** Description      :   Add counter
+** Input Parameter  :   i_xFifoLen total FIFO len
+** Modify Parameter :   m_pxCounter need modify counter  Read/Write counter
 ***********************************************************/
 #define AddCounter(i_xFifoLen, m_pxCounter)\
     do{\
@@ -51,13 +50,13 @@ static tLen gs_xCleanFifoLen = TOTAL_BYTES;                  /*can used fifo len
         }\
     }while(0)
 
-/*add write counter used in write fifo*/
+/* Add write counter used in write FIFO */
 #define AddWriteCounter(m_pstNode)\
     do{\
         AddCounter(m_pstNode->xFifoLen, &(m_pstNode->xWriteAddr));\
     }while(0)
 
-/*Check and change current  write FIFO status*/
+/* Check and change current  write FIFO status */
 #define CheckAndChangeWriteFIFOStatus(m_pstNode) \
     do{\
         DisableAllInterrupts();\
@@ -72,13 +71,13 @@ static tLen gs_xCleanFifoLen = TOTAL_BYTES;                  /*can used fifo len
         EnableAllInterrupts();\
     }while(0u)
 
-/*add read counter used in read fifo*/
+/* Add read counter used in read FIFO */
 #define AddReadCounter(m_pstNode)\
     do{\
         AddCounter(m_pstNode->xFifoLen, &(m_pstNode->xReadAddr));\
     }while(0)
 
-/*Check and change current read FIFO status*/
+/* Check and change current read FIFO status */
 #define CheckAndChangeReadFIFOStatus(m_pstNode) \
     do{\
         DisableAllInterrupts();\
@@ -94,29 +93,25 @@ static tLen gs_xCleanFifoLen = TOTAL_BYTES;                  /*can used fifo len
     }while(0u)
 
 
-/*get fifo list header*/
+/* Get FIFO list header */
 #define GetListHeader(o_psListHeader)\
     do{\
         (o_psListHeader) = gs_pstListHeader;\
     }while(0)
 
-/**********************************************************/
-
-/*********************Static function define*******************/
 static void AddInList(tFifoInfo *i_pstFifoNode, tFifoInfo **m_ppstHeader, tErroCode *o_peAddStatus);
 static void FindFifo(tId i_xFifoId, tFifoInfo **o_ppstNode, tErroCode *o_peFindStatus);
-/**********************************************************/
 
 /**********************************************************
-**  Function Name   :   ApplyFifo
-**  Description     :   Apply a fifo
-**  Input Parameter :   i_xApplyFifoLen need apply fifo len
-                        i_xFifoId fifo id. Use find this fifo.
+**  Function Name       :   ApplyFifo
+**  Description         :   Apply a FIFO
+**  Input Parameter     :   i_xApplyFifoLen need apply FIFO len
+                            i_xFifoId FIFO ID. Use find this FIFO.
 **  Modify Parameter    :   none
 **  Output Parameter    :   o_peApplyStatus apply status. If apply success ERRO_NONE, else ERRO_XXX
 **  Return Value        :   none
-**  Version         :   v00.00.01
-**  Author          :   Tomlin
+**  Version             :   v00.00.01
+**  Author              :   Tomlin
 **  Created Date        :   2013-3-27
 **********************************************************/
 void ApplyFifo(tLen i_xApplyFifoLen, tLen i_xFifoId, tErroCode *o_peApplyStatus)
@@ -124,32 +119,33 @@ void ApplyFifo(tLen i_xApplyFifoLen, tLen i_xFifoId, tErroCode *o_peApplyStatus)
     tFifoInfo *pstNode = (tFifoInfo *)0u;
     tLen xNodeNeedSpace = 0u;
     uint32 CleanFIFOLenTmp = 0u;
-
 #ifdef SAFE_LEVEL_O3
 
-    if ((tErroCode *)0u == o_peApplyStatus) {
+    if ((tErroCode *)0u == o_peApplyStatus)
+    {
         return;
     }
 
-    /*confirm apply FIFO header start align as 4Bytes*/
+    /* Confirm apply FIFO header start align as 4Bytes */
     CleanFIFOLenTmp = (uint32)(&gs_ucFifo[TOTAL_BYTES - gs_xCleanFifoLen]) & 0x03u;
 
-    if ((i_xApplyFifoLen + STRUCT_LEN + CleanFIFOLenTmp) > gs_xCleanFifoLen) {
+    if ((i_xApplyFifoLen + STRUCT_LEN + CleanFIFOLenTmp) > gs_xCleanFifoLen)
+    {
         *o_peApplyStatus = ERRO_OVER_MAX;
-
         return;
     }
 
 #endif
-
     FindFifo(i_xFifoId, &pstNode, o_peApplyStatus);
 
-    if (ERRO_NONE == *o_peApplyStatus) { /*note if ERRO_NONE that means id have registered.*/
+    if (ERRO_NONE == *o_peApplyStatus)   /* Note if ERRO_NONE that means ID have registered. */
+    {
         *o_peApplyStatus = ERRO_REGISTERED_SECOND;
         return;
     }
 
-    if (CleanFIFOLenTmp) {
+    if (CleanFIFOLenTmp)
+    {
         gs_xCleanFifoLen -= CleanFIFOLenTmp;
     }
 
@@ -161,27 +157,24 @@ void ApplyFifo(tLen i_xApplyFifoLen, tLen i_xFifoId, tErroCode *o_peApplyStatus)
     pstNode->xWriteAddr = 0u;
     pstNode->pStartFifoAddr = (unsigned char *)((tFifoInfo *)(&gs_ucFifo[TOTAL_BYTES - gs_xCleanFifoLen]) + 1u);
     pstNode->eFifoStatus = FIFO_EMPTY;
-
     xNodeNeedSpace = (tLen)((unsigned char *)((tFifoInfo *)(&gs_ucFifo[TOTAL_BYTES - gs_xCleanFifoLen]) + 1u) -
                             (unsigned char *)(&gs_ucFifo[TOTAL_BYTES - gs_xCleanFifoLen]));
-
     xNodeNeedSpace += i_xApplyFifoLen;
     gs_xCleanFifoLen -= xNodeNeedSpace;
-
     AddInList(pstNode, &gs_pstListHeader, o_peApplyStatus);
 }
 
 /**********************************************************
-**  Function Name   :   WriteDataInFifo
-**  Description     :   write data in fifo.
-**  Input Parameter :   i_xFifoId   fifo id
-                        i_pucWriteDataBuf Need write data buf
-                        i_xWriteDatalen  write data len
+**  Function Name       :   WriteDataInFifo
+**  Description         :   write data in FIFO.
+**  Input Parameter     :   i_xFifoId   FIFO ID
+                            i_pucWriteDataBuf Need write data buffer
+                            i_xWriteDatalen  write data len
 **  Modify Parameter    :   none
-**  Output Parameter    :   o_peWriteStatus write data status. If successfull ERRO_NONE, else ERRO_XX
+**  Output Parameter    :   o_peWriteStatus write data status. If successful ERRO_NONE, else ERRO_XX
 **  Return Value        :   none
-**  Version         :   v00.00.01
-**  Author          :   Tomlin
+**  Version             :   v00.00.01
+**  Author              :   Tomlin
 **  Created Date        :   2013-3-27
 **********************************************************/
 void WriteDataInFifo(tId i_xFifoId,
@@ -192,62 +185,63 @@ void WriteDataInFifo(tId i_xFifoId,
     tFifoInfo *pstNode = (tFifoInfo *)0u;
     tLen xIndex = 0u;
     tLen xCanWriteTotal = 0u;
-
 #ifdef SAFE_LEVEL_O3
 
-    if ((tErroCode *)0u == o_peWriteStatus) {
+    if ((tErroCode *)0u == o_peWriteStatus)
+    {
         return;
     }
 
-    if ((unsigned char *)0u == i_pucWriteDataBuf) {
+    if ((unsigned char *)0u == i_pucWriteDataBuf)
+    {
         *o_peWriteStatus = ERRO_POINTER_NULL;
-
         return;
     }
 
 #endif
-
     GetCanWriteLen(i_xFifoId, &xCanWriteTotal, o_peWriteStatus);
 
-    if (ERRO_NONE != *o_peWriteStatus) {
+    if (ERRO_NONE != *o_peWriteStatus)
+    {
         return;
     }
 
-    if (i_xWriteDatalen > xCanWriteTotal) {
+    if (i_xWriteDatalen > xCanWriteTotal)
+    {
         *o_peWriteStatus = ERRO_OVER_MAX;
-
         return;
     }
 
     FindFifo(i_xFifoId, &pstNode, o_peWriteStatus);
 
-    if (ERRO_NONE != *o_peWriteStatus) {
+    if (ERRO_NONE != *o_peWriteStatus)
+    {
         return;
     }
 
-    for (xIndex = 0u; xIndex < i_xWriteDatalen; xIndex++) {
+    for (xIndex = 0u; xIndex < i_xWriteDatalen; xIndex++)
+    {
         (pstNode->pStartFifoAddr)[pstNode->xWriteAddr] = i_pucWriteDataBuf[xIndex];
         AddWriteCounter(pstNode);
     }
 
-    /*check and change write FIFO status*/
+    /* Check and change write FIFO status */
     CheckAndChangeWriteFIFOStatus(pstNode);
-
     *o_peWriteStatus = ERRO_NONE;
 }
 
 /**********************************************************
-**  Function Name   :   ReadDataFromFifo
-**  Description     :   Read data from fifo.
-**  Input Parameter :   i_xFifoId need read fifo
-                        i_xNeedReadDataLen read data len
+**  Function Name       :   ReadDataFromFifo
+**  Description         :   Read data from FIFO.
+**  Input Parameter     :   i_xFifoId need read FIFO
+                            i_xNeedReadDataLen read data len
 **  Modify Parameter    :   none
-**  Output Parameter    :   o_pucReadDataBuf need read data buf.
-                        o_pxReadLen need read data len
-                        o_peReadStatus read status. If read successfull ERRO_NONE, else ERRO_XXX
+**  Output Parameter    :   o_pucReadDataBuf need read data buffer.
+                            o_pxReadLen need read data len
+                            o_peReadStatus read status. If read successful ERRO_NONE, else ERRO_XXX
 **  Return Value        :   none
-**  Version         :   v00.00.01
-**  Author          :   Tomlin
+**  Version             :   v00.00.01
+**  Author              :   Tomlin
 **  Created Date        :   2013-3-27
 **********************************************************/
 void ReadDataFromFifo(tId i_xFifoId, tLen i_xNeedReadDataLen,
@@ -258,92 +252,98 @@ void ReadDataFromFifo(tId i_xFifoId, tLen i_xNeedReadDataLen,
     tFifoInfo *pstNode = (tFifoInfo *)0u;
     tLen xIndex = 0u;
     tLen xCanReadTotal = 0u;
-
 #ifdef SAFE_LEVEL_O3
 
-    if ((tErroCode *)0u == o_peReadStatus) {
+    if ((tErroCode *)0u == o_peReadStatus)
+    {
         return;
     }
 
     if ((unsigned char *)0u == o_pucReadDataBuf ||
             (tLen *)0u == o_pxReadLen ||
-            (tLen)0u == i_xNeedReadDataLen ) {
+            (tLen)0u == i_xNeedReadDataLen )
+    {
         *o_peReadStatus = ERRO_POINTER_NULL;
-
         return;
     }
 
 #endif
-
     GetCanReadLen(i_xFifoId, &xCanReadTotal, o_peReadStatus);
 
-    if (ERRO_NONE != *o_peReadStatus) {
+    if (ERRO_NONE != *o_peReadStatus)
+    {
         return;
     }
 
     FindFifo(i_xFifoId, &pstNode, o_peReadStatus);
 
-    if (ERRO_NONE != *o_peReadStatus) {
+    if (ERRO_NONE != *o_peReadStatus)
+    {
         return;
     }
 
     xCanReadTotal = xCanReadTotal > i_xNeedReadDataLen ? i_xNeedReadDataLen : xCanReadTotal;
     *o_pxReadLen = xCanReadTotal;
 
-    for (xIndex = 0u; xIndex < xCanReadTotal; xIndex++) {
+    for (xIndex = 0u; xIndex < xCanReadTotal; xIndex++)
+    {
         o_pucReadDataBuf[xIndex] = (pstNode->pStartFifoAddr)[pstNode->xReadAddr] ;
         AddReadCounter(pstNode);
     }
 
-    /*check and change read FIFO status*/
+    /* Check and change read FIFO status */
     CheckAndChangeReadFIFOStatus(pstNode);
-
     *o_peReadStatus = ERRO_NONE;
 }
 
 /**********************************************************
-**  Function Name   :   GetCanReadLen
-**  Description     :   Get fifo have data.
-**  Input Parameter :   i_xFifoId fifo id
+**  Function Name       :   GetCanReadLen
+**  Description         :   Get FIFO have data.
+**  Input Parameter     :   i_xFifoId FIFO ID
 **  Modify Parameter    :   none
 **  Output Parameter    :   o_pxCanReadLen how much data can read.
-                        o_peGetStatus get status. If get successfull ERRO_NONE, else ERRO_XXX
+                            o_peGetStatus get status. If get successful ERRO_NONE, else ERRO_XXX
 **  Return Value        :   none
-**  Version         :   v00.00.01
-**  Author          :   Tomlin
+**  Version             :   v00.00.01
+**  Author              :   Tomlin
 **  Created Date        :   2013-3-27
 **********************************************************/
 void GetCanReadLen(tId i_xFifoId, tLen *o_pxCanReadLen, tErroCode *o_peGetStatus)
 {
     tFifoInfo *pstNode = (tFifoInfo *)0u;
-
 #ifdef SAFE_LEVEL_O3
 
-    if ((tErroCode *)0u == o_peGetStatus) {
+    if ((tErroCode *)0u == o_peGetStatus)
+    {
         return;
     }
 
-    if ((tLen *)0u == o_pxCanReadLen) {
+    if ((tLen *)0u == o_pxCanReadLen)
+    {
         *o_peGetStatus = ERRO_POINTER_NULL;
-
         return;
     }
 
 #endif
-
     FindFifo(i_xFifoId, &pstNode, o_peGetStatus);
 
-    if (ERRO_NONE != *o_peGetStatus) {
+    if (ERRO_NONE != *o_peGetStatus)
+    {
         return;
     }
 
-    if (FIFO_USING == pstNode->eFifoStatus) {
+    if (FIFO_USING == pstNode->eFifoStatus)
+    {
         *o_pxCanReadLen = (pstNode->xReadAddr > pstNode->xWriteAddr) ?
                           (pstNode->xFifoLen - pstNode->xReadAddr + pstNode->xWriteAddr) :
                           (pstNode->xWriteAddr - pstNode->xReadAddr);
-    } else if (FIFO_FULL == pstNode->eFifoStatus) {
+    }
+    else if (FIFO_FULL == pstNode->eFifoStatus)
+    {
         *o_pxCanReadLen = pstNode->xFifoLen;
-    } else {
+    }
+    else
+    {
         *o_pxCanReadLen = (tLen)0u;
     }
 
@@ -351,48 +351,53 @@ void GetCanReadLen(tId i_xFifoId, tLen *o_pxCanReadLen, tErroCode *o_peGetStatus
 }
 
 /**********************************************************
-**  Function Name   :   GetCanWriteLen
-**  Description     :   Get can write data.
-**  Input Parameter :   i_xFifoId fifo id
+**  Function Name       :   GetCanWriteLen
+**  Description         :   Get can write data.
+**  Input Parameter     :   i_xFifoId FIFO ID
 **  Modify Parameter    :   none
 **  Output Parameter    :   o_pxCanWriteLen how much data can write.
-                        o_peGetStatus get data status. If get successfull ERRO_NONE, esle ERRO_XX
+                            o_peGetStatus get data status. If get successful ERRO_NONE, else ERRO_XX
 **  Return Value        :   none
-**  Version         :   v00.00.01
-**  Author          :   Tomlin
+**  Version             :   v00.00.01
+**  Author              :   Tomlin
 **  Created Date        :   2013-3-27
 **********************************************************/
 void GetCanWriteLen(tId i_xFifoId, tLen *o_pxCanWriteLen, tErroCode *o_peGetStatus)
 {
     tFifoInfo *pstNode = (tFifoInfo *)0u;
-
 #ifdef SAFE_LEVEL_O3
 
-    if ((tErroCode *)0u == o_peGetStatus) {
+    if ((tErroCode *)0u == o_peGetStatus)
+    {
         return;
     }
 
-    if ((tLen *)0u == o_pxCanWriteLen) {
+    if ((tLen *)0u == o_pxCanWriteLen)
+    {
         *o_peGetStatus = ERRO_POINTER_NULL;
-
         return;
     }
 
 #endif
-
     FindFifo(i_xFifoId, &pstNode, o_peGetStatus);
 
-    if (ERRO_NONE != *o_peGetStatus) {
+    if (ERRO_NONE != *o_peGetStatus)
+    {
         return;
     }
 
-    if (FIFO_USING == pstNode->eFifoStatus) {
+    if (FIFO_USING == pstNode->eFifoStatus)
+    {
         *o_pxCanWriteLen = (pstNode->xReadAddr > pstNode->xWriteAddr) ?
                            (pstNode->xReadAddr - pstNode->xWriteAddr) :
                            (pstNode->xFifoLen + pstNode->xReadAddr - pstNode->xWriteAddr);
-    } else if (FIFO_EMPTY == pstNode->eFifoStatus) {
+    }
+    else if (FIFO_EMPTY == pstNode->eFifoStatus)
+    {
         *o_pxCanWriteLen = pstNode->xFifoLen;
-    } else {
+    }
+    else
+    {
         *o_pxCanWriteLen = (tLen)0u;
     }
 
@@ -400,47 +405,48 @@ void GetCanWriteLen(tId i_xFifoId, tLen *o_pxCanWriteLen, tErroCode *o_peGetStat
 }
 
 /**********************************************************
-**  Function Name   :   AddInList
-**  Description     :   Add node in list
-**  Input Parameter :   i_pstFifoNode need add in list node.
+**  Function Name       :   AddInList
+**  Description         :   Add node in list
+**  Input Parameter     :   i_pstFifoNode need add in list node.
 **  Modify Parameter    :   m_ppstHeader header list
 **  Output Parameter    :   o_peAddStatus add status
 **  Return Value        :   none
-**  Version         :   v00.00.01
-**  Author          :   Tomlin
+**  Version             :   v00.00.01
+**  Author              :   Tomlin
 **  Created Date        :   2013-3-26
 **********************************************************/
 static void AddInList(tFifoInfo *i_pstFifoNode, tFifoInfo **m_ppstHeader, tErroCode *o_peAddStatus)
 {
     tFifoInfo *pstTemp = (tFifoInfo *)0u;
-
 #ifdef SAFE_LEVEL_O3
 
-    if ((tErroCode *)0u == o_peAddStatus) {
+    if ((tErroCode *)0u == o_peAddStatus)
+    {
         return;
     }
 
-    if ((tFifoInfo **)0u == m_ppstHeader || (tFifoInfo *)0u == i_pstFifoNode) {
+    if ((tFifoInfo **)0u == m_ppstHeader || (tFifoInfo *)0u == i_pstFifoNode)
+    {
         *o_peAddStatus = ERRO_POINTER_NULL;
-
         return;
     }
 
 #endif
 
-    if ((tFifoInfo *)0u == *m_ppstHeader) {
+    if ((tFifoInfo *)0u == *m_ppstHeader)
+    {
         *m_ppstHeader = i_pstFifoNode;
         *o_peAddStatus = ERRO_NONE;
-
         return;
     }
 
     pstTemp = *m_ppstHeader;
 
-    while ((void *)0u != pstTemp->pvNextFifoList) {
-        if (i_pstFifoNode == pstTemp) {
+    while ((void *)0u != pstTemp->pvNextFifoList)
+    {
+        if (i_pstFifoNode == pstTemp)
+        {
             *o_peAddStatus = ERRO_REGISTERED_SECOND;
-
             return;
         }
 
@@ -449,49 +455,46 @@ static void AddInList(tFifoInfo *i_pstFifoNode, tFifoInfo **m_ppstHeader, tErroC
 
     pstTemp->pvNextFifoList = (void *)i_pstFifoNode;
     i_pstFifoNode->pvNextFifoList = (tErroCode *)0u;
-
     *o_peAddStatus = ERRO_NONE;
-
 }
 
 /**********************************************************
-**  Function Name   :   FindFifo
-**  Description     :   Find fifo in fifo list.
-**  Input Parameter :   FindFifo
+**  Function Name       :   FindFifo
+**  Description         :   Find FIFO in FIFO list.
+**  Input Parameter     :   FindFifo
 **  Modify Parameter    :   none
 **  Output Parameter    :   o_ppstNode
-                        o_peFindStatus
+                            o_peFindStatus
 **  Return Value        :   none
-**  Version         :   v00.00.01
-**  Author          :   Tomlin
+**  Version             :   v00.00.01
+**  Author              :   Tomlin
 **  Created Date        :   2013-3-26
 **********************************************************/
 static void FindFifo(tId i_xFifoId, tFifoInfo **o_ppstNode, tErroCode *o_peFindStatus)
 {
     tFifoInfo *pstNode = (tFifoInfo *)0u;
-
 #ifdef SAFE_LEVEL_O3
 
-    if ((tErroCode *)0u == o_peFindStatus) {
+    if ((tErroCode *)0u == o_peFindStatus)
+    {
         return;
     }
 
-    if ((tFifoInfo **)0u == o_ppstNode) {
+    if ((tFifoInfo **)0u == o_ppstNode)
+    {
         *o_peFindStatus = ERRO_POINTER_NULL;
-
         return;
     }
 
 #endif
-
     GetListHeader(pstNode);
 
-    while ((tFifoInfo *)0u != pstNode) {
-        if (i_xFifoId == pstNode->xOwnerId) {
+    while ((tFifoInfo *)0u != pstNode)
+    {
+        if (i_xFifoId == pstNode->xOwnerId)
+        {
             *o_peFindStatus = ERRO_NONE;
-
             *o_ppstNode = pstNode;
-
             return;
         }
 
@@ -502,31 +505,31 @@ static void FindFifo(tId i_xFifoId, tFifoInfo **o_ppstNode, tErroCode *o_peFindS
 }
 
 /**********************************************************
-**  Function Name   :   ClearFIFO
-**  Description     :   Clear FIFO, set read pointer equal write pointer
-**  Input Parameter :   i_xFifoId fifo id
+**  Function Name       :   ClearFIFO
+**  Description         :   Clear FIFO, set read pointer equal write pointer
+**  Input Parameter     :   i_xFifoId FIFO ID
 **  Modify Parameter    :   none
-**  Output Parameter    :   o_peGetStatus get data status. If get successfull ERRO_NONE, esle ERRO_XX
+**  Output Parameter    :   o_peGetStatus get data status. If get successful ERRO_NONE, else ERRO_XX
 **  Return Value        :   none
-**  Version         :   v00.00.01
-**  Author          :   Tomlin
+**  Version             :   v00.00.01
+**  Author              :   Tomlin
 **  Created Date        :   2019-6-18
 **********************************************************/
 void ClearFIFO(tId i_xFifoId, tErroCode *o_peGetStatus)
 {
     tFifoInfo *pstNode = (tFifoInfo *)0u;
-
 #ifdef SAFE_LEVEL_O3
 
-    if ((tErroCode *)0u == o_peGetStatus) {
+    if ((tErroCode *)0u == o_peGetStatus)
+    {
         return;
     }
 
 #endif
-
     FindFifo(i_xFifoId, &pstNode, o_peGetStatus);
 
-    if (ERRO_NONE != *o_peGetStatus) {
+    if (ERRO_NONE != *o_peGetStatus)
+    {
         return;
     }
 
@@ -534,7 +537,6 @@ void ClearFIFO(tId i_xFifoId, tErroCode *o_peGetStatus)
     pstNode->eFifoStatus = FIFO_EMPTY;
     pstNode->xReadAddr = pstNode->xWriteAddr;
     EnableAllInterrupts();
-
     *o_peGetStatus = ERRO_NONE;
 }
 

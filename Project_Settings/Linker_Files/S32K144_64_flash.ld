@@ -41,28 +41,30 @@ STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x00000800;
  */
 M_VECTOR_RAM_SIZE = DEFINED(__flash_vector_table__) ? 0x0 : 0x0400;
 
-FLASH_API_LEN       = 0x00000800; /* SRAM_L - Flash Driver(API) */
-APPFLASH_FLAG_LEN   = 0x00000018; /* Flash - APP Info */
-APPUP_BOOT_FLAG_LEN = 0x00000010; /* SRAM_U - Boot Info */
-
 /* Specify the memory areas */
 MEMORY
 {
   /* Flash */
   m_interrupts          (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00000400
   m_flash_config        (RX)  : ORIGIN = 0x00000400, LENGTH = 0x00000010
-  m_text                (RX)  : ORIGIN = 0x00000410, LENGTH = 0x00014000 - 0x00000410
-  m_appflash_flag       (RX)  : ORIGIN = 0x00014000, LENGTH = 0x00000018
+
+  /* Bootloader */
+  m_text                (RX)  : ORIGIN = 0x00000410, LENGTH = 0x00013BF0 /*80KB*/
+
+  /* APP Info */
+  m_APP_INFO            (RX)  : ORIGIN = 0x00014000, LENGTH = 0x00000200 /*512B*/
+
+  /* APP */
+  m_APP                 (RX)  : ORIGIN = 0x00014200, LENGTH = 0x0006BE00 /*512K - 80K - 512B*/
 
   /* SRAM_L */
-  m_flash_api           (RW)  : ORIGIN = 0x1FFF8000, LENGTH = 0x00000800
-
+  m_flash_driver        (RW)  : ORIGIN = 0x1FFF8000, LENGTH = 0x00000800  /*2K*/
   m_data                (RW)  : ORIGIN = 0x1FFF8800, LENGTH = 0x00007800
 
   /* SRAM_U */
   m_data_2              (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00006FF0
 
-  appup_boot_flag       (RW)  : ORIGIN = 0x20006FF0, LENGTH = 0x00000010
+  m_exchange_info       (RW)  : ORIGIN = 0x20006FF0, LENGTH = 0x00000010  /*16B*/
 }
 
 /* Define output sections */
@@ -94,17 +96,10 @@ SECTIONS
     *(.text*)                /* .text* sections (code) */
     *(.rodata)               /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)              /* .rodata* sections (constants, strings, etc.) */
-    *(.glue_7)               /* glue arm to thumb code */
-    *(.glue_7t)              /* glue thumb to arm code */
+    *(.init)                 /* section used in crti.o files */
+    *(.fini)                 /* section used in crti.o files */
     *(.eh_frame)             /* section used in crtbegin.o files */
-    KEEP (*(.init))                 /* section used in crti.o files */
-    KEEP (*(.fini))                 /* section used in crti.o files */
     . = ALIGN(4);
-  } > m_text
-
-  .ARM.extab :
-  {
-    *(.ARM.extab* .gnu.linkonce.armextab.*)
   } > m_text
 
   /* Section used by the libgcc.a library for fvp4 */
@@ -115,88 +110,14 @@ SECTIONS
     __exidx_end = .;
   } > m_text
 
-  .ctors :
-  {
-    __CTOR_LIST__ = .;
-    /* gcc uses crtbegin.o to find the start of
-       the constructors, so we make sure it is
-       first.  Because this is a wildcard, it
-       doesn't matter if the user does not
-       actually link against crtbegin.o; the
-       linker won't look for a file to match a
-       wildcard.  The wildcard also means that it
-       doesn't matter which directory crtbegin.o
-       is in.  */
-    KEEP (*crtbegin.o(.ctors))
-    KEEP (*crtbegin?.o(.ctors))
-    /* We don't want to include the .ctor section from
-       from the crtend.o file until after the sorted ctors.
-       The .ctor section from the crtend file contains the
-       end of ctors marker and it must be last */
-    KEEP (*(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors))
-    KEEP (*(SORT(.ctors.*)))
-    KEEP (*(.ctors))
-    __CTOR_END__ = .;
-  } > m_text
-
-  .dtors :
-  {
-    __DTOR_LIST__ = .;
-    KEEP (*crtbegin.o(.dtors))
-    KEEP (*crtbegin?.o(.dtors))
-    KEEP (*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors))
-    KEEP (*(SORT(.dtors.*)))
-    KEEP (*(.dtors))
-    __DTOR_END__ = .;
-  } > m_text
-
-  .preinit_array :
-  {
-    PROVIDE_HIDDEN (__preinit_array_start = .);
-    KEEP (*(.preinit_array*))
-    PROVIDE_HIDDEN (__preinit_array_end = .);
-  } > m_text
-
-  .init_array :
-  {
-    PROVIDE_HIDDEN (__init_array_start = .);
-    KEEP (*(SORT(.init_array.*)))
-    KEEP (*(.init_array*))
-    PROVIDE_HIDDEN (__init_array_end = .);
-  } > m_text
-
-  .fini_array :
-  {
-    PROVIDE_HIDDEN (__fini_array_start = .);
-    KEEP (*(SORT(.fini_array.*)))
-    KEEP (*(.fini_array*))
-    PROVIDE_HIDDEN (__fini_array_end = .);
-  } > m_text
-
   __etext = .;    /* Define a global symbol at end of code. */
   __DATA_ROM = .; /* Symbol is used by startup for data initialization. */
-
-  .appflash_flag :
-  {
-    __APP_FLASH_INFO_ADDR = .;
-    *(.appflash_flag);
-    . += APPFLASH_FLAG_LEN;
-  } > m_appflash_flag
-
-  .flash_api_ram :
-  {
-    . = ALIGN(4);
-    __RAM_START = .;
-  	__FLASH_DRIVER_START_ADDR = .;
-  	. += FLASH_API_LEN;
-  	__FLASH_DRIVER_END_ADDR = .;
-  } > m_flash_api
 
   .interrupts_ram :
   {
     . = ALIGN(4);
-    __RAM_START = .;
     __VECTOR_RAM__ = .;
+    __RAM_START = .;
     __interrupts_ram_start__ = .; /* Create a global symbol at data start. */
     *(.m_interrupts_ram)          /* This is a user defined section. */
     . += M_VECTOR_RAM_SIZE;
@@ -214,7 +135,6 @@ SECTIONS
     __data_start__ = .;      /* Create a global symbol at data start. */
     *(.data)                 /* .data sections */
     *(.data*)                /* .data* sections */
-    KEEP(*(.jcr*))
     . = ALIGN(4);
     __data_end__ = .;        /* Define a global symbol at data end. */
   } > m_data
@@ -299,13 +219,4 @@ SECTIONS
   ASSERT(__rom_end <= (ORIGIN(m_text) + LENGTH(m_text)), "Region m_text overflowed!")
 
   ASSERT(__StackLimit >= __HeapLimit, "region m_data_2 overflowed with stack and heap")
-
-  .flag :
-  {
-    __APP_UPDATE_ADDR = .;
-    . += 0x01;
-    __BOOTLOADER_REQUEST_ADDR = .;
-    . += APPUP_BOOT_FLAG_LEN - 0x01;
-    *(.flag_ram);
-  } > appup_boot_flag
 }

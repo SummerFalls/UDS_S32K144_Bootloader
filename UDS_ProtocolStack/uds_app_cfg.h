@@ -17,25 +17,24 @@
 
 typedef uint16 tUdsTime;
 
-typedef struct {
+typedef struct
+{
     tUdsId xUdsId;
     tUdsLen xDataLen;
     uint8 aDataBuf[150u];
-    /*tx message call back*/
-    void (*pfUDSTxMsgServiceCallBack)(uint8);
+    void (*pfUDSTxMsgServiceCallBack)(uint8); /* TX message callback */
 } tUdsAppMsgInfo;
 
-typedef struct UDSServiceInfo {
-    uint8 SerNum;     /*service num. eg 0x3e/0x87...*/
-    uint8 SessionMode;/*default session / program session / extend session*/
-    uint8 SupReqMode; /*support physical / function addr*/
-    uint8 ReqLevel;   /*request level.Lock/unlock*/
+typedef struct UDSServiceInfo
+{
+    uint8 SerNum;      /* Service ID eg 0x3E/0x87... */
+    uint8 SessionMode; /* Default session / program session / extend session */
+    uint8 SupReqMode;  /* Support physical / function addr */
+    uint8 ReqLevel;    /* Request level. Lock / unlock */
     void (*pfSerNameFun)(struct UDSServiceInfo *, tUdsAppMsgInfo *);
 } tUDSService;
 
-/*********************************************************/
-
-/*S3 timer watermark time percent*/
+/* S3 timer water mark time percent */
 #ifndef S3_TIMER_WATERMARK_PERCENT
 #define S3_TIMER_WATERMARK_PERCENT (90u)
 #endif
@@ -44,128 +43,99 @@ typedef struct UDSServiceInfo {
 #error "S3_TIMER_WATERMARK_PERCENT should config (0, 100]"
 #endif
 
-/*uds negative value define*/
-//enum __UDS_NRC_ENUM__
-//{
-//    NRC_GENERAL_REJECT                          = 0x10,
-//    NRC_SERVICE_NOT_SUPPORTED                   = 0x11,
-//    NRC_SUBFUNCTION_NOT_SUPPORTED               = 0x12,
-//    NRC_INVALID_MESSAGE_LENGTH_OR_FORMAT        = 0x13,
-//    NRC_BUSY_REPEAT_REQUEST                     = 0x21,
-//    NRC_CONDITIONS_NOT_CORRECT                  = 0x22,
-//    NRC_REQUEST_SEQUENCE_ERROR                  = 0x24,
-//    NRC_REQUEST_OUT_OF_RANGE                    = 0x31,
-//    NRC_SECURITY_ACCESS_DENIED                  = 0x33,
-//    NRC_INVALID_KEY                             = 0x35,
-//    NRC_EXCEEDED_NUMBER_OF_ATTEMPTS             = 0x36,
-//    NRC_REQUIRED_TIME_DELAY_NOT_EXPIRED         = 0x37,
-//    NRC_GENERAL_PROGRAMMING_FAILURE             = 0x72,
-//    NRC_SERVICE_BUSY                            = 0x78,
-//    NRC_SERVICE_NOT_SUPPORTED_IN_ACTIVE_SESSION = 0x7F,
-//};
-
-enum __UDS_NRC__ {
-    GR      = 0x10,
-    SNS     = 0x11, /*service not support*/
-    SFNS    = 0x12, /*subfunction not support*/
-    IMLOIF  = 0x13, /*incorrect message length or invalid format*/
-    BRR     = 0x21, /*busy repeat request*/
-    CNC     = 0x22, /*conditions not correct*/
-    RSE     = 0x24, /*request   sequence error*/
-    ROOR    = 0x31, /*request out of range*/
-    SAD     = 0x33, /*security access denied*/
-    IK      = 0x35, /*invalid key*/
-    ENOA    = 0x36, /*exceed number of attempts*/
-    RTDNE   = 0x37,
-    GPF     = 0x72,
-    RCRRP   = 0x78, /*request correctly received-response pending*/
-    SNSIAS  = 0x7F,
+/* UDS negative response code */
+enum __UDS_NRC__
+{
+    NRC_GENERAL_REJECT                           = 0x10,
+    NRC_SERVICE_NOT_SUPPORTED                    = 0x11,
+    NRC_SUBFUNCTION_NOT_SUPPORTED                = 0x12,
+    NRC_INVALID_MESSAGE_LENGTH_OR_FORMAT         = 0x13,
+    NRC_BUSY_REPEAT_REQUEST                      = 0x21,
+    NRC_CONDITIONS_NOT_CORRECT                   = 0x22,
+    NRC_REQUEST_SEQUENCE_ERROR                   = 0x24,
+    NRC_REQUEST_OUT_OF_RANGE                     = 0x31,
+    NRC_SECURITY_ACCESS_DENIED                   = 0x33,
+    NRC_INVALID_KEY                              = 0x35,
+    NRC_EXCEEDED_NUMBER_OF_ATTEMPTS              = 0x36,
+    NRC_REQUIRED_TIME_DELAY_NOT_EXPIRED          = 0x37,
+    NRC_GENERAL_PROGRAMMING_FAILURE              = 0x72,
+    NRC_SERVICE_BUSY                             = 0x78, /* Request correctly received and response pending */
+    NRC_SERVICE_NOT_SUPPORTED_IN_ACTIVE_SESSION  = 0x7F,
 };
 
 #define NEGTIVE_RESPONSE_ID (0x7Fu)
 
-/*define session mode*/
-#define DEFALUT_SESSION (1u << 0u)       /*default session*/
-#define PROGRAM_SESSION (1u << 1u)       /*program session*/
-#define EXTEND_SESSION (1u << 2u)        /*extend session*/
+/* Define session mode */
+#define DEFALUT_SESSION (1u << 0u)       /* Default session */
+#define PROGRAM_SESSION (1u << 1u)       /* Program session */
+#define EXTEND_SESSION (1u << 2u)        /* Extend session */
 
-/*security request*/
-#define NONE_SECURITY (1u << 0u)                          /*none security can request*/
-#define SECURITY_LEVEL_1 ((1 << 1u) | NONE_SECURITY)      /*security level 1 request*/
-#define SECURITY_LEVEL_2 ((1u << 2u) | SECURITY_LEVEL_1)  /*security level 2 request*/
+/* Security request */
+#define NONE_SECURITY (1u << 0u)                          /* None security can request */
+#define SECURITY_LEVEL_1 ((1 << 1u) | NONE_SECURITY)      /* Security level 1 request */
+#define SECURITY_LEVEL_2 ((1u << 2u) | SECURITY_LEVEL_1)  /* Security level 2 request */
 
-typedef struct {
-    uint8 CalledPeriod;         /*called uds period*/
-    /*security request count. If over this security request count, locked server some time.*/
+typedef struct
+{
+    uint8 CalledPeriod;         /* called UDS period */
+    /* Security request count. If over this security request count, locked server some time */
     uint8 SecurityRequestCnt;
-    tUdsTime xLockTime;         /*lock time*/
-    tUdsTime xS3Server;         /*s3 server time. */
+    tUdsTime xLockTime;         /* Lock time */
+    tUdsTime xS3Server;         /* S3 Server time */
 } tUdsTimeInfo;
 
 extern const tUdsTimeInfo gs_stUdsAppCfg;
 
-/*uds app time to count*/
+/* UDS APP time to count */
 #define UdsAppTimeToCount(xTime) ((xTime) / gs_stUdsAppCfg.CalledPeriod)
 
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
 #ifdef EN_DELAY_TIME
-typedef struct {
+typedef struct
+{
     boolean isReceiveUDSMsg;
     uint32 jumpToAPPDelayTime;
 } tJumpAppDelayTimeInfo;
 
 extern tJumpAppDelayTimeInfo gs_stJumpAPPDelayTimeInfo;
 #endif
+#endif
 
-/*********************************************************/
-/*set currrent session mode. DEFAULT_SESSION/PROGRAM_SESSION/EXTEND_SESSION */
-extern void SetCurrentSession(const uint8 i_SerSessionMode);
+void SetCurrentSession(const uint8 i_SerSessionMode);
 
-/*Is current session DEFAULT return TRUE, else return FALSE.*/
-extern uint8 IsCurDefaultSession(void);
+uint8 IsCurDefaultSession(void);
 
-/*Is S3server timeout?*/
-extern uint8 IsS3ServerTimeout(void);
+uint8 IsS3ServerTimeout(void);
 
-/*restart s3server time*/
-extern void RestartS3Server(void);
+void RestartS3Server(void);
 
-/*Is current session can request?*/
-extern uint8 IsCurSeesionCanRequest(uint8 i_SerSessionMode);
+uint8 IsCurSeesionCanRequest(uint8 i_SerSessionMode);
 
-/*save received request id. If receved physical/function/none phy
-and function ID set rceived physicali/function/erro ID.*/
-extern void SaveRequestIdType(const uint32 i_SerRequestID);
+void SaveRequestIdType(const uint32 i_SerRequestID);
 
-/*Is current received id can request?*/
-extern uint8 IsCurRxIdCanRequest(uint8 i_SerRequestIdMode);
+uint8 IsCurRxIdCanRequest(uint8 i_SerRequestIdMode);
 
-/*set security level*/
-extern void SetSecurityLevel(const uint8 i_SerSecurityLevel);
+void SetSecurityLevel(const uint8 i_SerSecurityLevel);
 
-/*Is current security level can request?*/
-extern uint8 IsCurSecurityLevelRequet(uint8 i_SerSecurityLevel);
+uint8 IsCurSecurityLevelRequet(uint8 i_SerSecurityLevel);
 
-/* Get UDS config Service information */
 tUDSService *GetUDSServiceInfo(uint8 *m_pSupServItem);
 
-/* If Rx UDS msg, set g_ucIsRxUdsMsg TURE */
-extern void SetIsRxUdsMsg(const uint8 i_SetValue);
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
+void SetIsRxUdsMsg(const uint8 i_SetValue);
 
-extern uint8 IsRxUdsMsg(void);
+uint8 IsRxUdsMsg(void);
+#endif
 
-/*set negative erro code*/
-extern void SetNegativeErroCode(const uint8 i_UDSServiceNum,
-                                const uint8 i_ErroCode,
-                                tUdsAppMsgInfo *m_pstPDUMsg);
+void SetNegativeErroCode(const uint8 i_UDSServiceNum,
+                         const uint8 i_ErroCode,
+                         tUdsAppMsgInfo *m_pstPDUMsg);
 
-/*uds time control*/
-extern void UDS_SystemTickCtl(void);
+void UDS_SystemTickCtl(void);
 
-/*get UDS s3 watermark timer. return s3 * 5 * 1000/ 8*/
-extern uint32 UDS_GetUDSS3WatermarkTimerMs(void);
+uint32 UDS_GetUDSS3WatermarkTimerMs(void);
 
-/*write message to host basd on UDS for request enter bootloader mode*/
-extern boolean UDS_TxMsgToHost(void);
+boolean UDS_TxMsgToHost(void);
 
 #endif /* UDS_APP_CFG_H_ */
 

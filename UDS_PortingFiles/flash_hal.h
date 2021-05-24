@@ -20,11 +20,12 @@ typedef boolean (*tpfEraseSecotr)(const uint32, const uint32);
 typedef boolean (*tpfProgramData)(const uint32, const uint8 *, const uint32);
 typedef boolean (*tpfReadFlashData)(const uint32, const uint32, uint8 *);
 
-typedef struct {
+typedef struct
+{
     tpfFlashInit pfFlashInit;
-    tpfEraseSecotr pfEraserSecotr;     /*erase sector*/
-    tpfProgramData pfProgramData;      /*program data*/
-    tpfReadFlashData pfReadFlashData;  /*read flash data*/
+    tpfEraseSecotr pfEraserSecotr;    /* erase sector */
+    tpfProgramData pfProgramData;     /* program data */
+    tpfReadFlashData pfReadFlashData; /* read flash data */
     tpfFlashDeInit pfFlashDeinit;
 } tFlashOperateAPI;
 
@@ -36,7 +37,7 @@ typedef struct {
  * @param[out] operate flash API
  * @return register status.
  */
-extern boolean FLASH_HAL_RegisterFlashAPI(tFlashOperateAPI *o_pstFlashOperateAPI);
+boolean FLASH_HAL_RegisterFlashAPI(tFlashOperateAPI *o_pstFlashOperateAPI);
 
 #endif /* FLASH_HAL_H_ */
 

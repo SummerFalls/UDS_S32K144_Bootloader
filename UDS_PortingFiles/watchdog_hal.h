@@ -14,13 +14,13 @@
 
 #include "includes.h"
 
-extern void WATCHDOG_HAL_Init(void);
+void WATCHDOG_HAL_Init(void);
 
-extern void WATCHDOG_HAL_Fed(void);
+void WATCHDOG_HAL_Feed(void);
 
-extern void WATCHDOG_HAL_SystemRest(void);
+void WATCHDOG_HAL_SystemReset(void);
 
-extern void WATCHDOG_HAL_Deinit(void);
+void WATCHDOG_HAL_Deinit(void);
 
 #endif /* WATCHDOG_HAL_H_ */
 

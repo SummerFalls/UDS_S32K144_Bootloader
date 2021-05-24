@@ -18,16 +18,13 @@
 
 #include "multi_cyc_fifo.h"
 
-/*uds network man function*/
-extern void CANTP_MainFun(void);
+void CANTP_MainFun(void);
 
-/*can tp system tick control*/
-extern void CANTP_SytstemTickControl(void);
+void CANTP_SytstemTickControl(void);
 
-/*Init CAN TP list*/
-extern void CANTP_Init(void);
+void CANTP_Init(void);
 
-#endif /*#ifdef EN_CAN_TP*/
+#endif /* EN_CAN_TP */
 
 #endif /* CAN_TP_H_ */
 

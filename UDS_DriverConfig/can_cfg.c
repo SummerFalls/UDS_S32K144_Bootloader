@@ -12,72 +12,62 @@
 #include "can_cfg.h"
 #include "user_config.h"
 
-#ifdef IsUse_CAN_Pal_Driver
-#include "can_pal1.h"
-#endif  //end of IsUse_CAN_Pal_Driver
+#ifdef EN_CAN_TP
 
 #ifdef IsUse_CAN_Pal_Driver
-/* Set information about the data to be receive and sent
-     *  - Standard message ID
-     *  - Bit rate switch enabled to use a different bitrate for the data segment
-     *  - Flexible data rate enabled
-     *  - Use zeros for FD padding
-     */
-can_buff_config_t buff_RxTx_Cfg = {
+#include "can_pal1.h"
+
+can_buff_config_t buff_RxTx_Cfg =
+{
     .enableFD = false,
-    .enableBRS = true,
+    .enableBRS = false,
     .fdPadding = 0U,
-    .idType = RX_FUN_ID_TYPE,
+    .idType = RX_FUN_ADDR_ID_TYPE,
     .isRemote = false
 };
 
-/* Define receive buffer */
 can_message_t recvMsg;
 
 #else
-/* Set information about the data to be receive and sent
-             *  - Standard message ID
-             *  - Bit rate switch enabled to use a different bitrate for the data segment
-             *  - Flexible data rate enabled
-             *  - Use zeros for FD padding
-             */
-flexcan_data_info_t buff_RxTx_Cfg = {
-    .msg_id_type = RX_FUN_ID_TYPE,
+
+flexcan_data_info_t buff_RxTx_Cfg =
+{
+    .msg_id_type = RX_FUN_ADDR_ID_TYPE,
     .data_length = 8,
     .fd_enable = false,
     .fd_padding = 0u,
-    .enable_brs = true,
+    .enable_brs = false,
     .is_remote = false,
 };
 
-/* Define receive buffer */
 flexcan_msgbuff_t recvMsg;
 
-#endif  //end of IsUse_CAN_Pal_Driver
+#endif /* IsUse_CAN_Pal_Driver */
 
 #if 0
-/*can hardware config*/
-const tCANHardwareConfig g_stCANHardWareConfig = {
-    16000000,   /*can clock*/
-    500u        /*can baud rate*/
+const tCANHardwareConfig g_stCANHardWareConfig =
+{
+    16000000,   /* CAN clock */
+    500u        /* CAN baud rate */
 };
 #endif
 
-/*RX can message config*/
-const tRxMsgConfig g_astRxMsgConfig[] = {
-    {RX_MAILBOX_FUN_ID, RX_FUN_ID, RX_FUN_ID_MASK, RX_FUN_ID_TYPE}, /*UDS Rx function ID*/
-    {RX_MAILBOX_PHY_ID, RX_PHY_ID, RX_PHY_ID_MASK, RX_PHY_ID_TYPE}  /*UDS RX physical ID*/
+const tRxMsgConfig g_astRxMsgConfig[] =
+{
+    {RX_FUN_ADDR_ID_MAILBOX, RX_FUN_ADDR_ID, RX_FUN_ADDR_ID_MASK, RX_FUN_ADDR_ID_TYPE},
+    {RX_PHY_ADDR_ID_MAILBOX, RX_PHY_ADDR_ID, RX_PHY_ADDR_ID_MASK, RX_PHY_ADDR_ID_TYPE}
 };
 
-/*rx can message num*/
 const unsigned char g_ucRxCANMsgIDNum = sizeof(g_astRxMsgConfig) / sizeof(g_astRxMsgConfig[0u]);
 
-/*TX can message config*/
-tTxMsgConfig g_stTxMsgConfig = {
-    TX_ID,     /*UDS tx can message id*/
-    TX_MAILBOX_0, /*UDS tx can message mail box*/
-    TX_ID_TYPE, /* UDS tx can message id type */
+tTxMsgConfig g_stTxMsgConfig =
+{
+    TX_RESP_ADDR_ID,
+    TX_RESP_ADDR_ID_MAILBOX,
+    TX_RESP_ADDR_ID_TYPE,
     NULL
 };
+
+#endif /* EN_CAN_TP */
 
 /* -------------------------------------------- END OF FILE -------------------------------------------- */

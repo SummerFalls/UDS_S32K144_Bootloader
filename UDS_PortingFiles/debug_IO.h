@@ -16,11 +16,11 @@
 
 #ifdef EN_DEBUG_IO
 
-extern void DEBUG_IO_Init(void);
-extern void DEBUG_IO_Deinit(void);
-extern void DEBUG_IO_SetDebugIOLow(void);
-extern void DEBUG_IO_SetDebugIOHigh(void);
-extern void DEBUG_IO_ToggleDebugIO(void);
+void DEBUG_IO_Init(void);
+void DEBUG_IO_Deinit(void);
+void DEBUG_IO_SetDebugIOLow(void);
+void DEBUG_IO_SetDebugIOHigh(void);
+void DEBUG_IO_ToggleDebugIO(void);
 
 #endif
 

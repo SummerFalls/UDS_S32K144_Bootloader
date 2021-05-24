@@ -35,23 +35,18 @@
 #include "can_driver.h"
 #include "flash.h"
 
-#define MAX_WAIT_TIME_MS (5000u)
-unsigned short g_usMaxDelayUdsMsgTime = MAX_WAIT_TIME_MS;
-unsigned char g_ucIsRxUdsMsg = FALSE;
 
-static void BSP_init(void)
+static void BSP_Init(void)
 {
-    /*clock init*/
     CLOCK_SYS_Init(g_clockManConfigsArr, CLOCK_MANAGER_CONFIG_CNT, g_clockManCallbacksArr, CLOCK_MANAGER_CALLBACK_CNT);
     CLOCK_SYS_UpdateConfiguration(0U, CLOCK_MANAGER_POLICY_AGREEMENT);
 
-    /*GPIO init*/
     PINS_DRV_Init(NUM_OF_CONFIGURED_PINS, g_pin_mux_InitConfigArr);
 
-    /*CAN init*/
+    POWER_SYS_Init(&powerConfigsArr, POWER_MANAGER_CONFIG_CNT, &powerStaticCallbacksConfigsArr, POWER_MANAGER_CALLBACK_CNT);
+
     InitCAN();
 
-    /*init flash*/
     InitFlash();
 }
 
@@ -61,11 +56,16 @@ void SendMsgMainFun(void)
     uint32 msgId = 0u;
     uint32 msgLength = 0u;
 
-    /*get message from TP*/
+    /* Get message from TP */
     if (TRUE == TP_DriverReadDataFromTP(8u, &aucMsgBuf[0u], &msgId, &msgLength))
     {
         TransmitCANMsg(msgId, msgLength, aucMsgBuf, &TP_DoTxMsgSuccesfulCallback, 0u);
     }
+}
+
+static void BSP_AbortCANTxMsg(void)
+{
+
 }
 
 /*!
@@ -77,6 +77,7 @@ void SendMsgMainFun(void)
 int main(void)
 {
   /* Write your local variable definition here */
+//    uint32_t RTT_Cnt = 0;
 
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   #ifdef PEX_RTOS_INIT
@@ -85,15 +86,22 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
-    BOOTLOADER_MAIN_Init(BSP_init, NULL_PTR);
 
-    g_usMaxDelayUdsMsgTime = MAX_WAIT_TIME_MS;
+    /* ³õÊ¼»¯SEGGER RTT(Real Time Transfer) */
+    RTT_INIT();
 
-    APPDebugPrintf("-->Enter CAN Bootloader S32K144--<\n");
+    RTT_CFG_UP_BUFFER(0, NULL, NULL, 0, SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL);
 
-    for(;;)
+    RTT_TERMINAL_OUT(0, "--> "PROJECT_NAME" Entered\r\n\r\n");
+    RTT_TERMINAL_OUT(0, "--> "PROJECT_NAME" "__PROJECT_COMPILE_DATE_TIME__"\r\n\r\n");
+
+    UDS_MAIN_Init(BSP_Init, BSP_AbortCANTxMsg);
+
+    RTT_SET_TERMINAL(1);
+    for (;;)
     {
-        BOOTLOADER_MAIN_Demo();
+        RTT_PRINTF(0, RTT_CTRL_CLEAR"--> "PROJECT_NAME" Cnt: %u\r\n", RTT_Cnt++);
+        UDS_MAIN_Process();
 
         SendMsgMainFun();
 
