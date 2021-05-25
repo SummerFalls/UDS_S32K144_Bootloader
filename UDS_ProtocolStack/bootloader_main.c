@@ -29,11 +29,12 @@ void UDS_MAIN_Init(void (*pfBSP_Init)(void), void (*pfAbortTxMsg)(void))
         Boot_PowerONClearAllFlag();
     }
 
-#ifndef EN_DELAY_TIME
-
-    Boot_JumpToAppOrNot();
-
+#ifdef EN_DELAY_TIME
+    if (TRUE == POWER_SYS_GetResetSrcStatusCmd(RCM, RCM_WATCH_DOG))
 #endif
+    {
+        Boot_JumpToAppOrNot();
+    }
 
 #endif
 

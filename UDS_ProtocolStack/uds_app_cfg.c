@@ -1357,7 +1357,7 @@ void UDS_SystemTickCtl(void)
         }
         else
         {
-            Boot_JumpToAppOrNot();
+            DoResetMCU(TX_MSG_SUCCESSFUL);
         }
     }
 

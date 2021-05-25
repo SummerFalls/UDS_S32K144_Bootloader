@@ -34,9 +34,7 @@
 #define __PROJECT_COMPILE_DATE_TIME__   __DATE__" - "__TIME__
 
 /* ASSERT and DEBUG IO/TIMER */
-#if defined (EN_ASSERT) || defined (EN_DEBUG_TIMER) || defined (EN_DEBUG_PRINT) || defined (EN_DEBUG_IO)
 #include "bootloader_debug.h"
-#endif
 
 #ifdef EN_ASSERT
 #define ASSERT(xValue)\
