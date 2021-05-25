@@ -256,9 +256,8 @@ void Flash_InitDowloadInfo(void)
 
     if (TRUE == IsFlashDriverDownload())
     {
-#if (defined UDS_PROJECT_FOR_APP) && (MCU_TYPE == MCU_S32K14x)
-#else
-        /* TODO : #00 S32K144 执行本函数会导致 HardFault，S32K118 无此问题，待解决 */
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
+        /* TODO : #00 由于链接文件地址空间分配的问题，APP 中不可执行本函数，否则会导致 HardFault */
         Flash_EraseFlashDriverInRAM();
 #endif
         SetFlashDriverNotDonwload();
@@ -275,9 +274,8 @@ void Flash_InitDowloadInfo(void)
 void FLASH_APP_Init(void)
 {
     gs_stFlashDownloadInfo.isFingerPrintWritten = FALSE;
-#if (defined UDS_PROJECT_FOR_APP) && (MCU_TYPE == MCU_S32K14x)
-#else
-    /* TODO : #00 S32K144 执行本函数会导致 HardFault，S32K118 无此问题，待解决 */
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
+    /* TODO : #00 由于链接文件地址空间分配的问题，APP 中不可执行本函数，否则会导致 HardFault */
     Flash_EraseFlashDriverInRAM();
 #endif
     SetFlashDriverNotDonwload();
@@ -1050,9 +1048,9 @@ uint8 Flash_WriteFlashAppInfo(void)
     uint32 newestAPPInfoLen = 0u;
     tAppFlashStatus *pstNewestAPPFlashStatus = NULL_PTR;
     uint32 resetHandleAddr = 0u;
-    boolean bIsEnableWriteResetHandle = FALSE;
-    uint32 resetHandleOffset = 0u;
-    uint32 resetHandleLength = 0u;
+    boolean bIsEnableWriteResetHandlerInFlash = FALSE;
+    uint32 resetHandlerOffset = 0u;
+    uint32 resetHandlerLength = 0u;
     CreateAndSaveAppStatusCrc(&crc);
     oldAppType = Flash_GetOldAPPType();
     newestAPPType = Flash_GetNewestAPPType();
@@ -1062,7 +1060,7 @@ uint8 Flash_WriteFlashAppInfo(void)
     {
         /* Write data information in flash */
         pAppStatusPtr = GetAppStatusPtr();
-        FLASH_HAL_GetRestHanlderInfo(&bIsEnableWriteResetHandle, &resetHandleOffset, &resetHandleLength);
+        FLASH_HAL_GetResetHandlerInfo(&bIsEnableWriteResetHandlerInFlash, &resetHandlerOffset, &resetHandlerLength);
 
         /* Update APP cnt */
         if (TRUE == FLASH_HAL_GetAPPInfo(newestAPPType, &newestAPPInfoStartAddr, &newestAPPInfoLen))
@@ -1076,8 +1074,8 @@ uint8 Flash_WriteFlashAppInfo(void)
             }
 
             /* Get APP start address from flash. The address is the newest APP, because the APP info not write in flash, so the APP is old */
-            resetHandleAddr = appInfoStartAddr + resetHandleOffset;
-            SaveAppResetHandlerAddr(*((uint32 *)resetHandleAddr), resetHandleLength);
+            resetHandleAddr = appInfoStartAddr + resetHandlerOffset;
+            SaveAppResetHandlerAddr(*((uint32 *)resetHandleAddr), resetHandlerLength);
             FLSDebugPrintf("APP type =%X, APP address=0x%X\n", oldAppType, *((uint32 *)resetHandleAddr));
             crc = 0u;
             CreateAndSaveAppStatusCrc(&crc);

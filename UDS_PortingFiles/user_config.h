@@ -222,7 +222,7 @@ typedef enum
 
 /* -------------------- Jump to APP delay time when have not received UDS message -------------------- */
 #define EN_DELAY_TIME
-#define DELAY_MAX_TIME_MS (5000u)
+#define DELAY_MAX_TIME_MS (2000u)
 
 #endif /* USER_CONFIG_H_ */
 

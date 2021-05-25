@@ -69,7 +69,7 @@ boolean UDS_ALG_HAL_DecryptData(const uint8 *i_pCipherText, const uint32 i_dataL
     deAes((sint8 *)i_pCipherText, i_dataLen, (sint8 *)&gs_aKey[0], (sint8 *)o_pPlainText);
 #endif
 #ifdef EN_ZLG_SA_ALGORITHM
-    /* TODO Bootloader: #02 Simple Security Access Algorithm Decryption function implemented by DTek */
+    /* TODO Bootloader: #02 Simple Security Access Algorithm Decryption function */
     deZLGKey((sint8 *)i_pCipherText, i_dataLen, (sint8 *)o_pPlainText);
 #endif
     return ret;

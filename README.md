@@ -63,9 +63,17 @@ S32K1xx 的 CAN 接 `周立功 USBCANFD-100U-mini`，使用 `ZCANPRO` 软件的 
 
 ---
 
-- 程序不能自动运行的解决办法
+### :warning: 特别注意
 
-![Note_00_程序不能自动运行的解决办法][Note_00_程序不能自动运行的解决办法]
+< :ok_hand: 已解决 > 关于 `S32K144 APP 工程` 调用 `Flash_EraseFlashDriverInRAM()` 会导致程序卡死的问题进行说明记录：
+
+- 根据 Ozone 调试得知，实际现象为出现 `HardFault` ， `HFSR` 寄存器 `FORCED` 位被置 1，所以可以判断由其它 Fault 异常提升而来，实际为 `UsageFault` ， `INVSTATE` 位被置 1，如下图所示：
+  - ![LinkSetting_ForUsageFault_00][LinkSetting_ForUsageFault_00]
+- 由于程序卡死的位置并不是每次都在同一位置，故初期的排查非常困难。由于同样的代码，在 `S32K118 APP 工程` 中被调用时，并不会产生该问题，所以需要从两个不同芯片的工程的不同之处寻找原因。经过比对，初步判断与两芯片的链接文件空间分配有关联，具体为两个芯片的 `Flash Driver` 所占用的 RAM 地址空间不同。其中，在 `S32K144` 的 `Bootloader 工程` 中，`m_flash_driver` 地址空间在 `APP 工程` 中会与 `m_data` 地址空间合并，从 Bootloader 跳转至 APP 时，会先调用 `Reset_Handler` 汇编函数，此汇编函数会进行相关初始化之后再跳转到 `main` 函数，其中在初始化时，会调用 `init_data_bss()` 函数，此函数其中的一个工作就是将位于 ROM 中（即 `m_interrupts` 地址空间内）的中断向量表拷贝到 RAM 中（即 `m_data` 地址空间内）的起始地址处，此时，如若在 `APP 工程` 中尝试调用 `Flash_EraseFlashDriverInRAM()` ，会对 `0x1FFF8000` 起始地址处连续 `0x800` 个字节的内容进行清零操作，而 `0x1FFF8000` ~ `0x1FFF8800` 地址空间段已经完全属于 `m_data` ，如若再执行 `Flash_EraseFlashDriverInRAM()` 则会将 RAM 中的中断向量表擦除，导致中断响应出现异常，故最终会导致程序卡死，详细配合以下截图进行分析。
+  - ![LinkSetting_ForUsageFault_01][LinkSetting_ForUsageFault_01]
+  - ![LinkSetting_ForUsageFault_02][LinkSetting_ForUsageFault_02]
+- 解决方法有两种：APP 工程中一律不调用 `Flash_EraseFlashDriverInRAM()` 或将链接文件内 `m_flash_driver` 的地址空间从 `m_data_2` 地址空间的后半段进行划分。
+  - 但经过评估，显然前者为更恰当的解决方法，因为在 APP 工程中，已不存在 `m_flash_driver` 地址空间，此时就算在 Bootloader 中将 `m_data_2` 的后半段空间划分给 `m_flash_driver` ，在 APP 工程中再对该片空间进行自行清零的操作是不妥的，因为 `m_data_2` 会用于存放 `customSectionBlock`、 `bss`、 `heap`、 `stack`， 此时如若再在 APP 中调用 `Flash_EraseFlashDriverInRAM()` ，同样有可能会将这些数据清零。
 
 <br/>
 
@@ -1029,7 +1037,9 @@ Resulting sub-function parameter byte value (bit 7 ~ 0)
 [Pic_ZCANPRO_ECU_Refresh]: ./Pic_ZCANPRO_ECU_Refresh.png
 [Pic_ZCANPRO_ECU_Refresh_Note_ProgramSession]: ./Pic_ZCANPRO_ECU_Refresh_Note_ProgramSession.png
 [Pic_ZCANPRO_ECU_Refresh_Note_ResetECU]: ./Pic_ZCANPRO_ECU_Refresh_Note_ResetECU.png
-[Note_00_程序不能自动运行的解决办法]: ./Note_00_程序不能自动运行的解决办法.png
+[LinkSetting_ForUsageFault_00]: ./LinkSetting_ForUsageFault_00.png
+[LinkSetting_ForUsageFault_01]: ./LinkSetting_ForUsageFault_01.png
+[LinkSetting_ForUsageFault_02]: ./LinkSetting_ForUsageFault_02.png
 [UDS_OSI_Model]: ./Pic_UDS_OSI.png
 [UDS_PCI_Frame]: ./Pic_UDS_PCI_Frame.png
 

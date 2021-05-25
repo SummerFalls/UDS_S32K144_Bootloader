@@ -867,7 +867,7 @@ tUDSService *GetUDSServiceInfo(uint8 *m_pSupServItem)
 
 #ifdef UDS_PROJECT_FOR_BOOTLOADER
 /* If RX UDS msg, set UDS layer received message TURE */
-void SetIsRxUdsMsg(const uint8 i_SetValue)
+void SetIsRxUdsMsg(const boolean i_SetValue)
 {
 #ifdef EN_DELAY_TIME
 
@@ -883,7 +883,7 @@ void SetIsRxUdsMsg(const uint8 i_SetValue)
 #endif
 }
 
-uint8 IsRxUdsMsg(void)
+boolean IsRxUdsMsg(void)
 {
 #ifdef EN_DELAY_TIME
     return gs_stJumpAPPDelayTimeInfo.isReceiveUDSMsg;
@@ -1357,7 +1357,6 @@ void UDS_SystemTickCtl(void)
         }
         else
         {
-            /* Max timeout timeout */
             Boot_JumpToAppOrNot();
         }
     }

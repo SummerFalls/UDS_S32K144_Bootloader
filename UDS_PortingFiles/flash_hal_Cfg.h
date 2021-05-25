@@ -41,13 +41,13 @@ uint32 FLASH_HAL_GetFlashLengthToSectors(const uint32 i_startFlashAddr, const ui
 boolean FLASH_HAL_GetFlashDriverInfo(uint32 *o_pFlashDriverAddrStart, uint32 *o_pFlashDriverEndAddr);
 
 /* Get reset handler information */
-void FLASH_HAL_GetRestHanlderInfo(boolean *o_pIsEnableWriteResetHandlerInFlash, uint32 *o_pResetHanderOffset, uint32 *o_pResetHandlerLength);
-
-/* Get storage reset handler information */
-uint32 FLASH_HAL_GetStorageRestHandlerAddr(void);
+void FLASH_HAL_GetResetHandlerInfo(boolean *o_pIsEnableWriteResetHandlerInFlash, uint32 *o_pResetHandlerOffset, uint32 *o_pResetHandlerLength);
 
 /* Is enable write reset handler in flash? */
 boolean FLASH_HAL_IsEnableStorageResetHandlerInFlash(void);
+
+/* Get storage reset handler information */
+uint32 FLASH_HAL_GetStorageRestHandlerAddr(void);
 
 /* Get reset handler addr length */
 uint32 FLASH_HAL_GetResetHandlerLen(void);

@@ -96,8 +96,6 @@ typedef struct
     boolean isReceiveUDSMsg;
     uint32 jumpToAPPDelayTime;
 } tJumpAppDelayTimeInfo;
-
-extern tJumpAppDelayTimeInfo gs_stJumpAPPDelayTimeInfo;
 #endif
 #endif
 
@@ -122,9 +120,9 @@ uint8 IsCurSecurityLevelRequet(uint8 i_SerSecurityLevel);
 tUDSService *GetUDSServiceInfo(uint8 *m_pSupServItem);
 
 #ifdef UDS_PROJECT_FOR_BOOTLOADER
-void SetIsRxUdsMsg(const uint8 i_SetValue);
+void SetIsRxUdsMsg(const boolean i_SetValue);
 
-uint8 IsRxUdsMsg(void);
+boolean IsRxUdsMsg(void);
 #endif
 
 void SetNegativeErroCode(const uint8 i_UDSServiceNum,

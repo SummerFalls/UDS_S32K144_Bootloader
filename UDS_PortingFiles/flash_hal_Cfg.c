@@ -321,26 +321,26 @@ boolean FLASH_HAL_GetFlashDriverInfo(uint32 *o_pFlashDriverAddrStart, uint32 *o_
 }
 
 /* Get reset handler information */
-void FLASH_HAL_GetRestHanlderInfo(boolean *o_pIsEnableWriteResetHandlerInFlash, uint32 *o_pResetHanderOffset, uint32 *o_pResetHandlerLength)
+void FLASH_HAL_GetResetHandlerInfo(boolean *o_pIsEnableWriteResetHandlerInFlash, uint32 *o_pResetHandlerOffset, uint32 *o_pResetHandlerLength)
 {
     ASSERT(NULL_PTR == o_pIsEnableWriteResetHandlerInFlash);
-    ASSERT(NULL_PTR == o_pResetHanderOffset);
+    ASSERT(NULL_PTR == o_pResetHandlerOffset);
     ASSERT(NULL_PTR == o_pResetHandlerLength);
-    *o_pIsEnableWriteResetHandlerInFlash = EN_WRITE_RESET_HANDLER_IN_FLASH;
-    *o_pResetHanderOffset = APP_VECTOR_TABLE_OFFSET + RESET_HANDLER_OFFSET;
-    *o_pResetHandlerLength = RESET_HANDLER_ADDR_LEN;
-}
-
-/* Get storage reset handler information */
-uint32 FLASH_HAL_GetStorageRestHandlerAddr(void)
-{
-    return APP_VECTOR_TABLE_OFFSET + RESET_HANDLER_OFFSET;
+    *o_pIsEnableWriteResetHandlerInFlash = FLASH_HAL_IsEnableStorageResetHandlerInFlash();
+    *o_pResetHandlerOffset = FLASH_HAL_GetStorageRestHandlerAddr();
+    *o_pResetHandlerLength = FLASH_HAL_GetResetHandlerLen();
 }
 
 /* Is enable write reset handler in flash? */
 boolean FLASH_HAL_IsEnableStorageResetHandlerInFlash(void)
 {
     return EN_WRITE_RESET_HANDLER_IN_FLASH;
+}
+
+/* Get storage reset handler information */
+uint32 FLASH_HAL_GetStorageRestHandlerAddr(void)
+{
+    return APP_VECTOR_TABLE_OFFSET + RESET_HANDLER_OFFSET;
 }
 
 /* Get reset handler addr length */

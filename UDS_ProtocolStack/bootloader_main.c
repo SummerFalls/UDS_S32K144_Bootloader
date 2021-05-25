@@ -29,7 +29,11 @@ void UDS_MAIN_Init(void (*pfBSP_Init)(void), void (*pfAbortTxMsg)(void))
         Boot_PowerONClearAllFlag();
     }
 
+#ifndef EN_DELAY_TIME
+
     Boot_JumpToAppOrNot();
+
+#endif
 
 #endif
 

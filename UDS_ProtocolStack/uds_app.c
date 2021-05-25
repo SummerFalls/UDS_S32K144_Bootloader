@@ -15,6 +15,11 @@
 #include "fls_app.h"
 #include "uds_alg_hal.h"
 
+#ifdef UDS_PROJECT_FOR_BOOTLOADER
+#ifdef EN_DELAY_TIME
+extern tJumpAppDelayTimeInfo gs_stJumpAPPDelayTimeInfo;
+#endif
+#endif
 
 void UDS_Init(void)
 {
