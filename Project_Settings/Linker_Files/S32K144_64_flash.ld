@@ -54,9 +54,6 @@ MEMORY
   /* APP Info */
   m_APP_INFO            (RX)  : ORIGIN = 0x00014000, LENGTH = 0x00000200 /*512B*/
 
-  /* APP */
-  m_APP                 (RX)  : ORIGIN = 0x00014200, LENGTH = 0x0006BE00 /*512K - 80K - 512B*/
-
   /* SRAM_L */
   m_flash_driver        (RW)  : ORIGIN = 0x1FFF8000, LENGTH = 0x00000800  /*2K*/
   m_data                (RW)  : ORIGIN = 0x1FFF8800, LENGTH = 0x00007800
