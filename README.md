@@ -32,7 +32,7 @@
 
 | 微信 | 支付宝 | Paypal |
 |---------|---------|---------|
-| <div style = "height: 500px;">![Wechat](./donate_Wechat.png)</div> | <div style = "height: 500px;">![Alipay](./donate_Alipay.jpg)</div> | [paypal.me/37LINN](paypal.me/37LINN) |
+| <div style = "height: 500px;">![Wechat](./donate_Wechat.png)</div> | <div style = "height: 500px;">![Alipay](./donate_Alipay.jpg)</div> | [paypal.me/37LINN](https://paypal.me/37LINN) |
 
 ## :book: 简介
 
