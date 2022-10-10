@@ -20,19 +20,13 @@
 
 <h2>
 
-本工程代码尚存在许多已知 BUG，不可用于实际量产环境，`可自行调试解决` 或 `付费获取技术支持`
+本工程代码仅作学习用途，不可用于实际量产环境，尚存在许多已知 BUG，`可自行调试解决` 或 `付费获取技术支持`
 
 </h2>
 
 联系方式：
 
 :e-mail: e-mail: ro7enkranz@qq.com
-
-本工程现有代码仅作 UDS 学习用途，如果给你带来了帮助，力所能及的打赏我会非常感激！
-
-| 微信 | 支付宝 | Paypal |
-|---------|---------|---------|
-| <div style = "height: 500px;">![Wechat](./donate_Wechat.png)</div> | <div style = "height: 500px;">![Alipay](./donate_Alipay.jpg)</div> | [paypal.me/37LINN](https://paypal.me/37LINN) |
 
 ## :book: 简介
 
